@@ -1,0 +1,48 @@
+.no-sidebar #page-wrapper{
+    margin: 0;
+}
+.department .edit,.department .remove{
+    display: none;
+    margin-left: 10px;
+}
+.department:hover .learner-count{
+    display: none;
+}
+.department:hover .edit,.department:hover .remove{
+    display: inline;
+}
+table form{
+    display: inline-block;
+}
+#learners .page-aside{
+    min-height: 500px;
+}
+#learners #department-list{
+}
+#learnings .panel-heading, #learnings .panel-body, #learnings .panel-footer{
+    /*text-align: center;*/
+}
+#learnings .bootstrap-tagsinput, #learning-content{
+    width: 100%;
+}
+#learnings .bootstrap-tagsinput input{
+    width: 250px;
+}
+
+.fileupload{
+    display: inline-block;
+}
+.fileupload input.upload {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.fileupload img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.right-aside .contact-list td img {
+    height: 30px;
+}

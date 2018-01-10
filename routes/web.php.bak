@@ -1,0 +1,134 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/test', function () {
+//    $o = \App\Models\Organization::with(['departments.learners'])->find(6);
+
+    $l = \App\Models\Learner::with(['department.organization'])->find(1);
+//    dd($l->organization);
+//    return view('test',['org'=>$o]);
+    return view('test',['org'=>$l]);
+});
+
+Route::group(['namespace' => 'Web'], function () {
+
+    Auth::routes();
+    Route::get('logout', 'Auth\LoginController@logout');
+
+    Route::get('/home', 'HomeController@home')->name('home');
+    Route::get('/unauthorized', 'Auth\LoginController@unauthorized')->name('unauthorized');
+
+    Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+
+        Route::get('dashboard', 'DashboardController@admin');
+
+        Route::get('learners', 'LearnerController@index');
+        Route::get('learners/{id}', 'LearnerController@show');
+        Route::post('learners', 'LearnerController@store');
+        Route::put('learners/{id}', 'LearnerController@update');
+        Route::delete('learners/{id}', 'LearnerController@update');
+
+        Route::get('learnings', 'LearningController@index');
+        Route::get('learnings/create', 'LearningController@create');
+        Route::post('learnings/create', 'LearningController@store');
+        Route::get('learnings/{id}', 'LearningController@show');
+
+        Route::get('assessments', 'AssessmentController@index');
+        Route::get('tickets', 'TicketController@index');
+        Route::get('awards', 'AwardController@index');
+
+        Route::get('organizations', 'OrganizationController@index');
+        Route::get('organizations/{id}', 'OrganizationController@show');
+
+
+    });
+
+    Route::group(['prefix' => 'learner/{learnerId}', 'middleware' => 'auth'], function () {
+
+        Route::get('dashboard', 'DashboardController@learner');
+
+        Route::get('learnings', 'LearningController@index');
+        Route::get('learnings/{id}', 'LearningController@show');
+
+        Route::get('assessments', 'AssessmentController@index');
+        Route::get('tickets', 'TicketController@index');
+        Route::post('tickets', 'TicketController@store');
+        Route::put('tickets/{id}', 'TicketController@update');
+        Route::get('awards', 'AwardController@index');
+
+    });
+
+    Route::group(['prefix' => 'organization/{orgId}', 'middleware' => 'auth'], function () {
+
+        Route::get('dashboard', 'DashboardController@organization');
+
+//        Route::get('/{orgId}/learners', 'OrganizationLearnerController@index');
+        Route::get('learners', 'OrganizationLearnerController@index');
+        Route::post('learners', 'OrganizationLearnerController@store');
+        Route::put('learners/{id}', 'OrganizationLearnerController@update');
+        Route::delete('learners/{id}', 'OrganizationLearnerController@delete');
+
+//        Route::get('/{orgId}/learners/{id}', 'LearnerController@show');
+        Route::get('learners/{id}', 'LearnerController@show');
+
+        Route::post('departments/', 'DepartmentController@store');
+        Route::put('departments/{id}', 'DepartmentController@update');
+
+        Route::get('learnings', 'LearningController@index');
+        Route::get('learnings/{id}', 'LearningController@show');
+
+        Route::get('assessments', 'AssessmentController@index');
+        Route::get('tickets', 'OrganizationTicketController@index');
+        Route::get('awards', 'OrganizationAwardController@index');
+
+    });
+
+//    Route::group(['prefix' => 'organization'], function () {
+//
+//        Route::get('dashboard', 'DashboardController@organization');
+//
+//        Route::get('/{orgId}/learners', 'OrganizationLearnerController@index');
+//        Route::get('learners', 'OrganizationLearnerController@index');
+//        Route::post('learners', 'OrganizationLearnerController@store');
+//        Route::put('learners/{id}', 'OrganizationLearnerController@update');
+//        Route::delete('learners/{id}', 'OrganizationLearnerController@delete');
+//
+////        Route::get('/{orgId}/learners/{id}', 'LearnerController@show');
+//        Route::get('learners/{id}', 'LearnerController@show');
+//
+//        Route::post('departments/', 'DepartmentController@store');
+//        Route::put('departments/{id}', 'DepartmentController@update');
+//
+//        Route::get('learnings', 'LearningController@index');
+//        Route::get('learnings/{id}', 'LearningController@show');
+//
+//        Route::get('assessments', 'AssessmentController@index');
+//        Route::get('tickets', 'TicketController@index');
+//        Route::get('awards', 'AwardController@index');
+//
+//    });
+
+
+//    Route::get('learnings','LearnerController@learnings');
+//    Route::get('assessment','LearnerController@assessment');
+//    Route::get('tickets','LearnerController@tickets');
+//    Route::get('awards','LearnerController@awards');
+//
+//    Route::get('dashboard','HomeController@dashboard');
+
+
+});
