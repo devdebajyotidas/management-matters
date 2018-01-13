@@ -221,11 +221,7 @@
                             </div>
                             <div class="col-md-6 m-b-20">
                                 <input type="text" class="form-control" name="learner[expiry_date]"
-                                       placeholder="Expiry Date (MM/YY)" value="{{ old('learner.expiry_date') }}">
-                            </div>
-                            <div class="col-md-6 m-b-20">
-                                <input type="number" class="form-control" name="learner[cvv]"
-                                       placeholder="CVV" value="{{ old('learner.cvv') }}">
+                                       placeholder="Expiry Date (YYYY-MM)" value="{{ old('learner.expiry_date') }}">
                             </div>
                         </div>
 
@@ -261,6 +257,10 @@
             }, {{ $timeout * $key }});
             @endforeach
             @endif
+
+            $('.learner-check').click(function(){
+                $('#add-learner').modal('show');
+            })
         };
     </script>
 

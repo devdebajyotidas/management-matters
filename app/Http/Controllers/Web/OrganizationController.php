@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Organization ;
 use App\Models\User as User;
 
+
+use League\Flysystem\Config;
+
+
 class OrganizationController extends Controller
 {
 
@@ -61,7 +65,7 @@ class OrganizationController extends Controller
         $data['organization'] = $request->get('organization');
         $data['user'] = $request->get('user');
         $subscription=$request->get('subscription');
-        $subscription['transaction_id']='';
+        $subscription['subscription_id']='';
         $subscription['start_date']=date('Y-m-d H:i:s');
         $subscription['status']=1;
 
@@ -91,8 +95,21 @@ class OrganizationController extends Controller
 
             $organization->subscription()->save($sub);
 
+
+            if(!empty($organization->card_number) && !empty($organization->expiry_date) ){
+                $newreq= new \Illuminate\Http\Request();
+
+                $newreq->name_on_card=$organization->name_on_card;
+                $newreq->card_number=$organization->card_number;
+                $newreq->expiry_date=$organization->expiry_date;
+                $newreq->billing_interval=$subscription['billing_interval'];
+                $newreq->licenses=$subscription['licenses'];
+
+                $response=app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$organization->id);
+            }
             DB::commit();
             return redirect()->back()->with('success', 'Organization added successfully');
+
         }
         else
         {
@@ -175,6 +192,7 @@ class OrganizationController extends Controller
 
         $organization = Organization::withTrashed()->where('id', $id)->first();
         $learners=$organization->learners()->get();
+        $subscription=Subscription::where('account_id',$id)->first();
 
         if($organization->trashed())
         {
@@ -189,6 +207,9 @@ class OrganizationController extends Controller
             }
 
             if($organization->forceDelete() && $count > 0){
+                if(isset($subscription->subscripton_id) && !empty($subscription->subscripton_id)){
+                    app('App\Http\Controllers\Web\SubscriptionController')->cancel($subscription->subscription_id);
+                }
 
                 return redirect()->back()->with(['success' => 'Organization removed successfully']);
             }
@@ -208,6 +229,9 @@ class OrganizationController extends Controller
                 $count=1;
             }
             if($organization->delete() && $count > 0){
+                if(isset($subscription->subscription_id) && !empty($subscription->subscription_id)){
+                    app('App\Http\Controllers\Web\SubscriptionController')->cancel($subscription->subscription_id);
+                }
                 return redirect()->back()->with(['success' => 'Organization archived successfully']);
             }
             else{
@@ -224,6 +248,7 @@ class OrganizationController extends Controller
         $count=0;
         $organization = Organization::withTrashed()->where('id', $id)->first();
         $learners=$organization->learners()->withTrashed()->get();
+        $subscription=Subscription::where('account_id',$id)->first();
         if(count($learners) > 0){
             foreach ($learners as $learner)
             {
@@ -237,6 +262,16 @@ class OrganizationController extends Controller
 
         if( $organization->restore() && $count > 0)
         {
+
+            $newreq= new \Illuminate\Http\Request();
+
+            $newreq->name_on_card=$organization->name_on_card;
+            $newreq->card_number=$organization->card_number;
+            $newreq->expiry_date=$organization->expiry_date;
+            $newreq->billing_interval=$subscription->billing_interval;
+            $newreq->licenses=$subscription->licenses;
+
+            $response=app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$organization->id);
             DB::commit();
             return redirect()->back()->with(['success' => 'Organization restored successfully']);
         }
@@ -247,4 +282,6 @@ class OrganizationController extends Controller
         }
 
     }
+
+
 }

@@ -21,8 +21,7 @@ class Organization extends Model implements AuditableContract
         'contact_person',
         'name_on_card',
         'card_number',
-        'expiry_date',
-        'cvv'
+        'expiry_date'
     ];
 
     protected $dates = [

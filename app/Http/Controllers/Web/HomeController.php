@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,5 +39,15 @@ class HomeController extends Controller
     public function restricted()
     {
         return view('errors.403');
+    }
+
+    public function profile(){
+         if(session('role')=='organization'){
+
+             $data['organization']=Organization::with(['subscription'])->find(Auth::user()->account_id);
+         }
+         elseif(session('role')=='learner'){
+
+         }
     }
 }

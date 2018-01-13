@@ -5,6 +5,7 @@
         <div class="row m-t-20">
             <div class="col-md-12">
             <div class="white-box">
+
             <h3 class="box-title">Drag and drop your event</h3>
                 <div class="m-t-20">
                     @foreach($tickets as $ticket)
@@ -12,7 +13,13 @@
                     @endforeach
                 </div>
                 <div class="m-t-20">
-                    <button type="button" class="btn btn-primary" id="add-event">Add Event</button>
+                    <button type="button" class="btn btn-success" id="add-event">Add Event</button>
+                    <button type="button" class="btn btn-default m-l-10" id="event-list" onclick="$('#eventlistForm').submit()">All Events</button>
+                    <div class="hidden">
+                        <form id="eventlistForm" action="{{url('tickets/events')}}" method="get">
+                            {{csrf_token()}}
+                        </form>
+                    </div>
                 </div>
 
             </div>
@@ -79,6 +86,22 @@
                             <textarea id="note" class="form-control" type="text" name="assignment[note]" value="{{ old('ticket.note') }}" ></textarea>
                         </div>
                         <div class="form-group">
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#collapse1">All Activity</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse1" class="panel-collapse collapse">
+                                        <ul class="list-group" id="activity">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label>Do's & Dont's:</label>
                             <a href="javascript:" class="dos-donts">Click here</a>
                         </div>
@@ -105,20 +128,28 @@
 
     <script>
 
-
-
-
-
-
         var selectedTicketDate = null;
         var tickets = [];
-       // var ticketsJSON = JSON.parse('{!! json_encode($tickets) !!}');
+        var notes_arr={};
+
         var ticketsJSON = JSON.parse('{!! json_encode($assignments) !!}');
         var formAction = document.querySelector('#ticket-editor form').getAttribute('action');
+        var tickets_arr=JSON.parse('{!! json_encode($tickets) !!}');
 
+        for (var j=0;j<tickets_arr.length;j++){
+            var id=tickets_arr[j]['id'];
+            var noteslist='';
+            for(var k=0;k<tickets_arr[j]['assignments'].length;k++){
+
+                noteslist+='<li class="row list-group-item"><span class="col-sm-3">'+tickets_arr[j]['assignments'][k]['target_date']+'</span> <span class="col-sm-9">'+tickets_arr[j]['assignments'][k]['note']+'</span></li>';
+
+            }
+            notes_arr[id] = noteslist
+        }
         function initCalendar() {
 
             for(var i =0; i<ticketsJSON.length; i++){
+
                 if(ticketsJSON[i].is_archived){
                     var color = '#f8c255';
                 }
@@ -143,7 +174,8 @@
                     note:ticketsJSON[i].note,
                     impact_level: ticketsJSON[i].impact_level,
                     is_archived: ticketsJSON[i].is_archived,
-                    ticket: ticketsJSON[i].ticket
+                    ticket: ticketsJSON[i].ticket,
+                    notes:notes_arr[ticketsJSON[i].ticket.id]
                 };
                 tickets.push(ticket);
             }
@@ -159,16 +191,8 @@
                 droppable: true, // this allows things to be dropped onto the calendar
                 eventLimit: true, // allow "more" link when too many events
                 events: tickets,
-                dayClick: function (date, jsEvent, view) {
-
-                    initTicketEditor();
-                    $('#ticket-editor').modal('show');
-                    $("input[name='assignment[id]']").val('');
-
-                },
                 eventClick: function (calEvent, jsEvent, view) {
                      $("input[name='assignment[id]']").val(calEvent.id);
-                    // console.log('Event: ' + calEvent.title);
                     initTicketEditor(calEvent,'Edit');
                     $('#ticket-editor').modal('show');
                     $('#award-title').val(calEvent.title);
@@ -289,7 +313,6 @@
         };
 
         function initTicketEditor(ticket = null, mode = 'Create') {
-
             var id = ticket ? ticket.ticket.id : '';
             var title = ticket ? ticket.title : '';
             var targetDate = ticket ? ticket.target_date : selectedTicketDate;
@@ -297,23 +320,27 @@
             var impactLevel = ticket ? ticket.impact_level : '';
             var isArchived = ticket ? ticket.is_archived : false;
             var isCompleted = ticket ? ticket.ticket.is_completed : false;
+            var notes_in=ticket ? ticket.notes : '';
 
 //            console.log(moment(selectedTicketDate).format('m/d/y'),selectedTicketDate, targetDate, targetDate.format('m/d/y'));
 
             $('#ticket-title').val(title);
             $('#target-date').val(moment(targetDate).format('MM/DD/YYYY'));
             $('#note').val(note);
+            $('#activity').empty().append(notes_in);
 
             if(isArchived || isCompleted){
                 mode = '';
+                $("#note").parent().show();
                 $('#archive-ticket,#save-ticket,#ticket-title,#target-date,#note,#impact,#learning-module').attr('readonly','');
                 $('#ticket-editor .modal-footer').hide();
             }else{
+                $("#note").parent().show();
                 $('#archive-ticket,#save-ticket,#ticket-title,#note,#impact,#learning-module').removeAttr('readonly');
                 $('#ticket-editor .modal-footer').show();
             }
             if(mode == 'Create'){
-                $("#note").attr('readonly',true);
+                $("#note").parent().hide();
                 $('#archive-ticket').hide();
                 $("#complete-ticket").hide();
                 $('#ticket-editor input[name="_method"]').val('post');
@@ -322,6 +349,7 @@
                 $('#ticket-editor form').attr('action', formAction + '/' + id);
                 $('#archive-ticket').show();
                 $("#complete-ticket").show();
+                $("#note").parent().show();
                 $('#ticket-editor input[name="_method"]').val('put');
             }
 

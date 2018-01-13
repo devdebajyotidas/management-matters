@@ -78,6 +78,18 @@ class TicketController extends Controller
         }
     }
 
+    public function events(){
+        $id = Auth::user()->account_id;
+
+        $data['page'] = 'tickets';
+        $data['role'] = session('role');
+        $data['prefix']  = session('role') . '/'. $id;
+        $data['assignments']=TicketAssignment::with(['ticket'=>function($query){
+            $query->where(['learner_id' => Auth::user()->account_id]);
+        }])->get();
+        return view('tickets.events', $data);
+    }
+
     public function store(Request $request)
     {
 

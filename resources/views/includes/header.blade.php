@@ -178,11 +178,15 @@
                 <!-- /.dropdown-tasks -->
             </li>
             <!-- /.dropdown -->
-            <li>
-                <a href="{{ url('logout') }}" class="waves-effect waves-light">
-                    <i class="fa fa-sign-out"></i>
-                </a>
-            </li>
+
+                <li class="dropdown"><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown"
+                                        href="#"><i class="fa fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">My Profile</a></li>
+                        <li><a href="{{ url('logout') }}">Sign Out</a></li>
+                    </ul>
+                </li>
             {{--<li class="right-side-toggle"><a class="waves-effect waves-light" href="javascript:void(0)">--}}
                     {{--<i class="ti-settings"></i></a></li>--}}
             <!-- /.dropdown -->
@@ -234,7 +238,7 @@
     .user-profile {
         padding: 5px 0;
     }
-    .top-left-part a{
+    .top-left-part a,.top-left-part span{
         font-size: inherit;
         text-transform: none;
     }

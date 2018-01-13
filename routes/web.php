@@ -38,6 +38,7 @@ Route::group(['namespace' => 'Web'], function () {
     Route::get('cost', 'HomeController@cost');
 
     Route::get('dashboard', 'DashboardController@index');
+    Route::get('profile', 'HomeController@profile');
 
     Route::get('learners', 'LearnerController@index');
     Route::get('learners/{id}', 'LearnerController@show');
@@ -70,6 +71,7 @@ Route::group(['namespace' => 'Web'], function () {
     Route::post('assessments/new', 'AssessmentController@store');
 
     Route::get('tickets', 'TicketController@index');
+    Route::get('tickets/events', 'TicketController@events');
     Route::post('tickets', 'TicketController@store');
     Route::put('tickets/{id}', 'TicketController@update');
     Route::delete('tickets/{id}', 'TicketController@delete');
@@ -91,6 +93,17 @@ Route::group(['namespace' => 'Web'], function () {
     Route::post('learnings/{learningId}/quiz', 'QuizController@store');
     Route::put('learnings/{learningId}/quiz/{id}', 'QuizController@update');
     Route::get('quiz', 'QuizController@index');
+
+    Route::get('subscription/{id}/purchase', 'SubscriptionController@purchase');
+    Route::post('subscription/{id}/process', 'SubscriptionController@process');
+    Route::post('subscription/{id}/subscribe', 'SubscriptionController@subscribe');
+    Route::post('subscription/{id}/update', 'SubscriptionController@update');
+    Route::post('subscription/{id}/cancel', 'SubscriptionController@cancel');
+    Route::post('subscription/{id}/test', 'SubscriptionController@test');
+
+
+
+
 //    });
 
 //    Route::group(['prefix' => 'learner/{learnerId}', 'middleware' => 'auth'], function () {

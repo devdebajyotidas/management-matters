@@ -38,7 +38,7 @@
                                                         <td>{{ $learner->user->email }}</td>
                                                         <td>{{ $learner->phone }}</td>
                                                         <td>
-                                                            <a href="{{  url('/organizations/'. $learner->id . '/learners') }}">
+                                                            <a href="{{  url('/organizations'.'/'. $learner->id . '/learners') }}">
                                                                 <span class="label label-info">
                                                                     {{ $learner->learners()->count() }}
                                                                 </span>
@@ -52,7 +52,7 @@
                                                                 <i class="ti-eye" aria-hidden="true"></i>
                                                             </a>
                                                             @if($learner->trashed())
-                                                                <form action="{{  '/organizations/'. $learner->id.'/restore'}}"
+                                                                <form action="{{  url('organizations').'/'.$learner->id.'/restore'}}"
                                                                       method="post">
                                                                     {{ method_field('put') }}
                                                                     {{ csrf_field() }}
@@ -63,7 +63,7 @@
                                                                     </a>
                                                                 </form>
                                                             @else
-                                                                <form action="{{  '/organizations/'. $learner->id}}"
+                                                                <form action="{{  url('organizations').'/'. $learner->id}}"
                                                                       method="post">
                                                                     {{ method_field('delete') }}
                                                                     {{ csrf_field() }}
@@ -231,13 +231,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group m-b-20">
                                                     <input type="text" class="form-control" name="organization[expiry_date]"
-                                                           placeholder="Expiry Date (MM/YY)">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group m-b-20">
-                                                    <input type="number" class="form-control" name="organization[cvv]"
-                                                           placeholder="CVV">
+                                                           placeholder="Expiry Date (YYYY-MM)">
                                                 </div>
                                             </div>
 
@@ -328,9 +322,6 @@
                 }, {{ $timeout * $key }});
                 @endforeach
                 @endif
-
-
-
 
                 $('#organization-table').DataTable({
                     dom: 'Bfrtip',

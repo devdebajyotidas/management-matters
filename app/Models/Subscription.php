@@ -19,7 +19,9 @@ class Subscription extends Model implements AuditableContract
         'start_date',
         'billing_interval',
         'licenses',
-        'status'
+        'status',
+        'amount',
+        'is_subscribed'
     ];
 
     protected $dates = [

@@ -321,7 +321,40 @@
                 }, {{ $timeout * $key }});
                 @endforeach
                 @endif
+
+
+                $('.learner-check').click(function(){
+                    var addflag=$('#learner-flag').val();
+                    var role=$('.user-role').val();
+                    if(role==='organization'){
+                        if(addflag==='1'){
+                            $('#add-learner').modal('show');
+                        }
+                        else{
+                            swal({
+                                title: 'Information',
+                                text: "You've used up all the licenses",
+                                type: 'info',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Buy Licenses'
+                            }).then(function(result){
+                                if(result.value){
+                                   window.location.href="{{url('subscription/').'/'.$organization->id.'/purchase'}}";
+                                }
+
+                            })
+                        }
+                    }
+                    else{
+                        $('#add-learner').modal('show');
+                    }
+                })
             };
+
+
+
         </script>
     @endif
 @endsection

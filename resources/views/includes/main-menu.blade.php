@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="box-shadow: 0 1px 3px rgba(0,0,0,.14)">
     <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
         <div class="sttabs tabs-style-iconbox">
             <nav>

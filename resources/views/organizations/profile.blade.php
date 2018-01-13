@@ -298,12 +298,7 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group m-b-20">
-                                                                <input type="text" class="form-control" name="organization[expiry_date]" placeholder="Expiry Date (MM/YY)" value="{{ $organization->expiry_date }}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group m-b-20">
-                                                                <input type="text" class="form-control" name="organization[cvv]" placeholder="CVV" value="{{ $organization->cvv }}">
+                                                                <input type="text" class="form-control" name="organization[expiry_date]" placeholder="Expiry Date (YYYY-MM)" value="{{ $organization->expiry_date }}">
                                                             </div>
                                                         </div>
                                                     </div>

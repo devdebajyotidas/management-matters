@@ -18,6 +18,7 @@ use App\Models\Department;
 use App\Models\Organization;
 
 
+
 class LearnerController extends Controller
 {
 
@@ -44,6 +45,10 @@ class LearnerController extends Controller
         $data['learner'] = $request->get('learner');
         $data['user'] = $request->get('user');
 
+        $subscription['subscription_id']='';
+        $subscription['start_date']=date('Y-m-d H:i:s');
+        $subscription['status']=1;
+
         if(intval($request->get('learner')['organization']))
         {
             $newRequest = Request::create('organizations/'. intval($request->get('learner')['organization']) . '/learners', 'POST', $request->all());
@@ -58,18 +63,36 @@ class LearnerController extends Controller
             $user = User::make($request->get('user'));
             $learner = Learner::create($request->get('learner'));
 
-            $learner->user()->save($user);
-            $user->attachRole('learner');
+            if($learner->user()->save($user)){
+                $user->attachRole('learner');
+                if(empty($learner->organization)){
+                    $sub = Subscription::make($subscription);
 
-            DB::commit();
+                    $learner->subscription()->save($sub);
+                    if(!empty($learner->name_on_card) && !empty($learner->card_number) && !empty($learner->expiry_date)){
+                        $newreq= new \Illuminate\Http\Request();
+                        $newreq->name_on_card=$learner->name_on_card;
+                        $newreq->card_number=$learner->card_number;
+                        $newreq->expiry_date=$learner->expiry_date;
+                        app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$learner->id);
+                    }
 
-            return redirect()->back()->with('success', 'Learner added successfully');
+                }
+                DB::commit();
+
+                return redirect()->back()->with('success', 'Learner added successfully');
+            }
+            else{
+                DB::rollBack();
+                return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong']);
+            }
+
         }
         else
         {
             DB::rollBack();
             $errors = $learnerValidator->errors()->merge($userValidator->errors());
-
+            dd($errors);
             return redirect()->back()->withInput($request->all())->withErrors($errors);
         }
 
@@ -160,24 +183,41 @@ class LearnerController extends Controller
      */
     public function delete(Request $request, $id)
     {
-           $learner = Learner::withTrashed()->where('id', $id)->first();
-           if($learner->trashed())
-           {
-               $learner->forceDelete();
-               return redirect()->back()->with(['success' => 'Learner removed successfully']);
-           }
-           else
-           {
-               $learner->delete();
-               return redirect()->back()->with(['success' => 'Learner archived successfully']);
-           }
+        $learner = Learner::withTrashed()->where('id', $id)->first();
+        $subscription=Subscription::where('account_id',$id)->first();
+        if($learner->trashed())
+        {
+            $learner->forceDelete();
+            if(isset($subscription->subscription_id) && !empty($subscription->subscription_id)){
+                app('App\Http\Controllers\Web\SubscriptionController')->cancel($subscription->subscription_id);
+            }
+            return redirect()->back()->with(['success' => 'Learner removed successfully']);
+        }
+        else
+        {
+            $learner->delete();
+            if(isset($subscription->subscription_id) && !empty($subscription->subscription_id)){
+                app('App\Http\Controllers\Web\SubscriptionController')->cancel($subscription->subscription_id);
+            }
+            return redirect()->back()->with(['success' => 'Learner archived successfully']);
+        }
     }
 
     public function restore(Request $request, $id)
     {
         $learner = Learner::withTrashed()->where('id', $id)->first();
+        $subscription=Subscription::where('account_id',$id)->first();
         if($learner->restore())
         {
+            $newreq= new \Illuminate\Http\Request();
+
+            $newreq->name_on_card=$learner->name_on_card;
+            $newreq->card_number=$learner->card_number;
+            $newreq->expiry_date=$learner->expiry_date;
+            $newreq->billing_interval=$subscription->billing_interval;
+            $newreq->licenses=$subscription->licenses;
+
+            $response=app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$learner->id);
             return redirect()->back()->with(['success' => 'Learner restored successfully']);
         }
         else

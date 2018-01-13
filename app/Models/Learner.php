@@ -21,8 +21,7 @@ class Learner extends Model implements AuditableContract
         'image',
         'name_on_card',
         'card_number',
-        'expiry_date',
-        'cvv'
+        'expiry_date'
     ];
 
     protected $dates = [

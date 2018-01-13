@@ -157,7 +157,7 @@
                     <table id="mainTable" class="table editable-table table-bordered table-striped m-b-0" style="margin: 20px 0">
                         <thead>
                         <tr>
-                            <th>Name</th>
+                            <th class="noedit">Name</th>
                             <th>Average Hourly Wage ($)</th>
                             <th>X Number of Employees</th>
                             <th>Lost Hours Per Week</th>

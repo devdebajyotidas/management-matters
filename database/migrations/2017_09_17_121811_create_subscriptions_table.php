@@ -18,11 +18,13 @@ class CreateSubscriptionsTable extends Migration
             $table->increments('id');
             $table->integer('account_id');
             $table->string('account_type');
-            $table->string('transaction_id')->nullable();
+            $table->string('subscription_id')->nullable();
             $table->dateTime('start_date')->default(\Carbon\Carbon::now());
             $table->integer('billing_interval')->default(30);
             $table->integer('licenses')->default(1);
             $table->integer('status')->default(1);
+            $table->integer('amount')->nullable();
+            $table->integer('is_subscribed')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

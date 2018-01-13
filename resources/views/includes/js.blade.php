@@ -222,9 +222,39 @@
 
 @elseif($page=='cost')
     <script>
-        $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
-        $('#editable-datatable').editableTableWidget().numericInputExample().find('td:first').focus();
+        // $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
+        // $('#editable-datatable').editableTableWidget().numericInputExample().find('td:first').focus();
+        var editor='';
         $(document).ready(function() {
+
+            // editor = new $.fn.dataTable.Editor( {
+            //     table: "#mainTable",
+            //     fields: [ {
+            //         label: "First name:",
+            //         name: "first_name"
+            //     }, {
+            //         label: "Last name:",
+            //         name: "last_name"
+            //     }, {
+            //         label: "Salary:",
+            //         name: "salary"
+            //     }
+            //     ]
+            // } );
+
+            $('#mainTable').DataTable( {
+                dom: 'Bfrtip',
+                columns: [
+                    {className: ''},
+                    {className: 'editable' },
+                    { className: 'editable' },
+                    {className: 'editable' },
+                    {className:'noteditable'}
+                ],
+                buttons:[]
+            } );
+
+
             caltotal();
             $('#editable-datatable').DataTable();
             var table=$('#mainTable').DataTable();

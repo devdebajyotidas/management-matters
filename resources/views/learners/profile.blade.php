@@ -282,13 +282,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group m-b-20">
                                                                 <input type="text" class="form-control" name="learner[expiry_date]"
-                                                                       placeholder="Expiry Date (MM/YY)" value="{{ $learner->expiry_date }}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group m-b-20">
-                                                                <input type="number" class="form-control" name="learner[cvv]"
-                                                                       placeholder="CVV" value="{{ $learner->cvv }}">
+                                                                       placeholder="Expiry Date (YYYY-MM)" value="{{ $learner->expiry_date }}">
                                                             </div>
                                                         </div>
                                                     </div>

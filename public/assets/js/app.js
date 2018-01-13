@@ -14,22 +14,9 @@ $(document).ready(function () {
         buttons: [
             {
                 text: 'Add New Learner',
-                // className : 'btn btn-success btn-rounded',
+                className : 'learner-check',
                 action: function ( e, dt, node, config ) {
-                    var addflag=$('#learner-flag').val();
-                    var role=$('.user-role').val();
-                    if(role==='organization'){
-                        if(addflag==='1'){
-                            $('#add-learner').modal('show');
-                        }
-                        else{
-                            swal('Error', "You've used up all licences", 'error');
-                            return;
-                        }
-                    }
-                    else{
-                        $('#add-learner').modal('show');
-                    }
+
                 }
             },
             {
