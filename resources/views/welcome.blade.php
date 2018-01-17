@@ -171,6 +171,13 @@
             overflow: auto;
         }
 
+        #main-nav .side-nav{
+            background-color: #efefef;
+        }
+        #main-nav .side-nav a{
+            color: #292929;
+        }
+
         @media screen and (max-width: 700px) {
             .box {
                 width: 70%;
@@ -341,9 +348,9 @@
                 <a class="waves-effect waves-light home  no-bg" data-scroll-nav="0" href="#">
                     <img class="responsive-img logo" src="{{asset('assets/img/mm-logo.png')}}"
                          alt="Logo image"><br>
-                    <p class="title-link">
-                        <span>A</span><span>p</span><span>p</span><span>e</span><span>r</span><span>l</span><span>e</span>
-                    </p>
+                    {{--<p class="title-link">--}}
+                        {{--<span>A</span><span>p</span><span>p</span><span>e</span><span>r</span><span>l</span><span>e</span>--}}
+                    {{--</p>--}}
                 </a>
             </li>
 
