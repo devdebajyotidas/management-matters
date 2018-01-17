@@ -31,9 +31,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/landing_resource/css/style19.css')}}" id="colors">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-{{--    <link rel="stylesheet" href="{{ asset('assets/landing_resource/css/font-awesome.min.css') }}">--}}
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    {{--    <link rel="stylesheet" href="{{ asset('assets/landing_resource/css/font-awesome.min.css') }}">--}}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script>
@@ -41,6 +41,68 @@
     <![endif]-->
 
     <style type="text/css">
+
+        .modal_scrollable {
+            height: 500px;
+            overflow-y: scroll;
+            padding: 20px !important;
+        }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            min-height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content .close {
+            position: relative;
+            float: right;
+            font-size: 25px;
+            transition: transform 500ms ease;
+            z-index: 11;
+        }
+
+        .about-us-image {
+            width: 455px !important;
+            height: 380px !important;
+        }
+
+        .phase-color {
+            color: #f75b36 !important;
+        }
+
         .gradient-color {
             background: linear-gradient(30deg, #f75b36, #f75b36);
         }
@@ -124,9 +186,7 @@
 <body>
 
 <!-- Start PreLoader Section-->
-<div class="pre-loader gradient-color">
-    <div class="loader"></div>
-</div>
+
 <!-- End PreLoader Section-->
 
 <!-- Start Nav Section -->
@@ -162,9 +222,9 @@
         <!-- Main Menu Content -->
         <ul class="right hide-on-med-and-down">
 
-            <li>
-                <a class="waves-effect waves-light no-bg" data-scroll-nav="0" href="#">Home</a>
-            </li>
+            <!--  <li>
+                 <a class="waves-effect waves-light no-bg" data-scroll-nav="0" href="#">Home</a>
+             </li> -->
 
             <li>
                 <a class="waves-effect waves-light" data-scroll-nav="1" href="#">Features</a>
@@ -195,8 +255,13 @@
             </li>
 
             <li>
-                <a class="waves-effect waves-light" data-scroll-nav="7" href="#">Contact</a>
+                <a class="waves-effect waves-light" data-scroll-nav="7" href="#">About Us</a>
             </li>
+
+            <li>
+                <a class="waves-effect waves-light" data-scroll-nav="8" href="#">Contact</a>
+            </li>
+
 
             @if (Route::has('login'))
                 @if (Auth::check())
@@ -274,7 +339,7 @@
             <!--Side Nav Add Logo and Name here-->
             <li>
                 <a class="waves-effect waves-light home  no-bg" data-scroll-nav="0" href="#">
-                    <img class="responsive-img logo" src="{{asset('assets/landing_resource/images/logo.svg')}}"
+                    <img class="responsive-img logo" src="{{asset('assets/img/mm-logo.png')}}"
                          alt="Logo image"><br>
                     <p class="title-link">
                         <span>A</span><span>p</span><span>p</span><span>e</span><span>r</span><span>l</span><span>e</span>
@@ -282,9 +347,9 @@
                 </a>
             </li>
 
-            <li>
-                <a class="waves-effect waves-light" data-scroll-nav="0" href="#">Home</a>
-            </li>
+            {{--<li>--}}
+            {{--<a class="waves-effect waves-light" data-scroll-nav="0" href="#">Home</a>--}}
+            {{--</li>--}}
 
             <li>
                 <a class="waves-effect waves-light" data-scroll-nav="1" href="#">Features</a>
@@ -364,7 +429,7 @@
                 </div>
 
                 <!-- App Main Description -->
-                <p class="description">Say hello to a whole new way to managing BETTER! <br> MM is a breakthrough
+                <p class="description"><item style="font-size: 22px;">Say HELLO to a whole new way to managing BETTER!</item> <br> MM is a breakthrough
                     on-line program that inspires emerging and experienced managers and supervisors with the necessary
                     critical thinking skills to obtain superior performance from everyone in the organization.</p>
 
@@ -406,7 +471,7 @@
             <div class="col s12 l4">
 
                 <div class="icon s6 p-tb-2">
-                    <i class="gradient-color fa fa-snowflake-o fa-3x waves-circle waves-effect waves-light"></i>
+                    <a href="#popup1"><i class="gradient-color fa fa-snowflake-o fa-3x waves-circle waves-effect waves-light" ></i></a>
                 </div>
 
                 <h5 class="p-tb-1">Learnings</h5>
@@ -420,7 +485,7 @@
             <div class="col s12 l4">
 
                 <div class="icon p-tb-2">
-                    <i class="gradient-color fa fa-pencil fa-3x waves-circle waves-effect waves-light"></i>
+                    <a href="#popup2"><i class="gradient-color fa fa-pencil fa-3x waves-circle waves-effect waves-light"></i></a>
                 </div>
 
                 <h5 class="p-tb-1">Tools</h5>
@@ -435,7 +500,7 @@
             <div class="col s12 l4">
 
                 <div class="icon p-tb-2">
-                    <i class="gradient-color fa fa-superpowers fa-3x waves-circle waves-effect waves-light"></i>
+                    <a href="#popup3"><i class="gradient-color fa fa-superpowers fa-3x waves-circle waves-effect waves-light"></i></a>
                 </div>
 
                 <h5 class="p-tb-1">Technology</h5>
@@ -533,7 +598,7 @@
                         <div>
                             <h5>Learnings</h5>
                             {{--<p>Provides basic understanding and approaches to assisting managers to better manage today’s employees</p>--}}
-                            <p>Assists managers to better manage today’s employees</p>
+                            <p>Assists managers to better understand and engage today’s employees.</p>
                         </div>
 
                         <!-- Icon -->
@@ -555,7 +620,7 @@
                         <div>
                             <h5>Quizzes</h5>
                             {{--<p>A set of 10 questions that ensure knowledge attainment with 50% of the questions situational.</p>--}}
-                            <p>Ensure knowledge attainment of the questions situational.</p>
+                            <p>Ensures knowledge attainment and application of the Learnings.</p>
                         </div>
 
                         <!-- Icon-->
@@ -630,7 +695,7 @@
                             <h5>Dashboard (Analytics)</h5>
                             {{--<p>Graphs that display metrics of Assessment scores, Tickets (or Actions) completed, Awards attained, Quizzes completed (if required),--}}
                             {{--etc.</p>--}}
-                            <p>Assessment scores, Tickets completed, Awards attained, Quizzes completed.</p>
+                            <p>Tracks Assessment scores, Tickets completed, Awards attained, and Quizzes completed.</p>
 
                         </div>
 
@@ -653,7 +718,7 @@
                             <h5>Ticket I Calendar Board</h5>
                             {{--<p>A robust calendar to organize your Tickets (or specific MM activities) that also ties into your native--}}
                             {{--iOS or Android calendar.</p>--}}
-                            <p>A robust calendar to organize your Tickets</p>
+                            <p>Organizes Tickets and syncs with native iOS and Android calendars.</p>
 
                         </div>
 
@@ -674,7 +739,7 @@
 
                             <!-- Title -->
                             <h5>Award and Notifications</h5>
-                            <p>Receive awards completing activities, Quizzes, Assessment.</p>
+                            <p>Displays Awards generated by Learner activity.</p>
 
                         </div>
 
@@ -707,11 +772,11 @@
             <br>
             1 Career-Changing Way to Better Manage Employees
             <br>
-            In Management Matters, positive behaviors are introduced <br> & <br> reinforced day-to-day
+            In Management Matters, <b><i>POSITIVE BEHAVIORS</b></i> are introduced <br> & <br> reinforced day-to-day
             <br>
-            ensuring a change in employee attitudes and performance; contributing
+            ensuring a change in <b><i>EMPLOYEE ATTITUDES</i></b> and performance; contributing
             <br>
-            greatly to a change in organizational culture.
+            greatly to a <b><i>CHANGE IN ORGANIZATONAL CULTURE</i></b>.
 
         </p>
 
@@ -721,11 +786,11 @@
             <div class="col s12 l6" data-aos="fade-right" data-aos-delay="100">
 
                 <!-- Small Title -->
-                <h5 class="p-b-1">
+                <h5 class="p-b-1 phase-color">
                     PHASE 1
                 </h5>
 
-                <p><b>GET TO KNOW YOURSELF BETTTER</b></p>
+                <p><b class="phase-color">GET TO KNOW YOURSELF BETTTER</b></p>
 
                 <div class="info">
 
@@ -739,7 +804,7 @@
 
                     <div>
 
-                        <h6> Conduct regularily a <b> Management Self-Assessment</b></h6>
+                        <h6> Conduct regularily a <b class="phase-color"> Management Self-Assessment.</b></h6>
                     </div>
 
                 </div>
@@ -755,10 +820,13 @@
                     </div>
 
                     <div>
-                        <h6>A set of 3 questions out of 6 will be randomly selected for scoring by the Learner.
-                            Thankfully, you won’t have to determine which Modules will be best suited for you to improve
-                            your managing better skills. A prioritized list will be provided, as well as each score is
-                            tabulated and conveyed on your Management Matters Chart.</h6>
+                        {{--<h6>A set of 3 questions out of 6 will be randomly selected for scoring by the Learner.--}}
+                        {{--Thankfully, you won’t have to determine which Modules will be best suited for you to improve--}}
+                        {{--your managing better skills. A prioritized list of suggested Learning Modules based on your Assessment score will be provided, as well as each score is--}}
+                        {{--tabulated and conveyed on your Management Matters Chart.</h6>--}}
+                        <h6>
+                            A prioritized list of suggested Learning Modules based on your Assessment score.
+                        </h6>
 
                     </div>
 
@@ -775,7 +843,7 @@
                     </div>
 
                     <div>
-                        <h6>Your goal must be <b>SPECIFIC</b>!</h6>
+                        <h6>Your goal will be <b class="phase-color">SPECIFIC</b>!</h6>
                     </div>
 
                 </div>
@@ -801,9 +869,9 @@
             <div class="col s12 l6" data-aos="fade-left" data-aos-delay="200">
 
                 <!-- Small Title -->
-                <h5 class="p-b-1">PHASE 2</h5>
+                <h5 class="p-b-1 phase-color">PHASE 2</h5>
 
-                <p><b>BROADEN YOUR HORIZONS</b></p>
+                <p><b class="phase-color">BROADEN YOUR HORIZONS</b></p>
 
                 <div class="info">
 
@@ -817,8 +885,11 @@
 
                     <div>
 
-                        <h6> Obtain knowledge from the <b>Learning Modules Quizzes, and Cost of NOT Managing Better</b></h6>
+                        {{--<h6> Obtain knowledge from the <b class="phase-color">Learning Modules, Quizzes, and Cost of NOT Managing Better</b></h6>--}}
 
+                        <h6>
+                            Learning Modules for specific management topics to broaden the learner's knowledge with the latest in the concepts and practices.
+                        </h6>
                     </div>
 
                 </div>
@@ -834,18 +905,20 @@
                     </div>
 
                     <div>
-                        <h6>Learning Modules for specific management topics to broaden the learner's knowledge with the
-                            latest in the concepts and practices. The Learnings include an Overview, Why It Work, Keys,
-                            Do's and Don'ts, Management Masters and Monsters, and Quizzes.
+                        {{--<h6>Learning Modules for specific management topics to broaden the learner's knowledge with the--}}
+                        {{--latest in the concepts and practices.You will be aware of the personality (behavior) styles within the workplace and--}}
+                        {{--determine what those behaviors cost the organization. And then work to reduce their impact.--}}
+                        {{--</h6>--}}
 
-                            <br>You will be aware of the personality (behavior) styles within the workplace and
-                            determine what those behaviors cost the organization. And then work to reduce their impact.
+                        <h6>Learning Modules for specific management topics to broaden the learner's knowledge with the
+                            latest in the concepts and practices.
                         </h6>
 
                     </div>
 
                 </div>
 
+
                 <div class="info">
 
                     <div>
@@ -857,7 +930,25 @@
                     </div>
 
                     <div>
-                        <h6>Your goal must be  <b>MEASURABLE</b>!</h6>
+                        <h6>Gain knowledge of various personality (behavior) traits that impact performance and work to reduce their impact.</h6>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info">
+
+                    <div>
+
+                        <div>
+                            <i class="fa fa-rocket gradient-color" aria-hidden="true"></i>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <h6>Your goal will be  <b class="phase-color">MEASURABLE</b>!</h6>
 
                     </div>
 
@@ -883,9 +974,9 @@
             <div class="col s12 l6" data-aos="fade-right" data-aos-delay="200">
 
                 <!-- Small Title -->
-                <h5 class="p-b-1">PHASE 3</h5>
+                <h5 class="p-b-1 phase-color">PHASE 3</h5>
 
-                <p><b>RETHINK YOUR STRATEGY</b></p>
+                <p><b class="phase-color">RETHINK YOUR STRATEGY</b></p>
 
                 <div class="info">
                     <div>
@@ -895,7 +986,7 @@
                     </div>
 
                     <div>
-                        <h6>Change behavior with the <b>Tickets and Calendar Board</b>
+                        <h6>Change behavior with the <b class="phase-color">Tickets and Calendar Board</b>
                         </h6>
                     </div>
 
@@ -910,8 +1001,7 @@
                     </div>
 
                     <div>
-                        <h6>Visualized your Tickets or Action Items to managing better on the Board. This will allow you
-                            to plan those incremental changes to better management practices.
+                        <h6>Visualized your Tickets or Action Items to managing better on the Board.
                         </h6>
                     </div>
 
@@ -928,11 +1018,14 @@
 
                     <div>
 
-                        <h6>Obtain awards when completing 10 activities.
-                            Improving management practices requires due diligence and cannot be done as an one time
-                            event. Keep in mind this is your personal improvement plan to FOREVER improve your skills.
-                        </h6>
+                        {{--<h6>Obtain awards when completing 10 activities.--}}
+                        {{--Improving management practices requires due diligence and cannot be done as an one time--}}
+                        {{--event. Keep in mind this is your personal improvement plan to FOREVER improve your skills.--}}
+                        {{--</h6>--}}
 
+                        <h6>
+                            Obtain awards when completing activities.
+                        </h6>
                     </div>
 
                 </div>
@@ -947,7 +1040,7 @@
                     </div>
 
                     <div>
-                        <h6>Your goal must be <b>ASSIGNABLE</b>!</h6>
+                        <h6>Your goal will be <b class="phase-color">ASSIGNABLE</b>!</h6>
 
                     </div>
 
@@ -973,9 +1066,9 @@
             <div class="col s12 l6" data-aos="fade-left" data-aos-delay="200">
 
                 <!-- Small Title -->
-                <h5 class="p-b-1">PHASE 4</h5>
+                <h5 class="p-b-1 phase-color">PHASE 4</h5>
 
-                <p><b>MAKE IT ROUTINE, TRACK PROGRESS AND BE REWARDED</b></p>
+                <p><b class="phase-color">MAKE IT ROUTINE, TRACK PROGRESS AND BE REWARDED</b></p>
 
                 <div class="info">
 
@@ -988,7 +1081,7 @@
                     </div>
 
                     <div>
-                        <h6>Receive feedback from the <b>Awards and Notifications</b> on a regular basis by your daily activities as you manage better.
+                        <h6>Receive feedback from the <b class="phase-color">Awards and Notifications</b> on a regular basis.
                         </h6>
 
                     </div>
@@ -1008,13 +1101,7 @@
                     <div>
 
 
-                        <h6>You will be given many new ideas to better
-                            engage employees in a variety of situations and circumstances.
-                            <br>
-                            You can adjust your activities as time evolves.
-                            With the attaining of awards, being notified of your managing better opportunities, and the
-                            visualization of your progress, will have you engaged as never before - making Managing
-                            Better fun!
+                        <h6>Continually adjust and monitor your activities to meet everyday issues – making Managing Better fun!
 
                         </h6>
 
@@ -1033,7 +1120,7 @@
                     </div>
 
                     <div>
-                        <h6>Your goal must be <b>REALISTIC AND TIMELY!</b></h6>
+                        <h6>Your goal will be <b class="phase-color">REALISTIC AND TIMELY!</b></h6>
 
                     </div>
 
@@ -1434,7 +1521,7 @@
 
                 <div class="info">
 
-                    <h5 class="p-b-1">Freelancer</h5>
+                    <h5 class="p-b-1">Learner</h5>
 
                     <hr>
 
@@ -1455,7 +1542,7 @@
 
                 </div>
 
-                <a href="#" class="m-t-1 shadow-button waves-effect waves-light">Buy Now
+                <a href="#" class="m-t-1 shadow-button waves-effect waves-light">Subscribe Now
                     <i class="fa fa-arrow-right"></i>
                 </a>
 
@@ -1473,7 +1560,7 @@
 
                 <div class="info">
 
-                    <h5 class="p-b-1">One Project</h5>
+                    <h5 class="p-b-1">Organization</h5>
 
                     <hr>
 
@@ -1495,7 +1582,7 @@
 
                 </div>
 
-                <a href="#" class="m-t-1 shadow-button waves-effect waves-light">Buy Now
+                <a href="#" class="m-t-1 shadow-button waves-effect waves-light">Subscribe Now
                     <i class="fa fa-arrow-right"></i>
                 </a>
 
@@ -1508,7 +1595,7 @@
 
                 <div class="info">
 
-                    <h5 class="p-b-1">Multiple Projects</h5>
+                    <h5 class="p-b-1">Enterprise</h5>
 
                     <hr>
 
@@ -1531,7 +1618,7 @@
 
                 </div>
 
-                <a href="#" class="m-t-1 shadow-button waves-effect waves-light">Buy Now
+                <a href="#" class="m-t-1 shadow-button waves-effect waves-light">Contact Us
                     <i class="fa fa-arrow-right"></i>
                 </a>
 
@@ -1760,13 +1847,135 @@
 </section>
 <!-- End FAQs Section-->
 
+
+
+<!-- Start About Us Section-->
+
+<section id="team" data-scroll-index="7" class="main-section center-align">
+
+    <div class="container">
+
+        <!--Title-->
+        <h4 class="reflection-text p-b-2">About Us</h4>
+
+        <!-- Description -->
+        <p class="p-t-1 desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab adipisci amet corporis, cupiditate dolores ipsa ipsam maiores molestias nesciunt, nihil odio quae, quo ratione soluta.</p>
+
+        <!-- Owl Team Slider -->
+        <div class="p-t-2 grid center-align owl-carousel owl-teams">
+
+            <!-- Single Team Container -->
+            <div class="team-member m-tb-2 z-depth-2 hoverable">
+                <figure>
+
+                    <!-- Team Image -->
+                    <img class="responsive-img about-us-image" src="{{asset('assets/img/about_us/team3.jpg')}}" alt="news image">
+
+
+
+                </figure>
+
+                <div class="name p-b-1">
+
+                    <!-- Team Member Name and link to his page -->
+                    <a href="#">
+                        <h5 class="team-name gradient-color waves-effect waves-light">Don Tapping</h5>
+                    </a>
+                    <h6>Publisher and Author</h6>
+
+                    <!-- Team Member Job -->
+                    <!-- <h6>Web Developer</h6> -->
+
+                    <a class="shadow-button waves-effect waves-light" id="modal_btn1" onclick="modalOpenFunction('one')" style="cursor: pointer; color: #039be5; width: 50%;">
+                        <b>Know more</b>
+
+                    </a>
+
+                    <!-- <a href="#" class="shadow-button waves-effect waves-light">
+                        Read more
+                        <i class="fa fa-arrow-right"></i>
+                    </a> -->
+
+                </div>
+            </div>
+
+            <!-- Single Team Container -->
+            <div class="team-member m-tb-2 z-depth-2 hoverable">
+                <figure>
+
+                    <!-- Team Image -->
+                    <img class="about-us-image" src="{{asset('assets/img/about_us/team1.jpg')}}" alt="img25">
+
+
+
+                </figure>
+
+                <div class="name p-b-1">
+
+                    <!-- Team Member Name and link to his page -->
+                    <a href="#">
+                        <h5 class="team-name gradient-color waves-effect waves-light">Cynthia Guy</h5>
+                    </a>
+                    <h6>Partner</h6>
+
+                    <a class="shadow-button waves-effect waves-light" id="modal_btn2" onclick="modalOpenFunction('two')" style="cursor: pointer; color: #039be5; width: 50%;">
+                        <b>Know more</b>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Single Team Container -->
+            <div class="team-member  m-tb-2 z-depth-2 hoverable">
+                <figure>
+
+                    <!-- Team Image -->
+                    <img class="about-us-image" src="{{asset('assets/img/about_us/team2.jpg')}}" alt="img25">
+
+
+
+                </figure>
+
+                <div class="name p-b-1">
+
+                    <!-- Team Member Name and link to his page -->
+                    <a href="#">
+                        <h5 class="team-name gradient-color waves-effect waves-light">Joe D Buys</h5>
+                    </a>
+                    <h6>Partner</h6>
+
+                    <a class="shadow-button waves-effect waves-light" id="modal_btn3" onclick="modalOpenFunction('three')" style="cursor: pointer; color: #039be5; width: 50%;">
+                        <b>Know more</b>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- End About Us Section-->
+
+
+
+
 <!-- Start Map Section-->
-<div id="map-section" data-scroll-index="7">
+<div id="map-section" data-scroll-index="8">
 
     <div id="map"></div>
 
 </div>
 <!-- End Map Section-->
+
+
 
 <!-- Start Footer Section-->
 <section id="footer" class="main-section center-align gradient-color">
@@ -1846,7 +2055,14 @@
                         <p class="p-b-1">
 
                             <i class="address-icon fa fa-map-marker"></i>
-                            <span>15 Bath Rd, Heathrow, Longford, Hounslow TW6 2AB, UK</span>
+                            <!-- <span>15 Bath Rd, Heathrow, Longford, Hounslow TW6 2AB, UK</span> -->
+                            <span>
+                                MCS Media Inc. (TheLeanStore.com)
+                                <br>
+                                888 Ridge Road
+                                <br>
+                                Chelsea, MI 48118  USA
+                            </span>
 
                         </p>
 
@@ -1854,7 +2070,9 @@
                         <p class="p-b-1">
 
                             <i class="address-icon fa fa-phone"></i>
-                            <a href="tel:+441711278528"> +44 171 127 8528</a>
+                            <a href="tel:+441711278528"> <!-- +44 171 127 8528 -->
+                                + 734-475—4301
+                            </a>
 
                         </p>
 
@@ -1862,13 +2080,19 @@
                         <p class="p-b-1">
 
                             <i class="address-icon fa fa-paper-plane" aria-hidden="true"></i>
-                            <a href="mailto:perla.app@example.com">perla.app@example.com</a>
+
+                            <span>
+                                <a href="mailto:info@theleanstore.com">
+                                info@theleanstore.com
+                            </a>
+                                <br>
+                            <a href="mailto:info@mgmt-matters.com" style="display: block">
+                                info@mgmt-matters.com
+                            </a>
+                            </span>
 
                         </p>
-
                         <!-- Your Social Network Links-->
-
-
                     </div>
 
                 </div>
@@ -1878,39 +2102,39 @@
         </div>
 
         <!-- Footer Area -->
-        <div class="footer-content p-t-3 left-align">
+        {{--<div class="footer-content p-t-3 left-align">--}}
 
-            <div class="container">
+        {{--<div class="container">--}}
 
-                <div class="row">
+        {{--<div class="row">--}}
 
-                    <div class="about col s12 m6 l3">
+        {{--<div class="about col s12 m6 l3">--}}
 
-                        <h5 class="p-b-2">About Us</h5>
+        {{--<h5 class="p-b-2">About Us</h5>--}}
 
-                        <!-- Your Logo -->
-                        <img class="responsive-img logo" src="" alt="logo image">
-                        <br>
-                        <!-- Your Title -->
-                        <p class="title-link">
-                            <span>A</span><span>p</span><span>p</span><span>e</span><span>r</span><span>l</span><span>e</span>
-                        </p>
-                        <!-- Your Info -->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, exercitationem!</p>
+        {{--<!-- Your Logo -->--}}
+        {{--<img class="responsive-img logo" src="" alt="logo image">--}}
+        {{--<br>--}}
+        {{--<!-- Your Title -->--}}
+        {{--<p class="title-link">--}}
+        {{--<span>A</span><span>p</span><span>p</span><span>e</span><span>r</span><span>l</span><span>e</span>--}}
+        {{--</p>--}}
+        {{--<!-- Your Info -->--}}
+        {{--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, exercitationem!</p>--}}
 
-                    </div>
+        {{--</div>--}}
 
-                    <!-- News -->
-
-
-                    <!-- Tags -->
+        {{--<!-- News -->--}}
 
 
-                </div>
+        {{--<!-- Tags -->--}}
 
-            </div>
 
-        </div>
+        {{--</div>--}}
+
+        {{--</div>--}}
+
+        {{--</div>--}}
 
     </div>
 
@@ -1923,7 +2147,7 @@
     <div class="container">
 
         <!-- Your Copy Right -->
-        <p>Copyright &copy;</p>
+        <p>Copyright &copy; 2018. Management Matters</p>
 
         <!-- Your Social Network Links-->
 
@@ -1932,6 +2156,138 @@
 
 </div>
 <!-- End Copy Rights Section-->
+
+<!-- <div class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog">
+
+<label for="modal" class="modal-bg"></label>
+<div class="modal-content">
+    <label for="modal" class="close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </label>
+    <header>
+        <h2>So This is a Modal</h3>
+    </header>
+    <article class="content">
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.</p>
+    </article>
+    <footer>
+        <a href="http://geekstudios.co" target="_parent" class="button success">Accept</a>
+        <label for="modal" class="button danger">Decline</label>
+    </footer>
+</div>
+
+</div>
+</div> -->
+
+<div id="modal_one" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content modal_scrollable">
+        <span class="close" id="modal_close1" onclick="closeModal('one')">&times;</span>
+        <div class="img_div" style="text-align: left;">
+            <img src="{{asset('assets/img/about_us/team3.jpg')}}" style="height: 200px; width: 200px;"/>
+            <br/>
+            <!-- <h5><b>Partner</b></h5> -->
+            <h5><b>Don Tapping</b></h5>
+
+
+            <p>
+                Don Tapping graduated from The University of Michigan in 1976. He spent the next four years as a Lieutenant in the United States Marine Corps in various positions during his tour. After completing his Corps duties, Don worked in the medical technology, education, and aerospace industries for the next 20 years. Don authored the best-selling book, Value Stream Management for the Lean Office (Productivity Press 2003), Lean Office Demystified (II), Who Hollered Fore?, and over 50 other books and apps on business performance - setting the bar for continuous improvements. He continues to enlighten organizations with his ability to design step-by-step implementation methodologies identifying processes that require improvement, and then introducing proactive steps to improve or redesign them - reducing costs, boosting performance, and increasing customer (patient) satisfaction. Don today is using his experience in developing apps on how Lean can be applied using smart devices. Don also received his MBA from The University of Notre Dame.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="modal_two" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content modal_scrollable">
+        <span class="close" id="modal_close1" onclick="closeModal('two')">&times;</span>
+        <div class="img_div" style="text-align: left;">
+            <img src="{{asset('assets/img/about_us/team1.jpg')}}" style="height: 200px; width: 200px;"/>
+            <br/>
+            <!-- <h5><b>Partner</b></h5> -->
+            <h5><b>Cynthia Guy</b></h5>
+
+
+            <p>Cynthia Guy is a senior partner at Crystal Clear Concepts, a management consulting firm.  She holds a BA from Michigan State University in Journalism. She is a Communications and a Leadership specialist from Harvard/McBer Institute. She’s a certified T.A. analyst as well as certified by the AMA and Time Manager/Denmark.  Her strengths are being a catalyst of organizational change, leadership and innovation.  She has been certified in the Sycronist (Lean) Manufacturing program from General Motors. She is the author of Finding Profit, a book about the transformation of a business through lean manufacturing principles.
+                In addition to a decade of human resource management expertise, Guy's strength lies in her ability as a catalyst of change. She’s been quoted as a change expert in the New York Times. Through close interaction with top management, she has been responsible for ushering in significant, positive change in a number of areas such as leadership, improved productivity and quality, resulting in increased profitability for companies. She developed her management skills as an owner of a major advertising agency that she operated before becoming a management consultant. She has gained the respect and admiration of top executives in business throughout the nation.
+            </p>
+
+            <b>Credentials:</b>
+            <p>
+                B.A. - Michigan State University<br/>
+                McBer Institute, Harvard - Managing Motivation for Performance Improvement<br/>
+                Author – Finding Profit, the story of Lean transformation<br/>
+                ITTA - Transactional Analyst<br/>
+                Time Management/Denmark - Certified as trainer's trainer </br>
+                Trained for Michigan State University, University of Michigan, Grand Rapids Community College, Muskegon Junior College <br/>
+                Former Director of Management Education for the Employers' Association of Western</br>
+                Michigan
+            </p>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="modal_three" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content modal_scrollable">
+        <span class="close" id="modal_close1" onclick="closeModal('three')">&times;</span>
+        <div class="img_div" style="text-align: left;">
+            <img src="{{asset('assets/img/about_us/team2.jpg')}}" style="height: 200px; width: 200px;"/>
+            <br/>
+            <!-- <h5><b>Partner</b></h5> -->
+            <h5><b>Joe D Buys</b></h5>
+
+
+            <p>As a senior partner, Joe Buys has been an innovator in Cross-Functional Team Development, Creative Problem Solving, and Leadership Development. More recently, he’s been working on developing strategies for companies to implement Lean processes into both areas of production and administration. He has been an expert contributor on the www.Allexperts.com website for over 10 years.<br/>
+
+                In addition to his human resource expertise as a consultant, Joe Buys was a national leader in the communications and research industries for over two decades. A past president of the Michigan Association of Broadcasters, Joe had a distinguished career in broadcasting as owner and/or manager of stations in Lansing, MI (WVIC- AM-FM), Detroit, MI (WKSG KISS-FM), Grand Rapids, MI (WZZR) and Fort Wayne, IN (WOWO-AM /FM).<br/>
+
+                As a businessman and consultant, he has earned the reputation as a paladin by successfully turning around a number of unprofitable businesses through in-depth, hands-on management and employee coaching. He also left an imprint on the research industry as Central Division Manager for the Arbitron Research Company in Chicago. However, unlike most turn-around experts, he did it without a smoking gun. Instead of replacing people, he trains and motivates them. He understands the need for managers to empower and challenge their employees by instilling a sense of dignity through compassion and pride.<br/>
+
+                “We have to tell our clients the facts in a way that they can understand how they will be impacted by them. Then we have to provide them with different tools they can use to improve performance, based on the reality of their situation. I trust that they will then make the best decisions for their particular needs.”
+            </p>
+
+            <b>Personal History</b>
+            <p>
+                Joe Buys was born in Grand Rapids, MI however, he lived his early years in East Lansing, MI. He developed an early interest in acting and competitive swimming. He participated in Toy Shop Theatre, a program at Michigan State University for young adults interested in theatre. That relationship led to his interest in broadcasting that was encouraged by cross participation between Toy Shop Theatre and the University’s television station, WKAR-TV. The interest in broadcasting and swimming led to an easy choice of college as he attended his hometown Michigan State University where he majored in Radio and Television, minored in Business and swam on the Spartan swim team. As an adult, he continued his swimming career by competing in the United States Masters Swimming and the Senior Olympics. He has set numerous state records, won a national championship and help set three world relay records.
+            </p>
+
+            <b>Client Base:</b>
+            <p>Manufacturing , Healthcare, Financial Services, Trade Associations,  Media
+                Law, Service Industries, Non-Profits,  Oil
+            </p>
+
+            <b>Credentials:</b>
+            <p>
+                Editor “Back-Street Lean” a book on Lean Manufacturing
+                MA. Michigan State University - Telecommunications/Business<br/>
+                B.A. Michigan State University - Telecommunications/Marketing<br/>
+                Board Member - Michigan Association of Broadcasters Foundation<br/>
+                Past President- Michigan Association of Broadcasters<br/>
+                Past President - Communication Arts Alumni Association - Michigan State University<br/>
+                Past President - Central East Lansing Business Association<br/>
+                Legislative Liaison, National Association Broadcasters<br/>
+                Time Management/Denmark - Certified as trainer’s trainer
+            </p>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
 
 <!-- jQuery - and plugins JS files -->
 <script src="{{asset('assets/landing_resource/js/plugins.js')}}" type="text/javascript"></script>
@@ -1945,7 +2301,47 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbWITJhiYWwcN7gobIdTe2RHGUWDmZKgw&amp;sensor=false"></script>
 <!-- Our Main JS -->
 <script src="{{asset('assets/landing_resource/js/min/main-min.js')}}" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+    //  var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    //  var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    // btn.onclick = function() {
+    //     modal.style.display = "block";
+    // }
+    function modalOpenFunction(id) {
+        modal = document.getElementById('modal_'+id);
+        modal.style.display = "block";
+
+        // $("#modal_close1").click( function() {
+        //     modal.style.display = "none";
+        // })
+
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    function closeModal(id) {
+        var close_modal = document.getElementById('modal_'+id);
+        close_modal.style.display = "none";
+    }
+
+    // // When the user clicks anywhere outside of the modal, close it
+    // window.onclick = function(event) {
+    //     if (event.target == modal) {
+    //         modal.style.display = "none";
+    //     }
+    // }
+
+
+
+</script>
 
 </body>
 
