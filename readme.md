@@ -52,7 +52,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 # Installation Guide
 
-$ git pull origin
+$ git pull origin master
 
 $ composer update
 
