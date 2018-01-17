@@ -198,7 +198,7 @@
 
         <!-- Add your Logo and Name here -->
         <a class="brand-logo design-font waves-effect waves-light no-bg" data-scroll-nav="0" href="#">
-            <img class="responsive-img logo" src="{{asset('assets/img/mm-log.png')}}" alt="">
+            <img class="responsive-img logo" src="{{asset('assets/img/mm-logo.png')}}" alt="">
             <p class="title-link">
                 <span>M</span><span>M</span>
             </p>
