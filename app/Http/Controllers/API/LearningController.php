@@ -2,20 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Learning;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Repositories\Eloquent\Learning;
-
 class LearningController extends Controller
 {
-    private $learning;
-
-    public function __construct(Learning $learning)
-    {
-        $this->learning = $learning;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +15,7 @@ class LearningController extends Controller
      */
     public function index()
     {
-        return $this->learning->all();
+        return Learning::all(['id', 'title', 'description', 'highlights']);
     }
 
     /**
@@ -44,7 +36,7 @@ class LearningController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->learning->create($request->all());
+
     }
 
     /**
@@ -55,7 +47,7 @@ class LearningController extends Controller
      */
     public function show($id)
     {
-        return $this->learning->find($id);
+        return Learning::find($id);
     }
 
     /**
@@ -78,7 +70,7 @@ class LearningController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $this->learning->updateRich($request->all(),$id);
+
     }
 
     /**
@@ -89,6 +81,6 @@ class LearningController extends Controller
      */
     public function destroy($id)
     {
-        return $this->learning->delete($id);
+
     }
 }

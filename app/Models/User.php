@@ -7,9 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use OwenIt\Auditing\Contracts\UserResolver;
 use Laratrust\Traits\LaratrustUserTrait;
+use Illuminate\Support\Facades\Auth;
 
-class User extends Authenticatable implements AuditableContract
+class User extends Authenticatable implements AuditableContract, UserResolver
 {
     use Notifiable;
     use SoftDeletes;
@@ -82,4 +84,11 @@ class User extends Authenticatable implements AuditableContract
         return $this->morphTo('account')->withTrashed();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public static function resolveId()
+    {
+        return Auth::check() ? Auth::user()->getAuthIdentifier() : null;
+    }
 }

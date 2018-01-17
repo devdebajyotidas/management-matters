@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::group(['namespace' => 'API', 'middleware' => 'auth:api'], function () {
+Route::group(['namespace' => 'API'], function () {
 
     Route::post('learners', 'LearnerController@create');
     Route::put('learners/{id}', 'LearnerController@update');
@@ -36,8 +36,8 @@ Route::group(['namespace' => 'API', 'middleware' => 'auth:api'], function () {
     // This may not required-- Route::post('learning', 'LearningController@create');
     // This may not reqiured--  Route::put('learning/{id}', 'LearningController@update');
     // Required
-    Route::get('learning', 'LearningController@index');
-    Route::get('learning/{id}', 'LearningController@show');
+    Route::get('learnings', 'LearningController@index');
+    Route::get('learnings/{id}', 'LearningController@show');
     // This may not required-- Route::delete('learning/{id}', 'LrganizationController@delete');
 
 

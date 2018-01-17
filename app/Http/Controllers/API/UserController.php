@@ -5,11 +5,19 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
-use Validator;
+use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserController extends Controller
 {
+
+    public function login(Request $request)
+    {
+
+    }
+
+
     /**
      * Create a new user resource
      *
@@ -20,7 +28,7 @@ class UserController extends Controller
     {
         try{
             // Validate the request
-            $validator =  Validator::make($request->all(),User::$rules);
+            $validator =  Validator::make($request->all(),User::$rules['create']);
 
             // Check if validation passes
             if($validator->passes()){
