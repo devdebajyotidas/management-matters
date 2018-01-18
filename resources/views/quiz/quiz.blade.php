@@ -69,7 +69,7 @@
                                                     <span class="label label-success text-block text-uppercase"> Complete</span>
                                                 @else
                                                     <span class="text-block">
-                                                    {{ abs(($learning->quizTaken[0]->result/count($learning->quiz)) * 100) }}
+                                                    {{ number_format(($learning->quizTaken[0]->result/count($learning->quiz)),2) * 100 }}
                                                         % Scored
                                                 </span>
                                                 @endif
@@ -171,7 +171,7 @@
                                         <div class="col-lg-12" style="text-align: center;">
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-6 result-dis" style="padding: 0">
-                                                <h1>SCORE: {{abs((($active_learning->quizTaken[0]->result)/intVal(count($active_learning->quiz)))*100)}}%</h1>
+                                                <h1>SCORE: {{number_format((($active_learning->quizTaken[0]->result)/intVal(count($active_learning->quiz))),2)*100}}%</h1>
                                                 <ul class="list-group" style="text-align: left">
                                                     <li class="list-group-item">
                                                         <span class="text-block">Correct: {{ $active_learning->quizTaken[0]->result}}</span>
