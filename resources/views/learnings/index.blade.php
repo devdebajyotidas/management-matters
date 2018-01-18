@@ -11,6 +11,7 @@
         .learning-thumbnail {
             height: 250px;
             width: 100%;
+            overflow: hidden;
         }
 
         .learning-title {
@@ -124,7 +125,6 @@
                             </h2>
                             <div class="learning-highlights">
                                 @if(isset($learning->highlights))
-                                    {{--@foreach(explode(',',implode(',',$learning->highlights)) as $highlight)--}}
                                     @foreach($learning->highlights as $highlight)
                                         <span class="highlight">{{ $highlight }}</span>
                                         @endforeach
