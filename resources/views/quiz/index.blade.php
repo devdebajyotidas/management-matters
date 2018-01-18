@@ -81,7 +81,6 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {{dd($quizs)}}
                                         @if(isset($quizs))
                                         @foreach($quizs as $quiz)
                                             <tr>
