@@ -141,7 +141,7 @@
             var noteslist='';
             for(var k=0;k<tickets_arr[j]['assignments'].length;k++){
 
-                noteslist+='<li class="row list-group-item"><span class="col-sm-3">'+tickets_arr[j]['assignments'][k]['target_date']+'</span> <span class="col-sm-9">'+(tickets_arr[j]['assignments'][k]['note'] !== null) ? tickets_arr[j]['assignments'][k]['note'] : 'N/A' +'</span></li>';
+                noteslist+='<li class="row list-group-item"><span class="col-sm-3">'+tickets_arr[j]['assignments'][k]['target_date']+'</span> <span class="col-sm-9">'+tickets_arr[j]['assignments'][k]['note'] +'</span></li>';
 
             }
             notes_arr[id] = noteslist
