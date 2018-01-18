@@ -98,7 +98,7 @@
                                                         <td>Not Applicable</td>
                                                     @endif
                                                 @endif
-                                                <td>{{ $quiz->learner->name }}</td>
+                                                <td>{{ isset($quiz->learner->name) ? $quiz->learner->name : 'N/A' }}</td>
                                                 <td>{{ $quiz->learning->title }}</td>
                                                 <td>{{number_format(floatval((($quiz->result)/count($quiz->learning->quiz)) * 100) ,2) }} %</td>
                                                 <td>{{ ($quiz->complete_flag == 1) ? 'Yes' : 'No'  }}</td>
