@@ -9,7 +9,7 @@
         }
 
         .learning-thumbnail {
-            max-height: 250px;
+            height: 250px;
             width: 100%;
         }
 
@@ -116,16 +116,18 @@
                 <div class="col-md-4 col-lg-4 col-xs-6 col-sm-6">
                     <div class="learning">
                         <img class="learning-thumbnail img-responsive"
-                             src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/big/img1.jpg"
+                             src="{{!empty($learning->image) ? asset('uploads/'.$learning->image) : 'https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/big/img1.jpg'}}"
                              alt="">
                         <div class="learning-overlay">
                             <h2 class="learning-title">
                                 {{ $learning->title }}
                             </h2>
                             <div class="learning-highlights">
-                                @foreach($learning->highlights as $highlight)
-                                    <span class="highlight">{{ $highlight }}</span>
-                                @endforeach
+                                @if(isset($learning))
+                                    @foreach(explode(',',implode(',',$learning->highlights)) as $highlight)
+                                        <span class="highlight">{{ $highlight }}</span>
+                                        @endforeach
+                                @endif
 
                                 <span class="highlight">Personality Development</span>
                                 <span class="highlight">Better Management</span>

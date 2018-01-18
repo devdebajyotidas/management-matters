@@ -123,8 +123,8 @@ class SubscriptionController extends Controller
         $subscription->setOrder($order);
 
         $billTo = new AnetAPI\NameAndAddressType();
-        $billTo->setFirstName((explode(' ',$name))[0]);
-        $billTo->setLastName((explode(' ',$name))[1]);
+        $billTo->setFirstName(isset((explode(' ',$name))[0]) ? (explode(' ',$name))[1] : 'First');
+        $billTo->setLastName(isset((explode(' ',$name))[1]) ? (explode(' ',$name))[1] : 'Last');
         $subscription->setBillTo($billTo);
         $request = new AnetAPI\ARBCreateSubscriptionRequest();
         $request->setmerchantAuthentication($merchantAuthentication);
@@ -137,7 +137,7 @@ class SubscriptionController extends Controller
         {
 
             $sub=Subscription::where('account_id',$id)->first();
-            $sub->subscription_id=$response->getSubscriptionId();
+            $sub->subscription_id= $response->getSubscriptionId();
             $sub->amount=$amount;
             $sub->is_subscribed=1;
             $response=$sub->update();
@@ -369,6 +369,7 @@ class SubscriptionController extends Controller
             $errorMessages = $response->getMessages()->getMessage();
             $subscription=Subscription::where('subscription_id',$subscriptionId)->first();
             $subscription->is_subscribed=0;
+            $subscription->subscription_id='';
             $subscription->update();
             return true;
         }

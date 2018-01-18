@@ -39,6 +39,8 @@ Route::group(['namespace' => 'Web'], function () {
 
     Route::get('dashboard', 'DashboardController@index');
     Route::get('profile', 'HomeController@profile');
+    Route::post('profile/{id}', 'HomeController@cancelsub');
+    Route::delete('profile/{id}', 'HomeController@removeaccount');
 
     Route::get('learners', 'LearnerController@index');
     Route::get('learners/{id}', 'LearnerController@show');

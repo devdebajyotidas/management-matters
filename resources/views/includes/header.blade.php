@@ -179,14 +179,22 @@
             </li>
             <!-- /.dropdown -->
 
-                <li class="dropdown"><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown"
-                                        href="#"><i class="fa fa-user"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">My Profile</a></li>
-                        <li><a href="{{ url('logout') }}">Sign Out</a></li>
-                    </ul>
-                </li>
+                @if(session("role")=='admin')
+                    <li class="dropdown"><a class="waves-effect waves-light"
+                                            href="{{ url('logout') }}"><i class="fa fa-sign-out"></i>
+                        </a>
+                    </li>
+                    @else
+                    <li class="dropdown"><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown"
+                                            href="#"><i class="fa fa-user"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{url('profile')}}">My Profile</a></li>
+                            <li><a href="{{ url('logout') }}">Sign Out</a></li>
+                        </ul>
+                    </li>
+                @endif
+
             {{--<li class="right-side-toggle"><a class="waves-effect waves-light" href="javascript:void(0)">--}}
                     {{--<i class="ti-settings"></i></a></li>--}}
             <!-- /.dropdown -->

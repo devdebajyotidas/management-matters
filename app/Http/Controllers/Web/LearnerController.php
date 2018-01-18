@@ -92,7 +92,6 @@ class LearnerController extends Controller
         {
             DB::rollBack();
             $errors = $learnerValidator->errors()->merge($userValidator->errors());
-            dd($errors);
             return redirect()->back()->withInput($request->all())->withErrors($errors);
         }
 
@@ -128,6 +127,7 @@ class LearnerController extends Controller
 
         $data['learner'] = $request->get('learner');
         $data['user'] = $request->get('user');
+        $sub=Subscription::where('account_id',$id)->first();
 
         $learnerValidator = Validator::make($data['learner'], Learner::$rules['update']);
         if(trim($data['user']['password']) == '' || $data['user']['password'] == null){
@@ -154,6 +154,21 @@ class LearnerController extends Controller
 
             $user = User::find($learner->user->id);
             $user->fill($data['user']);
+            $newreq= new \Illuminate\Http\Request();
+            if(isset($sub->subscription_id) && !empty($sub->subscription_id)){
+                $newreq->card_number=$data['learner']['card_number'];
+                $newreq->expiry_date=$data['learner']['expiry_date'];
+                app('App\Http\Controllers\Web\SubscriptionController')->update($newreq,$sub->subscription_id);
+
+            }
+            else{
+                if(!empty($data['learner']['card_number']) && !empty($data['learner']['expiry_date'])){
+                    $newreq->name_on_card=$data['learner']['name_on_card'];
+                    $newreq->card_number=$data['learner']['card_number'];
+                    $newreq->expiry_date=$data['learner']['expiry_date'];
+                    app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$id);
+                }
+            }
 
             if($learner->save() && $user->save())
             {

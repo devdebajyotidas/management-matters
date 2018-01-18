@@ -4,14 +4,17 @@
 
     <style>
         .learn-banner {
-            height: 300px;
-            width: 100%;
+            height: 100vh;
+            width: calc(100% + 18px);
+            margin: 0 -9px;
+            background-size: cover;
         }
 
         .details-learn {
             position: absolute;
             top: 0;
-            background: rgba(119, 36, 11, 0.34);
+            left:0;
+            background: rgba(23,23,23, 0.5);
             width: 100%;
             height: 100%;
             color: #fff;
@@ -31,10 +34,10 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="white-box p-0">
-                <div class="col-md-12 col-xs-12 col-sm-12">
-                    <img class="img-responsive learn-banner" alt="user"
-                         src="https://rampages.us/saifalfalasi/wp-content/uploads/sites/226/2014/06/97469339-thinking-person-abstract-1.2.jpg">
+            <div class="white-box p-0 m-t-0 m-l-15 m-r-15">
+                <div class="col-md-12 col-xs-12 col-sm-12" >
+                    <div class="learn-banner" style="background-image: url({{isset($learnings) ? asset('uploads/'.$learnings->image) : 'https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/big/img1.jpg'}})">
+                    </div>
                     <div class="white-box details-learn">
                         <h3 class="m-t-20 m-b-20" style="color: #fff;">{{ $learnings->title }}</h3>
                         <p>{{ $learnings->description }}</p>

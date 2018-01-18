@@ -253,12 +253,11 @@
                 ],
                 buttons:[]
             } );
-
-
             caltotal();
+
             $('#editable-datatable').DataTable();
             var table=$('#mainTable').DataTable();
-            var counter=1;
+
             $('#new-datafield').on('click',function(){
                 table.row.add( [
                    'Name',
@@ -266,11 +265,11 @@
                     '0',
                     '0',
                     '0'
-                ] ).draw( false );
-                caltotal();
+                ] ).draw(false);
+                $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
             });
             $('#mainTable td:nth-child(2),#mainTable td:nth-child(3),#mainTable td:nth-child(4)').change(function(){
-                caltotal();
+                alert('x');
             })
         });
         function caltotal(){
@@ -280,8 +279,8 @@
                 var val3=$(this).find('td:nth-child(4)').html();
                 var val4=parseFloat(val1) * parseFloat(val2) * parseFloat(val3);
                 $(this).find('td:nth-child(5)').html(val4);
-                $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
-            })
+            });
+            $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
         }
     </script>
 @endif

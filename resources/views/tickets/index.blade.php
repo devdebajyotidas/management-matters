@@ -28,6 +28,9 @@
                                             <a href="javascript:void(0)" class="department" data-id="" data-name="">
                                                 All Tickets
                                             </a>
+                                            <a href="javascript:void(0)" class="department" data-id="0" data-name="Not Applicable">
+                                                Not Applicable
+                                            </a>
                                         </li>
                                     @endif
                                         @if(session('role')=='organization')
@@ -55,6 +58,9 @@
                                                 <a href="javascript:void(0)" class="department" data-id="" data-name="">
                                                     All Tickets
                                                </a>
+                                                <a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">
+                                                    Not Applicable
+                                                </a>
                                             </li>
                                         @endif
 
@@ -80,7 +86,7 @@
                                             <th>Create By</th>
                                             <th>Title</th>
                                             <th>Impact Level</th>
-                                           <th>Activity</th>
+                                            <th>Activity</th>
                                             <th>Created On</th>
                                         </tr>
                                         </thead>
@@ -90,9 +96,9 @@
                                             <tr>
                                                 <td>{{ $ticket->id }}</td>
                                                 @if($role=='admin')
-                                                    <td>{{ $ticket->learner->department->organization->name }}</td>
+                                                    <td>{{ isset($ticket->learner->department->organization->name) ? $ticket->learner->department->organization->name : 'Not Applicable' }}</td>
                                                 @else
-                                                    <td>{{ $ticket->learner->department->name }}</td>
+                                                    <td>{{ isset($ticket->learner->department->name) ? $ticket->learner->department->name : 'Not Applicable'  }}</td>
                                                 @endif
 
                                                 <td>

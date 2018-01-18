@@ -30,9 +30,10 @@
                         </div>
                         <div class="form-group">
                             <input class="form-control" type="text" name="highlights"
-                                   value="Problem Solving,Better Management,Crtitical Thining"
+                                   @if(isset($learning))
+                                           value="{{implode(',',$learning->highlights)}}"
+                                   @endif
                                    data-role="tagsinput" placeholder="Key features (Type and press Return)"
-                                   @if(isset($learning))  @endif
                                    style="width: 100%!important;">
                         </div>
                     </div>
@@ -252,37 +253,37 @@
                     <div class="form-group">
                         <label>Option A</label>
                         <input type="text" class="form-control" name="content[answer][0]" placeholder="">
-                        <label>Note A</label>
+                        <label class="m-t-10">Note A</label>
                         <input type="text" class="form-control" name="content[note][0]" placeholder="">
-                        <label class="radio-inline"><input type="radio" name="content[type][0]"  value="true">True</label>
-                        <label class="radio-inline"><input type="radio" name="content[type][0]" value="false">False</label>
+                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][0]"  value="true">True</label>
+                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][0]" value="false">False</label>
                     </div>
 
                     <div class="form-group">
-                        <label>Option A</label>
+                        <label>Option B</label>
                         <input type="text" class="form-control option" name="content[answer][1]" placeholder="">
-                        <label>Note A</label>
+                        <label class="m-t-10">Note B</label>
                         <input type="text" class="form-control option" name="content[note][1]" placeholder="">
-                        <label class="radio-inline"><input type="radio" name="content[type][1]"  value="true">True</label>
-                        <label class="radio-inline"><input type="radio" name="content[type][1]" value="false">False</label>
+                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][1]"  value="true">True</label>
+                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][1]" value="false">False</label>
                     </div>
 
                     <div class="form-group">
-                        <label>Option A</label>
+                        <label>Option C</label>
                         <input type="text" class="form-control option" name="content[answer][2]" placeholder="">
-                        <label>Note A</label>
+                        <label class="m-t-10">Note C</label>
                         <input type="text" class="form-control option" name="content[note][2]" placeholder="">
-                        <label class="radio-inline"><input type="radio" name="content[type][2]"  value="true">True</label>
-                        <label class="radio-inline"><input type="radio" name="content[type][2]" value="false">False</label>
+                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][2]"  value="true">True</label>
+                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][2]" value="false">False</label>
                     </div>
 
                     <div class="form-group">
                         <label>Option D</label>
                         <input type="text" class="form-control option" name="content[answer][3]" placeholder="">
-                        <label>Note D</label>
+                        <label class="m-t-10">Note D</label>
                         <input type="text" class="form-control option" name="content[note][3]" placeholder="">
-                        <label class="radio-inline"><input type="radio" name="content[type][3]"  value="true">True</label>
-                        <label class="radio-inline"><input type="radio" name="content[type][3]" value="false">False</label>
+                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][3]"  value="true">True</label>
+                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][3]" value="false">False</label>
                     </div>
                 </div>
                 <div class="modal-footer">

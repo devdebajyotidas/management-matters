@@ -23,7 +23,7 @@ class Learning extends Model
     protected $casts = [
         'chapters' => 'array',
         'assessments' => 'array',
-        'quiz' => 'array',
+        'quiz' => 'array'
     ];
 
     public function assessments()
