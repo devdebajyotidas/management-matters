@@ -198,7 +198,7 @@
                     $('#award-title').val(calEvent.title);
                 },
                 drop:function( date, jsEvent, ui, resourceId ) {
-
+                    $('#ticket-editor input[name="_method"]').val('post');
                     $('#ticket-editor').find('input[name="assignment[target_date]"]').val((new Date(date)).toISOString().slice(0, 10));
                     $('#ticket-editor').find('input[name="assignment[ticket_id]"]').val($(this).data('id'));
 
