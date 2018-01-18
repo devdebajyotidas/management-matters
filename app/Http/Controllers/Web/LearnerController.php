@@ -49,12 +49,12 @@ class LearnerController extends Controller
         $subscription['start_date']=date('Y-m-d H:i:s');
         $subscription['status']=1;
 
-        if(intval($request->get('learner')['organization']))
-        {
-            $newRequest = Request::create('organizations/'. intval($request->get('learner')['organization']) . '/learners', 'POST', $request->all());
-            $response = Route::dispatch($newRequest);
-            return redirect()->intended(url('learners'));
-        }
+//        if(intval($request->get('learner')['organization']))
+//        {
+//            $newRequest = Request::create('organizations/'. intval($request->get('learner')['organization']) . '/learners', 'POST', $request->all());
+//            $response = Route::dispatch($newRequest);
+//            return redirect()->intended(url('learners'));
+//        }
 
         $learnerValidator = Validator::make($data['learner'], Learner::$rules['create']);
         $userValidator = Validator::make($data['user'], User::$rules['create']);
