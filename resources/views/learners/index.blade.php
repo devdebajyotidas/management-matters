@@ -200,17 +200,17 @@
                                        placeholder="Confirm Password">
                             </div>
 
-                            <div class="col-md-12 m-b-20">
-                                <label for="sel1">Select Organization:</label>
-                                <select class="form-control" name="learner[organization]" id="sel1">
-                                    <option value="">Not Applicable</option>
-                                    @foreach($organizations as $org)
-                                        @if(!empty($org))
-                                            <option value="{{$org->id}}">{{$org->name}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
+                            {{--<div class="col-md-12 m-b-20">--}}
+                                {{--<label for="sel1">Select Organization:</label>--}}
+                                {{--<select class="form-control" name="learner[organization]" id="sel1">--}}
+                                    {{--<option value="">Not Applicable</option>--}}
+                                    {{--@foreach($organizations as $org)--}}
+                                        {{--@if(!empty($org))--}}
+                                            {{--<option value="{{$org->id}}">{{$org->name}}</option>--}}
+                                        {{--@endif--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
                             <div class="col-md-12 m-b-20">
                                 <input type="text" class="form-control" name="learner[name_on_card]"
                                        placeholder="Name on Card" value="{{ old('learner.name_on_card') }}">
