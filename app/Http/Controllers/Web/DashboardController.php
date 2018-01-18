@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Models\Learning;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +22,15 @@ class DashboardController extends Controller
         $data['page'] = 'dashboard';
         $data['role'] = session('role');
         $data['prefix']  = session('role');
+
+        $learnings = Learning::count();
+        $outstandingTickets = Ticket::where('is_completed', '=', 0);
+        $completed = Ticket::where('is_completed', '=', 1);
+        $archivedTickets = Ticket::where('is_archived', '=', 1);
+        $ticketAssignments = Ticket::where('is_archived', '=', 1);
+
+        return view('dashboard', $data);
+
         if(session('role')=='admin'){
             return view('admin.dashboard', $data);
         }

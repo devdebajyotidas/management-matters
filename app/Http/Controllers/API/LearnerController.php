@@ -3,24 +3,16 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Learner;
+use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use App\Repositories\Eloquent\Learner;
-use App\Repositories\Eloquent\User;
 
 class LearnerController extends Controller
 {
-    private $learner;
-    private $user;
-
-    public function __construct(Learner $learner, User $user)
-    {
-        $this->learner = $learner;
-        $this->user = $user;
-    }
 
     /**
      * Display a listing of the resource.
@@ -30,7 +22,7 @@ class LearnerController extends Controller
 
     public function index()
     {
-        return response()->json($this->learner->all(), Response::HTTP_OK);
+        return Learner::all();
     }
 
 
@@ -38,44 +30,44 @@ class LearnerController extends Controller
     {
     }
 
-    /**
-     * Create a new resource.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-
     public function store(Request $request)
     {
-        DB::beginTransaction();
+        $response = [];
+        try
+        {
+            $data['learner'] = $request->except('user');
+            $data['user'] = $request->get('user');
 
-        $data['learner'] = $request->get('learner');
-        $data['user'] = $request->get('user');
+            $customerValidator = Validator::make($data['learner'], Learner::$rules['create']);
+            $userValidator = Validator::make($data['user'], User::$rules['create']);
 
-        // Validate the request
-        $learnerValidator = Validator::make($data['learner'], $this->learner->rules('create'));
-        $userValidator = Validator::make($data['user'], User::rules('create'));
+            if ($customerValidator->passes() && $userValidator->passes())
+            {
+                $customer = Learner::create($data['learner']);
+                $user = User::create($data['user']);
+                $customer->user()->save($user);
+                $customer->load('user');
 
-        // Check if validation passes
-        if ($learnerValidator->passes() && $userValidator->passes()) {
+                $response['success'] = true;
+                $response['account'] = $customer;
+                $response['error'] = '';
+            }
+            else
+            {
+                $errors = implode(',',call_user_func_array('array_merge', array_values(json_decode($customerValidator->errors()->merge($userValidator->errors()),true))));
+                $response['success'] = false;
+                $response['account'] = null;
+                $response['error'] = $errors;
+            }
 
-            // Creating a new User
-            $user = User::create($data['user']);
-            $user->attachRole('learner');
+            return $response;
 
-            // Creating a new Learner
-            $learner = $this->learner->create($data);
-            $learner->user()->save($user);
-
-            DB::commit();
-
-            // Return Learner object
-            return response()->json($learner, Response::HTTP_CREATED);
-
-        } else {
-            DB::rollBack();
-            $errors = json_encode(array_merge(json_decode($learnerValidator->errors(), true), json_decode($userValidator->errors(), true)));
-            throw new \InvalidArgumentException($errors);
+        }catch (\Exception $exception)
+        {
+            $response['success'] = false;
+            $response['account'] = null;
+            $response['error'] = $exception->getMessage();
+            return $response;
         }
     }
 
@@ -99,27 +91,7 @@ class LearnerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::beginTransaction();
 
-        $data['learner'] = $request->get('learner');
-        $data['user'] = $request->get('user');
-
-        unset($data['user']['username']);
-
-        // Validate the request
-        $learnerValidator = Validator::make($data['learner'], $this->learner->rules('update'));
-        $userValidator = Validator::make($data['user'], User::rules('update'));
-
-        if ($learnerValidator->passes() && $userValidator->passes()) {
-            $learner = $this->learner->update($data['learner'], $id);
-            $user = User::update($data['user'], $this->learner->find($id,['id'])->user->id);
-            DB::commit();
-            return response()->json(($learner AND $user), Response::HTTP_OK);
-        } else {
-            DB::rollBack();
-            $errors = json_encode(array_merge(json_decode($learnerValidator->errors(), true), json_decode($userValidator->errors(), true)));
-            throw new \InvalidArgumentException($errors);
-        }
     }
 
     /**
@@ -130,6 +102,6 @@ class LearnerController extends Controller
      */
     public function delete($id)
     {
-        return response()->json($this->learner->delete($id));
+
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -14,6 +15,25 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+        $response = [];
+
+        if($request->get('password') && Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')], true))
+        {
+            $user = Auth::user();
+            $user->fcm_token = $request->get('fcm_token');
+            $user->save();
+
+            $response['login'] = true;
+            $response['account'] = $user->account->load('user');
+
+        }
+        else
+        {
+            $response['login'] = false;
+        }
+
+        return $response;
+
 
     }
 
