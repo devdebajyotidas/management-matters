@@ -29,7 +29,7 @@ class QuizController extends Controller
         $data['role'] = session('role');
         $data['prefix']  = session('role');
 
-        dd(Auth::user()->account->learners()->pluck('learners.id')->toArray());
+        dd(Auth::user()->account()->learners()->pluck('learners.id')->toArray());
         if(session('role')=='admin'){
             $data['organizations']=Organization::all(['id','name']);
             $data['quizs']=Quiz::with(['learner','learning'])->get();
