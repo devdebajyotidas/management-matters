@@ -100,7 +100,7 @@
                                                 @endif
                                                 <td>{{ $quiz->learner->name }}</td>
                                                 <td>{{ $quiz->learning->title }}</td>
-                                                <td>{{(number_format((($quiz->result)/count($quiz->learning->quiz)),2) * 100}} %</td>
+                                                <td>{{number_format(floatval((($quiz->result)/count($quiz->learning->quiz)) * 100) ,2) }} %</td>
                                                 <td>{{ ($quiz->complete_flag == 1) ? 'Yes' : 'No'  }}</td>
                                                 <td>{{ $quiz->created_at->format('m/d/Y') }}</td>
                                             </tr>
