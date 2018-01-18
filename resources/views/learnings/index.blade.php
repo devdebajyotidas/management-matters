@@ -123,20 +123,17 @@
                                 {{ $learning->title }}
                             </h2>
                             <div class="learning-highlights">
-                                @if(isset($learning))
-                                    @foreach(explode(',',implode(',',$learning->highlights)) as $highlight)
+                                @if(isset($learning->highlights))
+                                    {{--@foreach(explode(',',implode(',',$learning->highlights)) as $highlight)--}}
+                                    @foreach($learning->highlights as $highlight)
                                         <span class="highlight">{{ $highlight }}</span>
                                         @endforeach
                                 @endif
-
-                                <span class="highlight">Personality Development</span>
-                                <span class="highlight">Better Management</span>
-
                             </div>
                             <div class="learning-details">
-                                <span class="chapter-count">6 Chapters</span>
-                                <span class="quiz-count">6 Quiz</span>
-                                <span class="assessment-count">16 Assessments</span>
+                                <span class="chapter-count">{{ count($learning->chapters) }} Chapters</span>
+                                <span class="quiz-count">{{ count($learning->quiz) }} Quiz</span>
+                                <span class="assessment-count">{{ count($learning->assessments) }} Assessments</span>
                             </div>
                         </div>
                         <div class="start-learning">

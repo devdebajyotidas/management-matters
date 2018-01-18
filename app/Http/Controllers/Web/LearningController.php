@@ -29,7 +29,7 @@ class LearningController extends Controller
         return view('learnings.index', $data);
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $data['page'] = 'learnings';
         $data['role'] = session('role');

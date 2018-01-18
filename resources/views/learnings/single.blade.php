@@ -23,12 +23,12 @@
         .panel-title, .panel-body {
             text-align: left;
         }
-        .content-wrap section p, .content-wrap li span {
-            margin: 0;
-            padding: 0!important;
-            color: black!important;
-            font-family: Rubik, sans-serif;
-        }
+        /*.content-wrap section p, .content-wrap li span {*/
+            /*margin: 0;*/
+            /*padding: 0!important;*/
+            /*color: black!important;*/
+            /*font-family: Rubik, sans-serif;*/
+        /*}*/
 
     </style>
 

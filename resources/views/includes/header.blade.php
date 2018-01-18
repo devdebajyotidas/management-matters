@@ -100,11 +100,12 @@
                 <!-- /.dropdown-messages -->
             {{--</li>--}}
             <!-- /.dropdown -->
-            <li class="dropdown"><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown"
-                                    href="#"><i
-                            class="icon-note"></i>
-                    <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                </a>
+            {{--<li class="dropdown"><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown"--}}
+                                    {{--href="#"><i--}}
+                            {{--class="icon-note"></i>--}}
+                    {{--<div class="notify"><span class="heartbit"></span><span class="point"></span></div>--}}
+                {{--</a>--}}
+            {{--</li>--}}
                 {{--<ul class="dropdown-menu dropdown-tasks animated flipInX">--}}
                     {{--<li>--}}
                         {{--<a href="#">--}}
@@ -176,7 +177,6 @@
                     {{--</li>--}}
                 {{--</ul>--}}
                 <!-- /.dropdown-tasks -->
-            </li>
             <!-- /.dropdown -->
 
                 @if(session("role")=='admin')

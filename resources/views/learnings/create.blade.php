@@ -30,9 +30,7 @@
                         </div>
                         <div class="form-group">
                             <input class="form-control" type="text" name="highlights"
-                                   @if(isset($learning))
-                                           value="{{implode(',',$learning->highlights)}}"
-                                   @endif
+                                   value="@if(isset($learning->highlights)) {{ implode(',', $learning->highlights) }} @endif"
                                    data-role="tagsinput" placeholder="Key features (Type and press Return)"
                                    style="width: 100%!important;">
                         </div>
@@ -299,7 +297,13 @@
     <script>
         window.onload = function () {
 
-            initSummernote('#introduction');
+            $('.modal').on('hidden.bs.modal', function () {
+                selectedChapter = null;
+                selectedAssessment = null;
+                selectedQuiz = null;
+            });
+
+            initEditor('#introduction');
 
             var selectedAssessment;
             $('#add-assessment').click(function () {
@@ -395,7 +399,7 @@
             });
             $('#save-chapter').click(function () {
                 var name = $('#chapter-name').val();
-                var content = $('#chapter-content').summernote('code').replace(/["']/g, "'");
+                var content = $('#chapter-content').froalaEditor('html.get').replace(/["']/g, "'");
                 console.log(name, content);
                 if (name.trim() == '') {
                     swal('Error', 'Please enter chapter name', 'error');
@@ -432,7 +436,7 @@
 
             //Quiz add update
 
-            var selectedquiz;
+            var selectedQuiz;
             $('#add-question').click(function () {
                 initQuizEditor();
                 $('#quiz-editor').modal('show');
@@ -446,9 +450,9 @@
                     return;
                 }
 
-                if (selectedquiz != null) {
-                    $('#question-list > .question[data-id="' + selectedquiz + '"]').find('.qu-name').text(quiz);
-                    $('#question-list > .question[data-id="' + selectedquiz + '"]').find('input[name="quiz[' + selectedquiz + '][question]"]').val(quiz);
+                if (selectedQuiz != null) {
+                    $('#question-list > .question[data-id="' + selectedQuiz + '"]').find('.qu-name').text(quiz);
+                    $('#question-list > .question[data-id="' + selectedQuiz + '"]').find('input[name="quiz[' + selectedQuiz + '][question]"]').val(quiz);
 
                 } else {
                     var count = $('#question-list > .question').length;
@@ -469,37 +473,34 @@
                         '</a>';
                     $('#question-list').append(html);
                 }
-                selectedquiz = null;
+                selectedQuiz = null;
                 $('#quiz-editor').modal('hide');
             });
 
             $(document).on('click', '#question-list > .question > .edit', function () {
-                selectedquiz = $(this).parent().attr('data-id');
+                selectedQuiz = $(this).parent().attr('data-id');
 
-                console.log(selectedquiz);
+                console.log(selectedQuiz);
                 console.log(name);
-                initQuizEditor(selectedquiz,'Edit');
+                initQuizEditor(selectedQuiz,'Edit');
                 $('#quiz-editor').modal('show');
             });
 
-
             //Quiz ends
-
-
 
             function initChapterEditor(name = '', content = '', mode = 'Add') {
                 console.log(name, content, mode);
                 $('#chapter-editor').find('.modal-title').text(mode + ' Chapter');
 
-                if ($('#chapter-content').data('summernote')) {
+                if ($('#chapter-content').data('froala.editor')) {
                     console.log('note');
-                    $('#chapter-content').summernote('reset');
-                } else {
-                    initSummernote('#chapter-content');
+                    $('#chapter-content').froalaEditor('destroy');
                 }
 
                 $('#chapter-name').val(name).focus();
-                $('#chapter-content').summernote('code', content);
+                $('#chapter-content').html(content);
+
+                initEditor('#chapter-content');
             }
 
             function initAssessmentEditor(assessment = '', mode= 'Add') {
@@ -539,22 +540,23 @@
             }
         }
 
-        function initSummernote(selector) {
-            $(selector).summernote({
-                height: 350, // set editor height
-                minHeight: null, // set minimum height of editor
-                maxHeight: null, // set maximum height of editor
-                focus: false, // set focus to editable area after initializing summernote
-                placeholder: 'Chapter content goes here',
-                toolbar: [
-                    ['insert', ['picture', 'link', 'table', 'hr']],
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
-                ]
+        function initEditor(selector) {
+            $(selector).froalaEditor({
+                height: 300,
+                fontFamily: {
+                    "Roboto,sans-serif": 'Roboto',
+                    "Oswald,sans-serif": 'Oswald',
+                    "Montserrat,sans-serif": 'Montserrat',
+                    "'Open Sans Condensed',sans-serif": 'Open Sans Condensed',
+                    'Arial,Helvetica,sans-serif': 'Arial',
+                    'Georgia,serif': 'Georgia',
+                    'Impact,Charcoal,sans-serif': 'Impact',
+                    'Tahoma,Geneva,sans-serif': 'Tahoma',
+                    "'Times New Roman',Times,serif": 'Times New Roman',
+                    'Verdana,Geneva,sans-serif': 'Verdana',
+                    'Helvetica,Arial,sans-serif': 'Helvetica'
+                },
+                fontFamilySelection: true
             });
         }
         function previewImage(input) {
