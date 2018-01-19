@@ -12,7 +12,7 @@
             background-position: center top;
             background-color: rgba(0, 0, 0, 0.60);
             padding: 20px;
-            min-height: 250px;
+            min-height: 300px;
         }
 
         .learning-thumbnail {
