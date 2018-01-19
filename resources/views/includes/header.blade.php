@@ -273,4 +273,7 @@
     .tabs-style-iconbox nav, .timeline-panel {
         background: #ffffff;
     }
+    .content-wrapper .footer{
+        left:0;
+    }
 </style>

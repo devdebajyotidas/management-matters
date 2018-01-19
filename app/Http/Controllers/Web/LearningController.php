@@ -15,8 +15,6 @@ class LearningController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        
-
     }
 
     public function index()
@@ -24,7 +22,12 @@ class LearningController extends Controller
         $data['page'] = 'learnings';
         $data['role'] = session('role');
         $data['prefix']  = session('role') . '/' . Auth::user()->account_id;
-        $data['learnings'] = Learning::all();
+
+        $learnings = Learning::all();
+        $size = ceil($learnings->count() / 3);
+        $chunks = $learnings->chunk($size);
+
+        $data['learningBundle'] = $chunks;
 
         return view('learnings.index', $data);
     }

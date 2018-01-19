@@ -6,10 +6,18 @@
         .learning {
             position: relative;
             margin-bottom: 15px;
+            background-image: url(http://localhost:8000/uploads/1516276915502.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-color: rgba(0, 0, 0, 0.60);
+            padding: 20px;
+            min-height: 300px;
         }
 
         .learning-thumbnail {
-            height: 250px;
+            max-height: 500px;
+            height: auto;
             width: 100%;
             overflow: hidden;
         }
@@ -20,16 +28,16 @@
         }
 
         .learning-details {
-            padding-bottom: 10px;
-            position: absolute;
-            bottom: 15px;
+            margin-top: 10px;
+            position: relative;
         }
 
         .learning-details span {
             color: #bbb;
+            margin: 5px;
         }
 
-        .start-learning a {
+        .learning-overlay a {
             position: absolute;
             left: 45%;
             top: 50%;
@@ -37,7 +45,7 @@
             margin-top: -30px;
         }
 
-        .learning-overlay, .start-learning {
+        .learning-overlay{
             padding: 20px;
             position: absolute;
             top: 0;
@@ -51,7 +59,7 @@
         }
 
         .learning-overlay {
-
+            opacity: 0;
         }
 
         .start-learning {
@@ -59,12 +67,12 @@
         }
 
         .learning:hover .learning-overlay {
-            opacity: 0;
-        }
-
-        .learning:hover .start-learning {
             opacity: 1;
         }
+
+        /*.learning:hover .start-learning {*/
+            /*opacity: 1;*/
+        /*}*/
 
         .learning-highlights {
             display: block;
@@ -75,7 +83,7 @@
             background: #f75b36;
             padding: 5px;
             margin: 5px;
-            color: #efefef;
+            color: #fff;
             border-radius: 1px;
         }
 
@@ -113,13 +121,10 @@
             </div>
         </div>
         <div class="row m-t-30">
-            @foreach($learnings as $learning)
+            @foreach($learningBundle as $learnings)
                 <div class="col-md-4 col-lg-4 col-xs-6 col-sm-6">
-                    <div class="learning">
-                        <img class="learning-thumbnail img-responsive"
-                             src="{{!empty($learning->image) ? asset('uploads/'.$learning->image) : 'https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/big/img1.jpg'}}"
-                             alt="">
-                        <div class="learning-overlay">
+            @foreach($learnings as $learning)
+                    <div class="learning" style="{{!empty($learning->image) ? "background-image: url('". asset('uploads/'.$learning->image) . "')" : "" }}">
                             <h2 class="learning-title">
                                 {{ $learning->title }}
                             </h2>
@@ -135,8 +140,9 @@
                                 <span class="quiz-count">{{ count($learning->quiz) }} Quiz</span>
                                 <span class="assessment-count">{{ count($learning->assessments) }} Assessments</span>
                             </div>
-                        </div>
-                        <div class="start-learning">
+                        {{--</div>--}}
+                        {{--<div class="start-learning">--}}
+                        <div class="learning-overlay">
                             @if($role == 'learner')
                                 <a href="{{ url('learnings/'.$learning->id) }}" class="btn btn-lg btn-rounded btn-info"> Start Learning</a>
                             @endif
@@ -146,6 +152,7 @@
                             @endif
                         </div>
                     </div>
+            @endforeach
                 </div>
             @endforeach
         </div>

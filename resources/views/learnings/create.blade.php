@@ -22,15 +22,13 @@
                         <small>You can set content on the fly.</small>
                         <hr>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="title" placeholder="Name"
+                            <input class="form-control" type="text" name="title" placeholder="Title"
                                    @if(isset($learning)) value="{{ $learning->title }}" @endif>
                         </div>
                         <div class="form-group">
                         <textarea class="form-control" name="description" id="" cols="30" rows="10"
                                   placeholder="Write a short description"
-                                  @if(isset($learning))  @endif>
-                            {{ isset($learning) ? $learning->description: ''}}
-                        </textarea>
+                                  @if(isset($learning))  @endif>{{ isset($learning) ? trim($learning->description): ''}}</textarea>
                         </div>
                         <div class="form-group">
                             <input class="form-control" type="text" name="highlights"
@@ -47,7 +45,7 @@
             <div class="row m-t-10">
                 <div class="col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Representational Image</h3>
+                        <h3 class="box-title m-b-0">Featured Image</h3>
                         <div class="m-b-0">
                             <img id="preview" src="{{!empty($learning->image) ? asset('uploads/'.$learning->image) : 'https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/big/img1.jpg'  }}" alt="" style="max-height: 300px">
                         </div>
