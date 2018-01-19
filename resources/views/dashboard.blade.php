@@ -4,26 +4,14 @@
     <div class="container-fluid">
         <!-- .row -->
         <div class="row m-t-30">
-            <div class="col-lg-6 col-sm-12 col-xs-12">
-                {{--<h4>Statistics <a class="get-code" data-toggle="collapse" href="#pgr1" aria-expanded="true"><i--}}
-                                {{--class="fa fa-code" title="Get Code" data-toggle="tooltip"></i></a></h4>--}}
-                {{--<div class="collapse m-t-15" id="pgr1" aria-expanded="true"> <pre--}}
-                            {{--class="line-numbers language-javascript m-t-0"><code><b>Use below code & put in column</b><br/>--}}
-                  {{--&lt;div class="white-box"&gt;--}}
-                      {{--&lt;h3 class="box-title"&gt;NEW CLIENTS&lt;/h3&gt;--}}
-                      {{--&lt;ul class="list-inline two-part"&gt;--}}
-                      {{--&lt;li&gt;&lt;i class="icon-people text-info"&gt;&lt;/i&gt;&lt;/li&gt;--}}
-                      {{--&lt;li class="text-right"&gt;&lt;span class="counter"&gt;23&lt;/span&gt;&lt;/li&gt;--}}
-                      {{--&lt;/ul&gt;--}}
-                  {{--&lt;/div&gt;</code></pre>--}}
-                {{--</div>--}}
+            <div class="col-lg-12 col-sm-12 col-xs-12">
                 <div class="row">
                     <div class="col-lg-6 col-sm-6 col-xs-12">
                         <div class="white-box">
                             <h3 class="box-title">Active Learnings</h3>
                             <ul class="list-inline two-part">
                                 <li><i class="icon-book-open text-info"></i></li>
-                                <li class="text-right"><span class="counter">5</span></li>
+                                <li class="text-right"><span class="counter">{{ $learnings }}</span></li>
                             </ul>
                         </div>
                     </div>
@@ -32,86 +20,85 @@
                             <h3 class="box-title">Outstanding Tickets</h3>
                             <ul class="list-inline two-part">
                                 <li><i class="icon-calender text-purple"></i></li>
-                                <li class="text-right"><span class="counter">169</span></li>
+                                <li class="text-right"><span class="counter">{{ $outstandingTickets }}</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title">Awards</h3>
+                            <h3 class="box-title">Ticket Activities</h3>
                             <ul class="list-inline two-part">
                                 <li><i class="icon-folder-alt text-danger"></i></li>
-                                <li class="text-right"><span class="counter">311</span></li>
+                                <li class="text-right"><span class="counter">{{ $ticketAssignments }}</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title">Acrhived Tickets</h3>
+                            <h3 class="box-title">Archived Tickets</h3>
                             <ul class="list-inline two-part">
                                 <li><i class="ti-archive text-success"></i></li>
-                                <li class="text-right"><span class="counter">117</span></li>
+                                <li class="text-right"><span class="counter">{{ $archivedTickets }}</span></li>
                             </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-sm-12 col-xs-12">
-                {{--<h4>Daily Wisdoms <a class="get-code" data-toggle="collapse" href="#pgr2" aria-expanded="true"><i--}}
-                                {{--class="fa fa-code" title="Get Code" data-toggle="tooltip"></i></a></h4>--}}
-                {{--<div class="collapse m-t-15" id="pgr2" aria-expanded="true"> <pre--}}
-                            {{--class="line-numbers language-javascript m-t-0"><code><b>Use below code & put in column</b><br/>--}}
-        {{--&lt;div class="carousel-inner"&gt;--}}
-            {{--&lt;div class="active item"&gt;--}}
-              {{--&lt;div class="overlaybg"&gt;&lt;img src="../plugins/images/news/slide1.jpg"/&gt;&lt;/div&gt;--}}
-              {{--&lt;div class="news-content"&gt;&lt;span class="label label-danger label-rounded"&gt;Primary&lt;/span&gt;--}}
-                {{--&lt;h2&gt;..content here...&lt;/h2&gt;--}}
-                {{--&lt;a href="#"&gt;Read More&lt;/a&gt;&lt;/div&gt;--}}
-            {{--&lt;/div&gt;--}}
-            {{--&lt;div class="item"&gt;--}}
-              {{--&lt;div class="overlaybg"&gt;&lt;img src="../plugins/images/news/slide1.jpg"/&gt;&lt;/div&gt;--}}
-              {{--&lt;div class="news-content"&gt;&lt;span class="label label-primary label-rounded"&gt;Primary&lt;/span&gt;--}}
-                {{--&lt;h2&gt;...content here...&lt;/h2&gt;--}}
-                {{--&lt;a href="#"&gt;Read More&lt;/a&gt;&lt;/div&gt;--}}
-            {{--&lt;/div&gt;--}}
-        {{--&lt;/div&gt;</code></pre>--}}
-                {{--</div>--}}
-                <div class="news-slide m-b-15">
-                    <div class="vcarousel slide">
-                        <!-- Carousel items -->
-                        <div class="carousel-inner">
-                            <div class="active item">
-                                <div class="overlaybg"><img
-                                            src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/news/slide1.jpg"/>
-                                </div>
-                                <div class="news-content"><span class="label label-danger label-rounded">Primary</span>
-                                    <h2>It has survived not only five centuries, but also the leap into electronic
-                                        typesetting, remaining essentially unchanged.</h2> <a href="#">Read More</a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="overlaybg"><img
-                                            src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/news/slide1.jpg"/>
-                                </div>
-                                <div class="news-content"><span class="label label-primary label-rounded">Primary</span>
-                                    <h2>It has survived not only five centuries, but also the leap into electronic
-                                        typesetting, remaining essentially unchanged.</h2> <a href="#">Read More</a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="overlaybg"><img
-                                            src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/news/slide1.jpg"/>
-                                </div>
-                                <div class="news-content"><span class="label label-success label-rounded">Primary</span>
-                                    <h2>It has survived not only five centuries, but also the leap into electronic
-                                        typesetting, remaining essentially unchanged.</h2> <a href="#">Read More</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        @if(session('role') == 'admin')
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6 col-xs-12">
+                            <div class="white-box">
+                                <h3 class="box-title">Organizations</h3>
+                                <ul class="list-inline two-part">
+                                    <li><i class="fa fa-users text-info"></i></li>
+                                    <li class="text-right"><span class="counter">{{ $organizations }}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 col-xs-12">
+                            <div class="white-box">
+                                <h3 class="box-title">Learners</h3>
+                                <ul class="list-inline two-part">
+                                    <li><i class="fa fa-user text-purple"></i></li>
+                                    <li class="text-right"><span class="counter">{{ $learners }}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        @if(session('role') == 'organization')
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6 col-xs-12">
+                            <div class="white-box">
+                                <h3 class="box-title">Total Licenses</h3>
+                                <ul class="list-inline two-part">
+                                    <li><i class="fa fa-users text-info"></i></li>
+                                    <li class="text-right"><span class="counter">{{ $licenses }}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 col-xs-12">
+                            <div class="white-box">
+                                <h3 class="box-title">Active Learners</h3>
+                                <ul class="list-inline two-part">
+                                    <li><i class="fa fa-user text-purple"></i></li>
+                                    <li class="text-right"><span class="counter">{{ $learners }}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    @endif
         <!-- /.row -->
         <!-- /.row -->
         <div class="row">
@@ -121,9 +108,9 @@
                         <div class="col-lg-3 col-sm-6 row-in-br">
                             <div class="col-in row">
                                 <div class="col-md-6 col-sm-6 col-xs-6"><i class="ti-book"></i>
-                                    <h5 class="text-muted vb">Modules Completed</h5></div>
+                                    <h5 class="text-muted vb">Quiz <br> Taken</h5></div>
                                 <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <h3 class="counter text-right m-t-15 text-danger">23</h3></div>
+                                    <h3 class="counter text-right m-t-15 text-danger">{{ $quiz }}</h3></div>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-danger" role="progressbar"
@@ -139,7 +126,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-6"><i class="ti-pencil-alt"></i>
                                     <h5 class="text-muted vb">Assessments Taken</h5></div>
                                 <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <h3 class="counter text-right m-t-15 text-info">169</h3></div>
+                                    <h3 class="counter text-right m-t-15 text-info">{{ $assessments }}</h3></div>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-info" role="progressbar"
@@ -155,7 +142,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-6"><i class="ti-calendar"></i>
                                     <h5 class="text-muted vb">Tickets Completed</h5></div>
                                 <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <h3 class="counter text-right m-t-15 text-success">431</h3></div>
+                                    <h3 class="counter text-right m-t-15 text-success">{{ $completedTickets }}</h3></div>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-success" role="progressbar"
@@ -169,9 +156,9 @@
                         <div class="col-lg-3 col-sm-6  b-0">
                             <div class="col-in row">
                                 <div class="col-md-6 col-sm-6 col-xs-6"><i class="ti-medall"></i>
-                                    <h5 class="text-muted vb">Badges Acquired</h5></div>
+                                    <h5 class="text-muted vb">Badges <br> Acquired</h5></div>
                                 <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <h3 class="counter text-right m-t-15 text-warning">157</h3></div>
+                                    <h3 class="counter text-right m-t-15 text-warning">{{ $awards }}</h3></div>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-warning" role="progressbar"
