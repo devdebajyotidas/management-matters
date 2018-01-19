@@ -61,7 +61,7 @@
                             <section id="chapter-introduction" class="content-current">
                                 <p>
                                     @if(!empty($learnings->introduction))
-                                        {{$learnings->introduction}}
+                                        {!! $learnings->introduction !!}
                                     @else
                                         Introduction not available
                                     @endif
