@@ -138,7 +138,7 @@
                                                             <span class="qu-name"> {{ $quiz['question'] }} </span>
                                                             <input type="hidden" name="quiz[{{$key}}][question]" value="{{ $quiz['question'] }}">
                                                             @foreach($quiz['content'] as $k=>$ans)
-                                                                <input type="hidden" name="quiz[{{$key}}][content][{{$k}}][answer]" value="{{ $ans['answer'] }}">
+                                                                <input type="hidden" class="answer-block" name="quiz[{{$key}}][content][{{$k}}][answer]" value="{{ $ans['answer'] }}">
                                                                 <input type="hidden" name="quiz[{{$key}}][content][{{$k}}][type]" value="{{ $ans['type'] }}">
                                                                 <input type="hidden" name="quiz[{{$key}}][content][{{$k}}][note]" value="{{ $ans['note'] }}">
                                                             @endforeach
@@ -152,7 +152,7 @@
                                                         <span class="qu-name"> {{ $quiz['question'] }} </span>
                                                         <input type="hidden" name="quiz[{{$key}}][question]" value="{{ $quiz['question'] }}">
                                                         @foreach($quiz['content'] as $k=>$ans)
-                                                            <input type="hidden" name="quiz[{{$key}}][content][{{$k}}][answer]" value="{{ $ans['answer'] }}">
+                                                            <input type="hidden" class="answer-block" name="quiz[{{$key}}][content][{{$k}}][answer]" value="{{ $ans['answer'] }}">
                                                             <input type="hidden" name="quiz[{{$key}}][content][{{$k}}][type]" value="{{ $ans['type'] }}">
                                                             <input type="hidden" name="quiz[{{$key}}][content][{{$k}}][note]" value="{{ $ans['note'] }}">
                                                         @endforeach
@@ -250,40 +250,8 @@
                         <label>Question</label>
                         <input id="question" type="text" class="form-control" name="question[]" placeholder="Name">
                     </div>
-                    <div class="form-group">
-                        <label>Option A</label>
-                        <input type="text" class="form-control" name="content[answer][0]" placeholder="">
-                        <label class="m-t-10">Note A</label>
-                        <input type="text" class="form-control" name="content[note][0]" placeholder="">
-                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][0]"  value="true">True</label>
-                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][0]" value="false">False</label>
-                    </div>
+                    <div class="form-content">
 
-                    <div class="form-group">
-                        <label>Option B</label>
-                        <input type="text" class="form-control option" name="content[answer][1]" placeholder="">
-                        <label class="m-t-10">Note B</label>
-                        <input type="text" class="form-control option" name="content[note][1]" placeholder="">
-                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][1]"  value="true">True</label>
-                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][1]" value="false">False</label>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Option C</label>
-                        <input type="text" class="form-control option" name="content[answer][2]" placeholder="">
-                        <label class="m-t-10">Note C</label>
-                        <input type="text" class="form-control option" name="content[note][2]" placeholder="">
-                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][2]"  value="true">True</label>
-                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][2]" value="false">False</label>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Option D</label>
-                        <input type="text" class="form-control option" name="content[answer][3]" placeholder="">
-                        <label class="m-t-10">Note D</label>
-                        <input type="text" class="form-control option" name="content[note][3]" placeholder="">
-                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][3]"  value="true">True</label>
-                        <label class="radio-inline m-t-10"><input type="radio" name="content[type][3]" value="false">False</label>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -447,8 +415,13 @@
 
             $('#save-quiz').click(function () {
                 var quiz = $('#question').val();
-                if (quiz.trim() == '') {
-                    swal('Error', 'Please enter a question', 'error');
+                var nonempty=$('#quiz-editor').find('input:text').filter(function() { return $(this).val() !== ""; });
+                if ((quiz.trim() == '')) {
+                    swal('Error', 'You must add a question', 'error');
+                    return;
+                }
+                else if((parseInt(nonempty.length) < 4)){
+                    swal('Error', 'You must add atleast two options', 'error');
                     return;
                 }
 
@@ -461,9 +434,9 @@
                     var anstable='';
                     for(var i=0;i<4;i++){
                         var ans=$('#quiz-editor').find('input[name="content[answer]['+i+']"]').val();
-                        var type=$('#quiz-editor').find('input[name="content[type]['+i+']"]').val();
+                        var type=$('#quiz-editor').find('input[name="content[type]['+i+']"]:checked').val();
                         var note=$('#quiz-editor').find('input[name="content[note]['+i+']"]').val();
-                        anstable +='<input type="hidden" name="quiz['+count+'][content]['+i+'][answer]" value="'+ans+'">';
+                        anstable +='<input type="hidden" class="answer-block" name="quiz['+count+'][content]['+i+'][answer]" value="'+ans+'">';
                         anstable+= '<input type="hidden" name="quiz['+count+'][content]['+i+'][type]" value="'+type+'">';
                         anstable+= '<input type="hidden" name="quiz['+count+'][content]['+i+'][note]" value="'+note+'">';
                     }
@@ -481,13 +454,26 @@
 
             $(document).on('click', '#question-list > .question > .edit', function () {
                 selectedQuiz = $(this).parent().attr('data-id');
-
-                console.log(selectedQuiz);
-                console.log(name);
                 initQuizEditor(selectedQuiz,'Edit');
                 $('#quiz-editor').modal('show');
             });
+            $(document).on('click', '#question-list > .question > .remove', function () {
+                var $this=$(this);
+                swal({
+                    title: 'Delete Question ?',
+                    text: "You won't be able to revert this",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete question'
+                }).then(function(result){
+                    if(result.value){
+                      $this.parent().remove();
+                    }
 
+                })
+            });
             //Quiz ends
 
             function initChapterEditor(name = '', content = '', mode = 'Add') {
@@ -528,18 +514,48 @@
 
         };
 
-        function initQuizEditor(id='',mode= 'Add') {
+        function initQuizEditor(id='',mode= 'add') {
             $('#quiz-editor').find('.modal-title').text(mode + ' Question');
-            var question=$('#question-list > .question[data-id="' + id + '"]').find('input[name="quiz['+id+'][question]"]').val();
-            $('#question').val(question);
-            for(var i=0;i<4;i++){
-                var ans=$('#question-list > .question[data-id="' + id + '"]').find('input[name="quiz['+id+'][content]['+i+'][answer]"]').val();
-                var type=$('#question-list > .question[data-id="' + id + '"]').find('input[name="quiz['+id+'][content]['+i+'][type]"]').val();
-                var note=$('#question-list > .question[data-id="' + id + '"]').find('input[name="quiz['+id+'][content]['+i+'][note]"]').val();
-                $('#quiz-editor').find('input[name="content[answer]['+i+']"]').val(ans);
-                $('#quiz-editor').find('input[name="content[type]['+i+']"][value='+type+']').prop('checked', true);
-                $('#quiz-editor').find('input[name="content[note]['+i+']"]').val(note);
+            var number_arr=['A','B','C','D','E','F','G','H','I'];
+            var html='';
+            if(mode==='add'){
+                $('#question').val('');
+                for(var i=0;i<4;i++){
+                    html+='<div class="form-group">\n' +
+                        '                                <label>Option '+number_arr[i]+'</label>\n' +
+                        '                                <input type="text" class="form-control option" name="content[answer]['+i+']" placeholder="Answer">\n' +
+                        '                                <label class="m-t-10">Note '+number_arr[i]+'</label>\n' +
+                        '                                <input type="text" class="form-control option" name="content[note]['+i+']" placeholder="Note">\n' +
+                        '                                <label class="radio-inline m-t-10"><input type="radio" name="content[type]['+i+']"  value="true" >True</label>\n' +
+                        '                                <label class="radio-inline m-t-10"><input type="radio" name="content[type]['+i+']" value="false" checked>False</label>\n' +
+                        '                            </div>';
+                }
+
+                $('#quiz-editor .form-content').empty().append(html);
+
             }
+            else{
+                var question=$('#question-list > .question[data-id="' + id + '"]').find('input[name="quiz['+id+'][question]"]').val();
+                $('#question').val(question);
+                var len=$('#question-list > .question[data-id="' + id + '"]').find('.answer-block').length;
+                for(var i=0;i<len;i++){
+                    var ans=$('#question-list > .question[data-id="' + id + '"]').find('input[name="quiz['+id+'][content]['+i+'][answer]"]').val();
+                    var type=$('#question-list > .question[data-id="' + id + '"]').find('input[name="quiz['+id+'][content]['+i+'][type]"]').val();
+                    var note=$('#question-list > .question[data-id="' + id + '"]').find('input[name="quiz['+id+'][content]['+i+'][note]"]').val();
+                    var c1=(type==='true') ? "checked" : '';
+                    var c2=(type==='false') ? "checked" : '';
+                    html+='<div class="form-group">\n' +
+                        '                                <label>Option '+number_arr[i]+'</label>\n' +
+                        '                                <input type="text" class="form-control option" name="content[answer]['+i+']" value="'+ans+'">\n' +
+                        '                                <label class="m-t-10">Note '+number_arr[i]+'</label>\n' +
+                        '                                <input type="text" class="form-control option" name="content[note]['+i+']" value="'+note+'">\n' +
+                        '                                <label class="radio-inline m-t-10"><input type="radio" name="content[type]['+i+']"  value="true" '+c1+'>True</label>\n' +
+                        '                                <label class="radio-inline m-t-10"><input type="radio" name="content[type]['+i+']" value="false" '+c2+'>False</label>\n' +
+                        '                            </div>';
+                }
+                $('#quiz-editor .form-content').empty().append(html);
+            }
+
         }
 
         function initEditor(selector) {
