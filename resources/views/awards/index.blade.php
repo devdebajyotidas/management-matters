@@ -97,11 +97,11 @@
                                                     @endif
                                                 @endif
                                                 <td>
-                                                    <a href="{{ url('/learners/'. $award->learner->id) }}">
-                                                        <img src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/users/genu.jpg"
-                                                        alt="user" class="img-circle"/>
+                                                    {{--<a href="{{ url('/learners/'. $award->learner->id) }}">--}}
+                                                        {{--<img src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/users/genu.jpg"--}}
+                                                        {{--alt="user" class="img-circle"/>--}}
                                                         {{ $award->learner->name }}
-                                                    </a>
+                                                    {{--</a>--}}
                                                 </td>
                                                 <td>{{ $award->title }}</td>
                                                 <td>{{ $award->description }}</td>
