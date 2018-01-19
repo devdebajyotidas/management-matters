@@ -11,7 +11,7 @@ class Award extends Model
       'title',
     ];
 
-    function learner(){
+    public function learner(){
         return $this->belongsTo('App\Models\Learner');
     }
 }
