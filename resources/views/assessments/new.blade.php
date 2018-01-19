@@ -22,7 +22,9 @@
                     {{ csrf_field() }}
                     <div class="col-md-12">
                         @foreach($learnings as $learning)
-                            @foreach($learning->assessments as $key => $assessment)
+                            {{ ( ($assessments = $learning->assessments) && shuffle($assessments))   ? '' : '' }}
+                            @foreach($assessments as $key => $assessment)
+                                @if($key == 3) @break @endif
                             <h4>{{ $assessment }}</h4>
                             <div class="radio radio-custom">
                                 <input type="radio" name="assessments[{{ $learning->title }}][{{  $key }}]" value="1" required>
