@@ -96,7 +96,7 @@ class OrganizationController extends Controller
             $organization->subscription()->save($sub);
 
 
-            if(!empty($organization->card_number) && !empty($organization->expiry_date) ){
+            if(!empty($data['organization']['card_number']) && !empty($data['organization']['expiry_date']) ){
                 $newreq= new \Illuminate\Http\Request();
 
                 $newreq->name_on_card=$organization->name_on_card;
@@ -105,7 +105,7 @@ class OrganizationController extends Controller
                 $newreq->billing_interval=$subscription['billing_interval'];
                 $newreq->licenses=$subscription['licenses'];
 
-                $response=app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$organization->id);
+                app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$organization->id);
             }
             DB::commit();
             return redirect()->back()->with('success', 'Organization added successfully');
@@ -136,6 +136,7 @@ class OrganizationController extends Controller
 
         $data['organization'] = $request->get('organization');
         $data['user'] = $request->get('user');
+        $sub=Subscription::where('account_id',$id)->first();
 
         $organizationValidator = Validator::make($data['organization'], Organization::$rules['update']);
 
@@ -165,11 +166,32 @@ class OrganizationController extends Controller
 
             $user = User::find($organization->user->id);
             $user->fill($data['user']);
-            $user->update();
 
-            DB::commit();
+            $newreq= new \Illuminate\Http\Request();
+            if(isset($sub->subscription_id) && !empty($sub->subscription_id)){
+                $newreq->card_number=$data['organization']['card_number'];
+                $newreq->expiry_date=$data['organization']['expiry_date'];
+                app('App\Http\Controllers\Web\SubscriptionController')->update($newreq,$sub->subscription_id);
 
-            return redirect()->back();
+            }
+            else{
+                if(!empty($data['organization']['card_number']) && !empty($data['organization']['expiry_date'])){
+                    $newreq->name_on_card=$data['organization']['name_on_card'];
+                    $newreq->card_number=$data['organization']['card_number'];
+                    $newreq->expiry_date=$data['organization']['expiry_date'];
+                    app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$id);
+                }
+            }
+
+            if($user->update()){
+                DB::commit();
+                return redirect()->back()->with('success', 'Organization updated successfully');
+            }
+            else{
+                DB::rollBack();
+                return redirect()->back()->withErrors(['Something went wrong']);
+            }
+
 
         } else {
             DB::rollBack();

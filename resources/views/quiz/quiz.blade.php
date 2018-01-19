@@ -118,7 +118,7 @@
                                         <span class="question-progress-text">1/{{ count($active_learning->quiz) }}</span>
                                         <div class="progress">
                                             <div class="progress-bar question-progress-bar progress-bar-success" role="progressbar" aria-valuenow="70"
-                                                 aria-valuemin="0" aria-valuemax="100" style="width:{{abs((1/count($active_learning->quiz))*100)}}%">
+                                                 aria-valuemin="0" aria-valuemax="100" style="width:{{count($active_learning->quiz) > 0 ? intval((1/count($active_learning->quiz))*100) : 0}}%">
                                                 <span class="sr-only">70% Complete</span>
                                             </div>
                                         </div>
@@ -129,24 +129,31 @@
                         <div class="panel-body">
                             <div class="row">
                                 @if(!isset($active_learning->quizTaken[0]) )
-                                    @foreach($active_learning->quiz as $key=>$qdata)
-                                        <div class="col-lg-12 question-block" id="goto-{{$key}}" data-toggle="{{$key}}" style="display: none">
-                                            <h3>Q: {{$qdata['question']}}</h3>
-                                            <div class="row">
+                                    @if(isset($active_learning->quiz) && !empty($active_learning->quiz))
+                                        @foreach($active_learning->quiz as $key=>$qdata)
+                                            <div class="col-lg-12 question-block" id="goto-{{$key}}" data-toggle="{{$key}}" style="display: none">
+                                                <h3>Q: {{$qdata['question']}}</h3>
+                                                <div class="row">
+                                                    @foreach($qdata['content'] as $num => $anstable)
+                                                        <div class="radio radio-custom"  style="margin:10px 0">
+                                                            <input type="radio" id="rad{{$key.$num}}" name="qradio{{$key}}" value="{{$anstable['type']}}" data-toggle="collapse" data-target="#enlarge-{{$key.$num}}">
+                                                            <label for="rad{{$key.$num}}"> {{($num+1).". ".$anstable['answer']}} </label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                                 @foreach($qdata['content'] as $num => $anstable)
-                                                    <div class="radio radio-custom"  style="margin:10px 0">
-                                                        <input type="radio" name="qradio{{$key}}" value="{{$anstable['type']}}" data-toggle="collapse" data-target="#enlarge-{{$key.$num}}">
-                                                        <label for=""> {{($num+1).". ".$anstable['answer']}} </label>
+                                                    <div id="enlarge-{{$key.$num}}" class="panel-collapse collapse" style="margin-top: 20px">
+                                                        {{"Note ".($num+1).": ".$anstable['note']}}
                                                     </div>
                                                 @endforeach
                                             </div>
-                                            @foreach($qdata['content'] as $num => $anstable)
-                                                <div id="enlarge-{{$key.$num}}" class="panel-collapse collapse" style="margin-top: 20px">
-                                                    {{"Note ".($num+1).": ".$anstable['note']}}
-                                                </div>
-                                            @endforeach
+                                        @endforeach
+                                    @else
+                                        <div class="col-lg-12 question-block">
+                                            <label class="text-danger">Questions not available right now</label>
                                         </div>
-                                    @endforeach
+                                    @endif
+
                                 @else
                                     @if(isset($_GET['retake']))
                                         @foreach($active_learning->quiz as $key=>$qdata)
@@ -155,8 +162,8 @@
                                                 <div class="btn-group-vertical">
                                                     @foreach($qdata['content'] as $num => $anstable)
                                                         <div class="radio radio-custom"  style="margin:10px 0">
-                                                            <input type="radio" name="qradio{{$key}}" value="{{$anstable['type']}}" data-toggle="collapse" data-target="#enlarge-{{$key.$num}}">
-                                                            <label for=""> {{($num+1).". ".$anstable['answer']}} </label>
+                                                            <input type="radio" id="rad{{$key.$num}}" name="qradio{{$key}}" value="{{$anstable['type']}}" data-toggle="collapse" data-target="#enlarge-{{$key.$num}}">
+                                                            <label for="rad{{$key.$num}}"> {{($num+1).". ".$anstable['answer']}} </label>
                                                         </div>
                                                     @endforeach
                                                 </div>
@@ -239,11 +246,13 @@
                         $(this).parent().siblings().addClass('disabled');
                         $(this).parent().siblings().find("input[type='radio']").attr('disabled',true);
                         if($(this).val()==='true'){
+                            $(this).addClass('radio-success');
                             $(this).siblings().addClass('text-success');
                             var correct=$resultCorrect.val();
                             $resultCorrect.val(parseInt(correct)+1)
                         }
                         else{
+                            $(this).addClass('radio-danger');
                             $(this).siblings().addClass('text-danger');
                             var incorrect=$resultIncorrect.val();
                             $resultIncorrect.val(parseInt(incorrect)+1)

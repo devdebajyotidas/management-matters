@@ -32,7 +32,8 @@ class Organization extends Model implements AuditableContract
 
     public static $rules = [
         'create' => [
-            'name' => 'required'
+            'name' => 'required',
+            'contact_person' => 'required'
         ],
         'update' => [
         ]

@@ -85,7 +85,8 @@ class AssessmentController extends Controller
         }
 
         $totalAvg = $totalAvg / count($data['assessments']);
-        $scores['Average'] = $totalAvg;
+        $scores['Average'] = (float)number_format((float)($totalAvg), 2, '.', '');
+
 
         $assessments = [
             'learner_id' => Auth::user()->account_id,
