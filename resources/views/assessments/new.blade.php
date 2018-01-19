@@ -15,9 +15,8 @@
         }
     </style>
     <div class="container-fluid">
-        <div class="white-box">
-
-            <div class="row m-t-20">
+        <div class="white-box m-t-20">
+            <div class="row">
                 <form action="{{ url('assessments/new') }}" method="post">
                     {{ csrf_field() }}
                     <div class="col-md-12">
