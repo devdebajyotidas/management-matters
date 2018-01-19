@@ -7,9 +7,9 @@
             position: relative;
             margin-bottom: 15px;
             background-image: url(http://localhost:8000/uploads/1516276915502.png);
-            background-size: contain;
+            background-size: cover;
             background-repeat: no-repeat;
-            background-position: center center;
+            background-position: center top;
             background-color: rgba(0, 0, 0, 0.60);
             padding: 20px;
         }
@@ -121,8 +121,8 @@
         </div>
         <div class="row m-t-30">
             @foreach($learningBundle as $learnings)
-            @foreach($learnings as $learning)
                 <div class="col-md-4 col-lg-4 col-xs-6 col-sm-6">
+            @foreach($learnings as $learning)
                     <div class="learning" style="{{!empty($learning->image) ? "background-image: url('". asset('uploads/'.$learning->image) . "')" : "" }}">
                             <h2 class="learning-title">
                                 {{ $learning->title }}
@@ -151,8 +151,8 @@
                             @endif
                         </div>
                     </div>
-                </div>
             @endforeach
+                </div>
             @endforeach
         </div>
     </div>
