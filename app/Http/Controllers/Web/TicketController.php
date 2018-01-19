@@ -19,7 +19,7 @@ use App\Models\Learning;
 class TicketController extends Controller
 {
 
-    public function __construct(Ticket $ticket, Learning $learning)
+    public function __construct()
     {
         $this->middleware('auth');
 
