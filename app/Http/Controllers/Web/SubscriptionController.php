@@ -123,7 +123,7 @@ class SubscriptionController extends Controller
         $subscription->setOrder($order);
 
         $billTo = new AnetAPI\NameAndAddressType();
-        $billTo->setFirstName(isset((explode(' ',$name))[0]) ? (explode(' ',$name))[1] : 'First');
+        $billTo->setFirstName(isset((explode(' ',$name))[0]) ? (explode(' ',$name))[0] : 'First');
         $billTo->setLastName(isset((explode(' ',$name))[1]) ? (explode(' ',$name))[1] : 'Last');
         $subscription->setBillTo($billTo);
         $request = new AnetAPI\ARBCreateSubscriptionRequest();
