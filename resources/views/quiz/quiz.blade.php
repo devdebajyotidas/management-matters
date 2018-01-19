@@ -129,24 +129,31 @@
                         <div class="panel-body">
                             <div class="row">
                                 @if(!isset($active_learning->quizTaken[0]) )
-                                    @foreach($active_learning->quiz as $key=>$qdata)
-                                        <div class="col-lg-12 question-block" id="goto-{{$key}}" data-toggle="{{$key}}" style="display: none">
-                                            <h3>Q: {{$qdata['question']}}</h3>
-                                            <div class="row">
+                                    @if(isset($active_learning->quiz) && !empty($active_learning->quiz))
+                                        @foreach($active_learning->quiz as $key=>$qdata)
+                                            <div class="col-lg-12 question-block" id="goto-{{$key}}" data-toggle="{{$key}}" style="display: none">
+                                                <h3>Q: {{$qdata['question']}}</h3>
+                                                <div class="row">
+                                                    @foreach($qdata['content'] as $num => $anstable)
+                                                        <div class="radio radio-custom"  style="margin:10px 0">
+                                                            <input type="radio" id="rad{{$key.$num}}" name="qradio{{$key}}" value="{{$anstable['type']}}" data-toggle="collapse" data-target="#enlarge-{{$key.$num}}">
+                                                            <label for="rad{{$key.$num}}"> {{($num+1).". ".$anstable['answer']}} </label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                                 @foreach($qdata['content'] as $num => $anstable)
-                                                    <div class="radio radio-custom"  style="margin:10px 0">
-                                                        <input type="radio" id="rad{{$key.$num}}" name="qradio{{$key}}" value="{{$anstable['type']}}" data-toggle="collapse" data-target="#enlarge-{{$key.$num}}">
-                                                        <label for="rad{{$key.$num}}"> {{($num+1).". ".$anstable['answer']}} </label>
+                                                    <div id="enlarge-{{$key.$num}}" class="panel-collapse collapse" style="margin-top: 20px">
+                                                        {{"Note ".($num+1).": ".$anstable['note']}}
                                                     </div>
                                                 @endforeach
                                             </div>
-                                            @foreach($qdata['content'] as $num => $anstable)
-                                                <div id="enlarge-{{$key.$num}}" class="panel-collapse collapse" style="margin-top: 20px">
-                                                    {{"Note ".($num+1).": ".$anstable['note']}}
-                                                </div>
-                                            @endforeach
+                                        @endforeach
+                                    @else
+                                        <div class="col-lg-12 question-block">
+                                            <label class="text-danger">Questions not available right now</label>
                                         </div>
-                                    @endforeach
+                                    @endif
+
                                 @else
                                     @if(isset($_GET['retake']))
                                         @foreach($active_learning->quiz as $key=>$qdata)
