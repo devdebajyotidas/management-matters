@@ -46,11 +46,14 @@
                 <div class="col-sm-12">
                     <div class="white-box">
                         <h3 class="box-title m-b-0">Featured Image</h3>
-                        <div class="m-b-0">
-                            <img id="preview" src="{{!empty($learning->image) ? asset('uploads/'.$learning->image) : 'https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/big/img1.jpg'  }}" alt="" style="max-height: 300px">
+                        <div class="m-b-0" id="image-preview">
+                            @if(!empty($learning->image))
+                                <img id="preview" src="{{asset('uploads/'.$learning->image)}}" alt="" style="max-height: 300px">
+                            @endif
                         </div>
-                        <div class="m-b-0">
-                            <input type="file" name="image" onchange="previewImage(this)">
+                        <div class="m-b-0 m-t-20">
+                            <button type="button" class="btn btn-primary waves-effect waves-light" onclick="$('#image-change').trigger('click')">Upload Image</button>
+                            <input class="hidden" id="image-change" type="file" name="image" onchange="previewImage(this)">
                         </div>
                     </div>
                 </div>
@@ -582,7 +585,8 @@
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    $('#preview').attr('src', e.target.result);
+                    var img='<img id="preview" src="'+e.target.result+'" alt="" style="max-height: 300px">';
+                    $('#image-preview').empty().append(img);
                 };
 
                 reader.readAsDataURL(input.files[0]);
