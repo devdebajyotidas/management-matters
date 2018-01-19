@@ -62,4 +62,13 @@ Route::group(['namespace' => 'API'], function () {
     // Need Learner Login
     // Need Password Reset
 
+
+    Route::get('learners/{id}/tickets', function (Request $request, $id){
+        return \App\Models\Ticket::with(['assignments'])->where('learner_id', '=', $id)->get();
+    });
+
+    Route::get('learners/{id}/awards', function (Request $request, $id){
+        return \App\Models\Award::where('learner_id', '=', $id)->get();
+    });
+
 });
