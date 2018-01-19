@@ -4,10 +4,11 @@
 
     <style>
         .learn-banner {
-            height: 100vh;
+            height: 80vh;
             width: calc(100% + 18px);
             margin: 0 -9px;
             background-size: cover;
+            background-attachment: fixed;
         }
 
         .details-learn {
