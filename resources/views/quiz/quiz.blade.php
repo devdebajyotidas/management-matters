@@ -118,7 +118,7 @@
                                         <span class="question-progress-text">1/{{ count($active_learning->quiz) }}</span>
                                         <div class="progress">
                                             <div class="progress-bar question-progress-bar progress-bar-success" role="progressbar" aria-valuenow="70"
-                                                 aria-valuemin="0" aria-valuemax="100" style="width:{{abs((1/count($active_learning->quiz))*100)}}%">
+                                                 aria-valuemin="0" aria-valuemax="100" style="width:{{count($active_learning->quiz) > 0 ? intval((1/count($active_learning->quiz))*100) : 0}}%">
                                                 <span class="sr-only">70% Complete</span>
                                             </div>
                                         </div>
