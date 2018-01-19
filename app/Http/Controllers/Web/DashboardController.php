@@ -62,7 +62,7 @@ class DashboardController extends Controller
             $data['assessments'] = $assessments->count();
             $data['quiz'] = $quiz->count();
             $data['licenses'] = isset(Auth::user()->account->subscription) ? Auth::user()->account->subscription->licenses : 0;
-            $data['learners'] = Auth::user()->learners()->count();
+            $data['learners'] = Auth::user()->account->learners()->count();
 //            return view('organizations.dashboard', $data);
         }
         else{
