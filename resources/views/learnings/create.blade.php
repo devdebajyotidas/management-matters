@@ -14,7 +14,11 @@
             <div class="row m-t-30">
                 <div class="col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title m-b-0">Create New Learning Module</h3>
+                        @if(isset($learning))
+                            <h3 class="box-title m-b-0">Edit Learning Module</h3>
+                        @else
+                            <h3 class="box-title m-b-0">Create New Learning Module</h3>
+                        @endif
                         <small>You can set content on the fly.</small>
                         <hr>
                         <div class="form-group">
