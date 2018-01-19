@@ -124,7 +124,7 @@
                 <div class="col-md-4 col-lg-4 col-xs-6 col-sm-6">
             @foreach($learnings as $learning)
                     <div class="learning" style="{{!empty($learning->image) ? "background-image: url('". asset('uploads/'.$learning->image) . "')" : "" }}">
-                    <div  style="background-color: rgba(0, 0, 0, 0.60); padding: 20px;">
+                    <div  style="background-color: rgba(0, 0, 0, 0.60); padding: 20px; min-height: 300px;">
                             <h2 class="learning-title">
                                 {{ $learning->title }}
                             </h2>
