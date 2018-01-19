@@ -140,8 +140,9 @@ class SubscriptionController extends Controller
             $sub->subscription_id= $response->getSubscriptionId();
             $sub->amount=$amount;
             $sub->is_subscribed=1;
-            $response=$sub->update();
-            if($response){
+            $updateresponse=$sub->update();
+
+            if($updateresponse){
 
                 DB::commit();
                 return true;

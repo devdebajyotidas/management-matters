@@ -26,24 +26,24 @@
                                 @if($key == 3) @break @endif
                             <h4>{{ $assessment }}</h4>
                             <div class="radio radio-custom">
-                                <input type="radio" name="assessments[{{ $learning->title }}][{{  $key }}]" value="1" required>
-                                <label for=""> Strongly Disagree </label>
+                                <input type="radio" id="rad1{{$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="1" required>
+                                <label for="rad1{{$key}}"> Strongly Disagree </label>
                             </div>
                             <div class="radio radio-custom">
-                                <input type="radio" name="assessments[{{ $learning->title }}][{{  $key }}]" value="2" required>
-                                <label for=""> Disagree </label>
+                                <input type="radio" id="rad2{{$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="2" required>
+                                <label for="rad2{{$key}}"> Disagree </label>
                             </div>
                             <div class="radio radio-custom">
-                                <input type="radio" name="assessments[{{ $learning->title }}][{{  $key }}]" value="3" required>
-                                <label for=""> Neutral </label>
+                                <input type="radio" id="rad3{{$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="3" required>
+                                <label for="rad3{{$key}}"> Neutral </label>
                             </div>
                             <div class="radio radio-custom">
-                                <input type="radio" name="assessments[{{ $learning->title }}][{{  $key }}]" value="4" required>
-                                <label for=""> Agree </label>
+                                <input type="radio" id="rad4{{$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="4" required>
+                                <label for="rad4{{$key}}"> Agree </label>
                             </div>
                             <div class="radio radio-custom">
-                                <input type="radio" name="assessments[{{ $learning->title }}][{{  $key }}]" value="5" required>
-                                <label for=""> Strongly Agree </label>
+                                <input type="radio" id="rad5{{$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="5" required>
+                                <label for="rad5{{$key}}"> Strongly Agree </label>
                             </div>
                             <hr>
                                 @endforeach

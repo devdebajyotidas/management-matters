@@ -135,8 +135,8 @@
                                             <div class="row">
                                                 @foreach($qdata['content'] as $num => $anstable)
                                                     <div class="radio radio-custom"  style="margin:10px 0">
-                                                        <input type="radio" name="qradio{{$key}}" value="{{$anstable['type']}}" data-toggle="collapse" data-target="#enlarge-{{$key.$num}}">
-                                                        <label for=""> {{($num+1).". ".$anstable['answer']}} </label>
+                                                        <input type="radio" id="rad{{$key.$num}}" name="qradio{{$key}}" value="{{$anstable['type']}}" data-toggle="collapse" data-target="#enlarge-{{$key.$num}}">
+                                                        <label for="rad{{$key.$num}}"> {{($num+1).". ".$anstable['answer']}} </label>
                                                     </div>
                                                 @endforeach
                                             </div>
@@ -155,8 +155,8 @@
                                                 <div class="btn-group-vertical">
                                                     @foreach($qdata['content'] as $num => $anstable)
                                                         <div class="radio radio-custom"  style="margin:10px 0">
-                                                            <input type="radio" name="qradio{{$key}}" value="{{$anstable['type']}}" data-toggle="collapse" data-target="#enlarge-{{$key.$num}}">
-                                                            <label for=""> {{($num+1).". ".$anstable['answer']}} </label>
+                                                            <input type="radio" id="rad{{$key.$num}}" name="qradio{{$key}}" value="{{$anstable['type']}}" data-toggle="collapse" data-target="#enlarge-{{$key.$num}}">
+                                                            <label for="rad{{$key.$num}}"> {{($num+1).". ".$anstable['answer']}} </label>
                                                         </div>
                                                     @endforeach
                                                 </div>
@@ -239,11 +239,13 @@
                         $(this).parent().siblings().addClass('disabled');
                         $(this).parent().siblings().find("input[type='radio']").attr('disabled',true);
                         if($(this).val()==='true'){
+                            $(this).addClass('radio-success');
                             $(this).siblings().addClass('text-success');
                             var correct=$resultCorrect.val();
                             $resultCorrect.val(parseInt(correct)+1)
                         }
                         else{
+                            $(this).addClass('radio-danger');
                             $(this).siblings().addClass('text-danger');
                             var incorrect=$resultIncorrect.val();
                             $resultIncorrect.val(parseInt(incorrect)+1)

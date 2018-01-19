@@ -78,14 +78,15 @@ class AssessmentController extends Controller
         foreach ($data['assessments'] as $learning => $answers) {
             $score = 0;
             foreach ($answers as $answer) {
-                $score += intval($answer);
+                $score += floatval($answer/5);
             }
             $totalAvg += $avg = $score / 3;
             $scores[$learning] = (float)number_format((float)$avg, 2, '.', '');
         }
 
         $totalAvg = $totalAvg / count($data['assessments']);
-        $scores['Average'] = $totalAvg;
+        $scores['Average'] = (float)number_format((float)($totalAvg), 2, '.', '');
+
 
         $assessments = [
             'learner_id' => Auth::user()->account_id,

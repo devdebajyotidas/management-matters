@@ -49,29 +49,35 @@ class OrganizationLearnerController extends Controller
         $data['learner'] = $request->get('learner');
         $data['user'] = $request->get('user');
 
-        $learnerValidator = Validator::make($data['learner'], Learner::$rules['create']);
-        $userValidator = Validator::make($data['user'], User::$rules['create']);
+        if(!empty($data['learner']['department_id'])){
+            $learnerValidator = Validator::make($data['learner'], Learner::$rules['create']);
+            $userValidator = Validator::make($data['user'], User::$rules['create']);
 
-        if ($learnerValidator->passes() && $userValidator->passes()) {
+            if ($learnerValidator->passes() && $userValidator->passes()) {
 
-            $user = User::make($request->get('user'));
-            $learner = Learner::create($request->get('learner'));
+                $user = User::make($request->get('user'));
+                $learner = Learner::create($request->get('learner'));
 
-            $learner->user()->save($user);
-            $user->attachRole('learner');
+                $learner->user()->save($user);
+                $user->attachRole('learner');
 
-            DB::commit();
+                DB::commit();
 
-            return redirect()->back()->with('success', 'Learner added successfully');
+                return redirect()->back()->with('success', 'Learner added successfully');
 
+            }
+            else
+            {
+                DB::rollBack();
+                $errors = $learnerValidator->errors()->merge($userValidator->errors());
+
+                return redirect()->back()->withInput($request->all())->withErrors($errors);
+            }
         }
-        else
-        {
-            DB::rollBack();
-            $errors = $learnerValidator->errors()->merge($userValidator->errors());
-
-            return redirect()->back()->withInput($request->all())->withErrors($errors);
+        else{
+            return redirect()->back()->withInput($request->all())->withErrors(['Please add a department']);
         }
+
     }
 
     public function update(Request $request,$orgId,$learnerId)
