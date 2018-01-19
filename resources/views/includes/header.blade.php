@@ -5,23 +5,15 @@
         <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)"
            data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
         <div class="top-left-part">
-            {{--<a class="logo" href="{{ url('/home') }}">--}}
-                {{--<img src="{{ asset('assets/img/mm-logo.png') }}" alt="home" class="dark-logo"/>--}}
-            {{--</a>--}}
+            <a class="custom-logo" href="{{ url('/home') }}">
+                <img src="{{ asset('assets/img/mm-logo.png') }}" alt="home" />
+            </a>
 
             {{--<a class="logo" href="index.html">--}}
                 {{--<b>--}}
-                    {{--<img src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/pixeladmin-logo.png"--}}
-                         {{--alt="home" class="dark-logo"/>--}}
-                    {{--<img src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/pixeladmin-logo-dark.png"--}}
+                    {{--<img src="{{ asset('assets/img/mm-logo.png') }}"--}}
                          {{--alt="home" class="light-logo"/>--}}
                 {{--</b>--}}
-                {{--<span class="hidden-xs">--}}
-                        {{--<img src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/pixeladmin-text.png"--}}
-                             {{--alt="home" class="dark-logo"/>--}}
-                        {{--<img src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/pixeladmin-text-dark.png"--}}
-                             {{--alt="home" class="light-logo"/>--}}
-                    {{--</span>--}}
             {{--</a>--}}
             {{--<div class="user-profile">--}}
                 {{--<div class="dropdown user-pro-body">--}}
@@ -43,6 +35,16 @@
                             {{--class="ti-menu"></i></a></li>--}}
         {{--</ul>--}}
         <ul class="nav navbar-top-links navbar-right pull-right">
+            <li class="p-20 text-dark">
+                @if(session('role')=='learner')
+                    <span>Welcome, {{Auth::user()->account->name}}</span>
+                @elseif(session('role')=='organization')
+                    <span>Welcome, {{Auth::user()->account->name}} Admin</span>
+                @else
+                    <span>Welcome, Superadmin</span>
+                @endif
+
+            </li>
             {{--<li class="dropdown"><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown"--}}
                                     {{--href="#"><i--}}
                             {{--class="icon-envelope"></i>--}}
@@ -180,12 +182,12 @@
             <!-- /.dropdown -->
 
                 @if(session("role")=='admin')
-                    <li class="dropdown"><a class="waves-effect waves-light"
+                    <li class="dropdown"><a class="waves-effect waves-light text-dark"
                                             href="{{ url('logout') }}"><i class="fa fa-sign-out"></i>
                         </a>
                     </li>
                     @else
-                    <li class="dropdown"><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown"
+                    <li class="dropdown"><a class="dropdown-toggle waves-effect waves-light text-dark" data-toggle="dropdown"
                                             href="#"><i class="fa fa-user"></i>
                         </a>
                         <ul class="dropdown-menu">
