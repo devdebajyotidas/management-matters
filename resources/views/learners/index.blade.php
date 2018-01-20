@@ -35,7 +35,7 @@
                                             <tr class="{{ $learner->trashed()? 'bg-warning':'' }}">
                                                 <td>{{ $learner->id }}</td>
                                                 <td>
-                                                    <a href="{{ $prefix . '/learners/'. $learner->id}}">
+                                                    <a href="{{ url('/learners/'. $learner->id)}}">
                                                         <img src="{{ ($learner->image)? asset('uploads/'.$learner->image) : 'http://sanarch.in/public/images/defaultAvatar.png' }}"
                                                              alt="user" class="img-circle"/>
                                                         {{ $learner->name }}
@@ -58,13 +58,13 @@
                                                 </td>
                                                 <td>{{ $learner->created_at->format('m/d/Y') }}</td>
                                                 <td>
-                                                    <a href="{{ $prefix . '/learners/'. $learner->id}}"
+                                                    <a href="{{ url('/learners/'. $learner->id)}}"
                                                        class="btn btn-sm btn-icon btn-pure btn-outline"
                                                        data-toggle="tooltip" data-original-title="View">
                                                         <i class="ti-eye" aria-hidden="true"></i>
                                                     </a>
                                                     @if($learner->trashed())
-                                                        <form action="{{  '/learners/' . $learner->id . '/restore'}}"
+                                                        <form action="{{  url('/learners/' . $learner->id . '/restore')}}"
                                                               method="post">
                                                             {{ method_field('put') }}
                                                             {{ csrf_field() }}
@@ -75,7 +75,7 @@
                                                             </a>
                                                         </form>
                                                     @else
-                                                        <form action="{{  '/learners/' . $learner->id}}"
+                                                        <form action="{{  url('/learners/' . $learner->id)}}"
                                                               method="post">
                                                             {{ method_field('delete') }}
                                                             {{ csrf_field() }}
