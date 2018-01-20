@@ -292,32 +292,30 @@
         <!-- /.modal-dialog -->
     </div>
 
-    @if(session()->has('success') || session('success'))
-        <script>
-            window.onload = function () {
-                setTimeout(function () {
-                    showToast('Success', '{{ session('success') }}', 'success');
-                }, 500);
-            };
-        </script>
-    @endif
 
-        @if($errors)
         <script>
             window.onload = function () {
                 @if(session()->has('success') || session('success'))
-                setTimeout(function () {
-                    showToast('Success', '{{ session('success') }}', 'success');
-                }, 500);
+                    setTimeout(function () {
+                        showToast('Success', '{{ session('success') }}', 'success');
+                    }, 500);
                 @endif
 
-                @if(isset($errors) && count($errors->all()) > 0 && $timeout = 700)
-                // $('#add-learner').modal('show');
-                @foreach ($errors->all() as $key => $error)
-                setTimeout(function () {
-                    showToast('Error', '{{ $error }}', 'error');
-                }, {{ $timeout * $key }});
-                @endforeach
+                @if(count($errors->department->all()) > 0 && $timeout = 700 )
+                    $('#add-department').modal('show');
+                    @foreach ($errors->department->all() as $key => $error)
+                    setTimeout(function () {
+                        showToast('Error', '{{ $error }}', 'error');
+                    }, {{ $timeout * $key }});
+                    @endforeach
+                @endif
+
+                @if(count($errors->learner->all()) > 0 && $timeout = 700)
+                    @foreach ($errors->learner->all() as $key => $error)
+                    setTimeout(function () {
+                        showToast('Error', '{{ $error }}', 'error');
+                    }, {{ $timeout * $key }});
+                    @endforeach
                 @endif
 
 
@@ -339,7 +337,7 @@
                                 confirmButtonText: 'Buy Licenses'
                             }).then(function(result){
                                 if(result.value){
-                                   window.location.href="{{url('subscription/').'/'.$organization->id.'/purchase'}}";
+                                    window.location.href="{{url('subscription/').'/'.$organization->id.'/purchase'}}";
                                 }
 
                             })
@@ -350,9 +348,5 @@
                     }
                 })
             };
-
-
-
         </script>
-    @endif
 @endsection

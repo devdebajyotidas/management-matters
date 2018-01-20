@@ -71,11 +71,11 @@ class OrganizationLearnerController extends Controller
                 DB::rollBack();
                 $errors = $learnerValidator->errors()->merge($userValidator->errors());
 
-                return redirect()->back()->withInput($request->all())->withErrors($errors);
+                return redirect()->back()->withInput($request->all())->withErrors($errors,'learner');
             }
         }
         else{
-            return redirect()->back()->withInput($request->all())->withErrors(['Please add a department']);
+            return redirect()->back()->withInput($request->all())->withErrors(['Please add a department'],'learner');
         }
 
     }

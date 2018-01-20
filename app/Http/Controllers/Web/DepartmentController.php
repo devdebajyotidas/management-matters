@@ -49,14 +49,14 @@ class DepartmentController extends Controller
                 DB::rollBack();
                 $errors = $departmentValidator->errors();
 
-                return redirect()->back()->withInput($request->all())->withErrors($errors, 'department');
+                return redirect()->back()->withInput($request->all())->withErrors($errors,'department');
 
 
             }
         }
         else
         {
-            return redirect()->back()->withInput($request->all())->withErrors(['This Department Already exist'], 'department');
+            return redirect()->back()->withInput($request->all())->withErrors(['This Department Already exist'],'department');
         }
     }
 
