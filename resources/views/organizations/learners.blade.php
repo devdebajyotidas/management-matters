@@ -117,7 +117,7 @@
                                                                 <i class="ti-eye" aria-hidden="true"></i>
                                                             </a>
                                                             @if($learner->trashed())
-                                                                <form action="{{  '/learners/' . $learner->id . '/restore'}}"
+                                                                <form action="{{  url('/learners/' . $learner->id . '/restore')}}"
                                                                       method="post">
                                                                     {{ method_field('put') }}
                                                                     {{ csrf_field() }}
@@ -128,7 +128,7 @@
                                                                     </a>
                                                                 </form>
                                                             @else
-                                                            <form action="{{  '/learners/'. $learner->id}}"
+                                                            <form action="{{  url('/learners/'. $learner->id)}}"
                                                                   method="post">
                                                                 {{ method_field('delete') }}
                                                                 {{ csrf_field() }}
@@ -140,7 +140,7 @@
                                                                 </a>
                                                             </form>
                                                             @endif
-                                                            <form action="{{  '/learners/'. $learner->id}}"
+                                                            <form action="{{  url('/learners/'. $learner->id)}}"
                                                                   method="post">
                                                                 {{ method_field('delete') }}
                                                                 {{ csrf_field() }}

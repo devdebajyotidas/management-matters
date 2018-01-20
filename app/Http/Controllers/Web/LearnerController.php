@@ -225,14 +225,16 @@ class LearnerController extends Controller
         if($learner->restore())
         {
             $newreq= new \Illuminate\Http\Request();
+            if(isset($subscription)){
+                $newreq->name_on_card=$learner->name_on_card;
+                $newreq->card_number=$learner->card_number;
+                $newreq->expiry_date=$learner->expiry_date;
+                $newreq->billing_interval=$subscription->billing_interval;
+                $newreq->licenses=$subscription->licenses;
 
-            $newreq->name_on_card=$learner->name_on_card;
-            $newreq->card_number=$learner->card_number;
-            $newreq->expiry_date=$learner->expiry_date;
-            $newreq->billing_interval=$subscription->billing_interval;
-            $newreq->licenses=$subscription->licenses;
+                $response=app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$learner->id);
+            }
 
-            $response=app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$learner->id);
             return redirect()->back()->with(['success' => 'Learner restored successfully']);
         }
         else

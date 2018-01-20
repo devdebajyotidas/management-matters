@@ -285,15 +285,18 @@ class OrganizationController extends Controller
         if( $organization->restore() && $count > 0)
         {
 
-            $newreq= new \Illuminate\Http\Request();
+            if(isset($subscription)){
+                $newreq= new \Illuminate\Http\Request();
 
-            $newreq->name_on_card=$organization->name_on_card;
-            $newreq->card_number=$organization->card_number;
-            $newreq->expiry_date=$organization->expiry_date;
-            $newreq->billing_interval=$subscription->billing_interval;
-            $newreq->licenses=$subscription->licenses;
+                $newreq->name_on_card=$organization->name_on_card;
+                $newreq->card_number=$organization->card_number;
+                $newreq->expiry_date=$organization->expiry_date;
+                $newreq->billing_interval=$subscription->billing_interval;
+                $newreq->licenses=$subscription->licenses;
 
-            $response=app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$organization->id);
+                $response=app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$organization->id);
+            }
+
             DB::commit();
             return redirect()->back()->with(['success' => 'Organization restored successfully']);
         }
