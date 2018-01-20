@@ -28,10 +28,8 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {{dd($assignments)}}
                                         @if(count($assignments) > 0)
                                             @foreach($assignments as $assignment)
-
                                                 <tr>
                                                     <td>{{ $assignment->target_date }}</td>
                                                     <td>{{ $assignment->ticket->learning->title}}</td>
