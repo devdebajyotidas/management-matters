@@ -302,8 +302,6 @@
         </script>
     @endif
 
-
-
         @if($errors)
         <script>
             window.onload = function () {

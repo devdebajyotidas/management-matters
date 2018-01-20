@@ -163,6 +163,7 @@ class HomeController extends Controller
         elseif(session('role')=='organization'){
             $count=0;
             $depcount=0;
+            $usercount=0;
 
             $organization = Organization::withTrashed()->where('id',Auth::user()->account_id)->first();
             $learners=$organization->learners()->get();
@@ -181,6 +182,16 @@ class HomeController extends Controller
                     $award=Award::where('learner_id',$learner->id)->get();
                     $quiz=Quiz::where('learner_id',$learner->id)->get();
                     $tickets=Ticket::withTrashed()->where('learner_id',$learner->id)->get();
+                    $userl=User::where('account_id',$learner->id)->get();
+                    if(count($userl) > 0){
+                        foreach ($userl as $le){
+                            $le->forceDelete();
+                            $usercount++;
+                        }
+                    }
+                    else{
+                        $usercount=1;
+                    }
 
                     if(count($assessment) > 0){
                         foreach ($assessment as $am){
@@ -233,7 +244,7 @@ class HomeController extends Controller
                         $tcount=1;
                     }
 
-                    if($amcount > 0 && $qcount > 0 && $awardcount > 0 && $tcount > 0){
+                    if($usercount > 0 && $amcount > 0 && $qcount > 0 && $awardcount > 0 && $tcount > 0){
                         $learner->forceDelete();
                         $count++;
                     }

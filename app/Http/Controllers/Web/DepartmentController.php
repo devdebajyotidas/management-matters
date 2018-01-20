@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use App\Models\Department as Department;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class DepartmentController extends Controller
 {
@@ -25,13 +26,12 @@ class DepartmentController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $orgId)
     {
         DB::beginTransaction();
 
         $data = $request->all();
-        $department = Department::where(['name'=>trim($data['name'])])->get();
-
+        $department = Department::where('organization_id','=',$orgId)->where('name','=',trim($data['name']))->get();
         if($department->count() == 0)
         {
             $departmentValidator = Validator::make($data, Department::$rules['create']);
@@ -49,14 +49,14 @@ class DepartmentController extends Controller
                 DB::rollBack();
                 $errors = $departmentValidator->errors();
 
-                return redirect()->back()->withInput($request->all())->withErrors($errors);
+                return redirect()->back()->withInput($request->all())->withErrors($errors, 'department');
 
 
             }
         }
         else
         {
-            return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong!']);
+            return redirect()->back()->withInput($request->all())->withErrors(['This Department Already exist'], 'department');
         }
     }
 
