@@ -45,16 +45,9 @@ class QuizController extends Controller
         }
         else{
             $data['learnings'] =  Learning::with(['quizTaken' => function($query){
-                $query->where('learner_id','=',Auth::user()->account_id)->first();
+                $query->where('learner_id','=',Auth::user()->account_id);
             }])->get();
-
             $data['active_learning'] = $data['learnings']->find($learningId);
-
-            if(count($data['active_learning']->quizTaken))
-            {
-                return redirect()->intended(url('learnings/'.$learningId.'/quiz/'.$data['active_learning']->quizTaken[0]->id));
-            }
-
             return view('quiz.quiz', $data);
         }
 
@@ -139,7 +132,7 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $learningId, $id)
+    public function update(Request $request, $learningId)
     {
         DB::beginTransaction();
 
@@ -147,6 +140,7 @@ class QuizController extends Controller
 
         $data['learner_id'] = Auth::user()->account_id;
         $data['learning_id'] = $learningId;
+        $id=$data['taken_id'];
         $learning=Learning::find($learningId);
         $totalQues = count($learning->quiz);
         if($totalQues==intval($data['result'])){

@@ -94,7 +94,7 @@ Route::group(['namespace' => 'Web'], function () {
     Route::get('learnings/{learningId}/quiz', 'QuizController@index');
     Route::get('learnings/{learningId}/quiz/{id}', 'QuizController@show');
     Route::post('learnings/{learningId}/quiz', 'QuizController@store');
-    Route::put('learnings/{learningId}/quiz/{id}', 'QuizController@update');
+    Route::put('learnings/{learningId}/quiz', 'QuizController@update');
     Route::get('quiz', 'QuizController@index');
 
     Route::get('subscription/{id}/purchase', 'SubscriptionController@purchase');

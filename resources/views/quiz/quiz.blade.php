@@ -40,9 +40,13 @@
         }
     </style>
     <div class="container-fluid">
-        <form action="" method="post">
+        <form id="quizForm" action="" method="post">
             @if(isset($_GET['retake']))
                 {{ method_field('put') }}
+                @if(isset($active_learning->quizTaken[0]))
+                    <input type="hidden" name="taken_id" value="{{$active_learning->quizTaken[0]->id}}">
+                @endif
+
             @endif
             {{ csrf_field() }}
             <div class="row" style="margin-top: 20px">
@@ -52,6 +56,7 @@
                             All quizes
                         </div>
                         <div class="panel-body" style="padding: 0">
+
                             <div class="list-group">
                                 @foreach($learnings as $learning)
                                     <a href="{{ url('/learnings/'. $learning->id .'/quiz') }}" class="list-group-item" >
@@ -283,7 +288,7 @@
 
                 }
 
-            })
+            });
 
 
             @if(session()->has('success') || session('success'))
