@@ -11,7 +11,6 @@
             background-repeat: no-repeat;
             background-position: center top;
             background-color: rgba(0, 0, 0, 0.60);
-            padding: 20px;
             min-height: 300px;
         }
 
@@ -125,6 +124,7 @@
                 <div class="col-md-4 col-lg-4 col-xs-6 col-sm-6">
             @foreach($learnings as $learning)
                     <div class="learning" style="{{!empty($learning->image) ? "background-image: url('". asset('uploads/'.$learning->image) . "')" : "" }}">
+                    <div  style="background-color: rgba(0, 0, 0, 0.60); padding: 20px; min-height: 300px;">
                             <h2 class="learning-title">
                                 {{ $learning->title }}
                             </h2>
@@ -150,6 +150,7 @@
                                     <a href="{{ url('learnings/'. $learning->id) }}" class="btn btn-lg btn-rounded btn-info"> View</a>
                                     <a href="{{ url('learnings/'. $learning->id .'/edit') }}" class="btn btn-lg btn-rounded btn-info" style="margin-left: 25px;"> Edit</a>
                             @endif
+                        </div>
                         </div>
                     </div>
             @endforeach
