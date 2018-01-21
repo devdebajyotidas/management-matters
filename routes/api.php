@@ -67,6 +67,10 @@ Route::group(['namespace' => 'API'], function () {
         return \App\Models\Ticket::with(['assignments'])->where('learner_id', '=', $id)->get();
     });
 
+    Route::post('learners/{learnerId}/tickets', 'TicketController@store');
+    Route::post('learners/{learnerId}/tickets/{id}', 'TicketController@update');
+    Route::post('learners/{learnerId}/tickets/{id}', 'TicketController@delete');
+
     Route::get('learners/{id}/awards', function (Request $request, $id){
         return \App\Models\Award::where('learner_id', '=', $id)->get();
     });
