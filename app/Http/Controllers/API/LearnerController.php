@@ -44,7 +44,7 @@ class LearnerController extends Controller
             if ($customerValidator->passes() && $userValidator->passes())
             {
                 $customer = Learner::create($data['learner']);
-                $user = User::create($data['user']);
+                $user = User::make($data['user']);
                 $customer->user()->save($user);
                 $customer->load('user');
 
