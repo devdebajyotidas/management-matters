@@ -23,13 +23,13 @@ class UserController extends Controller
             $user->fcm_token = $request->get('fcm_token');
             $user->save();
 
-            $response['login'] = true;
+            $response['success'] = true;
             $response['account'] = $user->account->load('user');
 
         }
         else
         {
-            $response['login'] = false;
+            $response['success'] = false;
         }
 
         return $response;
