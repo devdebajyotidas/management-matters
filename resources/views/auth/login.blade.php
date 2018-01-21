@@ -55,6 +55,11 @@
                 </a>
 
                 <div class="form-group m-t-40">
+                    @if (old('email'))
+                        <div class="col-xs-12">
+                            <div class="alert alert-warning text-center">Invalid Email or Password</div>
+                        </div>
+                    @endif
                     <div class="col-xs-12">
                         <input class="form-control" type="email" name="email" required="" placeholder="Email"
                         value="{{ old('email') }}">
