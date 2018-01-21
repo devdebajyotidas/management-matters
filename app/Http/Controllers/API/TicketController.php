@@ -77,7 +77,7 @@ class TicketController extends Controller
         if($ticket)
         {
             DB::commit();
-            return response()->json(Ticket::with(['assignments'])->where(['learner_id' => $learnerId])->get());
+            return response()->json(Ticket::with(['assignments','learning'])->where(['learner_id' => $learnerId])->get());
         }
         else{
             DB::rollBack();
