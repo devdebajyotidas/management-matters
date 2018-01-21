@@ -44,9 +44,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        dd($request->path());
-//        return response()->view('errors.500', [], 500);
-        return parent::render($request, $exception);
+        if($request->path()!='login'){
+            return response()->view('errors.500', [], 500);
+            return parent::render($request, $exception);
+        }
     }
 
     /**
