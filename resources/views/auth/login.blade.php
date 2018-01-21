@@ -60,6 +60,13 @@
                             <div class="alert alert-warning text-center">Invalid Email or Password</div>
                         </div>
                     @endif
+                        @if(isset($errors) && count($errors->all()) > 0)
+                            @foreach ($errors->all() as $key => $error)
+                                <div class="col-xs-12">
+                                    <div class="alert alert-warning text-center">{{$error}}</div>
+                                </div>
+                            @endforeach
+                        @endif
                     <div class="col-xs-12">
                         <input class="form-control" type="email" name="email" required="" placeholder="Email"
                         value="{{ old('email') }}">

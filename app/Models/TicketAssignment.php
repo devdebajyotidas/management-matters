@@ -16,6 +16,6 @@ class TicketAssignment extends Model
 
     public function ticket()
     {
-        return $this->belongsTo('App\Models\Ticket');
+        return $this->belongsTo('App\Models\Ticket')->withTrashed();
     }
 }
