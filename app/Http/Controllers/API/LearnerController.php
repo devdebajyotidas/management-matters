@@ -37,6 +37,7 @@ class LearnerController extends Controller
         {
             $data['learner'] = $request->except('user');
             $data['user'] = $request->get('user');
+            $data['user']['password_confirmation'] =  $data['user']['password'];
 
             $customerValidator = Validator::make($data['learner'], Learner::$rules['create']);
             $userValidator = Validator::make($data['user'], User::$rules['create']);
