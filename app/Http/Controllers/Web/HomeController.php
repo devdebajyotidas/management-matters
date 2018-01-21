@@ -38,7 +38,7 @@ class HomeController extends Controller
             return redirect()->intended('dashboard');
 
         }else{
-            return redirect()->intended('/');
+            redirect()->back()->withErrors(['Incorrect username or password']);
         }
     }
 
