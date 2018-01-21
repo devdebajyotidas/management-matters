@@ -55,10 +55,12 @@
                 </a>
 
                 <div class="form-group m-t-40">
-                    @if (old('email'))
-                        <div class="col-xs-12">
-                            <div class="alert alert-warning text-center">Invalid Email or Password</div>
-                        </div>
+                    @if(isset($errors) && count($errors->all()) > 0)
+                        @foreach ($errors->all() as $key => $error)
+                            <div class="col-xs-12">
+                                <span class="text-white">{{$error}}</span>
+                            </div>
+                        @endforeach
                     @endif
                     <div class="col-xs-12">
                         <input class="form-control" type="email" name="email" required="" placeholder="Email"
@@ -80,15 +82,7 @@
                                     {{--class="fa fa-lock m-r-5"></i> Forgot Password?</a>--}}
                     </div>
                 </div>
-                @if(isset($errors) && count($errors->all()) > 0)
-                    @foreach ($errors->all() as $key => $error)
-                        <div class="form-group text-left m-t-20">
-                            <div class="col-xs-12">
-                                <span class="text-danger">{{$error}}</span>
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
+
 
                 <div class="form-group text-center m-t-20">
                     <div class="col-xs-12">
