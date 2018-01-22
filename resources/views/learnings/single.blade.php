@@ -31,6 +31,13 @@
             /*font-family: Rubik, sans-serif;*/
         /*}*/
 
+        body {
+            color: #000;
+        }
+
+        strong{
+            font-weight: 700;
+        }
     </style>
 
     <div class="row">
