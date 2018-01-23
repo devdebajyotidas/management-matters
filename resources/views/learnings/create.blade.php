@@ -578,6 +578,23 @@
                     'Helvetica,Arial,sans-serif': 'Helvetica'
                 },
                 fontFamilySelection: true
+            }).on('froalaEditor.image.beforeUpload', function (e, editor, files) {
+                if (files.length) {
+                    // Create a File Reader.
+                    var reader = new FileReader();
+
+                    // Set the reader to insert images when they are loaded.
+                    reader.onload = function (e) {
+                        var result = e.target.result;
+                        editor.image.insert(result, null, null, editor.image.get());
+                    };
+
+                    // Read image as base64.
+                    reader.readAsDataURL(files[0]);
+                }
+
+                // Stop default upload chain.
+                return false;
             });
         }
         function previewImage(input) {
