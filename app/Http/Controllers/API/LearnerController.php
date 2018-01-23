@@ -129,7 +129,7 @@ class LearnerController extends Controller
         $data['outstandingTickets'] = $outstandingTickets->where('learner_id', '=', $id)->count();
         $data['completedTickets'] = $completedTickets->where('learner_id', '=', $id)->count();
         $data['archivedTickets'] = $archivedTickets->where('learner_id', '=', $id)->count();
-        $data['totalTickets'] = $archivedTickets->count();
+        $data['totalTickets'] = $totalTickets->count();
         $data['ticketAssignments'] = $ticketAssignments->with(['ticket' => function($query) use($id){
             $query->where('learner_id', '=', $id);
         }])->count();
