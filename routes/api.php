@@ -27,6 +27,7 @@ Route::group(['namespace' => 'API'], function () {
     Route::delete('learners/{id}', 'LearnerController@destroy');
     Route::post('learners/login', 'UserController@login');
     Route::post('learners', 'LearnerController@store');
+    Route::get('learners/{id}/dashboard', 'LearnerController@dashboard');
 
     // Not required
     Route::post('organizations', 'OrganizationController@create');

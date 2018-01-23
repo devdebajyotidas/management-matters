@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Assessment;
+use App\Models\Award;
 use App\Models\Learner;
+use App\Models\Learning;
+use App\Models\Quiz;
+use App\Models\Ticket;
+use App\Models\TicketAssignment;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -104,5 +110,33 @@ class LearnerController extends Controller
     public function delete($id)
     {
 
+    }
+
+    public function dashboard($id)
+    {
+        $learnings = Learning::count();
+        $outstandingTickets = Ticket::where('is_completed', '=', 0);
+        $completedTickets = Ticket::where('is_completed', '=', 1);
+        $archivedTickets = Ticket::where('is_archived', '=', 1);
+        $totalTickets = Ticket::where('learner_id', '=', $id);
+        $ticketAssignments = TicketAssignment::where('id', '>', 0);
+        $awards = Award::where('id', '>', 0);
+        $assessments = Assessment::where('id', '>', 0);
+        $quiz = Quiz::where('id', '>', 0);
+
+
+        $data['learnings'] = $learnings;
+        $data['outstandingTickets'] = $outstandingTickets->where('learner_id', '=', $id)->count();
+        $data['completedTickets'] = $completedTickets->where('learner_id', '=', $id)->count();
+        $data['archivedTickets'] = $archivedTickets->where('learner_id', '=', $id)->count();
+        $data['totalTickets'] = $archivedTickets->count();
+        $data['ticketAssignments'] = $ticketAssignments->with(['ticket' => function($query) use($id){
+            $query->where('learner_id', '=', $id);
+        }])->count();
+        $data['awards'] = $awards->where('learner_id', '=', $id)->count();
+        $data['assessments'] = $assessments->where('learner_id', '=', $id)->count();
+        $data['quiz'] = $quiz->where('learner_id', '=', $id)->count();
+
+        return $data;
     }
 }
