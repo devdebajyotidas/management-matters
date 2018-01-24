@@ -66,7 +66,7 @@ Route::group(['namespace' => 'API'], function () {
 
     Route::get('learners/{id}/tickets', function (Request $request, $id){
         return \App\Models\Ticket::with(['assignments', 'learning' => function($query){
-            $query->selectRaw('learnings.title');
+            $query->select('title');
         }])->where('learner_id', '=', $id)->get();
     });
 
