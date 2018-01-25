@@ -29,7 +29,7 @@ class TicketController extends Controller
         $data['learnerId'] = $id;
         $data['learnings'] = Learning::all(['id','title']);
 
-        $data['tickets'] = Ticket::with(['assignments'])->where(['learner_id' => $id])->get();
+        $data['tickets'] = Ticket::with(['assignments', 'learning'])->where(['learner_id' => $id])->get();
 //        $assignments = TicketAssignment::with(['ticket' => function($query){
 //            $query->where(['learner_id' => Auth::user()->account_id]);
 //        }])->get();
