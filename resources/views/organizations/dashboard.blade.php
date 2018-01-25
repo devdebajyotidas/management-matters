@@ -367,7 +367,7 @@
                             <p>SALES REPORT</p>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6 ">
-                            <h1 class="text-right text-success m-t-20">$3,690</h1></div>
+                            <h1 class="text-right text-success m-t-15">$3,690</h1></div>
                     </div>
                     <div class="table-responsive">
                         <table class="table">
@@ -662,7 +662,7 @@
                 <div class="white-box">
                     <div class="row">
                         <div class="pull-left">
-                            <div class="text-muted m-t-20">Site Analysis</div>
+                            <div class="text-muted m-t-15">Site Analysis</div>
                             <h2>21000</h2></div>
                         <div data-label="60%"
                              class="css-bar css-bar-60 css-bar-lg m-b-0 css-bar-danger pull-right"></div>
@@ -678,7 +678,7 @@
                 <div class="white-box">
                     <div class="row">
                         <div class="pull-left">
-                            <div class="text-muted m-t-20">TOTAL SALES</div>
+                            <div class="text-muted m-t-15">TOTAL SALES</div>
                             <h2>21000</h2></div>
                         <div data-label="60%"
                              class="css-bar css-bar-60 css-bar-lg m-b-0  css-bar-info pull-right"></div>
@@ -694,7 +694,7 @@
                 <div class="white-box">
                     <div class="row">
                         <div class="pull-left">
-                            <div class="text-muted m-t-20">TOTAL visits</div>
+                            <div class="text-muted m-t-15">TOTAL visits</div>
                             <h2>26000</h2></div>
                         <div data-label="60%"
                              class="css-bar css-bar-60 css-bar-lg m-b-0 css-bar-purple pull-right"></div>
@@ -710,7 +710,7 @@
                 <div class="white-box">
                     <div class="row">
                         <div class="pull-left">
-                            <div class="text-muted m-t-20">TOTAL consumption</div>
+                            <div class="text-muted m-t-15">TOTAL consumption</div>
                             <h2>61000</h2></div>
                         <div data-label="60%"
                              class="css-bar css-bar-60 css-bar-lg m-b-0 css-bar-inverse pull-right"></div>
@@ -1057,7 +1057,7 @@
                         <div class="col-md-4 col-sm-4 text-center">
                             <p class="text-danger"><i class="ti-dribbble"></i></p>
                             <h1>556</h1></div>
-                        <div class="stats-row col-md-12 m-t-20 m-b-0 text-center">
+                        <div class="stats-row col-md-12 m-t-15 m-b-0 text-center">
                             <div class="stat-item">
                                 <h6>Contact info</h6> <b><i class="ti-mobile"></i> 123-456-7890</b></div>
                         </div>

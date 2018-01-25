@@ -3,7 +3,7 @@
     @include('includes.main-menu')
     <div class="container-fluid">
         <canvas id="world" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;"></canvas>
-        <div class="row m-t-20">
+        <div class="row m-t-15">
             <div class="hidden">
                 <input type="hidden" class="award-flag" value="{{count($awards) > 0 ? 1 : 0}}">
             </div>

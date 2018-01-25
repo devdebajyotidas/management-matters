@@ -3,7 +3,7 @@
     @include('includes.main-menu')
 
     <div class="container-fluid">
-        <div class="row m-t-30">
+        <div class="row m-t-15">
             <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
                         <div class="col-md-6">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div id="assessment-chart"></div>
+                            <div id="assessment-chart" style="box-shadow: 0 1px 3px rgba(0,0,0,0.14)"></div>
                         </div>
                     </div>
             </div>

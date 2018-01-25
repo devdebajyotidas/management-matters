@@ -19,7 +19,7 @@
     </style>
     <div class="container-fluid">
         <canvas id="world" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;"></canvas>
-        <div class="row m-t-20">
+        <div class="row m-t-15">
             <div class="col-md-12">
                     <ul class="timeline">
                         <li>

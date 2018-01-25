@@ -51,7 +51,7 @@
                                 <img id="preview" src="{{asset('uploads/'.$learning->image)}}" alt="" style="max-height: 300px">
                             @endif
                         </div>
-                        <div class="m-b-0 m-t-20">
+                        <div class="m-b-0 m-t-15">
                             <button type="button" class="btn btn-primary waves-effect waves-light" onclick="$('#image-change').trigger('click')">Upload Image</button>
                             <input class="hidden" id="image-change" type="file" name="image" onchange="previewImage(this)">
                         </div>

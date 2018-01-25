@@ -3,7 +3,7 @@
     @include('includes.main-menu')
     <div class="container-fluid">
         <!-- row -->
-        <div class="row m-t-20">
+        <div class="row m-t-15">
             <div class="col-md-12">
                 <div class="white-box p-0">
                         <div class="hidden">

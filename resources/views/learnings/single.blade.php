@@ -47,7 +47,7 @@
                     <div class="learn-banner" style="background-image: url({{isset($learnings) ? asset('uploads/'.$learnings->image) : 'https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/big/img1.jpg'}})">
                     </div>
                     <div class="white-box details-learn">
-                        <h3 class="m-t-20 m-b-20" style="color: #fff;">{{ $learnings->title }}</h3>
+                        <h3 class="m-t-15 m-b-20" style="color: #fff;">{{ $learnings->title }}</h3>
                         <p>{{ $learnings->description }}</p>
                         @if($role == 'learner')
                             <a class="fcbtn btn btn-primary btn-outline btn-1b ticket" href="{{ url('tickets') }}">Create Ticket</a>

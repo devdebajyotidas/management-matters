@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
         <!-- row -->
-        <div class="row m-t-20">
+        <div class="row m-t-15">
             <div class="col-md-12">
                 <div class="white-box p-0">
 
@@ -31,7 +31,7 @@
                                         @if(count($assignments) > 0)
                                             @foreach($assignments as $assignment)
                                                 <tr>
-                                                    <td>{{ $assignment->target_date }}</td>
+                                                    <td>{{ date('m/d/Y',strtotime($assignment->target_date)) }}</td>
                                                     <td>{{ $assignment->ticket->learning->title}}</td>
                                                     <td>{{ $assignment->ticket->title}}</td>
                                                     <td>{{ $assignment->note }}</td>

@@ -55,18 +55,18 @@
                 </a>
 
                 <div class="form-group m-t-40">
-                    @if (old('email'))
-                        <div class="col-xs-12">
-                            <div class="alert alert-warning text-center">Invalid Email or Password</div>
-                        </div>
+                    {{--@if (old('email'))--}}
+                        {{--<div class="col-xs-12">--}}
+                            {{--<div class="alert alert-warning text-center">Invalid Email or Password</div>--}}
+                        {{--</div>--}}
+                    {{--@endif--}}
+                    @if(isset($errors) && count($errors->all()) > 0)
+                        @foreach ($errors->all() as $key => $error)
+                            <div class="col-xs-12">
+                                <div class="alert alert-warning text-center">{{$error}}</div>
+                            </div>
+                        @endforeach
                     @endif
-                        @if(isset($errors) && count($errors->all()) > 0)
-                            @foreach ($errors->all() as $key => $error)
-                                <div class="col-xs-12">
-                                    <div class="alert alert-warning text-center">{{$error}}</div>
-                                </div>
-                            @endforeach
-                        @endif
                     <div class="col-xs-12">
                         <input class="form-control" type="email" name="email" required="" placeholder="Email"
                         value="{{ old('email') }}">
@@ -87,7 +87,7 @@
                                     {{--class="fa fa-lock m-r-5"></i> Forgot Password?</a>--}}
                     </div>
                 </div>
-                <div class="form-group text-center m-t-20">
+                <div class="form-group text-center m-t-15">
                     <div class="col-xs-12">
                         <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"
                                 type="submit">Log In
@@ -122,7 +122,7 @@
                         <input class="form-control" type="text" required="" placeholder="Email">
                     </div>
                 </div>
-                <div class="form-group text-center m-t-20">
+                <div class="form-group text-center m-t-15">
                     <div class="col-xs-12">
                         <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light"
                                 type="submit">Reset

@@ -54,7 +54,7 @@
                         <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i
                                     class="fa fa-lock m-r-5"></i> Forgot pwd?</a></div>
                 </div>
-                <div class="form-group text-center m-t-20">
+                <div class="form-group text-center m-t-15">
                     <div class="col-xs-12">
                         <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"
                                 type="submit">Log In
@@ -90,7 +90,7 @@
                         <input class="form-control" type="text" name="email" required="" placeholder="Email">
                     </div>
                 </div>
-                <div class="form-group text-center m-t-20">
+                <div class="form-group text-center m-t-15">
                     <div class="col-xs-12">
                         <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light"
                                 type="submit">Reset

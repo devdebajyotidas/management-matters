@@ -35,6 +35,22 @@ class HomeController extends Controller
         $user = Auth::user();
         if($user)
         {
+//            if(session('role')=='learner'){
+//                if()
+//            }
+//            elseif(session('role')=='organization'){
+//                $subscription=Subscription::where('account_id',Auth::user()->account_id);
+//                if($subscription->is_subscribed==1){
+//                    return redirect()->intended('dashboard');
+//                }
+//                else{
+//                    return redirect()->intended('')
+//                }
+//
+//            }
+//            else{
+//                return redirect()->intended('dashboard');
+//            }
             return redirect()->intended('dashboard');
 
         }else{

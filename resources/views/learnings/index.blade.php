@@ -89,9 +89,9 @@
     </style>
 
     <div class="container-fluid">
-        <div class="row m-t-30">
-            <div class="col-md-12">
-                <div class="panel panel-default block1">
+        <div class="row m-t-15 m-b-0">
+            <div class="col-md-12" >
+                <div class="panel panel-default block1" style="box-shadow: 0 1px 3px rgba(0,0,0,0.14)">
                     <div class="panel-heading text-center">Learning Modules</div>
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body text-center">
@@ -119,12 +119,12 @@
                 </div>
             </div>
         </div>
-        <div class="row m-t-30">
+        <div class="row m-t-0">
             @foreach($learningBundle as $learnings)
                 <div class="col-md-4 col-lg-4 col-xs-6 col-sm-6">
             @foreach($learnings as $learning)
                     <div class="learning" style="{{!empty($learning->image) ? "background-image: url('". asset('uploads/'.$learning->image) . "')" : "" }}">
-                    <div  style="background-color: rgba(0, 0, 0, 0.60); padding: 20px; min-height: 300px;">
+                    <div  style="box-shadow: 0 1px 3px rgba(0,0,0,0.14);background-color: rgba(0, 0, 0, 0.60); padding: 20px; min-height: 300px;">
                             <h2 class="learning-title">
                                 {{ $learning->title }}
                             </h2>

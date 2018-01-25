@@ -24,6 +24,9 @@ use League\Flysystem\Config;
 
 class SubscriptionController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
 
     public function purchase($id){
         $organization = Organization::with(['subscription'])->find($id);
@@ -52,7 +55,7 @@ class SubscriptionController extends Controller
         else{
             $start=date('Y-m-d', strtotime('+1 day',strtotime(date('Y-m-d'))));
         }
-        $invoiceno=config('constants.invoice')+1;
+        $invoiceno=config('constants.INVOICE_NO')+1;
 
         if(isset($req->card_number)){
             $cardnum=$req->card_number;
@@ -83,15 +86,15 @@ class SubscriptionController extends Controller
         }
 
 
-        $amount=$license*config('constants.price');
+        $amount=$license*config('constants.BASE_PRICE');
 
-        if($license > config('constants.discountabove')){
-            $amount=$amount-(($amount*config('constants.discount'))/100);
+        if($license > config('constants.DISCOUNT_ABOVE')){
+            $amount=$amount-(($amount*config('constants.DISCOUNT'))/100);
         }
 
         $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
-        $merchantAuthentication->setName(config('constants.loginid'));
-        $merchantAuthentication->setTransactionKey(config('constants.transkey'));
+        $merchantAuthentication->setName(config('constants.AUTHORIZE_ID'));
+        $merchantAuthentication->setTransactionKey(config('constants.AUTHORIZE_KEY'));
 
         $refId = 'ref' . time();
 
@@ -174,20 +177,20 @@ class SubscriptionController extends Controller
             $name=!empty($req->name) ? $req->name : 'No Name';
             $expdate=$req->expdate;
             $cvv=$req->cvv;
-            $invoiceno=config('constants.invoice')+1;
+            $invoiceno=config('constants.INVOICE_NO')+1;
 
 
-            $amount=$license*config('constants.price');
+            $amount=$license*config('constants.BASE_PRICE');
 
             $customer=Organization::find($id);
 
-            if($license > config('constants.discountabove')){
-                $amount=$amount-(($amount*config('constants.discount'))/100);
+            if($license > config('constants.DISCOUNT_ABOVE')){
+                $amount=$amount-(($amount*config('constants.DISCOUNT'))/100);
             }
 
             $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
-            $merchantAuthentication->setName(config('constants.loginid'));
-            $merchantAuthentication->setTransactionKey(config('constants.transkey'));
+            $merchantAuthentication->setName(config('constants.AUTHORIZE_ID'));
+            $merchantAuthentication->setTransactionKey(config('constants.AUTHORIZE_KEY'));
 
             $refId = 'ref' . time();
 
@@ -313,8 +316,8 @@ class SubscriptionController extends Controller
     public function update(Request $req,$subscriptionId){
 
         $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
-        $merchantAuthentication->setName(config('constants.loginid'));
-        $merchantAuthentication->setTransactionKey(config('constants.transkey'));
+        $merchantAuthentication->setName(config('constants.AUTHORIZE_ID'));
+        $merchantAuthentication->setTransactionKey(config('constants.AUTHORIZE_KEY'));
 
         $refId = 'ref' . time();
         $subscription = new AnetAPI\ARBSubscriptionType();
@@ -354,8 +357,8 @@ class SubscriptionController extends Controller
     public function cancel($subscriptionId){
 
         $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
-        $merchantAuthentication->setName(config('constants.loginid'));
-        $merchantAuthentication->setTransactionKey(config('constants.transkey'));
+        $merchantAuthentication->setName(config('constants.AUTHORIZE_ID'));
+        $merchantAuthentication->setTransactionKey(config('constants.AUTHORIZE_KEY'));
 
         // Set the transaction's refId
         $refId = 'ref' . time();
@@ -384,8 +387,8 @@ class SubscriptionController extends Controller
 
     public function refund($refTransId,$card,$expdate,$amount){
         $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
-        $merchantAuthentication->setName(config('constants.loginid'));
-        $merchantAuthentication->setTransactionKey(config('constants.transkey'));
+        $merchantAuthentication->setName(config('constants.AUTHORIZE_ID'));
+        $merchantAuthentication->setTransactionKey(config('constants.AUTHORIZE_KEY'));
 
         $refId = 'ref' . time();
         // Create the payment data for a credit card

@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if($request->path()!='login'){
-            return response()->view('errors.500', [], 500);
+//            return response()->view('errors.500', [], 500);
             return parent::render($request, $exception);
         }
         else{
@@ -67,5 +67,11 @@ class Handler extends ExceptionHandler
         }
 
         return redirect()->guest(route('login'));
+    }
+
+    protected function unsubscribed($request, AuthenticationException $exception)
+    {
+        return response()->view('errors.subscription', [], 403);
+
     }
 }

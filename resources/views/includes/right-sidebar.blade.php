@@ -24,7 +24,7 @@
                     {{--</div>--}}
                 {{--</li>--}}
             {{--</ul>--}}
-            {{--<ul id="themecolors" class="m-t-20">--}}
+            {{--<ul id="themecolors" class="m-t-15">--}}
                 {{--<li><b>With Light sidebar</b></li>--}}
                 {{--<li><a href="javascript:void(0)" theme="default" class="default-theme working">1</a></li>--}}
                 {{--<li><a href="javascript:void(0)" theme="green" class="green-theme">2</a></li>--}}
@@ -41,7 +41,7 @@
                 {{--<li><a href="javascript:void(0)" theme="purple-dark" class="purple-dark-theme">11</a></li>--}}
                 {{--<li><a href="javascript:void(0)" theme="megna-dark" class="megna-dark-theme">12</a></li>--}}
             {{--</ul>--}}
-            <ul class="m-t-20 chatonline">
+            <ul class="m-t-15 chatonline">
                 <li><b>Chat option</b></li>
                 <li>
                     <a href="javascript:void(0)"><img

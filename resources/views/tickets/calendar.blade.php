@@ -2,17 +2,17 @@
 @section('content')
     @include('includes.main-menu')
     <div class="container-fluid">
-        <div class="row m-t-20">
+        <div class="row m-t-15">
             <div class="col-md-12">
             <div class="white-box">
 
             <h3 class="box-title">Drag and drop your event</h3>
-                <div class="m-t-20">
+                <div class="m-t-15">
                     @foreach($tickets as $ticket)
                         <div class="calendar-event" data-id="{{$ticket->id}}" data-class="bg-custom">{{$ticket->title}} <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a></div>
                     @endforeach
                 </div>
-                <div class="m-t-20">
+                <div class="m-t-15">
                     <button type="button" class="btn btn-success" id="add-event">Add Event</button>
                     <button type="button" class="btn btn-default m-l-10" id="event-list" onclick="$('#eventlistForm').submit()">All Events</button>
                     <div class="hidden">

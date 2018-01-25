@@ -15,13 +15,16 @@
         }
     </style>
     <div class="container-fluid">
-        <div class="white-box m-t-20">
+        <div class="white-box m-t-15">
+
             <div class="row">
                 <form action="{{ url('assessments/new') }}" method="post">
                     {{ csrf_field() }}
                     <div class="col-md-12">
+
                         @foreach($learnings as $num=>$learning)
                             {{ ( ($assessments = $learning->assessments) && shuffle($assessments))   ? '' : '' }}
+
                             @foreach($assessments as $key => $assessment)
                                 @if($key == 3) @break @endif
                             <h4>{{ $assessment }}</h4>

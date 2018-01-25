@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
         <!-- row -->
-        <div class="white-box m-t-20">
+        <div class="white-box m-t-15">
             <div class="row ">
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6">
