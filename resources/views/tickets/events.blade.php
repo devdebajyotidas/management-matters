@@ -34,7 +34,7 @@
                                             @foreach($assignments as $assignment)
                                                 <tr>
                                                     <td>{{ date('m/d/Y',strtotime($assignment->target_date)) }}</td>
-                                                    <td>{{ $assignment->ticket->learning->title}}</td>
+                                                    <td>{{ isset($assignment->ticket->learning->title) ? $assignment->ticket->learning->title : 'N/A'}}</td>
                                                     <td>{{ $assignment->ticket->title}}</td>
                                                     <td>{{ $assignment->note }}</td>
                                                 </tr>
