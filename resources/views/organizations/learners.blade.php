@@ -134,13 +134,13 @@
                                                                 {{ csrf_field() }}
                                                                 {{--<input type="hidden" name="department_id" value="{{ $department->id }}">--}}
                                                                 <a type="button"
-                                                                   class="btn btn-sm btn-icon btn-pure btn-outline archive-learner"
+                                                                   class="btn btn-sm btn-icon btn-pure btn-outline remove-learner"
                                                                    data-toggle="tooltip" data-original-title="Archive">
                                                                     <i class="ti-archive" aria-hidden="true"></i>
                                                                 </a>
                                                             </form>
                                                             @endif
-                                                            <form action="{{  url('/learners/'. $learner->id)}}"
+                                                            <form action="{{  url('/learners/'. $learner->id.'/remove')}}"
                                                                   method="post">
                                                                 {{ method_field('delete') }}
                                                                 {{ csrf_field() }}

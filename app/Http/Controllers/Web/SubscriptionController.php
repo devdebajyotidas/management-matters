@@ -435,4 +435,5 @@ class SubscriptionController extends Controller
             return false;
         }
     }
+
 }

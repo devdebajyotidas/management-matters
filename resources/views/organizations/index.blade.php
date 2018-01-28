@@ -74,6 +74,16 @@
                                                                     </a>
                                                                 </form>
                                                             @endif
+                                                            <form action="{{  url('organizations').'/'.$learner->id.'/remove'}}"
+                                                                  method="post">
+                                                                {{ method_field('delete') }}
+                                                                {{ csrf_field() }}
+                                                                <a type="button"
+                                                                   class="btn btn-sm btn-icon btn-pure btn-outline remove-learner"
+                                                                   data-toggle="tooltip" data-original-title="Remove Organization">
+                                                                    <i class="fa fa-close" aria-hidden="true"></i>
+                                                                </a>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -413,6 +423,24 @@
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
                         confirmButtonText: 'Yes, restore'
+                    }).then((result) => {
+                        if (result.value) {
+                        that.parent().submit();
+                    }
+                });
+                });
+
+                $('#organization-table').on('click', '.remove-learner', function() {
+
+                    var that = $(this);
+                    swal({
+                        title: 'Remove Organization?',
+                        text: "Are you sure?",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, remove'
                     }).then((result) => {
                         if (result.value) {
                         that.parent().submit();

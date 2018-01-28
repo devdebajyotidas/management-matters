@@ -270,10 +270,10 @@
                     '0',
                     '0'
                 ] ).draw(false);
-                $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
+                $('#mainTable').editableTableWidget().numericInputExample();
             });
             $('#mainTable td:nth-child(2),#mainTable td:nth-child(3),#mainTable td:nth-child(4)').change(function(){
-                alert('x');
+                caltotal();
             })
         });
         function caltotal(){
@@ -284,7 +284,7 @@
                 var val4=parseFloat(val1) * parseFloat(val2) * parseFloat(val3);
                 $(this).find('td:nth-child(5)').html(val4);
             });
-            $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
+            $('#mainTable').editableTableWidget().numericInputExample();
         }
     </script>
 @endif

@@ -75,4 +75,9 @@ class Learner extends Model implements AuditableContract
     {
         return $query->whereNull('learners.deleted_at');
     }
+
+    public function costs()
+    {
+        return $this->hasOne('App\Models\CostOfNot');
+    }
 }

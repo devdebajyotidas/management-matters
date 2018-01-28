@@ -39,7 +39,7 @@
       <h3 class="text-uppercase">Internal Server Error.</h3>
       <p class="text-muted m-t-30 m-b-30">Please try after some time</p>
       <a href="{{url('dashboard')}}" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Back to home</a> </div>
-    <footer class="footer text-center">2016 © Pixel Admin.</footer>
+    <footer class="footer text-center">&copy; 2018 Management Matters</footer>
   </div>
 </section>
 <script src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/bower_components/jquery/dist/jquery.min.js"></script>

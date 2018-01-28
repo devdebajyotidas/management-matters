@@ -31,6 +31,7 @@ Route::group(['namespace' => 'Web'], function () {
 
     Route::get('/home', 'HomeController@home')->name('home');
     Route::get('/restricted', 'HomeController@restricted')->name('restricted');
+    Route::get('/message', 'HomeController@message');
     Route::get('/unauthorized', 'Auth\LoginController@unauthorized')->name('unauthorized');
 
 //    Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -104,7 +105,11 @@ Route::group(['namespace' => 'Web'], function () {
     Route::post('subscription/{id}/cancel', 'SubscriptionController@cancel');
     Route::post('subscription/{id}/test', 'SubscriptionController@test');
 
+    Route::post('cost', 'CostController@store');
 
+    //Delete with archive
+    Route::delete('organizations/{id}/remove', 'OrganizationController@remove');
+    Route::delete('learners/{id}/remove', 'LearnerController@remove');
 
 
 //    });

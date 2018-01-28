@@ -6,7 +6,7 @@ use App\Models\Award;
 use App\Models\Department;
 use App\Models\Organization;
 use App\Models\TicketAssignment;
-
+use App\Http\Middleware\SubscriptionCheck;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,6 +22,7 @@ class TicketController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('checksub');
 
     }
 
@@ -84,8 +85,10 @@ class TicketController extends Controller
         $data['page'] = 'tickets';
         $data['role'] = session('role');
         $data['prefix']  = session('role') . '/'. $id;
+
+
         $data['assignments']=TicketAssignment::with(['ticket'=>function($query){
-            $query->where(['learner_id' => Auth::user()->account_id]);
+            $query->with('learning')->where(['learner_id' => Auth::user()->account_id]);
         }])->get();
         return view('tickets.events', $data);
     }
@@ -139,6 +142,7 @@ class TicketController extends Controller
 
         }
 
+
         $assignemnt = TicketAssignment::find($data['assignment']['id']);
         $assignemnt->note = ($data['assignment']['note']);
         if(!empty($type)){
@@ -149,6 +153,16 @@ class TicketController extends Controller
         }
 
         if($ticket->save() && $assignemnt->save() ){
+            $activity=TicketAssignment::where('ticket_id',$id)->whereNotNull('note')->get()->count();
+
+            if($activity==5){
+                $award['learner_id'] = Auth::user()->account_id;
+                $award['title'] = "Activity award for " . $data['ticket']['title'] ;
+
+                Award::create($award);
+
+            }
+
             DB::commit();
 
             return redirect()->back()->with('success', $message);

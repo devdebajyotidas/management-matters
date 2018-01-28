@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Models\Learner;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
@@ -13,7 +14,12 @@ use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\Organization ;
-use App\Models\User as User;
+use App\Models\User;
+use App\Models\Award;
+use App\Models\TicketAssignment;
+use App\Models\Assessment;
+use App\Models\Quiz;
+use App\Models\Ticket;
 
 
 use League\Flysystem\Config;
@@ -26,6 +32,7 @@ class OrganizationController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('checksub')->only(['dashboard','index','show']);
     }
 
     public function dashboard()
@@ -308,5 +315,132 @@ class OrganizationController extends Controller
 
     }
 
+    public function remove(Request $request,$id){
+        $count=0;
+        $depcount=0;
+        $usercount=0;
+        $tcount=0;
+        $qcount=0;
+        $amcount=0;
+        $awardcount=0;
+
+        $organization = Organization::withTrashed()->where('id', $id)->first();
+        $learners=$organization->learners()->get();
+        $subscription=Subscription::where('account_id',$id)->first();
+        $departments=Department::where('organization_id',$id)->get();
+        $user=User::where('account_id',$id)->first();
+
+        if(!empty($subscription->subscription_id)){
+            app('App\Http\Controllers\Web\SubscriptionController')->cancel($subscription->subscription_id);
+            if($subscription->forceDelete()){
+                $subdel=1;
+            }
+            else{
+                $subdel=0;
+            }
+        }
+        else{
+            $subdel=1;
+        }
+
+        if(count($learners) > 0 ){
+            foreach ($learners as $learner){
+                $assessment=Assessment::where('learner_id',$learner->id)->get();
+                $award=Award::where('learner_id',$learner->id)->get();
+                $quiz=Quiz::where('learner_id',$learner->id)->get();
+                $tickets=Ticket::withTrashed()->where('learner_id',$learner->id)->get();
+                $userl=User::where('account_id',$learner->id)->get();
+                if(count($userl) > 0){
+                    foreach ($userl as $le){
+                        $le->forceDelete();
+                        $usercount++;
+                    }
+                }
+                else{
+                    $usercount=1;
+                }
+
+                if(count($assessment) > 0){
+                    foreach ($assessment as $am){
+                        $am->forceDelete();
+                        $amcount++;
+                    }
+                }
+                else{
+                    $amcount=1;
+                }
+
+                if(count($award) > 0){
+                    foreach ($award as $aw){
+                        $aw->forceDelete();
+                        $awardcount++;
+                    }
+                }
+                else{
+                    $awardcount=1;
+                }
+
+                if(count($quiz) > 0){
+                    foreach ($quiz as $qz){
+                        $qz->forceDelete();
+                        $qcount++;
+                    }
+                }
+                else{
+                    $qcount=1;
+                }
+
+                if(count($tickets) > 0){
+                    foreach ($tickets as $tk){
+                        $assignment=TicketAssignment::where('ticket_id',$tk->id)->get();
+                        if(count($assignment) > 0){
+                            foreach ($assignment as $as){
+                                $as->forceDelete();
+                            }
+                            $tk->forceDelete();
+                            $tcount++;
+                        }
+                        else{
+                            $tk->forceDelete();
+                            $tcount++;
+                        }
+
+                    }
+                }
+                else{
+                    $tcount=1;
+                }
+
+                if($usercount > 0 && $amcount > 0 && $qcount > 0 && $awardcount > 0 && $tcount > 0){
+                    $learner->forceDelete();
+                    $count++;
+                }
+
+            }
+        }
+        else{
+            $count=1;
+        }
+
+        if(count($departments) > 0){
+            foreach ($departments as $dep){
+                $dep->forceDelete();
+                $depcount++;
+            }
+        }
+        else{
+            $depcount=1;
+        }
+
+        if($organization->forceDelete() && $subdel > 0 && $user->forceDelete() && $count > 0 && $depcount > 0){
+            DB::commit();
+            return redirect()->back()->with(['success' => 'Organization deleted successfully']);
+        }
+        else{
+            DB::rollBack();
+            return redirect()->back()->withErrors(['Something went wrong']);
+        }
+
+    }
 
 }

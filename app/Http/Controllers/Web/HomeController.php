@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\SubscriptionCheck;
 use App\Models\Assessment;
 use App\Models\Award;
 use App\Models\Department;
@@ -28,6 +29,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('home');
+        $this->middleware('checksub')->only('cost');
     }
     
     public function home()
@@ -35,27 +37,17 @@ class HomeController extends Controller
         $user = Auth::user();
         if($user)
         {
-//            if(session('role')=='learner'){
-//                if()
-//            }
-//            elseif(session('role')=='organization'){
-//                $subscription=Subscription::where('account_id',Auth::user()->account_id);
-//                if($subscription->is_subscribed==1){
-//                    return redirect()->intended('dashboard');
-//                }
-//                else{
-//                    return redirect()->intended('')
-//                }
-//
-//            }
-//            else{
-//                return redirect()->intended('dashboard');
-//            }
             return redirect()->intended('dashboard');
 
         }else{
             return redirect()->intended('login')->withErrors(['Incorrect email or password']);
         }
+    }
+
+    public function message(){
+
+        return view('errors.subscription');
+
     }
 
     public function cost()
@@ -165,8 +157,17 @@ class HomeController extends Controller
 
             if(!empty($subscription->subscription_id)){
                 app('App\Http\Controllers\Web\SubscriptionController')->cancel($subscription->subscription_id);
+                if($subscription->forceDelete()){
+                    $subdel=1;
+                }
+                else{
+                    $subdel=0;
+                }
             }
-            if($subscription->forceDelete() && $user->forceDelete() && $learner->forceDelete() && $tcount > 0 && $qcount > 0 && $awardcount > 0 && $amcount > 0){
+            else{
+                $subdel=1;
+            }
+            if($subdel > 0 && $user->forceDelete() && $learner->forceDelete() && $tcount > 0 && $qcount > 0 && $awardcount > 0 && $amcount > 0){
                 DB::commit();
 
                 return redirect()->intended(url('logout'));
@@ -190,6 +191,15 @@ class HomeController extends Controller
 
             if(!empty($subscription->subscription_id)){
                 app('App\Http\Controllers\Web\SubscriptionController')->cancel($subscription->subscription_id);
+                if($subscription->forceDelete()){
+                    $subdel=1;
+                }
+                else{
+                    $subdel=0;
+                }
+            }
+            else{
+                $subdel=1;
             }
 
             if(count($learners) > 0 ){
@@ -281,7 +291,7 @@ class HomeController extends Controller
                 $depcount=1;
             }
 
-            if($organization->forceDelete() && $subscription->forceDelete() && $user->forceDelete() && $count > 0 && $depcount > 0){
+            if($organization->forceDelete() && $subdel > 0 && $user->forceDelete() && $count > 0 && $depcount > 0){
                 DB::commit();
                 return redirect()->intended(url('logout'));
             }
@@ -291,4 +301,5 @@ class HomeController extends Controller
             }
         }
     }
+
 }

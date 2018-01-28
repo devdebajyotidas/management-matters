@@ -46,21 +46,24 @@
                             </div>
                         </div>
                         <hr>
-
-                        @if(isset($learner->subscription) && !empty($learner->subscription->subscription_id))
-                            <div class="row text-center m-t-10">
-                                <form action="{{url('profile/'.$learner->subscription->subscription_id)}}" method="post">
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-warning">Cancel Subscription</button>
-                                </form>
-                            </div>
-                        @elseif(!empty($learner->card_number) && !empty($learner->expiry_date))
-                            <button type="button" class="btn resubscribe-button btn-success">Re Subscribe</button>
-                        @else
-                            <div class="row text-left m-t-10 m-l-5 m-r-5">
-                                <span class="text-danger"><i class="fa fa-info-circle "></i> Please add your credit card information to enjoy interrupted services</span>
-                            </div>
+                        @if(!isset($learner->department->id))
+                            @if(isset($learner->subscription) && !empty($learner->subscription->subscription_id))
+                                <div class="row text-center m-t-10">
+                                    <form action="{{url('profile/'.$learner->subscription->subscription_id)}}" method="post">
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-warning">Cancel Subscription</button>
+                                    </form>
+                                </div>
+                            @elseif(!empty($learner->card_number) && !empty($learner->expiry_date))
+                                <button type="button" class="btn resubscribe-button btn-success">Re Subscribe</button>
+                            @else
+                                <div class="row text-left m-t-10 m-l-5 m-r-5">
+                                    <span class="text-danger"><i class="fa fa-info-circle "></i> Please add your credit card information to enjoy interrupted services</span>
+                                </div>
                         @endif
+                    @endif
+
+
                     <!-- /.row -->
                     </div>
                 </div>
@@ -281,39 +284,42 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingFour">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed disabled" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                        Billing Information
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour" aria-expanded="false">
-                                                <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group m-b-20">
-                                                                <input type="text" class="form-control" name="learner[name_on_card]"
-                                                                       placeholder="Name on card" value="{{ $learner->name_on_card }}">
+                                        @if(!isset($learner->department->id))
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="headingFour">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed disabled" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                            Billing Information
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour" aria-expanded="false">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group m-b-20">
+                                                                    <input type="text" class="form-control" name="learner[name_on_card]"
+                                                                           placeholder="Name on card" value="{{ $learner->name_on_card }}">
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group m-b-20">
-                                                                <input type="number" class="form-control" name="learner[card_number]"
-                                                                       placeholder="Credit card number" value="{{ $learner->card_number }}">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group m-b-20">
+                                                                    <input type="number" class="form-control" name="learner[card_number]"
+                                                                           placeholder="Credit card number" value="{{ $learner->card_number }}">
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group m-b-20">
-                                                                <input type="text" class="form-control" name="learner[expiry_date]"
-                                                                       placeholder="Expiry Date (YYYY-MM)" value="{{ $learner->expiry_date }}">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group m-b-20">
+                                                                    <input type="text" class="form-control" name="learner[expiry_date]"
+                                                                           placeholder="Expiry Date (YYYY-MM)" value="{{ $learner->expiry_date }}">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
+
                                     </div>
                                 </div>
                                 <div class="modal-footer">

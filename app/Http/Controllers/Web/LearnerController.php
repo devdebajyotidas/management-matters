@@ -16,11 +16,21 @@ use App\Models\Learner;
 use App\Models\User;
 use App\Models\Department;
 use App\Models\Organization;
-
+use App\Models\Assessment;
+use App\Models\Quiz;
+use App\Models\Ticket;
+use App\Models\TicketAssignment;
+use App\Models\Award;
 
 
 class LearnerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('checksub')->only(['index','show']);
+    }
 
     public function index()
     {
@@ -243,5 +253,97 @@ class LearnerController extends Controller
         }
 
     }
+
+    public function remove(Request $request,$id){
+        $tcount=0;
+        $qcount=0;
+        $amcount=0;
+        $awardcount=0;
+
+        $learner = Learner::withTrashed()->find($id);
+
+        $subscription=Subscription::where('account_id',$id)->first();
+        $user=User::where('account_id',$id)->first();
+        $assessment=Assessment::where('learner_id',$id)->get();
+        $award=Award::where('learner_id',$id)->get();
+        $quiz=Quiz::where('learner_id',$id)->get();
+        $tickets=Ticket::withTrashed()->where('learner_id',$id)->get();
+
+        if(count($assessment) > 0){
+            foreach ($assessment as $am){
+                $am->forceDelete();
+                $amcount++;
+            }
+        }
+        else{
+            $amcount=1;
+        }
+
+        if(count($award) > 0){
+            foreach ($award as $aw){
+                $aw->forceDelete();
+                $awardcount++;
+            }
+        }
+        else{
+            $awardcount=1;
+        }
+
+        if(count($quiz) > 0){
+            foreach ($quiz as $qz){
+                $qz->forceDelete();
+                $qcount++;
+            }
+        }
+        else{
+            $qcount=1;
+        }
+
+        if(count($tickets) > 0){
+            foreach ($tickets as $tk){
+                $assignment=TicketAssignment::where('ticket_id',$tk->id)->get();
+                if(count($assignment) > 0){
+                    foreach ($assignment as $as){
+                        $as->forceDelete();
+                    }
+                    $tk->forceDelete();
+                    $tcount++;
+                }
+                else{
+                    $tk->forceDelete();
+                    $tcount++;
+                }
+
+            }
+        }
+        else{
+            $tcount=1;
+        }
+
+
+
+        if(!empty($subscription->subscription_id)){
+            app('App\Http\Controllers\Web\SubscriptionController')->cancel($subscription->subscription_id);
+            if($subscription->forceDelete()){
+                $subdel=1;
+            }
+            else{
+                $subdel=0;
+            }
+        }
+        else{
+            $subdel=1;
+        }
+        if($subdel > 0 && $tcount > 0 && $qcount > 0 && $awardcount > 0 && $amcount > 0  && $learner->forceDelete() && $user->forceDelete()){
+            DB::commit();
+
+            return redirect()->back()->with(['success' => 'Learner removed successfully']);
+        }
+        else{
+            DB::rollBack();
+            return redirect()->back()->withErrors(['Something went wrong']);
+        }
+    }
+
 
 }

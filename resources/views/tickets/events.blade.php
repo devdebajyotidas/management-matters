@@ -14,6 +14,8 @@
 
                         <!-- /.left-aside-column-->
                         <div class="right-aside" style="margin: 0">
+
+
                             <div class="clearfix"></div>
                             <div class="scrollable">
                                 <div class="table-responsive">

@@ -11,16 +11,22 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 
-use App\Models\Learner as Learner;
-use App\Models\Organization as Organization;
-use App\Models\User as User;
+use App\Models\Learner;
+use App\Models\Organization ;
+use App\Models\User;
+use App\Models\Assessment;
+use App\Models\Quiz;
+use App\Models\Ticket;
+use App\Models\TicketAssignment;
+use App\Models\Award;
 
 class OrganizationLearnerController extends Controller
 {
 
-    public function __construct(Organization $organization, Learner $learner, User $user,Subscription $subscription)
+    public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('checksub');
 
     }
 
@@ -123,4 +129,7 @@ class OrganizationLearnerController extends Controller
         }
 
     }
+
+
+
 }

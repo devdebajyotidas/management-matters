@@ -1,6 +1,23 @@
 ﻿@extends('layouts.app')
 @section('content')
     @include('includes.main-menu')
+    <style>
+        .goto-cal{
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 20px;
+            line-height: 50px;
+            background-color: #f75b36;
+            color:#fff;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 3px 7px rgba(0,0,0,.14);
+        }
+    </style>
 
     <div class="container-fluid">
         <div class="row m-t-15">
@@ -193,6 +210,20 @@
                             <td>4</td>
                             <td>120</td>
                         </tr>
+                        <tr>
+                            <td>1 employees needs displine</td>
+                            <td>30</td>
+                            <td>1</td>
+                            <td>4</td>
+                            <td>120</td>
+                        </tr>
+                        <tr>
+                            <td>1 employees needs displine</td>
+                            <td>30</td>
+                            <td>1</td>
+                            <td>4</td>
+                            <td>120</td>
+                        </tr>
                         </tbody>
                         <tfoot>
                         <tr>
@@ -204,7 +235,18 @@
                         </tr>
                         </tfoot>
                     </table>
-                    <button class="btn btn-primary" id="new-datafield" style="margin: 20px 0">Add another field</button>
+                    <div class="hidden">
+                        <form method="post" action="">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="name" class="cost-name">
+                            <input type="hidden" name="hourly_wage" class="hourly-wage">
+                            <input type="hidden" name="emp_num" class="emp-num">
+                            <input type="hidden" name="lost_hours" class="lost-hours">
+                            <input type="hidden" name="total" class="cost-total">
+                            <input type="submit" value="true" id="saveCost">
+                        </form>
+                    </div>
+                    <button class="btn btn-primary" id="prepare-cost" style="margin: 20px 0">Save</button>
                     <p>Because we all are responsible for the bottom line, to one degree or another, the costs of doing business are
                         important to each and every one of us. It’s easy to find out the cost of wages, machines, tools, supplies and
                         services so our attention can become fixed on those tangible items. However, when it come to the performance of
@@ -217,5 +259,76 @@
         </div>
     </div>
 
+    <div class="goto-cal"><i class="fa fa-calculator"></i></div>
 
+    <script>
+        window.onscroll=function(){
+            if (inView($("#mainTable"))) {
+                $('.goto-cal').fadeOut('fast')
+            } else {
+               $('.goto-cal').fadeIn('fast')
+            }
+        }
+        window.onload=function(){
+            $(".goto-cal").click(function(){
+                navigationFn.goToSection('#mainTable');
+            });
+            $('#prepare-cost').click(function(){
+
+                var $table=$('#mainTable tbody');
+                var names = $table.find('td:first-child').map(function() {
+                    return '"'+$(this).html()+'"';
+                }).get();
+                var wage = $table.find('td:nth-child(2)').map(function() {
+                    return '"'+$(this).html()+'"';
+                }).get();
+                var empnum = $table.find('td:nth-child(3)').map(function() {
+                    return '"'+$(this).html()+'"';
+                }).get();
+                var lost = $table.find('td:nth-child(4)').map(function() {
+                    return '"'+$(this).html()+'"';
+                }).get();
+
+                var total=$('#mainTable tfoot').find('th:last-child').html();
+
+                $('.cost-name').val('['+names.toString()+']');
+                $('.hourly-wage').val('['+wage.toString()+']');
+                $('.emp-num').val('['+empnum.toString()+']');
+                $('.lost-hours').val('['+lost.toString()+']');
+                $('.cost-total').val(total);
+                $('#saveCost').trigger('click');
+            });
+
+            @if(session()->has('success') || session('success'))
+            setTimeout(function () {
+                showToast('Success', '{{ session('success') }}', 'success');
+            }, 500);
+            @endif
+
+            @if(isset($errors) && count($errors->all()) > 0 && $timeout = 700)
+            @foreach ($errors->all() as $key => $error)
+            setTimeout(function () {
+                showToast('Error', '{{ $error }}', 'error');
+            }, {{ $timeout * $key }});
+            @endforeach
+            @endif
+        };
+
+        function inView(obj){
+            var elementTop = obj.offset().top;
+            var elementBottom = elementTop + obj.outerHeight();
+
+            var viewportTop = $(window).scrollTop();
+            var viewportBottom = viewportTop + $(window).height();
+
+            return elementBottom > viewportTop && elementTop < viewportBottom;
+        }
+        var navigationFn = {
+            goToSection: function(id) {
+                $('html, body').animate({
+                    scrollTop: $(id).offset().top
+                }, 500);
+            }
+        }
+    </script>
 @endsection

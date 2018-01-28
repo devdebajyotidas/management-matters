@@ -900,7 +900,7 @@ pre {
     width: auto;
     height: 60px;
     padding: 0 10px;
-    background-color: #d6d6d6;
+    background-color:#F7F7F7;
     position: relative;
     float: left;
 }
@@ -912,7 +912,7 @@ pre {
 }
 .navbar-header {
     width: 100%;
-    background-color: #d6d6d6;
+    background-color:#F7F7F7;
     border: 0
 }
 .navbar-default {

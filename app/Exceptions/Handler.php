@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler
             return parent::render($request, $exception);
         }
         else{
-            return redirect()->intended('login')->withErrors(['Incorrect email or password']);
+            return redirect()->intended('login')->withInput($request->all())->withErrors(['Incorrect email or password']);
         }
     }
 

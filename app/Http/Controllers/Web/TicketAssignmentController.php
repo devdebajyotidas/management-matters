@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\DB;
 
 class TicketAssignmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('checksub');
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -69,6 +76,7 @@ class TicketAssignmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         DB::beginTransaction();
 
         $data['assignment'] = $request->get('assignment');
@@ -85,6 +93,9 @@ class TicketAssignmentController extends Controller
         }
 
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.
