@@ -41,7 +41,7 @@
                                                         {{ $learner->name }}
                                                     </a>
                                                 </td>
-                                                <td>{{ $learner->user->email }}</td>
+                                                <td>{{ isset($learner->user->email) ? $learner->user->email : 'N/A' }}</td>
                                                 <td>{{ $learner->phone }}</td>
                                                 <td>
                                                     @if($learner->department)
