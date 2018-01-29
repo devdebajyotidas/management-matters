@@ -68,10 +68,13 @@
         var chartData = [];
         var count = 0;
 
-        console.log(dates);
-
         function renderChart() {
-            console.log(chartData,scores);
+
+            console.log(chartData,scores,dates);
+            for(var i=0; i<dates.length; i++){
+                dates[i] = moment(dates[i].date).format("m/d/YYYY");
+            }
+
             Highcharts.chart('assessment-chart', {
 
                 title: {
