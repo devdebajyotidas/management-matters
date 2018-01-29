@@ -66,7 +66,14 @@
                         <h3 class="box-title m-b-0">Introduction</h3>
                         <small>You can set custom introduction for every module.</small>
                         <textarea id="introduction" name="introduction">
-                            {{ isset($learning) ? $learning->introduction: ''}}
+                                @php
+                                    $intro=isset($learning->introduction) ? $learning->introduction : '';
+                                @endphp
+                                @if(session('role')=='organization')
+                                    {{isset($learning->orgintro->org_introduction) ? $learning->orgintro->org_introduction : $intro }}
+                                @else
+                                    {{$intro}}
+                                @endif
                         </textarea>
                     </div>
                 </div>
