@@ -36,7 +36,7 @@ Route::group(['namespace' => 'Web'], function () {
 
 //    Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
-    Route::get('cost', 'HomeController@cost');
+    Route::get('cost', 'CostController@index');
 
     Route::get('dashboard', 'DashboardController@index');
     Route::get('profile', 'HomeController@profile');
@@ -106,6 +106,8 @@ Route::group(['namespace' => 'Web'], function () {
     Route::post('subscription/{id}/test', 'SubscriptionController@test');
 
     Route::post('cost', 'CostController@store');
+    Route::get('cost/edit', 'CostController@edit');
+    Route::put('cost/edit', 'CostController@update');
 
     //Delete with archive
     Route::delete('organizations/{id}/remove', 'OrganizationController@remove');

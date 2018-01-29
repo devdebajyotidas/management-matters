@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Learner;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Models\CostOfNot;
 
@@ -19,7 +20,9 @@ class CostController extends Controller
      */
     public function index()
     {
-        //
+        $content = Storage::disk('public')->get('CostOfNot/content.txt');
+
+        return view('cost', ['page' => 'cost', 'role' => session('role'), 'content' => $content]);
     }
 
     /**
@@ -84,9 +87,11 @@ class CostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $content = Storage::disk('public')->get('CostOfNot/content.txt');
+
+        return view('cost-edit', ['page' => 'cost', 'role' => session('role'), 'content' => $content]);
     }
 
     /**
@@ -96,9 +101,11 @@ class CostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $content = $request->get('content');
+        Storage::disk('public')->put('CostOfNot/content.txt', $content);
+        return redirect()->back()->with('success', 'Cost calculation has been saved');
     }
 
     /**
