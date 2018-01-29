@@ -62,6 +62,9 @@ class DashboardController extends Controller
             $awards = $awards->whereIn('learner_id', $learnersId);
             $assessments = $assessments->whereIn('learner_id', $learnersId);
             $quiz = $quiz->whereIn('learner_id', $learnersId);
+            $ticketAssignments = $ticketAssignments->whereHas('ticket', function ($query) use ($learnersId){
+                $query->whereIn('learner_id', $learnersId);
+            });
 
 
             $data['learnings'] = $learnings;
@@ -85,6 +88,9 @@ class DashboardController extends Controller
             $awards = $awards->where('learner_id', '=', $learnersId);
             $assessments = $assessments->where('learner_id', '=', $learnersId);
             $quiz = $quiz->where('learner_id', '=', $learnersId);
+            $ticketAssignments = $ticketAssignments->whereHas('ticket', function ($query) use ($learnersId){
+                $query->where('learner_id', '=', $learnersId);
+            });
 
 
             $data['learnings'] = $learnings;
