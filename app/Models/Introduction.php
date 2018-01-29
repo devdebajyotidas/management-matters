@@ -11,7 +11,7 @@ class Introduction extends Model
     protected $fillable = [
         'organization_id',
         'learning_id',
-        'introduction'
+        'org_introduction'
     ];
 
     public function organization()
