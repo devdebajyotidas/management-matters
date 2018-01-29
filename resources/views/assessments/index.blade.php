@@ -72,7 +72,7 @@
 
             console.log(chartData,scores,dates);
             for(var i=0; i<dates.length; i++){
-                dates[i] = moment(dates[i].date).format("m/d/YYYY");
+                dates[i] = moment(dates[i].date).format("MM/DD/YYYY");
             }
 
             Highcharts.chart('assessment-chart', {
