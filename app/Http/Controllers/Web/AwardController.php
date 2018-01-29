@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class AwardController extends Controller
@@ -30,10 +31,10 @@ class AwardController extends Controller
         }
         else if(session('role')=='organization'){
             $data['departments'] = Auth::user()->account->departments;
-
+            
             $data['awards']=Award::with(['learner' => function($query){
                  $query->whereIn('id',Auth::user()->account->learners()->pluck('learners.id')->toArray());
-            }])->get();
+            }])->whereIn('learner_id',Auth::user()->account->learners()->pluck('learners.id')->toArray())->get();
 
             return view('awards.index', $data);
         }
