@@ -6,7 +6,12 @@
         <div class="row m-t-15">
             <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
+                            <div id="assessment-chart" style="box-shadow: 0 1px 3px rgba(0,0,0,0.14)"></div>
+                        </div>
+                    </div>
+                <div class="row m-t-20">
+                        <div class="col-md-12">
                             <div class="scrollable white-box">
                                 @if($role == 'learner')
                                     <h3 class="box-title">
@@ -51,9 +56,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div id="assessment-chart" style="box-shadow: 0 1px 3px rgba(0,0,0,0.14)"></div>
-                        </div>
                     </div>
             </div>
         </div>
@@ -62,11 +64,17 @@
     <script>
         var CSS_COLOR_NAMES = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "Black", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGrey", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "Darkorange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkSlateGrey", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Grey", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed", "Indigo", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGrey", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSlateGrey", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "SlateGrey", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
         var scores = JSON.parse('{!! json_encode(($scores)) !!}');
+        var dates = JSON.parse('{!! json_encode(($dates)) !!}');
         var chartData = [];
         var count = 0;
 
         function renderChart() {
-            console.log(chartData,scores);
+
+            console.log(chartData,scores,dates);
+            for(var i=0; i<dates.length; i++){
+                dates[i] = moment(dates[i].date).format("m/d/YYYY");
+            }
+
             Highcharts.chart('assessment-chart', {
 
                 title: {
@@ -77,7 +85,8 @@
                     title: {
                         text: 'Assessments'
                     },
-                    categories: [1,2,3,4,5,6,7,8,9,10]
+//                    categories: [1,2,3,4,5,6,7,8,9,10]
+                    categories: dates
                 },
                 yAxis: {
                     title: {
@@ -119,6 +128,42 @@
         window.onload = function () {
 
             renderChart();
+
+            $('#organization-table').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'copyHtml5',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5]
+                        }
+                    }
+                ]
+            });
 
             @if(session()->has('success') || session('success'))
             setTimeout(function () {
