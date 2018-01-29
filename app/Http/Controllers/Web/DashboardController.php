@@ -54,6 +54,16 @@ class DashboardController extends Controller
 //            return view('admin.dashboard', $data);
         }
         else if(session('role')=='organization'){
+            $learnersId = Auth::user()->account->learners->pluck('id')->toArray();
+
+            $outstandingTickets = $outstandingTickets->whereIn('learner_id', $learnersId);
+            $completedTickets = $completedTickets->whereIn('learner_id', $learnersId);
+            $archivedTickets = $archivedTickets->whereIn('learner_id', $learnersId);
+            $awards = $awards->whereIn('learner_id', $learnersId);
+            $assessments = $assessments->whereIn('learner_id', $learnersId);
+            $quiz = $quiz->whereIn('learner_id', $learnersId);
+
+
             $data['learnings'] = $learnings;
             $data['outstandingTickets'] = $outstandingTickets->count();
             $data['completedTickets'] = $completedTickets->count();
@@ -67,6 +77,16 @@ class DashboardController extends Controller
 //            return view('organizations.dashboard', $data);
         }
         else{
+            $learnersId = Auth::user()->account_id;
+
+            $outstandingTickets = $outstandingTickets->where('learner_id', '=', $learnersId);
+            $completedTickets = $completedTickets->where('learner_id', '=', $learnersId);
+            $archivedTickets = $archivedTickets->where('learner_id', '=', $learnersId);
+            $awards = $awards->where('learner_id', '=', $learnersId);
+            $assessments = $assessments->where('learner_id', '=', $learnersId);
+            $quiz = $quiz->where('learner_id', '=', $learnersId);
+
+
             $data['learnings'] = $learnings;
             $data['outstandingTickets'] = $outstandingTickets->count();
             $data['completedTickets'] = $completedTickets->count();
