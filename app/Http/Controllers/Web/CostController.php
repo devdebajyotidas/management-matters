@@ -21,8 +21,18 @@ class CostController extends Controller
     public function index()
     {
         $content = Storage::disk('public')->get('CostOfNot/content.txt');
-
-        return view('cost', ['page' => 'cost', 'role' => session('role'), 'content' => $content]);
+        $cst=CostOfNot::where('learner_id',Auth::user()->account_id)->orderBy('created_at', 'desc')->first();
+        if(!isset($cst)){
+            $cost['name']=array("1 employees needs displine","2 employees remote supervise","Non Productive Personality Types not being addressed","Not coaching 4 employees","No Name","No Name");
+            $cost['hourly_wage']=$cost['emp_num']=$cost['lost_hours']=array('0','0','0','0','0','0');
+        }
+        else{
+            $cost['name']=json_decode($cst->name);
+            $cost['hourly_wage']=json_decode($cst->hourly_wage);
+            $cost['emp_num']=json_decode($cst->emp_num);
+            $cost['lost_hours']=json_decode($cst->lost_hours);
+        }
+        return view('cost', ['page' => 'cost', 'role' => session('role'), 'content' => $content,'cost'=>$cost]);
     }
 
     /**

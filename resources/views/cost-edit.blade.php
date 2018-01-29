@@ -6,7 +6,7 @@
         <form action="" method="post">
             {{ csrf_field() }}
             {{ method_field('put') }}
-            <div class="white-box">
+            <div class="white-box m-t-15">
                 <div class="row m-t-10">
                     <div class="col-sm-12">
                         <h3 class="box-title m-b-0">Cost of Not Managing Better</h3>
