@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 
+use App\Models\Introduction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +55,7 @@ class LearningController extends Controller
 
     public function store(Request $request)
     {
+
         DB::beginTransaction();
 
         $data =  ($request->all());
@@ -83,8 +85,14 @@ class LearningController extends Controller
         $data['page'] = 'learnings';
         $data['role'] = session('role');
         $data['prefix']  = session('role');
-        $data['learning'] = Learning::find($id);
-
+        if(session('role')=='organization'){
+            $data['learning'] = Learning::with(['orgintro'=>function($query){
+                $query->where('organization_id',Auth::user()->account_id)->first();
+            }])->find($id);
+        }
+        else{
+            $data['learning'] = Learning::find($id);
+        }
         return view('learnings.create', $data);
     }
 
@@ -102,10 +110,30 @@ class LearningController extends Controller
                 $data['image'] = null;
             }
         }
-        $learning=Learning::find($id);
-        $learning->fill($data);
+        if(session('role')=='organization'){
+            $exist=Introduction::where('learning_id',$id)->where('organization_id',Auth::user()->account_id)->count();
+            if($exist > 0){
+                $introduction=Introduction::where('learning_id',$id)->where('organization_id',Auth::user()->account_id)->first();
+                $introduction->org_introduction=$data['introduction'];
+                $status=$introduction->update();
+            }
+            else{
+                $organization['learning_id']=$id;
+                $organization['organization_id']=Auth::user()->account_id;
+                $organization['org_introduction']=$data['introduction'];
+                $status=Introduction::create($organization);
 
-        if($learning->update()){
+            }
+
+        }
+        else{
+            $learning=Learning::find($id);
+            $learning->fill($data);
+            $status=$learning->update();
+
+        }
+
+        if($status){
             DB::commit();
             return redirect()->back()->with('success', 'Module has been updated successfully');
         }

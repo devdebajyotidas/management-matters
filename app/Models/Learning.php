@@ -50,4 +50,9 @@ class Learning extends Model
     {
         return $this->hasMany('App\Models\Quiz');
     }
+
+    public function orgintro()
+    {
+        return $this->hasOne('App\Models\Introduction');
+    }
 }
