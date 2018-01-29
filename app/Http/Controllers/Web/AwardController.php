@@ -31,7 +31,7 @@ class AwardController extends Controller
         }
         else if(session('role')=='organization'){
             $data['departments'] = Auth::user()->account->departments;
-            
+
             $data['awards']=Award::with(['learner' => function($query){
                  $query->whereIn('id',Auth::user()->account->learners()->pluck('learners.id')->toArray());
             }])->whereIn('learner_id',Auth::user()->account->learners()->pluck('learners.id')->toArray())->get();
