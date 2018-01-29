@@ -68,6 +68,8 @@
         var chartData = [];
         var count = 0;
 
+        console.log(dates);
+
         function renderChart() {
             console.log(chartData,scores);
             Highcharts.chart('assessment-chart', {
