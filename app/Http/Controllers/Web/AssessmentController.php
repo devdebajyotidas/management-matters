@@ -43,6 +43,7 @@ class AssessmentController extends Controller
         }
 
         $data['assessments'] = $assessments;
+        $data['dates'] = $assessments->pluck('created_at');
 
 
         $scores = [];
