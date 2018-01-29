@@ -6,7 +6,12 @@
         <div class="row m-t-15">
             <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
+                            <div id="assessment-chart" style="box-shadow: 0 1px 3px rgba(0,0,0,0.14)"></div>
+                        </div>
+                    </div>
+                <div class="row m-t-20">
+                        <div class="col-md-12">
                             <div class="scrollable white-box">
                                 @if($role == 'learner')
                                     <h3 class="box-title">
@@ -50,9 +55,6 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div id="assessment-chart" style="box-shadow: 0 1px 3px rgba(0,0,0,0.14)"></div>
                         </div>
                     </div>
             </div>
@@ -119,6 +121,42 @@
         window.onload = function () {
 
             renderChart();
+
+            $('#organization-table').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'copyHtml5',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5]
+                        }
+                    }
+                ]
+            });
 
             @if(session()->has('success') || session('success'))
             setTimeout(function () {
