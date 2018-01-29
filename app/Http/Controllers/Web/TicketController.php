@@ -169,14 +169,15 @@ class TicketController extends Controller
         }
 
         if($ticket->save() && $assignemnt->save() ){
-            $activity=TicketAssignment::where('ticket_id',$id)->whereNotNull('note')->get()->count();
+            if(!isset($data['ticket']['archive']) && !isset($data['ticket']['complete'])){
+                $activity=TicketAssignment::where('ticket_id',$id)->whereNotNull('note')->get()->count();
+                if($activity==5){
 
-            if($activity==5){
-                $award['learner_id'] = Auth::user()->account_id;
-                $award['title'] = "Activity award for " . $data['ticket']['title'] ;
+                    $award['learner_id'] = Auth::user()->account_id;
+                    $award['title'] = "Activity award for " . $data['ticket']['title'] ;
 
-                Award::create($award);
-
+                    Award::create($award);
+                }
             }
 
             DB::commit();
