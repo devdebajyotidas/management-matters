@@ -35,48 +35,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Non Productive Personality Types not being addressed</td>
-                            <td>25</td>
-                            <td>4</td>
-                            <td>2</td>
-                            <td>200</td>
-                        </tr>
-                        <tr>
-                            <td>Not coaching 4 employees</td>
-                            <td>25</td>
-                            <td>6</td>
-                            <td>2</td>
-                            <td>300</td>
-                        </tr>
-                        <tr>
-                            <td>2 employees remote supervise</td>
-                            <td>30</td>
-                            <td>4</td>
-                            <td>10</td>
-                            <td>200</td>
-                        </tr>
-                        <tr>
-                            <td>1 employees needs displine</td>
-                            <td>30</td>
-                            <td>1</td>
-                            <td>4</td>
-                            <td>120</td>
-                        </tr>
-                        <tr>
-                            <td>1 employees needs displine</td>
-                            <td>30</td>
-                            <td>1</td>
-                            <td>4</td>
-                            <td>120</td>
-                        </tr>
-                        <tr>
-                            <td>1 employees needs displine</td>
-                            <td>30</td>
-                            <td>1</td>
-                            <td>4</td>
-                            <td>120</td>
-                        </tr>
+                        @if(isset($cost['name']))
+                            @foreach($cost['name'] as $key=>$name)
+                                <tr>
+                                    <td>{{$name}}</td>
+                                    <td>{{$cost['hourly_wage'][$key]}}</td>
+                                    <td>{{$cost['emp_num'][$key]}}</td>
+                                    <td>{{$cost['lost_hours'][$key]}}</td>
+                                    <td>{{$cost['hourly_wage'][$key]*$cost['emp_num'][$key]*$cost['lost_hours'][$key]}}</td>
+                                </tr>
+                            @endforeach
+                        @endif
                         </tbody>
                         <tfoot>
                         <tr>
