@@ -78,4 +78,10 @@ Route::group(['namespace' => 'API'], function () {
         return \App\Models\Award::where('learner_id', '=', $id)->get();
     });
 
+    Route::get('learnings/{learningId}/quiz', 'QuizController@index');
+    Route::get('learnings/{learningId}/quiz/{id}', 'QuizController@show');
+    Route::post('learnings/{learningId}/quiz', 'QuizController@store');
+    Route::put('learnings/{learningId}/quiz', 'QuizController@update');
+    Route::get('quiz', 'QuizController@index');
+
 });
