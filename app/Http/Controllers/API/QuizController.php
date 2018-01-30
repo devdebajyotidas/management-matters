@@ -89,7 +89,7 @@ class QuizController extends Controller
         }
         else
         {
-            $award = false;
+            $award = null;
             $data['is_completed'] = 0;
         }
         $quiz = Quiz::find($id);
