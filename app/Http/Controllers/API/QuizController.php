@@ -56,15 +56,15 @@ class QuizController extends Controller
             return response()->json([
                 'quiz' => $quiz,
                 'award' => $award,
-                'error' => false
+                'error' => ''
             ]);
         }
         else
         {
             DB::rollBack();
             return response()->json([
-                'quiz' => false,
-                'award' => false,
+                'quiz' => null,
+                'award' => null,
                 'error' => 'Something went wrong!'
             ]);
         }
