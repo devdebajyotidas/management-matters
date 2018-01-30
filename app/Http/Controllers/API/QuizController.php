@@ -76,8 +76,8 @@ class QuizController extends Controller
 
         $data = $request->all();
 
-        $data['learner_id'] = Auth::user()->account_id;
-        $data['learning_id'] = $learningId;
+//        $data['learner_id'] = Auth::user()->account_id;
+//        $data['learning_id'] = $learningId;
         $id=$data['taken_id'];
         $learning=Learning::find($learningId);
         $totalQues = count($learning->quiz);
