@@ -85,25 +85,35 @@ class QuizController extends Controller
             $data['is_completed'] = 1;
             $award['title']='Quiz completed for - '.$data['title'];
             $award['learner_id']=$data['learner_id'];
-            Award::create($award);
+            $award = Award::create($award);
         }
-        else{
+        else
+        {
+            $award = false;
             $data['is_completed'] = 0;
         }
-        $q = Quiz::find($id);
-        $q->result=$data['result'];
-        $q->is_completed = $data['is_completed'];
-        $q->save();
+        $quiz = Quiz::find($id);
+        $quiz->result=$data['result'];
+        $quiz->is_completed = $data['is_completed'];
+//        $q->save();
 
-
-        if( $q->save()){
-
+        if($quiz->save())
+        {
             DB::commit();
-            return redirect()->back()->with('success', 'Quiz result has been updated');
+            return response()->json([
+                'quiz' => $quiz,
+                'award' => $award,
+                'error' => ''
+            ]);
         }
-        else{
+        else
+        {
             DB::rollBack();
-            return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong!']);
+            return response()->json([
+                'quiz' => null,
+                'award' => null,
+                'error' => 'Something went wrong!'
+            ]);
         }
     }
 }
