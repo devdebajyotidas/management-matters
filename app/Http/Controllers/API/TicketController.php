@@ -86,50 +86,67 @@ class TicketController extends Controller
 
     }
 
-    public function update(Request $request, $learnerId, $id)
+    public function update(Request $request, $id)
     {
-
         DB::beginTransaction();
 
-        $type=NULL;
         $data['ticket'] = $request->get('ticket');
-        $data['assignment']=$request->get('assignment');
-        $ticket=Ticket::find($id);
+        $data['assignments']=$request->get('assignments');
+        $ticket = Ticket::find($id);
 
-        if(isset($data['ticket']['archive'])){
-            $type="archived";
+        if(isset($data['ticket']['is_archived']) && $data['ticket']['is_archived'] == 1)
+        {
             $ticket->is_archived=1;
         }
 
-
-        if(isset($data['ticket']['complete']))
+        if(isset($data['ticket']['is_completed']) && $data['ticket']['is_completed'] == 1)
         {
-            $type="completed";
-
             $ticket->is_completed=1;
-            $award['learner_id'] = Auth::user()->account_id;
+            $award['learner_id'] = $data['ticket']['learner_id'];
             $award['title'] = "Successfully completed Ticket - " . $data['ticket']['title'] ;
-
-            $awardCreated =Award::create($award);
+            $award = Award::create($award);
+        }
+        else
+        {
+            $award = null;
         }
 
-        $assignemnt = TicketAssignment::find($data['assignment']['id']);
-        $assignemnt->note = ($data['assignment']['note']);
-        if(!empty($type)){
-            $message="Ticket has been ".$type." successfully";
-        }
-        else{
-            $message="Ticket has been updated successfully";
-        }
+        if($ticket->save())
+        {
+            foreach ($data['assignments'] as $assignment)
+            {
+                if(!isset($assignment['ticket_id']))
+                    $assignment['ticket_id'] = $id;
 
-        if($ticket->save() && $assignemnt->save() ){
+                if(isset($assignment['id']))
+                {
+                    $ticketAssignemnt = TicketAssignment::find($assignment['id']);
+                    $ticketAssignemnt->fill($assignment);
+                }
+                else
+                {
+                    $ticketAssignemnt = TicketAssignment::make($assignment);
+                }
+//                $assignemnt->note = $assignment['note'];
+                $ticketAssignemnt->save();
+            }
+
             DB::commit();
-
-            return redirect()->back()->with('success', $message);
+            return response()->json(
+                [
+                'ticket' => $ticket->load('assignments'),
+                'award' => $award,
+                'error' => ''
+            ]);
         }
-        else{
+        else
+        {
             DB::rollBack();
-            return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong!']);
+            return response()->json([
+                'ticket' => null,
+                'award' => null,
+                'error' => 'Something went wrong!'
+            ]);
         }
 
     }
@@ -155,11 +172,19 @@ class TicketController extends Controller
         if($ticket->delete() && $count > 0){
 
             DB::commit();
-            return redirect()->back()->with('success', 'Ticket has been removed');
+            return response()->json([
+                'ticket' => true,
+                'award' => null,
+                'error' => ''
+            ]);
         }
         else{
             DB::rollBack();
-            return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong!']);
+            return response()->json([
+                'ticket' => null,
+                'award' => null,
+                'error' => 'Something went wrong!'
+            ]);
         }
     }
 }

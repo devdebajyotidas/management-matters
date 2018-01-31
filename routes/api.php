@@ -84,4 +84,13 @@ Route::group(['namespace' => 'API'], function () {
     Route::put('learnings/{learningId}/quiz', 'QuizController@update');
     Route::get('quiz', 'QuizController@index');
 
+    Route::get('tickets', 'TicketController@index');
+    Route::get('tickets/events', 'TicketController@events');
+    Route::post('tickets', 'TicketController@store');
+    Route::put('tickets/{id}', 'TicketController@update');
+    Route::delete('tickets/{id}', 'TicketController@delete');
+
+    Route::post('assignments','TicketAssignmentController@store');
+    Route::put('assignments/{id}','TicketAssignmentController@update');
+
 });
