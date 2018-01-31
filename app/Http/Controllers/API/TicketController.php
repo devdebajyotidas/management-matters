@@ -118,7 +118,7 @@ class TicketController extends Controller
                 if(!isset($assignment['ticket_id']))
                     $assignment['ticket_id'] = $id;
 
-                if(isset($assignment['id']))
+                if(isset($assignment['id']) && $assignment['id'] > 0)
                 {
                     $ticketAssignemnt = TicketAssignment::find($assignment['id']);
                     $ticketAssignemnt->fill($assignment);
