@@ -25,11 +25,14 @@ class UserController extends Controller
 
             $response['success'] = true;
             $response['account'] = $user->account->load('user');
+            $response['error'] = '';
 
         }
         else
         {
             $response['success'] = false;
+            $response['account'] = null;
+            $response['error'] = 'Invalid Email or Password!';
         }
 
         return $response;
