@@ -29,7 +29,7 @@ class AssessmentController extends Controller
                 } else {
                     $scores[$key]['name'] = $learning;
                     $scores[$key]['data'] = [$score];
-                    $scores[$key]['date'] = $assessment->created_at;
+                    $scores[$key]['date'] = $assessment->created_at->date;
                 }
                 $key++;
             }
