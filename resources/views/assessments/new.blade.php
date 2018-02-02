@@ -27,28 +27,30 @@
 
                             @foreach($assessments as $key => $assessment)
                                 @if($key == 3) @break @endif
-                            <h4>{{ $assessment }}</h4>
-                            <div class="radio radio-custom">
-                                <input type="radio" id="rad1{{$num.$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="1" required>
-                                <label for="rad1{{$num.$key}}"> Strongly Disagree </label>
+                            <div class="assessment-wrapper">
+                                <h4>{{ $assessment }}</h4>
+                                <div class="radio radio-custom">
+                                    <input type="radio" id="rad1{{$num.$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="1" required>
+                                    <label for="rad1{{$num.$key}}"> Strongly Disagree </label>
+                                </div>
+                                <div class="radio radio-custom">
+                                    <input type="radio" id="rad2{{$num.$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="2" required>
+                                    <label for="rad2{{$num.$key}}"> Disagree </label>
+                                </div>
+                                <div class="radio radio-custom">
+                                    <input type="radio" id="rad3{{$num.$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="3" required>
+                                    <label for="rad3{{$num.$key}}"> Neutral </label>
+                                </div>
+                                <div class="radio radio-custom">
+                                    <input type="radio" id="rad4{{$num.$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="4" required>
+                                    <label for="rad4{{$num.$key}}"> Agree </label>
+                                </div>
+                                <div class="radio radio-custom">
+                                    <input type="radio" id="rad5{{$num.$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="5" required>
+                                    <label for="rad5{{$num.$key}}"> Strongly Agree </label>
+                                </div>
+                                <hr>
                             </div>
-                            <div class="radio radio-custom">
-                                <input type="radio" id="rad2{{$num.$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="2" required>
-                                <label for="rad2{{$num.$key}}"> Disagree </label>
-                            </div>
-                            <div class="radio radio-custom">
-                                <input type="radio" id="rad3{{$num.$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="3" required>
-                                <label for="rad3{{$num.$key}}"> Neutral </label>
-                            </div>
-                            <div class="radio radio-custom">
-                                <input type="radio" id="rad4{{$num.$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="4" required>
-                                <label for="rad4{{$num.$key}}"> Agree </label>
-                            </div>
-                            <div class="radio radio-custom">
-                                <input type="radio" id="rad5{{$num.$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="5" required>
-                                <label for="rad5{{$num.$key}}"> Strongly Agree </label>
-                            </div>
-                            <hr>
                                 @endforeach
                         @endforeach
                     </div>
@@ -62,6 +64,32 @@
 
     <script>
         window.onload = function () {
+
+            $.fn.shuffle = function() {
+
+                var allElems = this.get(),
+                    getRandom = function(max) {
+                        return Math.floor(Math.random() * max);
+                    },
+                    shuffled = $.map(allElems, function(){
+                        var random = getRandom(allElems.length),
+                            randEl = $(allElems[random]).clone(true)[0];
+                        allElems.splice(random, 1);
+                        return randEl;
+                    });
+
+                this.each(function(i){
+                    var el = $(shuffled[i]);
+                    var text = el.find('h4').text();
+                    el.find('h4').text( (i+1) + '. ' + text);
+                    $(this).replaceWith(el);
+                });
+
+                return $(shuffled);
+
+            };
+
+            $('.assessment-wrapper').shuffle();
 
             @if(session()->has('success') || session('success'))
             setTimeout(function () {
