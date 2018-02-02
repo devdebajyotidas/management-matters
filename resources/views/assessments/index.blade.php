@@ -131,38 +131,7 @@
 
             $('#organization-table').DataTable({
                 dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'copyHtml5',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3]
-                        }
-                    },
-                    {
-                        extend: 'excelHtml5',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3]
-                        }
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3]
-                        }
-                    },
-                    {
-                        extend: 'csv',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3]
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3]
-                        }
-                    }
-                ]
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
             });
 
             @if(session()->has('success') || session('success'))
