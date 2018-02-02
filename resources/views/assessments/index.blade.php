@@ -135,31 +135,31 @@
                     {
                         extend: 'copyHtml5',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5]
+                            columns: [ 0, 1, 2, 3]
                         }
                     },
                     {
                         extend: 'excelHtml5',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5]
+                            columns: [ 0, 1, 2, 3]
                         }
                     },
                     {
                         extend: 'pdfHtml5',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5]
+                            columns: [ 0, 1, 2, 3]
                         }
                     },
                     {
                         extend: 'csv',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5]
+                            columns: [ 0, 1, 2, 3]
                         }
                     },
                     {
                         extend: 'print',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5]
+                            columns: [ 0, 1, 2, 3]
                         }
                     }
                 ]
