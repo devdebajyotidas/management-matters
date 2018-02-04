@@ -23,7 +23,7 @@ class CostController extends Controller
         $content = Storage::disk('public')->get('CostOfNot/content.txt');
         $cst=CostOfNot::where('learner_id',Auth::user()->account_id)->orderBy('created_at', 'desc')->first();
         if(!isset($cst)){
-            $cost['name']=array("1 employees needs displine","2 employees remote supervise","Non Productive Personality Types not being addressed","Not coaching 4 employees","No Name","No Name");
+            $cost['name']=array("Enter description 1","Enter description 2","Enter description 3","Enter description 4","Enter description 5","Enter description 6");
             $cost['hourly_wage']=$cost['emp_num']=$cost['lost_hours']=array('0','0','0','0','0','0');
         }
         else{

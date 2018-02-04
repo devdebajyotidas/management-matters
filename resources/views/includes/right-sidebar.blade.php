@@ -1,96 +1,51 @@
 <!-- .right-sidebar -->
-<div class="right-sidebar">
-    <div class="slimscrollright">
-        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span></div>
-        <div class="r-panel-body">
-            {{--<ul>--}}
-                {{--<li><b>Layout Options</b></li>--}}
-                {{--<li>--}}
-                    {{--<div class="checkbox checkbox-info">--}}
-                        {{--<input id="checkbox1" type="checkbox" class="fxhdr">--}}
-                        {{--<label for="checkbox1"> Fix Header </label>--}}
-                    {{--</div>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<div class="checkbox checkbox-warning">--}}
-                        {{--<input id="checkbox2" type="checkbox" class="fxsdr">--}}
-                        {{--<label for="checkbox2"> Fix Sidebar </label>--}}
-                    {{--</div>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<div class="checkbox checkbox-success">--}}
-                        {{--<input id="checkbox4" type="checkbox" class="open-close">--}}
-                        {{--<label for="checkbox4"> Toggle Sidebar </label>--}}
-                    {{--</div>--}}
-                {{--</li>--}}
-            {{--</ul>--}}
-            {{--<ul id="themecolors" class="m-t-15">--}}
-                {{--<li><b>With Light sidebar</b></li>--}}
-                {{--<li><a href="javascript:void(0)" theme="default" class="default-theme working">1</a></li>--}}
-                {{--<li><a href="javascript:void(0)" theme="green" class="green-theme">2</a></li>--}}
-                {{--<li><a href="javascript:void(0)" theme="gray" class="yellow-theme">3</a></li>--}}
-                {{--<li><a href="javascript:void(0)" theme="blue" class="blue-theme">4</a></li>--}}
-                {{--<li><a href="javascript:void(0)" theme="purple" class="purple-theme">5</a></li>--}}
-                {{--<li><a href="javascript:void(0)" theme="megna" class="megna-theme">6</a></li>--}}
-                {{--<li><b>With Dark sidebar</b></li>--}}
-                {{--<br/>--}}
-                {{--<li><a href="javascript:void(0)" theme="default-dark" class="default-dark-theme">7</a></li>--}}
-                {{--<li><a href="javascript:void(0)" theme="green-dark" class="green-dark-theme">8</a></li>--}}
-                {{--<li><a href="javascript:void(0)" theme="gray-dark" class="yellow-dark-theme">9</a></li>--}}
-                {{--<li><a href="javascript:void(0)" theme="blue-dark" class="blue-dark-theme">10</a></li>--}}
-                {{--<li><a href="javascript:void(0)" theme="purple-dark" class="purple-dark-theme">11</a></li>--}}
-                {{--<li><a href="javascript:void(0)" theme="megna-dark" class="megna-dark-theme">12</a></li>--}}
-            {{--</ul>--}}
-            <ul class="m-t-15 chatonline">
-                <li><b>Chat option</b></li>
-                <li>
-                    <a href="javascript:void(0)"><img
-                                src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/users/varun.jpg"
-                                alt="user-img" class="img-circle"> <span>Varun Dhavan <small
-                                    class="text-success">online</small></span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><img
-                                src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/users/genu.jpg"
-                                alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><img
-                                src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/users/ritesh.jpg"
-                                alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small
-                                    class="text-danger">Busy</small></span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><img
-                                src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/users/arijit.jpg"
-                                alt="user-img" class="img-circle"> <span>Arijit Sinh <small
-                                    class="text-muted">Offline</small></span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><img
-                                src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/users/govinda.jpg"
-                                alt="user-img" class="img-circle"> <span>Govinda Star <small
-                                    class="text-success">online</small></span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><img
-                                src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/users/hritik.jpg"
-                                alt="user-img" class="img-circle"> <span>John Abraham<small
-                                    class="text-success">online</small></span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><img
-                                src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/users/john.jpg"
-                                alt="user-img" class="img-circle"> <span>Hritik Roshan<small
-                                    class="text-success">online</small></span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><img
-                                src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/users/pawandeep.jpg"
-                                alt="user-img" class="img-circle"> <span>Pwandeep rajan <small class="text-success">online</small></span></a>
-                </li>
-            </ul>
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse slimscrollsidebar" style="height: 100%;">
+        @if(session('role')!='admin')
+        <div class="user-profile">
+            <div class="dropdown user-pro-body">
+                <div><img src="{{!empty(auth()->user()->account->image) ? asset('uploads/'.auth()->user()->account->image) : 'https://www.timeshighereducation.com/sites/default/files/byline_photos/default-avatar.png' }}" alt="user-img" class="img-circle"></div>
+                <a href="javascript:void(0)" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{auth()->user()->account->name}} <span class="caret"></span></a>
+                <ul class="dropdown-menu animated flipInY">
+                    <li><a href="{{url('profile')}}"><i class="ti-user"></i> My Profile</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="{{url('logout')}}"><i class="fa fa-power-off"></i> Logout</a></li>
+                </ul>
+            </div>
         </div>
+        @endif
+        <ul class="nav" id="side-menu">
+            @if($role=="admin")
+                <li @if($page=='dashboard') class="tab-current" @endif><a href="{{url('/dashboard')}}" class="sticon ti-home"><span>Dashboard</span></a></li>
+                <li @if($page=='learnings') class="tab-current" @endif><a href="{{url('/learnings')}}" class="sticon ti-blackboard"><span>Learnings</span></a></li>
+                <li @if($page=='cost') class="tab-current" @endif><a href="{{url('/cost/edit')}}" class="sticon ti-stats-down"><span>Cost of Not</span></a></li>
+                <li @if($page=='organizations') class="tab-current" @endif><a href="{{url('/organizations')}}" class="sticon ti-briefcase"><span>Organizations</span></a></li>
+                <li @if($page=='learners') class="tab-current" @endif><a href="{{url('/learners')}}" class="sticon ti-user"><span>Learners</span></a></li>
+                <li @if($page=='quiz') class="tab-current" @endif><a href="{{url('/quiz')}}" class="sticon ti-thought"><span>Quiz</span></a></li>
+                <li @if($page=='assessments') class="tab-current" @endif><a href="{{url('/assessments')}}" class="sticon ti-agenda"><span>Assessment</span></a></li>
+                <li @if($page=='tickets') class="tab-current" @endif><a href="{{url('/tickets')}}" class="sticon ti-calendar"><span>Tickets</span></a></li>
+                <li @if($page=='awards') class="tab-current" @endif><a href="{{url('/awards')}}" class="sticon ti-crown"><span>Award Board</span></a></li>
+            @endif
+
+            @if($role=="organization")
+                <li @if($page=='dashboard') class="tab-current" @endif><a href="{{url('/dashboard')}}" class="waves-effect"><i class="sticon ti-home"></i> <span class="hide-menu">Dashboard</span></a></li>
+                <li @if($page=='learnings') class="tab-current" @endif><a href="{{url('/learnings')}}" class="waves-effect"><i class="sticon ti-blackboard"></i> <span class="hide-menu">Learnings</span></a></li>
+                <li @if($page=='learners') class="tab-current" @endif><a href="{{url('organizations/'. auth()->user()->account_id .'/learners')}}" class="waves-effect"><i class="sticon ti-user"></i> <span class="hide-menu">Learners</span></a></li>
+                <li @if($page=='quiz') class="tab-current" @endif><a href="{{url('/quiz')}}" class="waves-effect"><i class="sticon ti-thought"></i> <span class="hide-menu">Quiz</span></a></li>
+                <li @if($page=='assessments') class="tab-current" @endif><a href="{{url('/assessments')}}" class="waves-effect"><i class="sticon ti-agenda"></i> <span class="hide-menu">Assessment</span></a></li>
+                <li @if($page=='tickets') class="tab-current" @endif><a href="{{url('/tickets')}}" class="waves-effect"><i class="sticon ti-calendar"></i> <span class="hide-menu">Tickets</span></a></li>
+                <li @if($page=='awards') class="tab-current" @endif><a href="{{url('/awards')}}" class="waves-effect"><i class="sticon ti-crown"></i> <span class="hide-menu">Award Board</span></a></li>
+            @endif
+
+                @if($role=="learner")
+                    <li @if($page=='dashboard') class="tab-current" @endif><a href="{{url('/dashboard')}}" class="waves-effect"><i class="sticon ti-home"></i> <span class="hide-menu">Dashboard</span></a></li>
+                    <li @if($page=='learnings') class="tab-current" @endif><a href="{{url('/learnings')}}" class="waves-effect"><i class="sticon ti-blackboard"></i> <span class="hide-menu">Learnings</span></a></li>
+                    <li @if($page=='cost') class="tab-current" @endif><a href="{{url('/cost')}}" class="waves-effect"><i class="sticon ti-stats-down"></i> <span class="hide-menu">Cost of Not Managing Better</span></a></li>
+                    <li @if($page=='assessments') class="tab-current" @endif><a href="{{url('/assessments')}}" class="waves-effect"><i class="sticon ti-agenda"></i> <span class="hide-menu">Assessment</span></a></li>
+                    <li @if($page=='tickets') class="tab-current" @endif><a href="{{url('/tickets')}}" class="waves-effect"><i class="sticon ti-calendar"></i> <span class="hide-menu">Tickets</span></a></li>
+                    <li @if($page=='awards') class="tab-current" @endif><a href="{{url('/awards')}}" class="waves-effect"><i class="sticon ti-crown"></i> <span class="hide-menu">Award Board</span></a></li>
+                @endif
+        </ul>
     </div>
 </div>
 <!-- /.right-sidebar -->

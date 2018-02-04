@@ -4,7 +4,7 @@
     <style>
         .goto-cal{
             position: fixed;
-            bottom: 30px;
+            top: 100px;
             right: 30px;
             width: 50px;
             height: 50px;
@@ -27,7 +27,7 @@
                     <table id="mainTable" class="table editable-table table-bordered table-striped m-b-0" style="margin: 20px 0">
                         <thead>
                         <tr>
-                            <th class="noedit">Name</th>
+                            <th class="noedit">Behavior/Personality Issue or Concern</th>
                             <th>Average Hourly Wage ($)</th>
                             <th>X Number of Employees</th>
                             <th>Lost Hours Per Week</th>
@@ -92,6 +92,12 @@
             }
         }
         window.onload=function(){
+            if (inView($("#mainTable"))) {
+                $('.goto-cal').fadeOut('fast')
+            }
+            else{
+                $('.goto-cal').fadeIn('fast')
+            }
             $(".goto-cal").click(function(){
                 navigationFn.goToSection('#mainTable');
             });

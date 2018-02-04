@@ -13,6 +13,21 @@
         hr {
             background-color: #fff;
         }
+        .assessment-icon{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color:#4f5467;
+            vertical-align: middle;
+            padding: 2px;
+            margin-right: 5px;
+            margin-left: 0;
+        }
+        h4{
+            display: inline-block;
+            vertical-align: middle;
+        }
     </style>
     <div class="container-fluid">
         <div class="white-box m-t-15">
@@ -28,7 +43,11 @@
                             @foreach($assessments as $key => $assessment)
                                 @if($key == 3) @break @endif
                             <div class="assessment-wrapper">
-                                <h4>{{ $assessment }}</h4>
+                                <img src="{{asset('icons/'.strtolower($learning->title).'.png')}}"  class="assessment-icon">
+                                <h4>
+                                    {{ $assessment }}
+                                </h4>
+                                <br>
                                 <div class="radio radio-custom">
                                     <input type="radio" id="rad1{{$num.$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="1" required>
                                     <label for="rad1{{$num.$key}}"> Strongly Disagree </label>

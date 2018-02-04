@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\TipsCheck;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -56,6 +57,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'checksub' => \App\Http\Middleware\SubscriptionCheck::class,
+        'tips'=>\App\Http\Middleware\TipsCheck::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
         /*
