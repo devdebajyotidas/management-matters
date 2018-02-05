@@ -17,19 +17,19 @@ class AssessmentController extends Controller
     {
         $assessments = Assessment::where(['learner_id' => $id])->get();
 
-        $data['assessments'] = [];
+        $data['assessments'] = $assessments;
 
         foreach ($assessments as $key => $assessment)
         {
-//            $data['assessments'][$key] = $assessment->scores;
-
             $i = 0;
+            $scores = [];
             foreach ($assessment->scores as $learning => $score)
             {
-                $data['assessments'][$key][$i]['name'] = $learning;
-                $data['assessments'][$key][$i]['score'] = $score;
+                $scores[$i]['name'] = $learning;
+                $scores[$i]['score'] = $score;
                 $i++;
             }
+            $data['assessments'][$key]['scores'] = $scores;
         }
 
         $data['dates'] = $assessments->pluck('created_at');

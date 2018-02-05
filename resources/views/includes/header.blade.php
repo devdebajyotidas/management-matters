@@ -5,11 +5,13 @@
            data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
         <div class="top-left-part">
             <a class="logo" href="{{url('/')}}">
-                <b>
-                    <!--This is dark logo icon--><img src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/pixeladmin-logo.png" alt="home" class="dark-logo"><!--This is light logo icon--><img src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/pixeladmin-logo-dark.png" alt="home" class="light-logo">
-                </b>
-                <span class="hidden-xs" style="display: none;">
-                        <!--This is dark logo text--><img src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/pixeladmin-text.png" alt="home" class="dark-logo"><!--This is light logo text--><img src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/pixeladmin-text-dark.png" alt="home" class="light-logo">
+                {{--<b>--}}
+                    {{--<!--This is dark logo icon--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="dark-logo" width="100">--}}
+                    {{--<!--This is light logo icon--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="light-logo" width="100">--}}
+                {{--</b>--}}
+                <span class="hidden-xs">
+                        <!--This is dark logo text--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="dark-logo" width="100">
+                    <!--This is light logo text--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="light-logo" width="100">
                      </span>
             </a>
         </div>
@@ -87,6 +89,7 @@
     }
     .top-left-part{
         position: absolute;
+        height: 100%;
     }
     .user-profile {
         padding: 5px 0;
@@ -137,15 +140,24 @@
         padding: 15px 0;
     }
     #side-menu{
-        display: flex;
-        flex-direction: column;
+        /*display: flex;*/
+        /*flex-direction: column;*/
     }
     #side-menu li{
-        flex: 1;
+        /*flex: 1;*/
     }
     #side-menu li a{
-        height: 100%;
-        width: 100%;
+        /*height: 100%;*/
+        /*width: 100%;*/
+    }
+    .navbar-header{
+        background: #f75b36!important;
+    }
+    #side-menu li{
+        /*line-height: 50px!important;*/
+    }
+    #side-menu>li>a {
+        /*padding: 5px 30px 5px 15px!important;*/
     }
 </style>
 <script>

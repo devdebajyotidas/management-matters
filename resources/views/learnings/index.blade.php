@@ -125,6 +125,7 @@
             @foreach($learnings as $learning)
                     <div class="learning" style="{{!empty($learning->image) ? "background-image: url('". asset('uploads/'.$learning->image) . "')" : "" }}">
                     <div  style="box-shadow: 0 1px 3px rgba(0,0,0,0.14);background-color: rgba(0, 0, 0, 0.60); padding: 20px; min-height: 300px;">
+                        <img src="{{asset('assets/icons/'.strtolower($learning->title).'.png')}}"  class="assessment-icon" style="display: inline">
                             <h2 class="learning-title">
                                 {{ $learning->title }}
                             </h2>
