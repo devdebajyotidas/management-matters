@@ -17,7 +17,21 @@ class AssessmentController extends Controller
     {
         $assessments = Assessment::where(['learner_id' => $id])->get();
 
-        $data['assessments'] = $assessments;
+        $data['assessments'] = [];
+
+        foreach ($assessments as $key => $assessment)
+        {
+//            $data['assessments'][$key] = $assessment->scores;
+
+            $i = 0;
+            foreach ($assessment->scores as $learning => $score)
+            {
+                $data['assessments'][$key][$i]['name'] = $learning;
+                $data['assessments'][$key][$i]['score'] = $score;
+                $i++;
+            }
+        }
+
         $data['dates'] = $assessments->pluck('created_at');
 
         $scores = [];
