@@ -78,6 +78,6 @@ class Learner extends Model implements AuditableContract
 
     public function costs()
     {
-        return $this->hasOne('App\Models\CostOfNot');
+        return $this->hasMany('App\Models\CostOfNot');
     }
 }

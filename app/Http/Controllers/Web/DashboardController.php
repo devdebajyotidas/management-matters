@@ -93,6 +93,8 @@ class DashboardController extends Controller
             });
 
 
+            $data['cost'] = Auth::user()->account->costs()->pluck('total', 'created_at');
+
             $data['learnings'] = $learnings;
             $data['outstandingTickets'] = $outstandingTickets->count();
             $data['completedTickets'] = $completedTickets->count();
