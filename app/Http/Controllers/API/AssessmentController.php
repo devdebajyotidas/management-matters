@@ -50,9 +50,10 @@ class AssessmentController extends Controller
             foreach($learning->assessments as $key => $assessment)
             {
                 $assessments[$num][$learning->title][$i] = $assessment;
-//                $assessments[$i]["assessment"] = $assessment;
                 $i++;
             }
+            shuffle($assessments[$num][$learning->title]);
+            $assessments[$num][$learning->title] = array_slice($assessments[$num][$learning->title], 0, 3, true);
         }
 
         return response()->json($assessments);
