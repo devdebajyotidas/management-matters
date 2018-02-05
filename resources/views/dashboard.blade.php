@@ -1097,8 +1097,9 @@
 
             @if($role == 'learner')
 
-            var cost = JSON.parse("{{ $cost }}");
+            var cost = JSON.parse("{{ json_encode($cost) }}");
             console.log(cost);
+
             Highcharts.chart('chart', {
 
                 title: {

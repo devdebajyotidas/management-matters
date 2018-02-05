@@ -19,6 +19,10 @@
             <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="ti-menu"></i></a></li>
         </ul>
 
+        <ul class="nav navbar-top-links navbar-left hidden-xs" style="color: #fff;margin-left: sas;width: 400px">
+            <marquee style="margin-top: 20px;">This is your daily motivational quote</marquee>
+        </ul>
+
         <ul class="nav navbar-top-links navbar-right pull-right">
 
             @if(session('role')=='organization')
