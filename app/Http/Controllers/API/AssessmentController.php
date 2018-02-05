@@ -47,18 +47,15 @@ class AssessmentController extends Controller
         $i = 0;
         foreach($learnings as $num => $learning)
         {
-            foreach($learning as $key => $assessment)
+            foreach($learning->assessments as $key => $assessment)
             {
-                $assessments[$i]["assessment"] = $assessment;
-                $assessments[$i]["assessment"] = $assessment;
+                $assessments[$num][$learning->title][$i] = $assessment;
+//                $assessments[$i]["assessment"] = $assessment;
                 $i++;
             }
         }
-     ( ($assessments = $learning->assessments) && shuffle($assessments))   ? '' : '';
 
-
-
-//        return view('assessments.new', $data);
+        return response()->json($assessments);
     }
 
     public function store(Request $request)

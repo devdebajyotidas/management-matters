@@ -94,6 +94,7 @@ Route::group(['namespace' => 'API'], function () {
     Route::put('assignments/{id}','TicketAssignmentController@update');
 
     Route::get('learners/{learnerId}/assessments','AssessmentController@index');
+    Route::get('learners/{learnerId}/assessments/new','AssessmentController@create');
     Route::post('learners/{learnerId}/assessments','AssessmentController@store');
 
 });
