@@ -35,6 +35,7 @@ class Learner extends Model implements AuditableContract
             'name' => 'required'
         ],
         'update' => [
+
         ]
     ];
 

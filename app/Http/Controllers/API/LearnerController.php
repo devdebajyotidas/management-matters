@@ -98,7 +98,44 @@ class LearnerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $response = [];
+        try
+        {
+            $data['learner'] = $request->except('user');
+            $data['user'] = $request->get('user');
 
+            $customerValidator = Validator::make($data['learner'], Learner::$rules['update']);
+            $userValidator = Validator::make($data['user'], User::$rules['update']);
+
+            if ($customerValidator->passes() && $userValidator->passes())
+            {
+                $learner = Learner::find($id);
+                $learner->fill($data['learner']);
+                $user = User::make($data['user']);
+                $learner->user()->save($user);
+                $learner->load('user');
+
+                $response['success'] = true;
+                $response['account'] = $learner;
+                $response['error'] = '';
+            }
+            else
+            {
+                $errors = implode(',',call_user_func_array('array_merge', array_values(json_decode($customerValidator->errors()->merge($userValidator->errors()),true))));
+                $response['success'] = false;
+                $response['account'] = null;
+                $response['error'] = $errors;
+            }
+
+            return $response;
+
+        }catch (\Exception $exception)
+        {
+            $response['success'] = false;
+            $response['account'] = null;
+            $response['error'] = $exception->getMessage();
+            return $response;
+        }
     }
 
     /**
