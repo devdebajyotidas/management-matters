@@ -75,7 +75,7 @@ class AssessmentController extends Controller
         return response()->json($assessments);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $learnerId)
     {
         DB::beginTransaction();
 
@@ -84,7 +84,9 @@ class AssessmentController extends Controller
 
         $totalAvg = 0;
         $scores = [];
-        foreach ($data['assessments'] as $learning => $answers) {
+        foreach ($data['assessments'] as $result) {
+            $learning = $result['model'];
+            $answers = $result['answer'];
             $score = 0;
             foreach ($answers as $answer) {
                 $score += intval($answer);
@@ -98,7 +100,7 @@ class AssessmentController extends Controller
 
 
         $assessments = [
-            'learner_id' => Auth::user()->account_id,
+            'learner_id' => $learnerId,
             'scores' => $scores
         ];
 
