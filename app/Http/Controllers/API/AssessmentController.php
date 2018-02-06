@@ -104,10 +104,12 @@ class AssessmentController extends Controller
             'scores' => $scores
         ];
 
-        if (Assessment::create($assessments)){
+        $new = Assessment::create($assessments);
+
+        if ($new){
 
             DB::commit();
-            return redirect()->intended('assessments')->with('success', 'Assessment has been submitted');
+            return response()->json($new);
         }
 
         else{
