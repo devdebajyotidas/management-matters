@@ -106,7 +106,9 @@
                 tickInterval: 1,
                 min: 1,
                 max: 100,
-
+                exporting: {
+                    fallbackToExportServer: false
+                },
                 responsive: {
                     rules: [{
                         condition: {

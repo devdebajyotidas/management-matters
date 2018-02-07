@@ -61,6 +61,8 @@
 
 <script src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
 
 <script src="{{ asset('assets/js/cbpFWTabs.js') }}"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>

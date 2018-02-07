@@ -163,6 +163,12 @@
     #side-menu>li>a {
         /*padding: 5px 30px 5px 15px!important;*/
     }
+    body.modal-open {
+        overflow: hidden;
+    }
+    .fr-toolbar.fr-sticky-on{
+        top:60px!important;
+    }
 </style>
 <script>
     window.onload=function(){
