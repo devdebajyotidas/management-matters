@@ -23,20 +23,32 @@
                                            data-page-size="10" data-filter="#search-tickets">
                                         <thead>
                                         <tr>
-                                            <th>Date</th>
-                                            <th>Learning Module</th>
+                                            <th>ID</th>
                                             <th>Title</th>
-                                            <th>Note</th>
+                                            <th>Impact Level</th>
+                                            <th>Activity</th>
+                                            <th>Created On</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @if(count($assignments) > 0)
-                                            @foreach($assignments as $assignment)
+                                        @if(count($tickets) > 0)
+                                            @foreach($tickets as $ticket)
                                                 <tr>
-                                                    <td>{{ date('m/d/Y',strtotime($assignment->target_date)) }}</td>
-                                                    <td>{{ isset($assignment->ticket->learning->title) ? $assignment->ticket->learning->title : 'N/A'}}</td>
-                                                    <td>{{ isset($assignment->ticket->title) ? $assignment->ticket->title : "N/A"}}</td>
-                                                    <td>{{ $assignment->note }}</td>
+                                                    <td>{{ $ticket->id }}</td>
+                                                    <td>{{ $ticket->title}}</td>
+                                                    <td>{{ $ticket->impact_level}}</td>
+                                                    <td>
+                                                        @if(count($ticket->assignments) > 0)
+                                                            @foreach($ticket->assignments as $assignment)
+                                                                @php
+                                                                    $note=!empty($assignment->note) ? $assignment->note : 'No activity';
+                                                                    $date=date('m/d/Y',strtotime($assignment->target_date));
+                                                                @endphp
+                                                                {!! $date.' : '.$note !!}<br>
+                                                            @endforeach
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ date('m/d/Y',strtotime($ticket->created_at)) }}</td>
                                                 </tr>
                                             @endforeach
                                         @endif
@@ -58,7 +70,33 @@
         window.onload = function () {
             ticketTable = $('#tickets-table').DataTable({
                 dom: 'Bfrtip',
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                buttons: [
+                    'copy',
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            stripNewlines: false
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            stripNewlines: false
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            stripNewlines: false
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            stripHtml: false
+                        }
+                    }
+                ]
             });
         };
     </script>

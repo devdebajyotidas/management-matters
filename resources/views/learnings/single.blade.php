@@ -68,11 +68,15 @@
                         <div class="content-wrap text-left">
                             <section id="chapter-introduction" class="content-current">
                                 <p>
-                                    @if(!empty($learnings->introduction))
-                                        {!! $learnings->introduction !!}
+                                    @php
+                                        $intro=!empty($learnings->introduction) ? $learnings->introduction : 'Introduction not available';
+                                    @endphp
+                                    @if(!empty(Auth::user()->account->department_id))
+                                        {!! isset($learnings->orgintro->org_introduction) ? $learnings->orgintro->org_introduction : $intro !!}
                                     @else
-                                        Introduction not available
+                                        {!! $intro !!}
                                     @endif
+
                                 </p>
                             </section>
                             @foreach($learnings->chapters as $key => $chapter)

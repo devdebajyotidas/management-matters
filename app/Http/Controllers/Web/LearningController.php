@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Web;
 
 
+use App\Models\Department;
 use App\Models\Introduction;
+use App\Models\Learner;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +42,14 @@ class LearningController extends Controller
         $data['page'] = 'learnings';
         $data['role'] = session('role');
         $data['prefix']  = session('role');
-        $data['learnings'] = Learning::find($id);
+        if(!empty(Auth::user()->account->department_id)){
+            $data['learnings'] = Learning::with(['orgintro'=>function($query){
+                $query->where('organization_id',Department::with('organization')->find(Auth::user()->account->department_id)->organization_id)->first();
+            }])->find($id);
+        }
+        else{
+            $data['learnings'] = Learning::find($id);
+        }
 
         return view('learnings.single', $data);
     }

@@ -87,25 +87,6 @@ class TicketController extends Controller
         $data['prefix']  = session('role') . '/'. $id;
 
         $data['tickets'] = Ticket::with(['assignments'])->where(['learner_id' => $id])->get();
-        $assignments = TicketAssignment::with(['ticket' => function($query){
-            $query->with('learning')->where(['learner_id' => Auth::user()->account_id]);
-        }])->get();
-
-        $data['assignments'] = [];
-        foreach ($assignments as $assignment)
-        {
-            if(!empty($assignment->ticket)){
-                $assignment->title = $assignment->ticket->title;
-                $assignment->learner_id = $assignment->ticket->learner_id;
-                $assignment->learning_id = $assignment->ticket->learning_id;
-                $assignment->impact_level = $assignment->ticket->impact_level;
-                $assignment->is_archived = $assignment->ticket->is_archived;
-                $assignment->is_completed = $assignment->ticket->is_completed;
-
-                $data['assignments'][] = $assignment;
-            }
-
-        }
         return view('tickets.events', $data);
     }
 

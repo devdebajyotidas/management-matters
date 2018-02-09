@@ -44,6 +44,9 @@ class LearnerController extends Controller
             $data['learner'] = $request->except('user');
             $data['user'] = $request->get('user');
             $data['user']['password_confirmation'] =  $data['user']['password'];
+            $subscription['subscription_id']='';
+            $subscription['start_date']=date('Y-m-d H:i:s');
+            $subscription['status']=1;
 
             $customerValidator = Validator::make($data['learner'], Learner::$rules['create']);
             $userValidator = Validator::make($data['user'], User::$rules['create']);
@@ -52,8 +55,23 @@ class LearnerController extends Controller
             {
                 $customer = Learner::create($data['learner']);
                 $user = User::make($data['user']);
-                $customer->user()->save($user);
+                if($customer->user()->save($user)){
+                    if(empty($customer->organization)){
+                        $sub = Subscription::make($subscription);
+
+                        $customer->subscription()->save($sub);
+                        if(!empty($customer->name_on_card) && !empty($customer->card_number) && !empty($customer->expiry_date)){
+                            $newreq= new \Illuminate\Http\Request();
+                            $newreq->name_on_card=$customer->name_on_card;
+                            $newreq->card_number=$customer->card_number;
+                            $newreq->expiry_date=$customer->expiry_date;
+                            app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$customer->id);
+                        }
+
+                    }
+                }
                 $customer->load('user');
+
 
                 $response['success'] = true;
                 $response['account'] = $customer;
@@ -87,6 +105,7 @@ class LearnerController extends Controller
     public function show($id)
     {
         return response()->json($this->learner->find($id), Response::HTTP_OK);
+
     }
 
     /**
@@ -110,11 +129,26 @@ class LearnerController extends Controller
             if ($customerValidator->passes() && $userValidator->passes())
             {
                 $learner = Learner::find($id);
+                $sub=Subscription::where('account_id',$id)->first();
                 $learner->fill($data['learner']);
                 $user = User::make($data['user']);
                 $learner->user()->save($user);
                 $learner->load('user');
+                $newreq= new \Illuminate\Http\Request();
+                if(isset($sub->subscription_id) && !empty($sub->subscription_id)){
+                    $newreq->card_number=$data['learner']['card_number'];
+                    $newreq->expiry_date=$data['learner']['expiry_date'];
+                    app('App\Http\Controllers\Web\SubscriptionController')->update($newreq,$sub->subscription_id);
 
+                }
+                else{
+                    if(!empty($data['learner']['card_number']) && !empty($data['learner']['expiry_date'])){
+                        $newreq->name_on_card=$data['learner']['name_on_card'];
+                        $newreq->card_number=$data['learner']['card_number'];
+                        $newreq->expiry_date=$data['learner']['expiry_date'];
+                        app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$id);
+                    }
+                }
                 $response['success'] = true;
                 $response['account'] = $learner;
                 $response['error'] = '';

@@ -13862,7 +13862,8 @@ table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {
     padding: 6px 10px 10px
 }
 .page-aside {
-    position: relative
+    position: relative;
+    min-height: calc(100vh - 90px) ;
 }
 .left-aside {
     position: absolute;
@@ -13870,11 +13871,11 @@ table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {
     border-right: 1px solid rgba(120, 130, 140, .21);
     padding: 20px;
     width: 250px;
-    height: 100%
+    height: 100%;
 }
 .right-aside {
     padding: 20px;
-    margin-left: 250px
+    margin-left: 250px;
 }
 .right-aside .contact-list td {
     vertical-align: middle;
