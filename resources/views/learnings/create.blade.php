@@ -571,6 +571,7 @@
         function initEditor(selector) {
             $(selector).froalaEditor({
                 height: 300,
+                toolbarStickyOffset: 60,
                 fontFamily: {
                     "Roboto,sans-serif": 'Roboto',
                     "Oswald,sans-serif": 'Oswald',

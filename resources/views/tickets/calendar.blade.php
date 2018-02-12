@@ -13,8 +13,8 @@
                     @endforeach
                 </div>
                 <div class="m-t-15">
-                    <button type="button" class="btn btn-success" id="add-event">Add Event</button>
-                    <button type="button" class="btn btn-default m-l-10" id="event-list" onclick="$('#eventlistForm').submit()">All Events</button>
+                    <button type="button" class="btn btn-success" id="add-event">Add Ticket</button>
+                    <button type="button" class="btn btn-default m-l-10" id="event-list" onclick="$('#eventlistForm').submit()">All Tickets</button>
                     <div class="hidden">
                         <form id="eventlistForm" action="{{url('tickets/events')}}" method="get">
                             {{csrf_token()}}

@@ -97,4 +97,8 @@ Route::group(['namespace' => 'API'], function () {
     Route::get('learners/{learnerId}/assessments/new','AssessmentController@create');
     Route::post('learners/{learnerId}/assessments','AssessmentController@store');
 
+    Route::post('subscription/{id}/subscribe', 'SubscriptionController@subscribe');//learner id
+    Route::delete('subscription/{id}/cancel', 'SubscriptionController@cancel');//subscription id
+    Route::post('subscription/{id}/update', 'SubscriptionController@update');//subscription id
+
 });

@@ -109,33 +109,18 @@
                                                 <td>{{ $ticket->title }}</td>
                                                 <td>{{ $ticket->impact_level }}</td>
                                                 <td>
-                                                    <span class="activity-view text-primary" style="cursor: pointer;">{{count($ticket->assignments)}} Assignments</span>
-                                                    <div id="activity-modal" class="activity-modal modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                                         aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                    <h4 class="modal-title" id="myModalLabel">Activity</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    @if(isset($ticket->assignments))
-                                                                        @foreach($ticket->assignments as $assignment)
-                                                                            <div class="row form-group">
-                                                                                <div class="col-sm-2">{{$assignment->target_date}}</div>
-                                                                                <div class="col-sm-10">{{!empty($assignment->note) ? $assignment->note : 'No activity'}}</div>
-                                                                            </div>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.modal-content -->
-                                                        </div>
-                                                        <!-- /.modal-dialog -->
-                                                    </div>
+                                                    @if(isset($ticket->assignments) && !empty($ticket->assignments))
+                                                        @foreach($ticket->assignments as $assignment)
+                                                            @php
+                                                                $note=!empty($assignment->note) ? $assignment->note : 'No activity';
+                                                                $date=date('m/d/Y',strtotime($assignment->target_date));
+                                                            @endphp
+                                                            {!! $date.' : '.$note !!}
+                                                        @endforeach
+                                                    @else
+                                                        No activity
+                                                    @endif
+
                                                 </td>
                                                 <td>{{ $ticket->created_at->format('m/d/Y') }}</td>
                                             </tr>
@@ -169,7 +154,33 @@
         window.onload = function () {
             ticketTable = $('#tickets-table').DataTable({
                 dom: 'Bfrtip',
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                buttons: [
+                    'copy',
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            stripNewlines: false
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            stripNewlines: false
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            stripNewlines: false
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            stripHtml: false
+                        }
+                    }
+                ]
             });
             $('#department-list .department').click(function () {
                 var name = $(this).attr('data-name');

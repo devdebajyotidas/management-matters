@@ -111,16 +111,14 @@
 
             window.h = 0;
 
+
             resizeWindow = function() {
                 window.w = canvas.width = window.innerWidth;
                 return window.h = canvas.height = window.innerHeight;
             };
 
             window.addEventListener('resize', resizeWindow, false);
-
-            window.onload = function() {
-                return setTimeout(resizeWindow, 0);
-            };
+            window.addEventListener('load', resizeWindow, false);
 
             range = function(a, b) {
                 return (b - a) * Math.random() + a;

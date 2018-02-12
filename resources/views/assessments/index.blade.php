@@ -133,7 +133,33 @@
 
             $('#organization-table').DataTable({
                 dom: 'Bfrtip',
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                buttons: [
+                    'copy',
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            stripNewlines: false
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            stripNewlines: false
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            stripNewlines: false
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            stripHtml: false
+                        }
+                    }
+                ]
             });
 
             @if(session()->has('success') || session('success'))

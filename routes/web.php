@@ -103,7 +103,6 @@ Route::group(['namespace' => 'Web'], function () {
     Route::post('subscription/{id}/subscribe', 'SubscriptionController@subscribe');
     Route::post('subscription/{id}/update', 'SubscriptionController@update');
     Route::post('subscription/{id}/cancel', 'SubscriptionController@cancel');
-    Route::post('subscription/{id}/test', 'SubscriptionController@test');
 
     Route::post('cost', 'CostController@store');
     Route::get('cost/edit', 'CostController@edit');
