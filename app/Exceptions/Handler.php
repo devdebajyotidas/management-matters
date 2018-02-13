@@ -44,9 +44,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if($request->path()!='login'){
-//            return response()->view('errors.500', [], 500);
+        if($exception instanceof AuthenticationException)
+        {
             return parent::render($request, $exception);
+        }
+        if($request->path()!='login'){
+            return response()->view('errors.500', [], 500);
         }
         else{
             return redirect()->intended('login')->withInput($request->all())->withErrors(['Incorrect email or password']);
