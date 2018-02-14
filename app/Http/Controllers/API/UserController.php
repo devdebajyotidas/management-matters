@@ -24,7 +24,7 @@ class UserController extends Controller
             $user->save();
 
             $response['success'] = true;
-            $response['account'] = $user->account->load('user', 'organization', 'department');
+            $response['account'] = $user->account->load('user', 'department.organization');
             $response['error'] = '';
 
         }
