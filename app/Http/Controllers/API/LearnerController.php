@@ -133,7 +133,7 @@ class LearnerController extends Controller
                 $learner->fill($data['learner']);
                 $user = User::make($data['user']);
                 $learner->user()->save($user);
-                $learner->load('user');
+                $learner->load('user', 'organization', 'department');
                 $newreq= new \Illuminate\Http\Request();
                 if(isset($sub->subscription_id) && !empty($sub->subscription_id)){
                     $newreq->card_number=$data['learner']['card_number'];
