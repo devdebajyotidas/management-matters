@@ -43,7 +43,6 @@ class LoginController extends Controller
     {
         // Processing after authentication
 
-//        dd($user->userable);
         if(isset($user->userable) && $user->userable->trashed()){
 //            Auth::logout();
             return redirect()->intended('restricted');
@@ -55,6 +54,7 @@ class LoginController extends Controller
             } else if ($user->hasRole('learner')) {
                 session(['role' => 'learner' ]);
             }
+
         }
     }
 

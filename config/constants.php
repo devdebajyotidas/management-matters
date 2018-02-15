@@ -19,6 +19,14 @@ $constants=[
     'ASSESMENT_TARGET'=>'10',
     'QUIZ_TARGET'=>'10',
     'TICKETS_TARGET'=>'10',
-    'AWARD_TARGET'=>'10'
+    'AWARD_TARGET'=>'10',
+
+    /*Email Configuration*/
+
+    'IN_TOUCH_EMAIL'=>'info@mgmt-matters.com',
+    'EMAIL_FROM'=>'no-reply@mgmt-matters.com',
+    'EMAIL_BCC'=>'dev.debajyotidas@gmail.com',
+    'EMAIL_CC'=>'maikap.samir@gmail.com'
+
 ];
 return $constants;

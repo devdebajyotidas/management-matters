@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" href="{{asset('assets/img/favicon.png')}}">
-    <title>Subscription Ended</title>
+    <title>Account not verified</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('assets/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- animation CSS -->
@@ -34,11 +34,12 @@
 <section id="wrapper" class="error-page">
     <div class="error-box">
         <div class="error-body text-center">
-
             <h1>Oops</h1>
-            <h3 class="text-uppercase">Subscription Ended.</h3>
-            <p class="text-muted m-t-30 m-b-30">Please subscribe or contact your organization</p>
-            <a href="{{url('profile')}}" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Go to Profile</a> </div>
+            <h3 class="text-uppercase">Account verification required</h3>
+            <p class="text-muted m-t-30 m-b-30">Please verify your email address to continue</p>
+            <a href="{{url('resendconfirmation')}}" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Resend Email</a>
+            <a href="{{url('logout')}}" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Retry Login</a>
+        </div>
         <footer class="footer text-center">&copy; 2018 Management Matters</footer>
     </div>
 </section>

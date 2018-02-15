@@ -35,7 +35,7 @@
                                                         <td>
                                                          {{$learner->name}}
                                                         </td>
-                                                        <td>{{ $learner->user->email }}</td>
+                                                        <td>{{ isset($learner->user->email) ? $learner->user->email : 'N/A' }}</td>
                                                         <td>{{ $learner->phone }}</td>
                                                         <td>
                                                             <a href="{{  url('/organizations'.'/'. $learner->id . '/learners') }}">

@@ -49,7 +49,9 @@ class Handler extends ExceptionHandler
             return parent::render($request, $exception);
         }
         if($request->path()!='login'){
+
             return response()->view('errors.500', [], 500);
+
         }
         else{
             return redirect()->intended('login')->withInput($request->all())->withErrors(['Incorrect email or password']);

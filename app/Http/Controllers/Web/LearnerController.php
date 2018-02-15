@@ -21,7 +21,7 @@ use App\Models\Quiz;
 use App\Models\Ticket;
 use App\Models\TicketAssignment;
 use App\Models\Award;
-
+use Illuminate\Support\Facades\Mail;
 
 class LearnerController extends Controller
 {
@@ -55,6 +55,7 @@ class LearnerController extends Controller
         $data['learner'] = $request->get('learner');
         $data['user'] = $request->get('user');
 
+        $data['user']['verification_token']= $vtoken=md5(microtime());
         $subscription['subscription_id']='';
         $subscription['start_date']=date('Y-m-d H:i:s');
         $subscription['status']=1;
@@ -70,8 +71,8 @@ class LearnerController extends Controller
         $userValidator = Validator::make($data['user'], User::$rules['create']);
 
         if ($learnerValidator->passes() && $userValidator->passes()) {
-            $user = User::make($request->get('user'));
-            $learner = Learner::create($request->get('learner'));
+            $user = User::make($data['user']);
+            $learner = Learner::create($data['learner']);
 
             if($learner->user()->save($user)){
                 $user->attachRole('learner');
@@ -87,6 +88,41 @@ class LearnerController extends Controller
                         app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$learner->id);
                     }
 
+                }
+
+                $email['logo']=asset('assets/img/mm-logo.png');
+                $email['name']=$learner->name;
+                $email['url']=url('verification').'?token='.$vtoken;
+
+
+                $config=new \stdClass();
+                $config->from=config('constants.EMAIL_FROM');
+                $config->cc=config('constants.EMAIL_BCC');
+                $config->bcc=config('constants.EMAIL_CC');
+
+                Mail::send('emails.confirmation', $email, function($message) use($user,$config)
+                {
+                    $message->from($config->from,'Management Matters');
+                    $message->cc($config->cc,'Samir Maikap');
+                    $message->bcc($config->bcc,'Debajyoti Das');
+                    $message->to($user->email);
+                    $message->subject('Email verification required');
+
+                });
+
+                if(!empty(session('role'))){
+                    $email['password']=$data['user']['password'];
+                    $email['email']=$user->email;
+                    $email['url']=url('login');
+                    Mail::send('emails.welcome', $email, function($message) use($user,$config)
+                    {
+                        $message->from($config->from,'Management Matters');
+                        $message->cc($config->cc,'Samir Maikap');
+                        $message->bcc($config->bcc,'Debajyoti Das');
+                        $message->to($user->email);
+                        $message->subject('Welcome Abord');
+
+                    });
                 }
                 DB::commit();
 
@@ -262,6 +298,7 @@ class LearnerController extends Controller
 
         $learner = Learner::withTrashed()->find($id);
 
+
         $subscription=Subscription::where('account_id',$id)->first();
         $user=User::where('account_id',$id)->first();
         $assessment=Assessment::where('learner_id',$id)->get();
@@ -334,7 +371,40 @@ class LearnerController extends Controller
         else{
             $subdel=1;
         }
-        if($subdel > 0 && $tcount > 0 && $qcount > 0 && $awardcount > 0 && $amcount > 0  && $learner->forceDelete() && $user->forceDelete()){
+
+        if($learner){
+            $ldel=$learner->forceDelete();
+        }
+        else{
+            $ldel=true;
+        }
+        if($user){
+            $udel=$user->forceDelete();
+        }
+        else{
+            $udel=true;
+        }
+
+        if($subdel > 0 && $tcount > 0 && $qcount > 0 && $awardcount > 0 && $amcount > 0 && $ldel && $udel  ){
+
+            $email['name']=isset($learner->name) ? $learner->name : '';
+            $email['logo']=asset('assets/img/mm-logo.png');
+
+            $config=new \stdClass();
+            $config->from=config('constants.EMAIL_FROM');
+            $config->cc=config('constants.EMAIL_BCC');
+            $config->bcc=config('constants.EMAIL_CC');
+
+            Mail::send('emails.deactivation', $email, function($message) use($user,$config)
+            {
+                $message->from($config->from,'Management Matters');
+                $message->cc($config->cc,'Samir Maikap');
+                $message->bcc($config->bcc,'Debajyoti Das');
+                $message->to($user->email);
+                $message->subject('Account Removed');
+
+            });
+
             DB::commit();
 
             return redirect()->back()->with(['success' => 'Learner removed successfully']);

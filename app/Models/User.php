@@ -28,7 +28,8 @@ class User extends Authenticatable implements AuditableContract, UserResolver
         'email',
         'password',
         'account_id',
-        'account_type'
+        'account_type',
+        'verification_token'
     ];
 
     /**

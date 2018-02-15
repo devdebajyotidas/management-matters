@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 use App\Models\Organization ;
 use App\Models\User;
@@ -71,6 +72,7 @@ class OrganizationController extends Controller
 
         $data['organization'] = $request->get('organization');
         $data['user'] = $request->get('user');
+        $data['user']['verification_token']= $vtoken=md5(microtime());
         $subscription=$request->get('subscription');
         $subscription['subscription_id']='';
         $subscription['start_date']=date('Y-m-d H:i:s');
@@ -92,7 +94,7 @@ class OrganizationController extends Controller
                 }
             }
 
-            $user = User::make($request->get('user'));
+            $user = User::make($data['user']);
             $organization = Organization::create($data['organization']);
 
             $organization->user()->save($user);
@@ -114,6 +116,41 @@ class OrganizationController extends Controller
 
                 app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$organization->id);
             }
+
+            $email['logo']=asset('assets/img/mm-logo.png');
+            $email['name']=$organization->name;
+            $email['url']=url('verification').'?token='.$vtoken;
+
+            $config=new \stdClass();
+            $config->from=config('constants.EMAIL_FROM');
+            $config->cc=config('constants.EMAIL_BCC');
+            $config->bcc=config('constants.EMAIL_CC');
+
+            Mail::send('emails.confirmation', $email, function($message) use($user,$config)
+            {
+                $message->from($config->from,'Management Matters');
+                $message->cc($config->cc,'Samir Maikap');
+                $message->bcc($config->bcc,'Debajyoti Das');
+                $message->to($user->email);
+                $message->subject('Email verification required');
+
+            });
+
+            if(!empty(session('role'))){
+                $email['password']= $data['user']['password'];
+                $email['email']=$user->email;
+                $email['url']=url('login');
+                Mail::send('emails.welcome', $email, function($message) use($user,$config)
+                {
+                    $message->from($config->from,'Management Matters');
+                    $message->cc($config->cc,'Samir Maikap');
+                    $message->bcc($config->bcc,'Debajyoti Das');
+                    $message->to($user->email);
+                    $message->subject('Welcome Abord');
+
+                });
+            }
+
             DB::commit();
             return redirect()->back()->with('success', 'Organization added successfully');
 
@@ -433,6 +470,25 @@ class OrganizationController extends Controller
         }
 
         if($organization->forceDelete() && $subdel > 0 && $user->forceDelete() && $count > 0 && $depcount > 0){
+
+            $email['name']=$organization->name;
+            $email['logo']=asset('assets/img/mm-logo.png');
+
+            $config=new \stdClass();
+            $config->from=config('constants.EMAIL_FROM');
+            $config->cc=config('constants.EMAIL_BCC');
+            $config->bcc=config('constants.EMAIL_CC');
+
+            Mail::send('emails.deactivation', $email, function($message) use($user,$config)
+            {
+                $message->from($config->from,'Management Matters');
+                $message->cc($config->cc,'Samir Maikap');
+                $message->bcc($config->bcc,'Debajyoti Das');
+                $message->to($user->email);
+                $message->subject('Account Removed');
+
+            });
+
             DB::commit();
             return redirect()->back()->with(['success' => 'Organization deleted successfully']);
         }

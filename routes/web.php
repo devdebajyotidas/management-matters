@@ -32,7 +32,10 @@ Route::group(['namespace' => 'Web'], function () {
     Route::get('/home', 'HomeController@home')->name('home');
     Route::get('/restricted', 'HomeController@restricted')->name('restricted');
     Route::get('/message', 'HomeController@message');
+    Route::get('/abort', 'HomeController@abort');
     Route::get('/unauthorized', 'Auth\LoginController@unauthorized')->name('unauthorized');
+
+
 
 //    Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
@@ -42,6 +45,13 @@ Route::group(['namespace' => 'Web'], function () {
     Route::get('profile', 'HomeController@profile');
     Route::post('profile/{id}', 'HomeController@cancelsub');
     Route::delete('profile/{id}', 'HomeController@removeaccount');
+
+    Route::post('resetpassword', 'HomeController@sendpasslink');
+    Route::get('setpassword', 'HomeController@newpassword');
+    Route::post('setpassword', 'HomeController@setpassword');
+    Route::get('verification', 'HomeController@verifyemail');
+    Route::get('resendconfirmation', 'HomeController@resendconfirmation');
+    Route::post('getintouch', 'HomeController@getintouch');
 
     Route::get('learners', 'LearnerController@index');
     Route::get('learners/{id}', 'LearnerController@show');
