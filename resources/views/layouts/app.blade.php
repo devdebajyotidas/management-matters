@@ -2,7 +2,7 @@
 <html lang="en">
 
 
-<!-- Mirrored from wrappixel.com/demos/admin-templates/pixeladmin/inverse/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 23 Sep 2017 07:57:18 GMT -->
+<!-- Mirrored from wrappixel.com/demos/admin-emails/pixeladmin/inverse/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 23 Sep 2017 07:57:18 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,5 +40,5 @@
 </body>
 
 
-<!-- Mirrored from wrappixel.com/demos/admin-templates/pixeladmin/inverse/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 23 Sep 2017 07:59:03 GMT -->
+<!-- Mirrored from wrappixel.com/demos/admin-emails/pixeladmin/inverse/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 23 Sep 2017 07:59:03 GMT -->
 </html>

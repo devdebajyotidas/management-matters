@@ -19,6 +19,7 @@ use App\Models\Quiz;
 use App\Models\Ticket;
 use App\Models\TicketAssignment;
 use App\Models\Award;
+use Illuminate\Support\Facades\Mail;
 
 class OrganizationLearnerController extends Controller
 {
@@ -54,6 +55,7 @@ class OrganizationLearnerController extends Controller
 
         $data['learner'] = $request->get('learner');
         $data['user'] = $request->get('user');
+        $data['user']['verification_token']= $vtoken=md5(microtime());
 
         if(!empty($data['learner']['department_id'])){
             $learnerValidator = Validator::make($data['learner'], Learner::$rules['create']);
@@ -61,11 +63,45 @@ class OrganizationLearnerController extends Controller
 
             if ($learnerValidator->passes() && $userValidator->passes()) {
 
-                $user = User::make($request->get('user'));
-                $learner = Learner::create($request->get('learner'));
+                $user = User::make($data['user']);
+                $learner = Learner::create($data['learner']);
 
                 $learner->user()->save($user);
                 $user->attachRole('learner');
+
+                $email['logo']=asset('assets/img/mm-logo.png');
+                $email['name']=$learner->name;
+                $email['url']=url('verification').'?token='.$vtoken;
+
+                $config=new \stdClass();
+                $config->from=config('constants.EMAIL_FROM');
+                $config->cc=config('constants.EMAIL_BCC');
+                $config->bcc=config('constants.EMAIL_CC');
+
+                Mail::send('emails.confirmation', $email, function($message) use($user,$config)
+                {
+                    $message->from($config->from,'Management Matters');
+                    $message->cc($config->cc,'Samir Maikap');
+                    $message->bcc($config->bcc,'Debajyoti Das');
+                    $message->to($user->email);
+                    $message->subject('Email verification required');
+
+                });
+
+                if(!empty(session('role'))){
+                    $email['password']= $data['user']['password'];
+                    $email['email']=$user->email;
+                    $email['url']=url('login');
+                    Mail::send('emails.welcome', $email, function($message) use($user,$config)
+                    {
+                        $message->from($config->from,'Management Matters');
+                        $message->cc($config->cc,'Samir Maikap');
+                        $message->bcc($config->bcc,'Debajyoti Das');
+                        $message->to($user->email);
+                        $message->subject('Welcome Abord');
+
+                    });
+                }
 
                 DB::commit();
 

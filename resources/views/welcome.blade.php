@@ -1999,15 +1999,16 @@
                 <div class="contact-container">
 
                     <!-- Contact Form -->
-                    <form id="contact-form" name="contact-form" method="POST" data-name="Contact Form">
+                    <form id="contact-form" name="contact-form" method="POST" data-name="Contact Form" action="{{url('getintouch')}}">
 
+                        {{ csrf_field() }}
                         <div class="row">
 
                             <!-- Name Field -->
                             <div class="input-field col s12">
 
                                 <i class="fa fa-user-o prefix" aria-hidden="true"></i>
-                                <input id="contact-name" type="text" class="validate" name="first_name" required>
+                                <input id="contact-name" type="text" class="validate" name="name" required>
                                 <label for="contact-name">Name*</label>
 
                             </div>
@@ -2038,7 +2039,7 @@
                             <!-- Submit Button -->
                             <div class="col s12">
 
-                                <button id="contact-submit" class="gradient-color waves-effect waves-light"
+                                <button id="intouch-btn" class="gradient-color waves-effect waves-light"
                                         type="submit">Send Message
                                 </button>
 

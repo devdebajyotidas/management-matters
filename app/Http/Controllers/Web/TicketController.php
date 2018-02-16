@@ -6,7 +6,7 @@ use App\Models\Award;
 use App\Models\Department;
 use App\Models\Organization;
 use App\Models\TicketAssignment;
-use App\Http\Middleware\SubscriptionCheck;
+use App\Http\Middleware\AuthenticationCheck;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

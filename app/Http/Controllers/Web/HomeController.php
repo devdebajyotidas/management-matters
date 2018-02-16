@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Web;
-
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
-use App\Http\Middleware\SubscriptionCheck;
+use App\Http\Middleware\AuthenticationCheck;
 use App\Models\Assessment;
 use App\Models\Award;
 use App\Models\Department;
 use App\Models\Organization;
+use App\Models\Password;
 use App\Models\Quiz;
 use App\Models\Subscription;
 use App\Models\Ticket;
@@ -17,6 +18,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Learner;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 
 
 class HomeController extends Controller
@@ -28,7 +31,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('home');
+        $this->middleware('auth')->except('home','resetpassword','sendpasslink','newpassword','setpassword','verifyemail','getintouch');
         $this->middleware('checksub')->only('cost');
     }
     
@@ -48,6 +51,10 @@ class HomeController extends Controller
 
         return view('errors.subscription');
 
+    }
+
+    public function abort(){
+        return view('errors.verification');
     }
 
     public function cost()
@@ -302,4 +309,184 @@ class HomeController extends Controller
         }
     }
 
+    function resetpassword(){
+        $data['page'] = 'passwordreset';
+        $data['role'] = session('role');
+        $data['prefix']  = session('role');
+        return view('auth.passwords.email', $data);
+    }
+
+    function sendpasslink(Request $request){
+
+        DB::beginTransaction();
+
+       $data=$request->all();
+       $data['token']=md5(microtime());
+       $user=User::where('email',$data['email'])->count();
+
+       if(empty($data['email']))
+           return redirect()->back()->withInput($request->all())->withErrors(['Email address required']);
+
+       if($user > 0){
+           $save=Password::create($data);
+           if($save){
+               $email['logo']=asset('assets/img/mm-logo.png');
+               $email['url']=url('setpassword').'?token='.$data['token'];
+
+               $config=new \stdClass();
+               $config->from=config('constants.EMAIL_FROM');
+               $config->cc=config('constants.EMAIL_BCC');
+               $config->bcc=config('constants.EMAIL_CC');
+
+               Mail::send('emails.password', $email, function($message) use($data,$config)
+               {
+                   $message->from($config->from,'Management Matters');
+                   $message->cc($config->cc,'Samir Maikap');
+                   $message->bcc($config->bcc,'Debajyoti Das');
+                   $message->to($data->email);
+                   $message->subject('Password reset');
+
+               });
+               if(Mail::failures()){
+
+                   DB::rollBack();
+                   return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong']);
+               }
+               else{
+                   DB::commit();
+                   return redirect()->back()->with('success', 'Password reset link has been sent');
+               }
+           }
+           else{
+               DB::rollBack();
+               return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong']);
+           }
+       }
+       else{
+           return redirect()->back()->withInput($request->all())->withErrors(["Your account doesn't exist"]);
+       }
+    }
+
+    function newpassword(){
+        $data['page'] = 'newpassword';
+        $data['role'] = session('role');
+        $data['prefix']  = session('role');
+        return view('auth.passwords.reset', $data);
+    }
+
+    function setpassword(Request $request){
+        DB::beginTransaction();
+
+        $data=$request->all();
+
+        $email=Password::where('token',$data['token'])->pluck('email')->first();
+        $confirm=$data['password']==$data['password_confirmation'] ? true : false;
+        if($email){
+            if($confirm){
+                $pass=User::where('email',$email);
+                $update=$pass->update(['password'=>Hash::make($data['password'])]);
+                if($update){
+                    DB::commit();
+                    return redirect()->intended('login');
+                }
+                else{
+                    DB::rollBack();
+                    return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong']);
+                }
+            }
+            else{
+                return redirect()->back()->withInput($request->all())->withErrors(["Password doesn't match"]);
+            }
+        }
+        else{
+            return redirect()->back()->withInput($request->all())->withErrors(["your account doesn't exist"]);
+        }
+
+    }
+
+    function resendconfirmation(){
+        $id=Auth::user()->account_id;
+        $user=User::where('account_id',$id)->select('verification_token','email')->get()->first();
+        $data['logo']=asset('assets/img/mm-logo.png');
+        if(session('role')=='learner'){
+            $data['name']=Learner::find($id)->name;
+        }
+        else if(session('role')=='organization'){
+            $data['name']=Organization::find($id)->name;
+        }
+        $data['url']=url('verification').'?token='.$user->verification_token;
+
+        $config=new \stdClass();
+        $config->from=config('constants.EMAIL_FROM');
+        $config->cc=config('constants.EMAIL_BCC');
+        $config->bcc=config('constants.EMAIL_CC');
+
+        Mail::send('emails.confirmation', $data, function($message) use($user,$config)
+        {
+            $message->from($config->from,'Management Matters');
+            $message->cc($config->cc,'Samir Maikap');
+            $message->bcc($config->bcc,'Debajyoti Das');
+            $message->to($user->email);
+            $message->subject('Account verification required');
+        });
+        if(empty(Mail::failures())){
+            return redirect()->intended('logout');
+        }
+    }
+
+    function verifyemail(Request $request){
+
+        DB::beginTransaction();
+
+        $user=User::where('verification_token',$request->token)->first();
+        if(count($user) > 0){
+            $table=User::where('verification_token',$request->token);
+            if( $table->update(['is_verified'=>1])){
+                DB::commit();
+                return redirect()->intended('login');
+            }
+            else{
+                DB::rollBack();
+                return redirect()->intended('abort');
+            }
+        }
+    }
+
+    public function getintouch(Request $request){
+
+        $data['logo']=asset('assets/img/mm-logo.png');
+        $data['name']=$request->name;
+        $data['email']=$request->email;
+        $data['emessage']=$request->message;
+
+        $config=new \stdClass();
+        $config->to=config('constants.IN_TOUCH_EMAIL');
+        $config->from=config('constants.EMAIL_FROM');
+        $config->cc=config('constants.EMAIL_BCC');
+        $config->bcc=config('constants.EMAIL_CC');
+
+        Mail::send('emails.getintouch', $data, function($message) use($config,$request)
+        {
+            $message->from($config->from,$request->name);
+            $message->cc($config->cc,'Samir Maikap');
+            $message->bcc($config->bcc,'Debajyoti Das');
+            $message->to($config->to);
+            $message->subject('Information Request');
+
+        });
+
+        Mail::send('emails.thankyou', $data, function($message) use($request,$config)
+        {
+            $message->from($config->from,'Management Matters');
+            $message->cc($config->cc,'Samir Maikap');
+            $message->bcc($config->bcc,'Debajyoti Das');
+            $message->to($request->email);
+            $message->subject('Thank you for your interest');
+
+        });
+
+        if(empty(Mail::failures())){
+            return redirect()->back();
+        }
+    }
 }

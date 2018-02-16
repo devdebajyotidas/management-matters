@@ -44,7 +44,7 @@
         <div class="col-md-12">
             <div class="white-box p-0 m-t-0 m-l-15 m-r-15">
                 <div class="col-md-12 col-xs-12 col-sm-12" >
-                    <div class="learn-banner" style="background-image: url({{isset($learnings) ? asset('uploads/'.$learnings->image) : 'https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/big/img1.jpg'}})">
+                    <div class="learn-banner" style="background-image: url({{isset($learnings) ? asset('uploads/'.$learnings->image) : 'emails'}})">
                     </div>
                     <div class="white-box details-learn">
                         <h3 class="m-t-15 m-b-20" style="color: #fff;">{{ $learnings->title }}</h3>

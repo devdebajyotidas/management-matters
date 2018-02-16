@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16"
-          href="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/favicon.png">
+    <link rel="icon" type="image/png"
+          href="{{asset('assets/img/favicon.png')}}">
     <title>Management Matters - Login</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{url('assets/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -15,6 +15,7 @@
     <link href="{{url('assets/css/animate.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{url('assets/css/style.css')}}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="{{url('assets/css/colors/default.css')}}" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -34,6 +35,19 @@
         .btn-info{
             background: #f75b36 !important;
             border: 1px solid #fff !important;
+        }
+        .recover-close{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            line-height: 50px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease-out;
+        }
+        .recover-close:hover{
+            background-color: #f3f3f3;
+            transition: all 0.3s ease-out;
         }
     </style>
 
@@ -83,8 +97,8 @@
                             <input id="checkbox-signup" type="checkbox" name="remember">
                             <label for="checkbox-signup"> Remember me </label>
                         </div>
-                        {{--<a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i--}}
-                                    {{--class="fa fa-lock m-r-5"></i> Forgot Password?</a>--}}
+                        <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i
+                                    class="fa fa-lock m-r-5"></i> Forgot Password?</a>
                     </div>
                 </div>
                 <div class="form-group text-center m-t-15">
@@ -110,7 +124,18 @@
                     </div>
                 </div>
             </form>
-            <form class="form-horizontal" id="recoverform" action="">
+            <form class="form-horizontal" id="recoverform" method="post" action="{{url('resetpassword')}}">
+                {{ csrf_field() }}
+                <div class="from-group">
+                    <span class="recover-close waves-effect waves-dark"><i class="fa fa-arrow-left"></i></span>
+                </div>
+                <div class="form-group">
+                    <a href="/" class="text-center db">
+                        <img src="{{ asset('assets/img/mm-logo.png') }}"
+                             style="width: 200px"
+                             alt="Home"/>
+                    </a>
+                </div>
                 <div class="form-group ">
                     <div class="col-xs-12">
                         <h3>Recover Password</h3>
@@ -119,7 +144,7 @@
                 </div>
                 <div class="form-group ">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="Email">
+                        <input class="form-control" type="text" name="email" required placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group text-center m-t-15">
@@ -133,6 +158,19 @@
         </div>
     </div>
 </section>
+<script>
+    window.onload=function(){
+        if (window.history && window.history.pushState) {
+            @if(!empty(session('role')))
+            window.location.reload();
+            @endif
+        }
+        $('.recover-close').click(function(){
+            $("#loginform").slideDown('fast');
+            $("#recoverform").fadeOut('fast');
+        })
+    }
+</script>
 <!-- jQuery -->
 <script src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
