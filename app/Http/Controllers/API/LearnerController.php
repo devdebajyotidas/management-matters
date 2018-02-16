@@ -8,6 +8,7 @@ use App\Models\Award;
 use App\Models\Learner;
 use App\Models\Learning;
 use App\Models\Quiz;
+use App\Models\Subscription;
 use App\Models\Ticket;
 use App\Models\TicketAssignment;
 use App\Models\User;
@@ -131,8 +132,13 @@ class LearnerController extends Controller
                 $learner = Learner::find($id);
                 $sub=Subscription::where('account_id',$id)->first();
                 $learner->fill($data['learner']);
-                $user = User::make($data['user']);
-                $learner->user()->save($user);
+                $learner->save();
+//                dd($learner);
+//                $user = User::make($data['user']);
+                $learner->user->fill($data['user']);
+                $learner->user->save();
+//                $user->fill($data['user'])
+//                $learner->user()->save($user);
                 $learner->load('user', 'department.organization');
                 $newreq= new \Illuminate\Http\Request();
                 if(isset($sub->subscription_id) && !empty($sub->subscription_id)){
@@ -167,7 +173,7 @@ class LearnerController extends Controller
         {
             $response['success'] = false;
             $response['account'] = null;
-            $response['error'] = $exception->getMessage();
+            $response['error'] = $exception->getTraceAsString();
             return $response;
         }
     }
