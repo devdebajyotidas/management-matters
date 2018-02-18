@@ -195,6 +195,7 @@
                 droppable: true, // this allows things to be dropped onto the calendar
                 eventLimit: true, // allow "more" link when too many events
                 events: tickets,
+                timezone: 'UTC',
                 eventClick: function (calEvent, jsEvent, view) {
                      $("input[name='assignment[id]']").val(calEvent.id);
                     initTicketEditor(calEvent,'Edit');
