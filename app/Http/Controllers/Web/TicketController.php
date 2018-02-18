@@ -93,6 +93,7 @@ class TicketController extends Controller
     public function store(Request $request)
     {
 
+        dd($request->all());
         DB::beginTransaction();
         
         $data['ticket'] = $request->get('ticket');
