@@ -36,6 +36,7 @@ class TicketAssignmentController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         DB::beginTransaction();
 
         $data['assignment'] = $request->get('assignment');
