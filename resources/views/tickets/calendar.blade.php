@@ -136,6 +136,8 @@
         var formAction = document.querySelector('#ticket-editor form').getAttribute('action');
         var tickets_arr=JSON.parse('{!! json_encode($tickets) !!}');
 
+        console.log(ticketsJSON, tickets_arr);
+
         for (var j=0;j<tickets_arr.length;j++){
             var id=tickets_arr[j]['id'];
             var noteslist='';
