@@ -180,6 +180,7 @@
                     ticket: ticketsJSON[i].ticket,
                     notes:notes_arr[ticketsJSON[i].ticket.id]
                 };
+                console.log(moment(ticketsJSON[i].target_date).utc().toDate());
                 tickets.push(ticket);
             }
 
