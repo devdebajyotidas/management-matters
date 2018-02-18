@@ -45,6 +45,8 @@ class LearnerController extends Controller
             $data['learner'] = $request->except('user');
             $data['user'] = $request->get('user');
             $data['user']['password_confirmation'] =  $data['user']['password'];
+            $data['user']['verification_token']= $vtoken=md5(microtime());
+
             $subscription['subscription_id']='';
             $subscription['start_date']=date('Y-m-d H:i:s');
             $subscription['status']=1;

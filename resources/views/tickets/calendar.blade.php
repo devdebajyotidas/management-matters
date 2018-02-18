@@ -172,7 +172,7 @@
                     id:  ticketsJSON[i].id,
                     learning_id: ticketsJSON[i].learning_id,
                     learner_id: ticketsJSON[i].learner_id,
-                    target_date: (new Date(ticketsJSON[i].target_date)),
+                    target_date: (new Date(ticketsJSON[i].target_date + " EST")),
                     note:ticketsJSON[i].note,
                     impact_level: ticketsJSON[i].impact_level,
                     is_archived: ticketsJSON[i].is_archived,
