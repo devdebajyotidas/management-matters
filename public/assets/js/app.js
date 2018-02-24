@@ -92,7 +92,7 @@ $(document).ready(function () {
     $('#department-list li:last').detach().prependTo('#department-list');
     $('#department-list .department').click(function () {
         var name = $(this).attr('data-name');
-        learnersTable.columns(4).search(name).draw();
+        learnersTable.columns(3).search(name).draw();
         $('#department-list li').removeClass('box-label');
         $(this).parent('li').addClass('box-label');
     });
@@ -141,8 +141,23 @@ $(document).ready(function () {
     });
     });
 
+    $('.scroll-top').click(function(){
+        $("html, body").animate({ scrollTop: 0 }, "fast");
+        return false;
+    });
+    $('.firework').click(function(){
+        $(this).stop(0).fadeOut('fast').fireworks('destroy');
+    });
 });
-
+$(window).scroll(function(){
+    var scroll = $(window).scrollTop();
+    if(scroll > 700){
+        $('.scroll-top').stop(0).fadeIn('fast');
+    }
+    else{
+        $('.scroll-top').stop(0).fadeOut('fast');
+    }
+})
 
 function showToast(title,message,type) {
     $.toast({
@@ -154,4 +169,10 @@ function showToast(title,message,type) {
         hideAfter: 7000,
         stack: 6
     });
+}
+function firework(){
+    $('.firework').stop(0).fadeIn('fast').fireworks();
+    setTimeout(function () {
+        $('.firework').stop(0).fadeOut('fast').fireworks('destroy');
+    }, 10000);
 }

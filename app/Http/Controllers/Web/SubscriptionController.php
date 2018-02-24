@@ -63,6 +63,7 @@ class SubscriptionController extends Controller
             $expdate=$req->expiry_date;
             $binterval=isset($req->billing_interval) ? $req->billing_interval : config('constants.DEFAULT_INTERVAL');
             $license=isset($req->licenses) ? $req->licenses : config('constants.DEFAULT_LICENSE') ;
+            $srole=isset($req->srole) ? $req->srole : '';
         }
         else{
             if(session('role')=='organization'){
@@ -73,6 +74,7 @@ class SubscriptionController extends Controller
                 $expdate=$organization->expiry_date;
                 $binterval=$organization->subscription->billing_interval;
                 $license=$organization->subscription->licenses;
+                $srole="App\Models\Organization";
             }
             elseif(session('role')=='learner'){
 
@@ -82,6 +84,7 @@ class SubscriptionController extends Controller
                 $expdate= $learner->expiry_date;
                 $binterval=$learner->subscription->billing_interval;
                 $license=1;
+                $srole="App\Models\Learner";
             }
         }
 
@@ -139,7 +142,7 @@ class SubscriptionController extends Controller
         if (($response != null) && ($response->getMessages()->getResultCode() == "Ok") )
         {
 
-            $sub=Subscription::where('account_id',$id)->first();
+            $sub=Subscription::where('account_id',$id)->where('account_type',$srole)->first();
             $sub->subscription_id= $response->getSubscriptionId();
             $sub->amount=$amount;
             $sub->is_subscribed=1;

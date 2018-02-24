@@ -4,12 +4,12 @@
         <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)"
            data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
         <div class="top-left-part">
-            <a class="logo" href="{{url('/')}}">
+            <a class="logo" href="{{url('/')}}" style="position: relative;float: left;width: 100%">
                 {{--<b>--}}
                     {{--<!--This is dark logo icon--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="dark-logo" width="100">--}}
                     {{--<!--This is light logo icon--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="light-logo" width="100">--}}
                 {{--</b>--}}
-                <span class="hidden-xs">
+                <span class="hidden-xs text-center" style="display: block">
                         <!--This is dark logo text--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="dark-logo" width="100">
                     <!--This is light logo text--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="light-logo" width="100">
                      </span>
@@ -18,32 +18,57 @@
         <ul class="nav navbar-top-links navbar-left hidden-xs">
             <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="ti-menu"></i></a></li>
         </ul>
-
-        <ul class="nav navbar-top-links navbar-left hidden-xs" style="color: #fff;margin-left: sas;width: 400px">
-            <marquee style="margin-top: 20px;">This is your daily motivational quote</marquee>
-        </ul>
-
         <ul class="nav navbar-top-links navbar-right pull-right">
 
-            @if(session('role')=='organization')
-                <?php $tipscount=\App\Models\Ticket::whereIn('learner_id',auth()->user()->account->learners()->pluck('learners.id')->toArray())->whereDate('created_at','=',date('Y-m-d'))->count()?>
-                @if($tipscount > 0)
-                    <li style="border-right: 1px solid rgba(255,255,255,0.2)"><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false">
-                            <i class="sticon ti-light-bulb"></i>
-                            <div class="notify" style="margin-right: 7px"><span class="heartbit"></span><span class="point"></span></div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-tasks animated slideInUp">
-                            <li>
-                                <a href="{{url('tickets')}}">
-                                    <div>
-                                        <p> There are {{$tipscount}} Managing Better Tickets scheduled for today within your managers in your organizatioin </p>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+            @if(session('role')!='admin')
+                @if(session('role')=='organization')
+                    <?php
+                    $tipscount=\App\Models\Ticket::whereIn('learner_id',auth()->user()->account->learners()->pluck('learners.id')->toArray())->whereDate('created_at','=',date('Y-m-d'))->count();
+                    ?>
+                @else
+                    <?php
+                    $tipscount=\App\Models\Ticket::where('learner_id',auth()->user()->account_id)->whereDate('created_at','=',date('Y-m-d'))->count();
+                    ?>
                 @endif
+                   @if($tipscount > 0)
+                       <li><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false">
+                               <i class="fas fa-lightbulb"></i>
+                               <div class="notify"><span class="heartbit heartbit-white"></span><span class="point point-white"></span></div>
+                           </a>
+                           <ul class="dropdown-menu dropdown-tasks animated slideInUp">
+                               <li>
+                                   <a href="{{url('tickets')}}">
+                                       <div>
+                                           @if(session('role')=='learner')
+                                               <p>You have a {{$tipscount}} Tickets scheduled for today to Manage Better</p>
+                                           @else
+                                               <p> There are {{$tipscount}} Managing Better Tickets scheduled for today within your managers in your organizatioin </p>
+                                           @endif
+                                       </div>
+                                   </a>
+                               </li>
+                           </ul>
+                       </li>
+                   @endif
+                   <?php
+                    $quotes=unserialize(Storage::disk('public')->get('quotes.txt'));
+                    ?>
+                    @if(!empty($quotes) && isset($quotes[date('l')])))
+                        <li><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false" title="Quote of the day">
+                                <i class="fas fa-quote-right"></i>
+                                <div class="notify"><span class="heartbit heartbit-white"></span><span class="point point-white"></span></div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-tasks animated slideInUp">
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        {{$quotes[date('l')]}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
             @endif
+
              <li class="p-20 text-white">
                 @if(session('role')=='learner')
                     <span>Welcome, {{Auth::user()->account->name}}</span>
@@ -54,16 +79,20 @@
                 @endif
 
             </li>
+            <li>
+                <span class="dropdown-toggle u-dropdown" data-toggle="dropdown"  role="button"><img style="width: 30px;height: 30px;margin: 15px" src="{{!empty(auth()->user()->account->image) ? asset('uploads/'.auth()->user()->account->image) : asset('uploads/avatar.png') }}" alt="user-img" class="img-circle"></span>
+                <ul class="dropdown-menu animated flipInY m-r-20" style="margin-top: -5px">
+                    @if(session("role")!='admin')
+                        <li><a href="javascript:void(0)">{{Auth::user()->account->name}}</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{url('profile')}}"><i class="ti-user"></i> My Profile</a></li>
+                    @else
+                        <li><a href="{{url('controls')}}"><i class="ti-settings"></i> Controls</a></li>
+                    @endif
+                    <li><a href="{{url('logout')}}"><i class="fa fa-power-off"></i> Logout</a></li>
+                </ul>
+            </li>
                 <!-- /.dropdown-tasks -->
-            <!-- /.dropdown -->
-
-                @if(session("role")=='admin')
-                    <li class="dropdown" style="border-left: 1px solid rgba(255,255,255,0.2)"><a class="waves-effect waves-light text-white"
-                                            href="{{ url('logout') }}"><i class="fa fa-sign-out"></i>
-                        </a>
-                    </li>
-                @endif
-            <!-- /.dropdown -->
         </ul>
     </div>
     <div class="container">

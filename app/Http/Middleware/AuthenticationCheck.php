@@ -29,7 +29,13 @@ class AuthenticationCheck
                 } else {
                     $id = $uid;
                 }
-                $subscription = Subscription::where('account_id', $id)->first();
+                if(session('role')=='learner'){
+                    $subscription = Subscription::where('account_id', $id)->where('account_type','App\Models\Learner')->first();
+                }
+                else{
+                    $subscription = Subscription::where('account_id', $id)->where('account_type','App\Models\Organization')->first();
+                }
+
                 if (isset($subscription)) {
                     $trial = strtotime('+ ' . config('constants.TRIAL_PERIOD'), strtotime($subscription->created_at));
                     $today = strtotime(date('Y-m-d H:i:s'));

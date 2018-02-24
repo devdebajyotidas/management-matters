@@ -1,66 +1,142 @@
 @extends('layouts.app')
 @section('content')
     @include('includes.main-menu')
-
+    <div class="firework"></div>
     <div class="container-fluid">
         <div class="row m-t-15">
             <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="assessment-chart" style="box-shadow: 0 1px 3px rgba(0,0,0,0.14)"></div>
-                        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="assessment-chart" style="box-shadow: 0 1px 3px rgba(0,0,0,0.14)"></div>
                     </div>
+                </div>
                 <div class="row m-t-20">
-                        <div class="col-md-12">
-                            <div class="scrollable white-box">
-                                @if($role == 'learner')
-                                    <h3 class="box-title">
-                                        <a href="{{ url('assessments/new') }}" class="btn btn-info">
-                                            Take New Assessment
-                                        </a>
-                                    </h3>
-                                @endif
-                                <div class="table-responsive">
-                                    <table id="organization-table" class="table m-t-30 table-hover contact-list"
-                                           data-page-size="10" data-filter="#search-learner">
-                                        <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            @if($role != 'learner')
-                                            <th>Learner</th>
+                    <div class="col-md-12">
+                        <div class="scrollable white-box">
+                            @if($role == 'learner')
+                                <h3 class="box-title">
+                                    <a href="{{ url('assessments/new') }}" class="btn btn-info">
+                                        Take New Assessment
+                                    </a>
+                                </h3>
+                            @endif
+                            @if(session('role')!='learner')
+                            <div class="page-aside">
+                                <!-- .left-aside-column-->
+                                <div class="left-aside">
+                                    <div class="scrollable">
+                                        <ul id="department-list" class="list-style-none">
+                                            @if(session('role')=='admin')
+                                                @if(isset($organizations))
+                                                    @foreach($organizations as $organization)
+                                                        <li>
+                                                            <a href="javascript:void(0)" class="department"
+                                                               data-id="{{ $organization->id }}" data-name="{{ $organization->name }}">
+                                                                {{ $organization->name }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                @endif
+                                                <li class="box-label">
+                                                    <a href="javascript:void(0)" class="department" data-id="" data-name="">
+                                                        All Assessment
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">
+                                                        Not Applicable
+                                                    </a>
+                                                </li>
+
                                             @endif
-                                            <th>Score</th>
-                                            <th>Taken On</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @if(isset($assessments))
-                                            @foreach($assessments as $assessment)
-                                                <tr>
-                                                    <td>{{ $assessment->id }}</td>
-                                                    @if($role != 'learner')
-                                                    <td>{{ $assessment->learner->name }}</td>
-                                                    @endif
-                                                    <td>
-                                                        @foreach($assessment->scores as $module => $score)
-                                                            {{ $module }} : {{ number_format((float)$score, 2, '.', '') }}
-                                                            <br>
-                                                        @endforeach
-                                                    </td>
-                                                    <td>{{ $assessment->created_at->format('m/d/Y') }}</td>
-                                                </tr>
-                                            @endforeach
-                                        @endif
-                                        </tbody>
-                                    </table>
+                                            @if(session('role')=='organization')
+                                                @if(isset($departments))
+                                                    @foreach($departments as $department)
+                                                        <li>
+                                                            <a href="javascript:void(0)" class="department"
+                                                               data-id="{{ $department->id }}" data-name="{{ $department->name }}">
+                                                                {{ $department->name }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+
+                                                @endif
+                                                <li class="box-label">
+                                                    <a href="javascript:void(0)" class="department" data-id="" data-name="">
+                                                        All Assessment
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">
+                                                        Not Applicable
+                                                    </a>
+                                                </li>
+                                            @endif
+
+                                        </ul>
+                                    </div>
                                 </div>
+                                <div class="right-aside">
+                                @endif
+                                    <div class="table-responsive">
+                                        <table id="organization-table" class="table m-t-30 table-hover contact-list"
+                                               data-page-size="10" data-filter="#search-learner">
+                                            <thead>
+                                            <tr>
+                                                @if($role='admin')
+                                                    <th>Organization</th>
+                                                @elseif($role=='organization')
+                                                    <th>Department</th>
+                                                @endif
+                                                @if($role != 'learner')
+                                                    <th>Learner</th>
+                                                @endif
+                                                <th>Score</th>
+                                                <th>Taken On</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @if(isset($assessments))
+                                                @foreach($assessments as $assessment)
+                                                    <tr>
+                                                        @if($role == "admin")
+                                                            @if(isset($assessment->learner->organization->name))
+                                                                <td>{{ $assessment->learner->organization->name }}</td>
+                                                            @else
+                                                                <td>Not Applicable</td>
+                                                            @endif
+
+                                                        @elseif($role=='organization')
+                                                            @if(isset($assessment->learner->department->name))
+                                                                <td>{{ $assessment->learner->department->name }}</td>
+                                                            @else
+                                                                <td>Not Applicable</td>
+                                                            @endif
+                                                        @endif
+                                                        @if($role != 'learner')
+                                                            <td>{{ $assessment->learner->name }}</td>
+                                                        @endif
+
+                                                        <td>
+                                                            @foreach($assessment->scores as $module => $score)
+                                                                {{ $module }} : {{ number_format((float)$score, 2, '.', '') }}
+                                                                <br>
+                                                            @endforeach
+                                                        </td>
+                                                        <td>{{ $assessment->created_at->format('m/d/Y') }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @if(session('role')!='learner')
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
-
+    <div class="scroll-top"><i class="fa fa-chevron-up"></i></div>
     <script>
         var CSS_COLOR_NAMES = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "Black", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGrey", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "Darkorange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkSlateGrey", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Grey", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed", "Indigo", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGrey", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSlateGrey", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "SlateGrey", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
         var scores = JSON.parse('{!! json_encode(($scores)) !!}');
@@ -70,7 +146,6 @@
 
         function renderChart() {
 
-            console.log(chartData,scores,dates);
             for(var i=0; i<dates.length; i++){
                 dates[i] = moment(dates[i].date).format("MM/DD/YYYY");
             }
@@ -131,41 +206,24 @@
 
             renderChart();
 
-            $('#organization-table').DataTable({
+            ticketTable = $('#organization-table').DataTable({
                 dom: 'Bfrtip',
-                buttons: [
-                    'copy',
-                    {
-                        extend: 'csv',
-                        exportOptions: {
-                            stripNewlines: false
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        exportOptions: {
-                            stripNewlines: false
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        exportOptions: {
-                            stripNewlines: false
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            stripHtml: false
-                        }
-                    }
-                ]
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            });
+            $('#department-list .department').click(function () {
+                var name = $(this).attr('data-name');
+                ticketTable.columns(0).search(name).draw();
+                $('#department-list li').removeClass('box-label');
+                $(this).parent('li').addClass('box-label');
             });
 
             @if(session()->has('success') || session('success'))
             setTimeout(function () {
                 showToast('Success', '{{ session('success') }}', 'success');
             }, 500);
+            @if(session('role')=='learner')
+            firework();
+            @endif
             @endif
 
             @if(isset($errors) && count($errors->all()) > 0 && $timeout = 700)
@@ -176,6 +234,8 @@
             }, {{ $timeout * $key }});
             @endforeach
             @endif
+
         }
+
     </script>
 @endsection

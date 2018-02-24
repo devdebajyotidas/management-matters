@@ -99,8 +99,8 @@ class CostController extends Controller
      */
     public function edit()
     {
-        $content = Storage::disk('public')->get('CostOfNot/content.txt');
 
+        $content = Storage::disk('public')->get('CostOfNot/content.txt');
         return view('cost-edit', ['page' => 'cost', 'role' => session('role'), 'content' => $content]);
     }
 

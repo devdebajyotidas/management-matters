@@ -37,7 +37,6 @@
                         <!-- .row -->
                         <!-- /.row -->
                         <div class="col-md-4 col-sm-4 text-center">
-
                             <p class="text-purple">Departments</p>
                             <h1>{{ $organization->departments()->count() }}</h1>
                         </div>
@@ -307,22 +306,124 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
-                                </div>
+                                @if(session('role')=='organization')
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
+                                    </div>
+                                @endif
+
                             </form>
+                            @if(session('role')=='admin')
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-info waves-effect add-license-btn">Add License</button>
+                                    <button type="submit" class="btn btn-danger waves-effect reset-assessment-btn">Reset Assessment</button>
+                                    <button type="submit" class="btn btn-danger waves-effect reset-conmb-btn">Reset CONMB</button>
+                                </div>
+                                <div class="hidden">
+                                    <form action="{{url('/organizations/'.$organization->id.'/resetassessment')}}" method="post">
+                                        {{ csrf_field() }}
+                                        <input type="submit" id="reset-assessment-submit" value="submit">
+                                    </form>
+                                    <form action="{{url('/organizations/'.$organization->id.'/resetconmb')}}" method="post">
+                                        {{ csrf_field() }}
+                                        <input type="submit" id="reset-conmb-submit" value="submit">
+                                    </form>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- /.row -->
+
+        <div id="add-license" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Update License</h4>
+                    </div>
+                    <form class="form-horizontal" action="{{ url('/organizations/'.$organization->id.'/license') }}" method="post">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-md-12">New License</label>
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="license" placeholder="New License"
+                                           value="{{ old('license') }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-info waves-effect">Update</button>
+                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
     </div>
     <!-- /.container-fluid -->
 
     <script>
         window.onload = function () {
 
+            @if(session()->has('success') || session('success'))
+            setTimeout(function () {
+                showToast('Success', '{{ session('success') }}', 'success');
+            }, 500);
+            @endif
+
+            @if(isset($errors) && count($errors->all()) > 0 && $timeout = 700)
+            @foreach ($errors->all() as $key => $error)
+            setTimeout(function () {
+                showToast('Error', '{{ $error }}', 'error');
+            }, {{ $timeout * $key }});
+            @endforeach
+            @endif
+
+
+            $('.add-license-btn').click(function(){
+                $('#add-license').modal('show');
+            });
+            $('.reset-assessment-btn').click(function(){
+                swal({
+                    title: 'Reset assessment to default?',
+                    text: "You can't revert this later.",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Reset'
+                }).then(function(result){
+                    if(result.value){
+                        $('#reset-assessment-submit').trigger('click');
+                        return false;
+                    }
+
+                })
+            });
+            $('.reset-conmb-btn').click(function(){
+                swal({
+                    title: 'Reset conmb to default?',
+                    text: "You can't revert this later.",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Reset'
+                }).then(function(result){
+                    if(result.value){
+                        $('#reset-conmb-submit').trigger('click');
+                        return false;
+                    }
+
+                })
+            });
         }
         function previewImage(input) {
             if (input.files && input.files[0]) {

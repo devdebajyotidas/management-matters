@@ -20,7 +20,7 @@
                                                     <a href="javascript:void(0)" class="department"
                                                        data-id="{{ $organization->id }}" data-name="{{ $organization->name }}">
                                                         {{ $organization->name }}
-                                                   </a>
+                                                    </a>
                                                 </li>
                                             @endforeach
                                         @endif
@@ -33,36 +33,36 @@
                                             </a>
                                         </li>
                                     @endif
-                                        @if(session('role')=='organization')
-                                            @if(isset($departments))
-                                                @if(is_array($departments))
-                                                    @foreach($departments as $department)
-                                                        <li>
-                                                            <a href="javascript:void(0)" class="department"
-                                                               data-id="{{ $department->id }}" data-name="{{ $department->name }}">
-                                                                {{ $department->name }}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                @else
+                                    @if(session('role')=='organization')
+                                        @if(isset($departments))
+                                            @if(is_array($departments))
+                                                @foreach($departments as $department)
                                                     <li>
                                                         <a href="javascript:void(0)" class="department"
-                                                           data-id="{{ $departments->id }}" data-name="{{ $departments->name }}">
-                                                            {{ $departments->name }}
-                                                       </a>
+                                                           data-id="{{ $department->id }}" data-name="{{ $department->name }}">
+                                                            {{ $department->name }}
+                                                        </a>
                                                     </li>
-                                                @endif
-
+                                                @endforeach
+                                            @else
+                                                <li>
+                                                    <a href="javascript:void(0)" class="department"
+                                                       data-id="{{ $departments->id }}" data-name="{{ $departments->name }}">
+                                                        {{ $departments->name }}
+                                                    </a>
+                                                </li>
                                             @endif
-                                            <li class="box-label">
-                                                <a href="javascript:void(0)" class="department" data-id="" data-name="">
-                                                    All Tickets
-                                               </a>
-                                                <a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">
-                                                    Not Applicable
-                                                </a>
-                                            </li>
+
                                         @endif
+                                        <li class="box-label">
+                                            <a href="javascript:void(0)" class="department" data-id="" data-name="">
+                                                All Tickets
+                                            </a>
+                                            <a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">
+                                                Not Applicable
+                                            </a>
+                                        </li>
+                                    @endif
 
                                 </ul>
                             </div>
@@ -77,7 +77,6 @@
                                            data-page-size="10" data-filter="#search-learner">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
                                             @if($role=='admin')
                                                 <th>Organization</th>
                                             @else
@@ -87,6 +86,7 @@
                                             <th>Title</th>
                                             <th>Impact Level</th>
                                             <th>Activity</th>
+                                            <th>Status</th>
                                             <th>Created On</th>
                                         </tr>
                                         </thead>
@@ -94,7 +94,6 @@
 
                                         @foreach($tickets as $ticket)
                                             <tr>
-                                                <td>{{ $ticket->id }}</td>
                                                 @if($role=='admin')
                                                     <td>{{ isset($ticket->learner->department->organization->name) ? $ticket->learner->department->organization->name : 'Not Applicable' }}</td>
                                                 @else
@@ -120,7 +119,15 @@
                                                     @else
                                                         No activity
                                                     @endif
-
+                                                </td>
+                                                <td>
+                                                    @if($ticket->is_completed==1)
+                                                        Completed
+                                                    @elseif($ticket->is_archived)
+                                                        Archived
+                                                    @else
+                                                        Open
+                                                    @endif
                                                 </td>
                                                 <td>{{ $ticket->created_at->format('m/d/Y') }}</td>
                                             </tr>
@@ -138,7 +145,7 @@
         </div>
         <!-- /.row -->
     </div>
-
+    <div class="scroll-top"><i class="fa fa-chevron-up"></i></div>
     @if(session()->has('success') || session('success'))
         <script>
             window.onload = function () {

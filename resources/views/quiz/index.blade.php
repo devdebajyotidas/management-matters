@@ -119,13 +119,16 @@
         </div>
         <!-- /.row -->
     </div>
-
+    <div class="scroll-top"><i class="fa fa-chevron-up"></i></div>
     @if(session()->has('success') || session('success'))
         <script>
             window.onload = function () {
                 setTimeout(function () {
                     showToast('Success', '{{ session('success') }}', 'success');
                 }, 500);
+                @if(session('role')=='learner')
+                firework();
+                @endif
             };
         </script>
     @endif

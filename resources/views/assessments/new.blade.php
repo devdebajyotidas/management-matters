@@ -28,8 +28,21 @@
             display: inline-block;
             vertical-align: middle;
         }
+        .firework{
+            position: fixed;
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999999;
+            background-color: transparent;
+            display: none;
+        }
     </style>
+    <div id="canvas" style="position: absolute;top:0;bottom: 0;z-index:99999;"></div>
+
     <div class="container-fluid">
+
         <div class="white-box m-t-15">
 
             <div class="row">

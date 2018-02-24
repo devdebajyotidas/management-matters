@@ -35,6 +35,9 @@ Route::group(['namespace' => 'Web'], function () {
     Route::get('/abort', 'HomeController@abort');
     Route::get('/unauthorized', 'Auth\LoginController@unauthorized')->name('unauthorized');
 
+    Route::get('/controls', 'HomeController@controls');
+    Route::post('/quotes', 'HomeController@savequotes');
+
 
 
 //    Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -61,6 +64,8 @@ Route::group(['namespace' => 'Web'], function () {
     Route::delete('learners/{id}', 'LearnerController@delete');
     Route::put('learners/{id}/restore', 'LearnerController@restore');
 
+    Route::post('learners/{id}/resetassessment', 'LearnerController@resetassessment');
+    Route::post('learners/{id}/resetconmb', 'LearnerController@resetconmb');
 
     Route::get('organizations/{orgId}/learners', 'OrganizationLearnerController@index');
     Route::post('organizations/{orgId}/learners', 'OrganizationLearnerController@store');
@@ -71,6 +76,7 @@ Route::group(['namespace' => 'Web'], function () {
 
     Route::post('organization/{orgId}/departments/', 'DepartmentController@store');
     Route::put('organization/{orgId}/departments/{id}', 'DepartmentController@update');
+
 
     Route::get('learnings', 'LearningController@index');
     Route::get('learnings/create', 'LearningController@create');
@@ -101,6 +107,13 @@ Route::group(['namespace' => 'Web'], function () {
     Route::put('organizations/{id}', 'OrganizationController@update');
     Route::delete('organizations/{id}', 'OrganizationController@delete');
     Route::put('organizations/{id}/restore', 'OrganizationController@restore');
+
+    Route::post('organizations/{id}/license', 'OrganizationController@updatelicense');
+    Route::post('organizations/{id}/resetassessment', 'OrganizationController@resetassessment');
+    Route::post('organizations/{id}/resetconmb', 'OrganizationController@resetconmb');
+
+    Route::post('organizations/resetassessmentall', 'OrganizationController@resetassessmentall');
+    Route::post('organizations/resetconmball', 'OrganizationController@resetconmball');
 
     Route::get('learnings/{learningId}/quiz', 'QuizController@index');
     Route::get('learnings/{learningId}/quiz/{id}', 'QuizController@show');

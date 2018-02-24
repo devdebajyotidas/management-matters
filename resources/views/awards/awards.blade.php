@@ -3,7 +3,7 @@
     @include('includes.main-menu')
     <div class="container-fluid">
         <canvas id="world" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;"></canvas>
-        <div class="row m-t-15">
+        <div class="row m-t-15 world-container">
             <div class="hidden">
                 <input type="hidden" class="award-flag" value="{{count($awards) > 0 ? 1 : 0}}">
             </div>
@@ -13,7 +13,12 @@
                         @foreach($awards as $num=>$award)
                             <li class="{{(($num % 2)==0) ? ' ': 'timeline-inverted' }}">
                                 <div class="timeline-badge ">
-                                    <img class="img-responsive" alt="user" src="{{asset('assets/img/title.png')}}">
+                                    @if(empty($award->description))
+                                        <img class="img-responsive" alt="user" src="{{asset('assets/img/title.png')}}">
+                                    @else
+                                        <img class="img-responsive" alt="user" src="{{asset('assets/img/'.$award->description.'.png')}}">
+                                    @endif
+
                                 </div>
                                 <div class="timeline-panel">
                                     <div class="timeline-heading">

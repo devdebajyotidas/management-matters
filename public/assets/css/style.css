@@ -384,6 +384,9 @@ strong {
     -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite
 }
+.notify .heartbit-white{
+    border: 5px solid #fff;
+}
 .notify .point {
     width: 6px;
     height: 6px;
@@ -394,6 +397,9 @@ strong {
     position: absolute;
     right: -6px;
     top: -10px
+}
+.notify .point-white{
+    background-color: #fff;
 }
 @-moz-keyframes heartbit {
     0% {

@@ -79,7 +79,6 @@
                                            data-page-size="10" data-filter="#search-learner">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
@@ -94,7 +93,6 @@
                                             @foreach($organization->departments as $key => $department)
                                                 @foreach($department->learners as $learner)
                                                     <tr class="{{ $learner->trashed()? 'bg-warning':'' }}">
-                                                        <td>{{ $learner->id }}</td>
                                                         <td>
                                                             <a href="{{ url( '/learners/'. $learner->id) }}">
                                                                 {{--<img src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/users/genu.jpg"--}}
@@ -291,7 +289,7 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
+    <div class="scroll-top"><i class="fa fa-chevron-up"></i></div>
 
         <script>
             window.onload = function () {

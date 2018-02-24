@@ -39,6 +39,7 @@
             display: block;
         }
     </style>
+    <div class="firework"></div>
     <div class="container-fluid">
         <form id="quizForm" action="" method="post">
             @if(isset($_GET['retake']))
@@ -223,7 +224,9 @@
                                 @if(isset($_GET['retake']))
                                     <button type="button" class="btn btn-primary btn-next disabled">Next</button>
                                 @else
-                                    <a href="?retake=true" type="button" class="btn btn-primary" >Retake</a>
+                                    @if($active_learning->quizTaken[0]->is_completed==0)
+                                        <a href="?retake=true" type="button" class="btn btn-primary" >Retake</a>
+                                    @endif
                                 @endif
 
                             @endif
@@ -291,11 +294,17 @@
             });
 
 
+
             @if(session()->has('success') || session('success'))
+
+            @if(!empty(session('award')))
+                    firework();
+            @endif
             setTimeout(function () {
                 showToast('Success', '{{ session('success') }}', 'success');
             }, 500);
             @endif
+
 
             @if(isset($errors) && count($errors->all()) > 0 && $timeout = 700)
             @foreach ($errors->all() as $key => $error)

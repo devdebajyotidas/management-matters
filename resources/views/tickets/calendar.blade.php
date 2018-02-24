@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     @include('includes.main-menu')
+    <div class="firework"></div>
     <div class="container-fluid">
         <div class="row m-t-15">
             <div class="col-md-12">
@@ -9,7 +10,13 @@
             <h3 class="box-title">Drag and drop your event</h3>
                 <div class="m-t-15">
                     @foreach($tickets as $ticket)
-                        <div class="calendar-event" data-id="{{$ticket->id}}" data-class="bg-custom">{{$ticket->title}} <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a></div>
+                        @if($ticket->is_completed==1)
+                            <div class="calendar-event" data-id="{{$ticket->id}}" data-class="bg-custom" style="background-color: #28a745;">{{$ticket->title}} <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a></div>
+                        @elseif($ticket->is_archived)
+                            <div class="calendar-event bg-warning" data-id="{{$ticket->id}}" data-class="bg-custom" style="background-color: #ffc107">{{$ticket->title}} <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a></div>
+                        @else
+                            <div class="calendar-event draggble" data-id="{{$ticket->id}}" data-class="bg-custom">{{$ticket->title}} <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a></div>
+                        @endif
                     @endforeach
                 </div>
                 <div class="m-t-15">
@@ -122,6 +129,7 @@
                 <input type="submit" class="hidden" id="submit">
                 <!-- /.modal-content -->
             </form>
+
         </div>
         <!-- /.modal-dialog -->
     </div>
@@ -135,8 +143,6 @@
         var ticketsJSON = JSON.parse('{!! json_encode($assignments) !!}');
         var formAction = document.querySelector('#ticket-editor form').getAttribute('action');
         var tickets_arr=JSON.parse('{!! json_encode($tickets) !!}');
-
-        console.log(ticketsJSON, tickets_arr);
 
         for (var j=0;j<tickets_arr.length;j++){
             var id=tickets_arr[j]['id'];
@@ -153,13 +159,13 @@
             for(var i =0; i<ticketsJSON.length; i++){
 
                 if(ticketsJSON[i].is_archived){
-                    var color = '#f8c255';
+                    var color = '#ffc107';
                 }
                 else if(ticketsJSON[i].ticket.is_completed){
-                    var color = '#28A745';
+                    var color = '#28a745';
                 }
                 else{
-                    var color = '#008efa';
+                    var color = '#007bff';
                 }
                 var ticket = {
                     // Required params for FullCalendar Plugin
@@ -172,7 +178,6 @@
                     id:  ticketsJSON[i].id,
                     learning_id: ticketsJSON[i].learning_id,
                     learner_id: ticketsJSON[i].learner_id,
-//                    target_date: (new Date(ticketsJSON[i].target_date + " GMT-0530")),
                     target_date: moment(ticketsJSON[i].target_date).utc().toDate(),
                     note:ticketsJSON[i].note,
                     impact_level: ticketsJSON[i].impact_level,
@@ -180,7 +185,6 @@
                     ticket: ticketsJSON[i].ticket,
                     notes:notes_arr[ticketsJSON[i].ticket.id]
                 };
-                console.log(moment(ticketsJSON[i].target_date).utc().toDate());
                 tickets.push(ticket);
             }
 
@@ -236,11 +240,13 @@
                     });
 
                     // make the event draggable using jQuery UI
-                    $(this).draggable({
-                        zIndex: 1111999,
-                        revert: true,      // will cause the event to go back to its
-                        revertDuration: 0  //  original position after the drag
-                    });
+                    if($(this).hasClass('draggble')){
+                        $(this).draggable({
+                            zIndex: 1111999,
+                            revert: true,      // will cause the event to go back to its
+                            revertDuration: 0  //  original position after the drag
+                        });
+                    }
                 });
             };
 
@@ -302,6 +308,9 @@
             });
 
             @if(session()->has('success') || session('success'))
+            @if(!empty(session('award')))
+            firework();
+            @endif
             setTimeout(function () {
                 showToast('Success', '{{ session('success') }}', 'success');
             }, 500);

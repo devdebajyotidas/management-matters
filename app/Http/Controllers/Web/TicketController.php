@@ -112,9 +112,9 @@ class TicketController extends Controller
 
     public function update(Request $request, $id)
     {
-
         DB::beginTransaction();
 
+        $awstatus=null;
         $type=NULL;
         $data['ticket'] = $request->get('ticket');
         $data['assignment']=$request->get('assignment');
@@ -125,7 +125,6 @@ class TicketController extends Controller
             $ticket->is_archived=1;
         }
 
-
         if(isset($data['ticket']['complete']))
         {
             $type="completed";
@@ -133,21 +132,26 @@ class TicketController extends Controller
             $ticket->is_completed=1;
             $award['learner_id'] = Auth::user()->account_id;
             $award['title'] = "Successfully completed Ticket - " . $data['ticket']['title'] ;
+            $award['description']=$awstatus='ticket_complete';
 
             Award::create($award);
 
 
         }
 
-
         $assignemnt = TicketAssignment::find($data['assignment']['id']);
         $assignemnt->note = ($data['assignment']['note']);
-        if(!empty($type)){
+        if(!empty($type) && $type=='completed'){
+            $message="You've earned a management better badge";
+        }
+        else if(!empty($type)){
             $message="Ticket has been ".$type." successfully";
         }
         else{
             $message="Ticket has been updated successfully";
         }
+
+
 
         if($ticket->save() && $assignemnt->save() ){
             if(!isset($data['ticket']['archive']) && !isset($data['ticket']['complete'])){
@@ -156,14 +160,15 @@ class TicketController extends Controller
 
                     $award['learner_id'] = Auth::user()->account_id;
                     $award['title'] = "Activity award for " . $data['ticket']['title'] ;
-
+                    $award['description']=$awstatus='activity';
+                    $message="You've earned a management better badge";
                     Award::create($award);
                 }
             }
 
             DB::commit();
 
-            return redirect()->back()->with('success', $message);
+            return redirect()->back()->with(['success'=>$message,'award'=>$awstatus]);
         }
         else{
             DB::rollBack();

@@ -71,7 +71,7 @@ class QuizController extends Controller
     {
 
         DB::beginTransaction();
-
+        $awstatus=null;
         $data = $request->all();
         $data['learner_id'] = Auth::user()->account_id;
         $data['learning_id'] = $learningId;
@@ -81,6 +81,7 @@ class QuizController extends Controller
             $data['is_completed'] = 1;
             $award['title']='Quiz completed for - '.$data['title'];
             $award['learner_id']=$data['learner_id'];
+            $award['description']=$awstatus='quiz';
             Award::create($award);
         }
         else{
@@ -90,7 +91,7 @@ class QuizController extends Controller
         if(Quiz::create($data)){
 
             DB::commit();
-            return redirect()->back()->with('success', 'Quiz has been submitted');
+            return redirect()->back()->with(['success'=>'Quiz result has been updated','award'=>$awstatus]);
         }
         else{
             DB::rollBack();
@@ -140,6 +141,8 @@ class QuizController extends Controller
 
         $data = $request->all();
 
+        $awstatus=null;
+
         $data['learner_id'] = Auth::user()->account_id;
         $data['learning_id'] = $learningId;
         $id=$data['taken_id'];
@@ -149,6 +152,7 @@ class QuizController extends Controller
             $data['is_completed'] = 1;
             $award['title']='Quiz completed for - '.$data['title'];
             $award['learner_id']=$data['learner_id'];
+            $award['description']=$awstatus='quiz';
             Award::create($award);
         }
         else{
@@ -163,7 +167,7 @@ class QuizController extends Controller
         if( $q->save()){
 
             DB::commit();
-            return redirect()->back()->with('success', 'Quiz result has been updated');
+            return redirect()->back()->with(['success'=>'Quiz result has been updated','award'=>$awstatus]);
         }
         else{
             DB::rollBack();

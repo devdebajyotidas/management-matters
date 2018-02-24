@@ -23,10 +23,10 @@
                                            data-page-size="10" data-filter="#search-tickets">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Title</th>
                                             <th>Impact Level</th>
                                             <th>Activity</th>
+                                            <th>Status</th>
                                             <th>Created On</th>
                                         </tr>
                                         </thead>
@@ -34,7 +34,6 @@
                                         @if(count($tickets) > 0)
                                             @foreach($tickets as $ticket)
                                                 <tr>
-                                                    <td>{{ $ticket->id }}</td>
                                                     <td>{{ $ticket->title}}</td>
                                                     <td>{{ $ticket->impact_level}}</td>
                                                     <td>
@@ -46,6 +45,15 @@
                                                                 @endphp
                                                                 {!! $date.' : '.$note !!}<br>
                                                             @endforeach
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if($ticket->is_completed==1)
+                                                            Completed
+                                                        @elseif($ticket->is_archived)
+                                                            Archived
+                                                        @else
+                                                            Open
                                                         @endif
                                                     </td>
                                                     <td>{{ date('m/d/Y',strtotime($ticket->created_at)) }}</td>
@@ -65,6 +73,7 @@
         </div>
         <!-- /.row -->
     </div>
+    <div class="scroll-top"><i class="fa fa-chevron-up"></i></div>
     <script>
         var ticketTable;
         window.onload = function () {

@@ -10,9 +10,32 @@
                     <!-- .left-right-aside-column-->
                     <div class="page-aside">
                         <!-- .left-aside-column-->
-
+                        <div class="left-aside">
+                            <div class="scrollable">
+                                <ul id="department-list" class="list-style-none">
+                                    @if(isset($organizations))
+                                        @foreach($organizations as $organization)
+                                            <li>
+                                                <a href="javascript:void(0)" class="department"
+                                                   data-id="{{ $organization->id }}" data-name="{{ $organization->name }}">
+                                                    {{ $organization->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                    <li class="box-label">
+                                        <a href="javascript:void(0)" class="department" data-id="" data-name="">
+                                            All Learners
+                                        </a>
+                                        <a href="javascript:void(0)" class="department" data-id="" data-name="N/A">
+                                            Not Applicable
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         <!-- /.left-aside-column-->
-                        <div class="right-aside" style="margin: 0">
+                        <div class="right-aside">
                             <div class="clearfix"></div>
                             <div class="scrollable">
                                 <div class="table-responsive">
@@ -20,7 +43,6 @@
                                            data-page-size="10" data-filter="#search-learner">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
@@ -33,7 +55,6 @@
                                         @foreach($learners as $learner)
 
                                             <tr class="{{ $learner->trashed()? 'bg-warning':'' }}">
-                                                <td>{{ $learner->id }}</td>
                                                 <td>
                                                     <a href="{{ url('/learners/'. $learner->id)}}">
                                                         <img src="{{ ($learner->image)? asset('uploads/'.$learner->image) : 'http://sanarch.in/public/images/defaultAvatar.png' }}"
@@ -247,7 +268,7 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
+    <div class="scroll-top"><i class="fa fa-chevron-up"></i></div>
 
 
 

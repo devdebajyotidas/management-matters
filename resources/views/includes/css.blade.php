@@ -24,6 +24,7 @@
 
 <link href={{  asset('assets/css/app.css') }} rel="stylesheet">
 
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 <!-- Include Froala Editor style. -->
 <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/css/froala_editor.min.css' rel='stylesheet' type='text/css' />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.3/css/froala_style.min.css' rel='stylesheet' type='text/css' />
@@ -40,5 +41,12 @@
 <style>
     .white-box{
         box-shadow: 0 1px 3px rgba(0,0,0,0.14);
+    }
+    .fas{
+        font-size: 17px;
+        line-height: 60px;
+    }
+    .notify{
+        margin-top:-35px;
     }
 </style>

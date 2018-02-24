@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Learner;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Storage;
 
 
 class HomeController extends Controller
@@ -102,7 +102,8 @@ class HomeController extends Controller
 
         if(session('role')=='learner'){
             $learner = Learner::withTrashed()->where('id', Auth::user()->account_id)->first();
-            $subscription=Subscription::where('account_id',Auth::user()->account_id)->first();
+
+            $subscription=Subscription::where('account_id',Auth::user()->account_id)->where('account_type','App\Models\Learner')->first();
             $user=User::where('account_id',Auth::user()->account_id)->first();
             $assessment=Assessment::where('learner_id',Auth::user()->account_id)->get();
             $award=Award::where('learner_id',Auth::user()->account_id)->get();
@@ -192,7 +193,7 @@ class HomeController extends Controller
             $organization = Organization::withTrashed()->where('id',Auth::user()->account_id)->first();
             $learners=$organization->learners()->get();
             $departments=Department::where('organization_id',Auth::user()->account_id)->get();
-            $subscription=Subscription::where('account_id',Auth::user()->account_id)->first();
+            $subscription=Subscription::where('account_id',Auth::user()->account_id)->where('account_type','App\Models\Organization')->first();
             $user=User::where('account_id',Auth::user()->account_id)->first();
 
 
@@ -489,4 +490,19 @@ class HomeController extends Controller
             return redirect()->back();
         }
     }
+
+    function controls(){
+        $data['page'] = 'controls';
+        $data['role'] = session('role');
+        $data['prefix']  = session('role');
+        $data['quotes'] = unserialize(Storage::disk('public')->get('quotes.txt'));
+        return view('controls', $data);
+    }
+
+    function savequotes(Request $request){
+        Storage::disk('public')->put('quotes.txt',serialize($request->get('quotes')));
+        return redirect()->back()->with('success', 'Quotes has been updated');
+    }
+
+
 }

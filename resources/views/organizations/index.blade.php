@@ -19,7 +19,6 @@
                                            data-page-size="10" data-filter="#search-learner">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
@@ -31,7 +30,6 @@
                                         <tbody>
                                                 @foreach($organizations as $learner)
                                                     <tr class="{{ $learner->trashed()? 'bg-warning':'' }}">
-                                                        <td>{{ $learner->id }}</td>
                                                         <td>
                                                          {{$learner->name}}
                                                         </td>
@@ -303,7 +301,7 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
+    <div class="scroll-top"><i class="fa fa-chevron-up"></i></div>
     @if(session()->has('success') || session('success'))
         <script>
             window.onload = function () {

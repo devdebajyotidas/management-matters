@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler
             return parent::render($request, $exception);
         }
         if($request->path()!='login'){
-
+            return parent::render($request, $exception);
             return response()->view('errors.500', [], 500);
 
         }

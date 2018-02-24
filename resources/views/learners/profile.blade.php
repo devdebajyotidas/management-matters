@@ -27,7 +27,7 @@
                         <!-- .row -->
                         <div class="row text-center m-t-10">
                             <div class="col-md-6 b-r"><strong>Email ID</strong>
-                                <p>{{ $learner->user->email }}</p>
+                                <p>{{ isset($learner->user->email) ? $learner->user->email : 'N/A' }}</p>
                             </div>
                             <div class="col-md-6"><strong>Phone</strong>
                                 <p>{{ !empty($learner->phone) ? $learner->phone : 'N/A'  }}</p>
@@ -36,7 +36,7 @@
                         <!-- /.row -->
                         <hr>
                         <!-- .row -->
-                    <!-- /.row -->
+                        <!-- /.row -->
                     </div>
                 </div>
             </div>
@@ -241,7 +241,7 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group m-b-20">
                                                                 <input type="email" class="form-control" name="user[email]" placeholder="Email"
-                                                                       value="{{ $learner->user->email }}">
+                                                                       value="{{ isset($learner->user->email) ? $learner->user->email : 'N/A' }}">
                                                             </div>
                                                             <div class="form-group m-b-20">
                                                                 <input type="password" class="form-control" name="user[password]"
@@ -292,9 +292,25 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
+                                    <button type="button" class="btn btn-danger waves-effect reset-assessment-btn">Reset Assessment</button>
+                                    <button type="button" class="btn btn-danger waves-effect reset-conmb-btn">Reset CONMB</button>
+                                    @if(session('role')=='learner')
+                                        <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
+                                    @endif
                                 </div>
                             </form>
+
+
+                            <div class="hidden">
+                                <form action="{{url('/learners/'.$learner->id.'/resetassessment')}}" method="post">
+                                    {{ csrf_field() }}
+                                    <input type="submit" id="reset-assessment-submit" value="submit">
+                                </form>
+                                <form action="{{url('/learners/'.$learner->id.'/resetconmb')}}" method="post">
+                                    {{ csrf_field() }}
+                                    <input type="submit" id="reset-conmb-submit" value="submit">
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -321,6 +337,41 @@
             }, {{ $timeout * $key }});
             @endforeach
             @endif
+
+            $('.reset-assessment-btn').click(function(){
+                swal({
+                    title: 'Reset assessment to default?',
+                    text: "You can't revert this later.",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Reset'
+                }).then(function(result){
+                    if(result.value){
+                        $('#reset-assessment-submit').trigger('click');
+                        return false;
+                    }
+
+                })
+            });
+            $('.reset-conmb-btn').click(function(){
+                swal({
+                    title: 'Reset conmb to default?',
+                    text: "You can't revert this later.",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Reset'
+                }).then(function(result){
+                    if(result.value){
+                        $('#reset-conmb-submit').trigger('click');
+                        return false;
+                    }
+
+                })
+            });
         }
         function previewImage(input) {
             if (input.files && input.files[0]) {
@@ -333,5 +384,6 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
     </script>
 @endsection

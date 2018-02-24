@@ -1,7 +1,9 @@
 <!-- jQuery -->
 <script src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+
 <!-- Bootstrap Core JavaScript -->
 <script src="{{ asset('assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
 <!-- Menu Plugin JavaScript -->
 <script src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 <!--slimscroll JavaScript -->
@@ -113,8 +115,17 @@
 
 
             resizeWindow = function() {
+                var worldHeight=$('.world-container').height();
+                var minHeight= window.innerHeight;
                 window.w = canvas.width = window.innerWidth;
-                return window.h = canvas.height = window.innerHeight;
+                if(worldHeight > minHeight){
+                    return window.h = canvas.height=parseFloat(parseFloat(worldHeight) + 130);
+                }
+                else{
+                    return window.h = canvas.height=minHeight;
+                }
+
+
             };
 
             window.addEventListener('resize', resizeWindow, false);
@@ -214,11 +225,11 @@
         <script type="text/javascript">
             (function() {
                 window.onload = function() {
-                   var flag=$('.award-flag').val();
-                   if(flag==='0'){
-                       swal('Information', "You haven't recieved any award yet", 'info');
-                       return;
-                   }
+                    var flag=$('.award-flag').val();
+                    if(flag==='0'){
+                        swal('Information', "You haven't recieved any award yet", 'info');
+                        return;
+                    }
                 };
             }).call(this)
         </script>
@@ -264,7 +275,7 @@
 
             $('#new-datafield').on('click',function(){
                 table.row.add( [
-                   'Name',
+                    'Name',
                     '0',
                     '0',
                     '0',
@@ -287,4 +298,6 @@
             $('#mainTable').editableTableWidget().numericInputExample();
         }
     </script>
+@elseif($page=='assessments' || $page=='quiz' || $page=='tickets')
+   <script src="{{asset('assets/js/fireworks.js')}}"></script>
 @endif

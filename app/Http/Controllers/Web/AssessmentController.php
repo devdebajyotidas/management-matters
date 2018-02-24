@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Models\Award;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Assessment;
 use App\Models\Learner;
 use App\Models\Learning;
+use App\Models\Organization;
+use App\Models\Department;
 
 class AssessmentController extends Controller
 {
@@ -32,16 +35,15 @@ class AssessmentController extends Controller
         if(session('role') == 'learner'){
             $assessments = Assessment::where(['learner_id' => Auth::user()->account_id])->get();
         }
-
-        if(session('role') == 'admin'){
-            $assessments = Assessment::all();
-        };
-
-        if(session('role') == 'organization'){
-            $learners = Auth::user()->account->learners()->select('learners.id')->pluck('id');
-            $assessments = Assessment::whereIn('learner_id', $learners)->get();
+        elseif(session('role') == 'admin'){
+            $data['organizations']=Organization::all(['id','name']);
+            $assessments = Assessment::with(['learner'])->get();
         }
-
+        else {
+            $data['departments'] = Department::where('organization_id', Auth::user()->account_id)->get();
+            $learners = Auth::user()->account->learners()->select('learners.id')->pluck('id');
+            $assessments = Assessment::with('learner')->whereIn('learner_id', $learners)->get();
+        }
         $data['assessments'] = $assessments;
         $data['dates'] = $assessments->pluck('created_at');
 
@@ -103,8 +105,13 @@ class AssessmentController extends Controller
 
         if (Assessment::create($assessments)){
 
+            $data['awards']['learner_id']=Auth::user()->account_id;
+            $data['awards']['title']='Completed an assessment';
+            $data['awards']['description']='assessment';
+            Award::create($data['awards']);
+
             DB::commit();
-            return redirect()->intended('assessments')->with('success', 'Assessment has been submitted');
+            return redirect()->intended('assessments')->with('success', "You've earned a Management Better badge");
         }
 
         else{

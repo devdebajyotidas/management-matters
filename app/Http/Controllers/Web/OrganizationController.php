@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\CostOfNot;
 use App\Models\Department;
 use App\Models\Learner;
 use App\Models\Subscription;
@@ -21,7 +22,6 @@ use App\Models\TicketAssignment;
 use App\Models\Assessment;
 use App\Models\Quiz;
 use App\Models\Ticket;
-
 
 use League\Flysystem\Config;
 
@@ -113,6 +113,7 @@ class OrganizationController extends Controller
                 $newreq->expiry_date=$organization->expiry_date;
                 $newreq->billing_interval=$subscription['billing_interval'];
                 $newreq->licenses=$subscription['licenses'];
+                $newreq->srole='App\Models\Organization';
 
                 app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$organization->id);
             }
@@ -180,7 +181,8 @@ class OrganizationController extends Controller
 
         $data['organization'] = $request->get('organization');
         $data['user'] = $request->get('user');
-        $sub=Subscription::where('account_id',$id)->first();
+        $srole='App\Models\Organization';
+        $sub=Subscription::where('account_id',$id)->where('account_type',$srole)->first();
 
         $organizationValidator = Validator::make($data['organization'], Organization::$rules['update']);
 
@@ -215,6 +217,7 @@ class OrganizationController extends Controller
             if(isset($sub->subscription_id) && !empty($sub->subscription_id)){
                 $newreq->card_number=$data['organization']['card_number'];
                 $newreq->expiry_date=$data['organization']['expiry_date'];
+                $newreq->srole='App\Models\Organization';
                 app('App\Http\Controllers\Web\SubscriptionController')->update($newreq,$sub->subscription_id);
 
             }
@@ -223,6 +226,7 @@ class OrganizationController extends Controller
                     $newreq->name_on_card=$data['organization']['name_on_card'];
                     $newreq->card_number=$data['organization']['card_number'];
                     $newreq->expiry_date=$data['organization']['expiry_date'];
+                    $newreq->srole='App\Models\Organization';
                     app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$id);
                 }
             }
@@ -258,7 +262,8 @@ class OrganizationController extends Controller
 
         $organization = Organization::withTrashed()->where('id', $id)->first();
         $learners=$organization->learners()->get();
-        $subscription=Subscription::where('account_id',$id)->first();
+        $srole='App\Models\Organization';
+        $subscription=Subscription::where('account_id',$id)->where('account_type',$srole)->first();
 
         if($organization->trashed())
         {
@@ -314,7 +319,8 @@ class OrganizationController extends Controller
         $count=0;
         $organization = Organization::withTrashed()->where('id', $id)->first();
         $learners=$organization->learners()->withTrashed()->get();
-        $subscription=Subscription::where('account_id',$id)->first();
+        $srole='App\Models\Organization';
+        $subscription=Subscription::where('account_id',$id)->where('account_type',$srole)->first();
         if(count($learners) > 0){
             foreach ($learners as $learner)
             {
@@ -337,7 +343,7 @@ class OrganizationController extends Controller
                 $newreq->expiry_date=$organization->expiry_date;
                 $newreq->billing_interval=$subscription->billing_interval;
                 $newreq->licenses=$subscription->licenses;
-
+                $newreq->srole='App\Models\Organization';
                 $response=app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$organization->id);
             }
 
@@ -360,10 +366,10 @@ class OrganizationController extends Controller
         $qcount=0;
         $amcount=0;
         $awardcount=0;
-
+        $srole='App\Models\Organization';
         $organization = Organization::withTrashed()->where('id', $id)->first();
         $learners=$organization->learners()->get();
-        $subscription=Subscription::where('account_id',$id)->first();
+        $subscription=Subscription::where('account_id',$id)->where('account_type',$srole)->first();
         $departments=Department::where('organization_id',$id)->get();
         $user=User::where('account_id',$id)->first();
 
@@ -498,5 +504,222 @@ class OrganizationController extends Controller
         }
 
     }
+
+
+    function updatelicense(Request $request,$id){
+        $subscription=Subscription::where('account_id',$id)->where('account_type','App\Models\Organization')->first();
+        if(!empty($subscription->subscription_id)) {
+            $newreq= new \Illuminate\Http\Request();
+            $newreq->amount=$amount=$request->license*config('constants.BASE_PRICE');
+            $result=app('App\Http\Controllers\Web\SubscriptionController')->update($newreq,$subscription->subscription_id);
+            if($result){
+                $subscription->update(['licenses'=>$request->license]);
+                return redirect()->back()->with(['success' => 'Licenses has been updated']);
+            }
+            else{
+                return redirect()->back()->withErrors(['Something went wrong']);
+            }
+
+        }else{
+            return redirect()->back()->withErrors(['Subscription not available']);
+        }
+    }
+
+    function resetassessment($id){
+        DB::beginTransaction();
+
+        $amcount=0;
+        $organization = Organization::withTrashed()->where('id', $id)->first();
+        $learners=$organization->learners()->get();
+        if(count($learners) > 0 ) {
+            foreach ($learners as $learner) {
+                $assessment = Assessment::where('learner_id', $learner->id)->get();
+                if(count($assessment) > 0){
+                    foreach ($assessment as $am){
+                        $am->delete();
+                        $amcount++;
+                    }
+                }
+                else{
+                    $amcount=1;
+                }
+            }
+        }
+        else{
+            return redirect()->back()->with(['success' => 'Assessment has been reset']);
+        }
+
+        if($amcount > 0){
+            DB::commit();
+            return redirect()->back()->with(['success' => 'Assessment has been reset']);
+        }
+        else{
+            DB::rollBack();
+            return redirect()->back()->withErrors(['Something went wrong']);
+        }
+    }
+
+    function resetconmb($id){
+        DB::beginTransaction();
+
+        $amcount=0;
+        $organization = Organization::withTrashed()->where('id', $id)->first();
+        $learners=$organization->learners()->get();
+        if(count($learners) > 0 ) {
+            foreach ($learners as $learner) {
+                $cost = CostOfNot::where('learner_id', $learner->id)->get();
+                if(count($cost) > 0){
+                    foreach ($cost as $am){
+                        $am->delete();
+                        $amcount++;
+                    }
+                }
+                else{
+                    $amcount=1;
+                }
+            }
+        }
+        else{
+            return redirect()->back()->with(['success' => 'Cost of not has been reset']);
+        }
+
+        if($amcount > 0){
+            DB::commit();
+            return redirect()->back()->with(['success' => 'Cost of not has been reset']);
+        }
+        else{
+            DB::rollBack();
+            return redirect()->back()->withErrors(['Something went wrong']);
+        }
+    }
+
+    function resetassessmentall(){
+        DB::beginTransaction();
+
+        $amcount=0;
+        $lamcount=0;
+        $organizations=Organization::withTrashed()->get();
+        $learners=Learner::withTrashed()->get();
+
+        if(count($organizations) > 0){
+            foreach ($organizations as $organization){
+                $orglearners=$organization->learners()->withTrashed()->get();
+                if(count($orglearners) > 0){
+                    foreach ($orglearners as $olearner) {
+                        $oassessment = Assessment::where('learner_id', $olearner->id)->get();
+                        if(!empty($oassessment) && count($oassessment) > 0){
+                            foreach ($oassessment as $oam){
+                                $oam->delete();
+                                $amcount++;
+                            }
+                        }
+                        else{
+                            $amcount=1;
+                        }
+                    }
+                }
+                else{
+                    $amcount=1;
+                }
+            }
+        }
+        else{
+            $amcount=1;
+        }
+
+        if(count($learners) > 0){
+            foreach ($learners as $learner) {
+                $assessment = Assessment::where('learner_id', $learner->id)->get();
+                if(!empty($assessment) && count($assessment) > 0){
+                    foreach ($assessment as $am){
+                        $am->delete();
+                        $lamcount++;
+                    }
+                }
+                else{
+                    $lamcount=1;
+                }
+            }
+        }
+        else{
+            $lamcount=1;
+        }
+
+
+        if($amcount > 0 && $lamcount > 0){
+            DB::commit();
+            return redirect()->back()->with(['success' => 'Assessment has been reset']);
+        }
+        else{
+            DB::rollBack();
+            return redirect()->back()->withErrors(['Something went wrong']);
+        }
+
+    }
+
+    function resetconmball(){
+        DB::beginTransaction();
+
+        $amcount=0;
+        $lamcount=0;
+        $organizations=Organization::withTrashed()->get();
+        $learners=Learner::withTrashed()->get();
+
+        if(count($organizations) > 0){
+            foreach ($organizations as $organization){
+                $orglearners=$organization->learners()->withTrashed()->get();
+                if(count($orglearners) > 0){
+                    foreach ($orglearners as $olearner) {
+                        $oassessment = CostOfNot::where('learner_id', $olearner->id)->get();
+                        if(!empty($oassessment) && count($oassessment) > 0){
+                            foreach ($oassessment as $oam){
+                                $oam->delete();
+                                $amcount++;
+                            }
+                        }
+                        else{
+                            $amcount=1;
+                        }
+                    }
+                }
+                else{
+                    $amcount=1;
+                }
+            }
+        }
+        else{
+            $amcount=1;
+        }
+
+        if(count($learners) > 0){
+            foreach ($learners as $learner) {
+                $assessment = CostOfNot::where('learner_id', $learner->id)->get();
+                if(!empty($assessment) && count($assessment) > 0){
+                    foreach ($assessment as $am){
+                        $am->delete();
+                        $lamcount++;
+                    }
+                }
+                else{
+                    $lamcount=1;
+                }
+            }
+        }
+        else{
+            $lamcount=1;
+        }
+
+
+        if($amcount > 0 && $lamcount > 0){
+            DB::commit();
+            return redirect()->back()->with(['success' => 'Assessment has been reset']);
+        }
+        else{
+            DB::rollBack();
+            return redirect()->back()->withErrors(['Something went wrong']);
+        }
+
+    }
+
 
 }

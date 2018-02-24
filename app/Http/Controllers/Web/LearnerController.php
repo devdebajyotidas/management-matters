@@ -21,6 +21,7 @@ use App\Models\Quiz;
 use App\Models\Ticket;
 use App\Models\TicketAssignment;
 use App\Models\Award;
+use App\Models\CostOfNot;
 use Illuminate\Support\Facades\Mail;
 
 class LearnerController extends Controller
@@ -85,6 +86,7 @@ class LearnerController extends Controller
                         $newreq->name_on_card=$learner->name_on_card;
                         $newreq->card_number=$learner->card_number;
                         $newreq->expiry_date=$learner->expiry_date;
+                        $newreq->srole='App\Models\Learner';
                         app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$learner->id);
                     }
 
@@ -173,7 +175,8 @@ class LearnerController extends Controller
 
         $data['learner'] = $request->get('learner');
         $data['user'] = $request->get('user');
-        $sub=Subscription::where('account_id',$id)->first();
+        $srole='App\Models\Learner';
+        $sub=Subscription::where('account_id',$id)->where('account_type',$srole)->first();
 
         $learnerValidator = Validator::make($data['learner'], Learner::$rules['update']);
         if(trim($data['user']['password']) == '' || $data['user']['password'] == null){
@@ -204,6 +207,7 @@ class LearnerController extends Controller
             if(isset($sub->subscription_id) && !empty($sub->subscription_id)){
                 $newreq->card_number=$data['learner']['card_number'];
                 $newreq->expiry_date=$data['learner']['expiry_date'];
+                $newreq->srole='App\Models\Learner';
                 app('App\Http\Controllers\Web\SubscriptionController')->update($newreq,$sub->subscription_id);
 
             }
@@ -212,6 +216,7 @@ class LearnerController extends Controller
                     $newreq->name_on_card=$data['learner']['name_on_card'];
                     $newreq->card_number=$data['learner']['card_number'];
                     $newreq->expiry_date=$data['learner']['expiry_date'];
+                    $newreq->srole='App\Models\Learner';
                     app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$id);
                 }
             }
@@ -244,8 +249,9 @@ class LearnerController extends Controller
      */
     public function delete(Request $request, $id)
     {
+        $srole='App\Models\Learner';
         $learner = Learner::withTrashed()->where('id', $id)->first();
-        $subscription=Subscription::where('account_id',$id)->first();
+        $subscription=Subscription::where('account_id',$id)->where('account_type',$srole)->first();
         if($learner->trashed())
         {
             $learner->forceDelete();
@@ -277,7 +283,7 @@ class LearnerController extends Controller
                 $newreq->expiry_date=$learner->expiry_date;
                 $newreq->billing_interval=$subscription->billing_interval;
                 $newreq->licenses=$subscription->licenses;
-
+                $newreq->srole='App\Models\Learner';
                 $response=app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$learner->id);
             }
 
@@ -298,8 +304,8 @@ class LearnerController extends Controller
 
         $learner = Learner::withTrashed()->find($id);
 
-
-        $subscription=Subscription::where('account_id',$id)->first();
+        $srole='App\Models\Learner';
+        $subscription=Subscription::where('account_id',$id)->where('acccount_type',$srole)->first();
         $user=User::where('account_id',$id)->first();
         $assessment=Assessment::where('learner_id',$id)->get();
         $award=Award::where('learner_id',$id)->get();
@@ -415,5 +421,56 @@ class LearnerController extends Controller
         }
     }
 
+
+    function resetassessment($id){
+        DB::beginTransaction();
+
+        $amcount=0;
+
+        $assessment = Assessment::where('learner_id', $id)->get();
+        if(count($assessment) > 0){
+            foreach ($assessment as $am){
+                $am->delete();
+                $amcount++;
+            }
+        }
+        else{
+            $amcount=1;
+        }
+
+        if($amcount > 0){
+            DB::commit();
+            return redirect()->back()->with(['success' => 'Assessment has been reset']);
+        }
+        else{
+            DB::rollBack();
+            return redirect()->back()->withErrors(['Something went wrong']);
+        }
+    }
+
+    function resetconmb($id){
+        DB::beginTransaction();
+
+        $amcount=0;
+        $cost = CostOfNot::where('learner_id', $id)->get();
+        if(count($cost) > 0){
+            foreach ($cost as $am){
+                $am->delete();
+                $amcount++;
+            }
+        }
+        else{
+            $amcount=1;
+        }
+
+        if($amcount > 0){
+            DB::commit();
+            return redirect()->back()->with(['success' => 'Cost of not has been reset']);
+        }
+        else{
+            DB::rollBack();
+            return redirect()->back()->withErrors(['Something went wrong']);
+        }
+    }
 
 }
