@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,5 +101,31 @@ Route::group(['namespace' => 'API'], function () {
     Route::post('subscription/{id}/subscribe', 'SubscriptionController@subscribe');//learner id
     Route::delete('subscription/{id}/cancel', 'SubscriptionController@cancel');//subscription id
     Route::post('subscription/{id}/update', 'SubscriptionController@update');//subscription id
+
+    Route::get('cost', function (){
+        $content = Storage::disk('public')->get('CostOfNot/content.txt');
+        return response()->json(['content' => $content]);
+    });
+
+    Route::post('cost', function (Request $request){
+
+        $data['cost']=$request->all();
+        $result = \App\Models\CostOfNot::create($data['cost']);
+
+        $response = [];
+
+        if($result)
+        {
+            $response['success'] = true;
+            $response['cost'] = $result;
+            return response()->json($response);
+        }
+        else
+        {
+            $response['success'] = false;
+            $response['cost'] = null;
+            return response()->json($response);
+        }
+    });
 
 });
