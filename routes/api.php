@@ -107,4 +107,25 @@ Route::group(['namespace' => 'API'], function () {
         return response()->json(['content' => $content]);
     });
 
+    Route::post('cost', function (Request $request){
+
+        $data['cost']=$request->all();
+        $result = \App\Models\CostOfNot::create($data['cost']);
+
+        $response = [];
+
+        if($result)
+        {
+            $response['success'] = true;
+            $response['cost'] = $result;
+            return response()->json($response);
+        }
+        else
+        {
+            $response['success'] = false;
+            $response['cost'] = null;
+            return response()->json($response);
+        }
+    });
+
 });
