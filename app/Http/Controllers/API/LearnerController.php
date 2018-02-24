@@ -216,6 +216,8 @@ class LearnerController extends Controller
         $data['assessments'] = $assessments->where('learner_id', '=', $id)->count();
         $data['quiz'] = $quiz->where('learner_id', '=', $id)->count();
 
+        $data['cost'] = Learner::find($id)->costs()->pluck('total', 'created_at');
+
         return $data;
     }
 }
