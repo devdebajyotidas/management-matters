@@ -217,7 +217,17 @@ class LearnerController extends Controller
         $data['quiz'] = $quiz->where('learner_id', '=', $id)->count();
 
         $data['cost'] = Learner::find($id)->costs()->pluck('total', 'created_at');
-        dd($data['cost']);
+
+        $cost = [];
+        $i = 0;
+        foreach ($data['cost'] as $key => $value)
+        {
+            $cost[$i]['key'] = $key;
+            $cost[$i]['value'] = $value;
+
+            $i++;
+        }
+        $data['cost'] = $cost;
 
         return $data;
     }
