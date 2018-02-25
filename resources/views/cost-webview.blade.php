@@ -17,7 +17,7 @@
             cursor: pointer;
             box-shadow: 0 3px 7px rgba(0,0,0,.14);
         }
-        nav{
+        nav, #mainTable_filter, #mainTable_info, #mainTable_paginate{
             display: none;
         }
         #page-wrapper {
@@ -30,6 +30,26 @@
             <div class="col-md-12">
                 <div class="white-box">
                     {!! $content !!}
+
+                    <p>Because we all are responsible for the bottom line, to one degree or another, the costs of doing business are
+                        important to each and every one of us. It’s easy to find out the cost of wages, machines, tools, supplies and
+                        services so our attention can become fixed on those tangible items. However, when it come to the performance of
+                        people the costs are not so obvious. Management Matters makes a commitment to help you identify these costs in
+                        all our Modules, when appropriate. </p>
+                    <p>MUST PROVIDE SIMILAR TYPE WORKSHEET, RIGTH AFTER THIS EXAMPLE AND TEXT, THEN THIS SECTION TOTAL GETS TOTALED TO
+                        THE DASHBOARD SECTION….CUMULATIVE TO THE NUMBER OF MODULES THEY HAVE PURCHASED.</p>
+                    <hr>
+                    <p>
+                        <span> <b>A</b> = Behavior/Personality Issue or Concern </span>
+                        <br>
+                        <span> <b>B</b> = Average Hourly Wage ($) </span>
+                        <br>
+                        <span> <b>C</b> = X Number of Employees </span>
+                        <br>
+                        <span> <b>D</b> = Lost Hours Per Week </span>
+                        <br>
+                        <span> <b>X</b> = Total ($) </span>
+                    </p>
                     <table id="mainTable" class="table editable-table table-bordered table-striped m-b-0" style="margin: 20px 0">
                         <thead>
                         <tr>
@@ -74,14 +94,7 @@
                             <input type="submit" value="true" id="saveCost">
                         </form>
                     </div>
-                    <button class="btn btn-primary" id="prepare-cost" style="margin: 20px 0">Save</button>
-                    <p>Because we all are responsible for the bottom line, to one degree or another, the costs of doing business are
-                        important to each and every one of us. It’s easy to find out the cost of wages, machines, tools, supplies and
-                        services so our attention can become fixed on those tangible items. However, when it come to the performance of
-                        people the costs are not so obvious. Management Matters makes a commitment to help you identify these costs in
-                        all our Modules, when appropriate. </p>
-                    <p>MUST PROVIDE SIMILAR TYPE WORKSHEET, RIGTH AFTER THIS EXAMPLE AND TEXT, THEN THIS SECTION TOTAL GETS TOTALED TO
-                        THE DASHBOARD SECTION….CUMULATIVE TO THE NUMBER OF MODULES THEY HAVE PURCHASED.</p>
+                    <button class="btn btn-block btn-primary" id="prepare-cost" style="margin: 20px 0">Save</button>
                 </div>
             </div>
         </div>
