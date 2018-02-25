@@ -1111,6 +1111,12 @@
 
             console.log(cost,date);
 
+            Highcharts.setOptions({
+                lang: {
+                    thousandsSep: ','
+                }
+            });
+
             Highcharts.chart('chart', {
 
                 title: {
@@ -1131,9 +1137,9 @@
                     title: {
                         text: 'Total Impact($)'
                     },
-                    labels: {
-                        format: '$ {value:,.0f}'
-                    },
+//                    labels: {
+//                        format: '${value:,.0f}'
+//                    },
                     categories: cost
                 },
                 legend: {
