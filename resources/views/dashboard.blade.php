@@ -1137,9 +1137,9 @@
                     title: {
                         text: 'Total Impact($)'
                     },
-//                    labels: {
-//                        format: '${value:,.0f}'
-//                    },
+                    labels: {
+                        format: '{point.y:,.0f}'
+                    },
                     categories: cost
                 },
                 legend: {
