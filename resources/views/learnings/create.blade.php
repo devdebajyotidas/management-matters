@@ -106,7 +106,7 @@
                                     </button>
                                     <div id="chapter-list" class="list-group m-t-10">
                                         @if(isset($learning))
-                                            @foreach($learning->chapters as $key => $chapter)
+                                            @foreach(array_values($learning->chapters) as $key => $chapter)
                                                 <a href="javascript:void(0)" class="list-group-item chapter" data-id="{{ $key }}">
                                                     <span class="chapter-name">{{ $chapter['name'] }}</span>
                                                     <input type="hidden" name="chapters[{{ $key }}][name]" value="{{ $chapter['name'] }}">
