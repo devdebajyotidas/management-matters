@@ -1095,7 +1095,6 @@
     <script>
         window.onload = function () {
 
-            @if($role == 'learner')
 
 
             var parsed = JSON.parse('{!! json_encode($cost) !!}');
@@ -1105,7 +1104,11 @@
             var date = [];
             var result = $.parseJSON('{!! json_encode($cost) !!}');
             $.each(result, function(k, v) {
+                @if($role == 'learner')
                 date.push(moment(k).format("MM/DD/YYYY"));
+                @else
+                date.push(k);
+                @endif
                 cost.push(v);
             });
 
@@ -1117,14 +1120,15 @@
                 }
             });
 
+            @if($role != 'admin')
+
             Highcharts.chart('chart', {
 
                 title: {
                     text: 'Cost of Not Managing Better'
                 },
-
                 subtitle: {
-                    text: ''
+                    text: 'All data is reset every year on Jan 01'
                 },
                 xAxis: {
                     title: {
@@ -1180,6 +1184,46 @@
 
             });
 
+        @else
+         Highcharts.chart('chart', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Cost of Not Managing Better'
+            },
+            subtitle: {
+                text: 'All data is reset every year on Jan 01'
+            },
+            xAxis: {
+                categories: date,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Total Impact($)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>$ {point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Cost for Organization',
+                data: cost
+            }]
+        });
         @endif
         }
     </script>

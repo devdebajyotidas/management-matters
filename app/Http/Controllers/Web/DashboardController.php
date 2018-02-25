@@ -4,15 +4,18 @@ namespace App\Http\Controllers\Web;
 
 use App\Models\Assessment;
 use App\Models\Award;
+use App\Models\CostOfNot;
 use App\Models\Learner;
 use App\Models\Learning;
 use App\Models\Organization;
 use App\Models\Quiz;
 use App\Models\Ticket;
 use App\Models\TicketAssignment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -39,6 +42,27 @@ class DashboardController extends Controller
         $assessments = Assessment::where('id', '>', 0);
         $quiz = Quiz::where('id', '>', 0);
 
+        $now = Carbon::now();
+        $resetDate = Carbon::createFromFormat('d/m/Y', '01/01/'. $now->year);
+
+        $orgs = Organization::with(['learners.costs'])->get();
+
+
+        $cost = [];
+        foreach ($orgs as  $org)
+        {
+            $cost[$org->name] = 0;
+            foreach ($org->learners as $learner)
+            {
+                foreach ($learner->costs as $c)
+                {
+                    if($now->gt($resetDate))
+                        $cost[$org->name] += $c->total;
+                }
+            }
+        }
+
+        $data['cost'] = $cost;
 
         if(session('role')=='admin'){
             $data['learnings'] = $learnings;
@@ -66,6 +90,25 @@ class DashboardController extends Controller
                 $query->whereIn('learner_id', $learnersId);
             });
 
+            $now = Carbon::now();
+            $resetDate = Carbon::createFromFormat('d/m/Y', '01/01/'. $now->year);
+            $data['cost'] = CostOfNot::whereIn('learner_id', $learnersId)->whereDate('created_at', '>=', $resetDate)->select('id', 'total', 'created_at')
+                ->get()
+                ->groupBy(function($val) {
+                    return Carbon::parse($val->created_at)->format('M');
+                });
+
+            $cost = [];
+            foreach ($data['cost'] as $month => $c)
+            {
+                $cost[$month] = 0;
+                foreach ($c as $c2)
+                {
+                    $cost[$month] += $c2->total;
+                }
+            }
+            $data['cost'] = $cost;
+//            dd(, CostOfNot::whereIn('learner_id', $learnersId)->pluck('total', 'created_at'));
 
             $data['learnings'] = $learnings;
             $data['outstandingTickets'] = $outstandingTickets->count();
