@@ -101,9 +101,13 @@
                                                 @endif
 
                                                 <td>
-                                                    <a href="{{ url('/learners/'. $ticket->learner->id) }}">
-                                                        {{ $ticket->learner->name }}
-                                                    </a>
+                                                    @if(isset($ticket->learner->id))
+                                                        <a href="{{ url('/learners/'.$ticket->learner->id)}}">
+                                                            {{ $ticket->learner->name }}
+                                                        </a>
+                                                    @else
+                                                        N/A
+                                                    @endif
                                                 </td>
                                                 <td>{{ $ticket->title }}</td>
                                                 <td>{{ $ticket->impact_level }}</td>
