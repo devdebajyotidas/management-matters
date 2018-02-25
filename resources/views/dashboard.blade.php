@@ -1138,7 +1138,7 @@
                         text: 'Total Impact($)'
                     },
                     labels: {
-                        format: '{point.y:,.0f}'
+                        format: '{value:,.0f}'
                     },
                     categories: cost
                 },
