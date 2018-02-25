@@ -119,7 +119,7 @@
                                                                     <span class="text-danger">
                                                                         {{ $module }} : {{ number_format((float)$score, 2, '.', '') }}
                                                                     </span>
-                                                                @elseif($score > 2 && $score < 4)
+                                                                @elseif($score >= 2 && $score < 4)
                                                                     <span class="text-warning">
                                                                         {{ $module }} : {{ number_format((float)$score, 2, '.', '') }}
                                                                     </span>
