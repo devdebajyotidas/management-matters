@@ -128,4 +128,7 @@ Route::group(['namespace' => 'API'], function () {
         }
     });
 
+    Route::get('learners/{learnerId}/cost', 'CostController@index');
+    Route::post('learners/{learnerId}/cost', 'CostController@store');
+
 });
