@@ -66,6 +66,7 @@ Route::group(['namespace' => 'Web'], function () {
 
     Route::post('learners/{id}/resetassessment', 'LearnerController@resetassessment');
     Route::post('learners/{id}/resetconmb', 'LearnerController@resetconmb');
+    Route::post('learners/{id}/resetquiz', 'LearnerController@resetquiz');
 
     Route::get('organizations/{orgId}/learners', 'OrganizationLearnerController@index');
     Route::post('organizations/{orgId}/learners', 'OrganizationLearnerController@store');
@@ -111,6 +112,7 @@ Route::group(['namespace' => 'Web'], function () {
     Route::post('organizations/{id}/license', 'OrganizationController@updatelicense');
     Route::post('organizations/{id}/resetassessment', 'OrganizationController@resetassessment');
     Route::post('organizations/{id}/resetconmb', 'OrganizationController@resetconmb');
+
 
     Route::post('organizations/resetassessmentall', 'OrganizationController@resetassessmentall');
     Route::post('organizations/resetconmball', 'OrganizationController@resetconmball');

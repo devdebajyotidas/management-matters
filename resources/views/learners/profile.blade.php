@@ -294,6 +294,9 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger waves-effect reset-assessment-btn">Reset Assessment</button>
                                     <button type="button" class="btn btn-danger waves-effect reset-conmb-btn">Reset CONMB</button>
+                                    @if(session('role')=='organization')
+                                        <button type="button" class="btn btn-danger waves-effect reset-quiz-btn">Reset Quiz</button>
+                                    @endif
                                     @if(session('role')=='learner')
                                         <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
                                     @endif
@@ -309,6 +312,10 @@
                                 <form action="{{url('/learners/'.$learner->id.'/resetconmb')}}" method="post">
                                     {{ csrf_field() }}
                                     <input type="submit" id="reset-conmb-submit" value="submit">
+                                </form>
+                                <form action="{{url('/learners/'.$learner->id.'/resetquiz')}}" method="post">
+                                    {{ csrf_field() }}
+                                    <input type="submit" id="reset-quiz-submit" value="submit">
                                 </form>
                             </div>
                         </div>
@@ -367,6 +374,23 @@
                 }).then(function(result){
                     if(result.value){
                         $('#reset-conmb-submit').trigger('click');
+                        return false;
+                    }
+
+                })
+            });
+            $('.reset-quiz-btn').click(function(){
+                swal({
+                    title: 'Reset quiz to default?',
+                    text: "You can't revert this later.",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Reset'
+                }).then(function(result){
+                    if(result.value){
+                        $('#reset-quiz-submit').trigger('click');
                         return false;
                     }
 
