@@ -1111,6 +1111,12 @@
 
             console.log(cost,date);
 
+            Highcharts.setOptions({
+                lang: {
+                    thousandsSep: ','
+                }
+            });
+
             Highcharts.chart('chart', {
 
                 title: {
@@ -1130,6 +1136,9 @@
                 yAxis: {
                     title: {
                         text: 'Total Impact($)'
+                    },
+                    labels: {
+                        format: '{value:,.0f}'
                     },
                     categories: cost
                 },

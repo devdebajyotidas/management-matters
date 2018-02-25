@@ -7,7 +7,18 @@
             <div class="col-md-12">
             <div class="white-box">
 
-            <h3 class="box-title">Drag and drop your event</h3>
+                <div class="m-t-15">
+                    <button type="button" class="btn btn-success" id="add-event">Add Ticket</button>
+                    <button type="button" class="btn btn-default m-l-10" id="event-list" onclick="$('#eventlistForm').submit()">All Tickets</button>
+                    <div class="hidden">
+                        <form id="eventlistForm" action="{{url('tickets/events')}}" method="get">
+                            {{csrf_token()}}
+                        </form>
+                    </div>
+                </div>
+                <hr>
+
+                <h3 class="box-title">Drag and drop your tickets</h3>
                 <div class="m-t-15">
                     @foreach($tickets as $ticket)
                         @if($ticket->is_completed==1)
@@ -19,16 +30,6 @@
                         @endif
                     @endforeach
                 </div>
-                <div class="m-t-15">
-                    <button type="button" class="btn btn-success" id="add-event">Add Ticket</button>
-                    <button type="button" class="btn btn-default m-l-10" id="event-list" onclick="$('#eventlistForm').submit()">All Tickets</button>
-                    <div class="hidden">
-                        <form id="eventlistForm" action="{{url('tickets/events')}}" method="get">
-                            {{csrf_token()}}
-                        </form>
-                    </div>
-                </div>
-
             </div>
             </div>
             <div class="col-md-12">

@@ -115,7 +115,20 @@
 
                                                         <td>
                                                             @foreach($assessment->scores as $module => $score)
-                                                                {{ $module }} : {{ number_format((float)$score, 2, '.', '') }}
+                                                                <img src="{{asset('assets/icons/'.strtolower($module).'.png')}}"  class="assessment-icon" style="display: inline;width: 50px;">
+                                                                @if($score < 2)
+                                                                    <span class="text-danger">
+                                                                        {{ $module }} : {{ number_format((float)$score, 2, '.', '') }}
+                                                                    </span>
+                                                                @elseif($score >= 2 && $score < 4)
+                                                                    <span class="text-warning">
+                                                                        {{ $module }} : {{ number_format((float)$score, 2, '.', '') }}
+                                                                    </span>
+                                                                @else
+                                                                    <span class="text-success">
+                                                                        {{ $module }} : {{ number_format((float)$score, 2, '.', '') }}
+                                                                    </span>
+                                                                @endif
                                                                 <br>
                                                             @endforeach
                                                         </td>
