@@ -473,4 +473,29 @@ class LearnerController extends Controller
         }
     }
 
+    function resetquiz($id){
+        DB::beginTransaction();
+
+        $amcount=0;
+        $quiz= Quiz::where('learner_id', $id)->get();
+        if(count($quiz) > 0){
+            foreach ($quiz as $am){
+                $am->delete();
+                $amcount++;
+            }
+        }
+        else{
+            $amcount=1;
+        }
+
+        if($amcount > 0){
+            DB::commit();
+            return redirect()->back()->with(['success' => 'Quiz has been reset']);
+        }
+        else{
+            DB::rollBack();
+            return redirect()->back()->withErrors(['Something went wrong']);
+        }
+    }
+
 }
