@@ -21,7 +21,7 @@ class CostController extends Controller
     public function index(Request $request)
     {
         $email = $request->get('email');
-        $pass = $request->get('pass');
+        $pass = $request->get('password');
 
         if(!Auth::attempt(['email' => $email, 'password' => $pass]))
             dd('No access');
@@ -60,7 +60,7 @@ class CostController extends Controller
     public function store(Request $request){
 
         $email = $request->get('email');
-        $pass = $request->get('pass');
+        $pass = $request->get('password');
 
         if(!Auth::attempt(['email' => $email, 'password' => $pass]))
             dd('No access');
