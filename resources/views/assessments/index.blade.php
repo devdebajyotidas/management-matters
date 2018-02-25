@@ -115,6 +115,7 @@
 
                                                         <td>
                                                             @foreach($assessment->scores as $module => $score)
+                                                                <img src="{{asset('assets/icons/'.strtolower($module).'.png')}}"  class="assessment-icon" style="display: inline;width: 50px;">
                                                                 @if($score < 2)
                                                                     <span class="text-danger">
                                                                         {{ $module }} : {{ number_format((float)$score, 2, '.', '') }}
