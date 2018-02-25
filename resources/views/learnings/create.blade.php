@@ -618,4 +618,10 @@
             }
         }
     </script>
+
+    <style>
+        .fr-box > div:not(.fr-wrapper) > a{
+            display:none!important;
+        }
+    </style>
 @endsection
