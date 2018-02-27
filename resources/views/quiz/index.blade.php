@@ -68,7 +68,7 @@
                                            data-page-size="10" data-filter="#search-learner">
                                         <thead>
                                         <tr>
-                                            @if($role='admin')
+                                            @if(session('role')=='admin')
                                                 <th>Organization</th>
                                             @else
                                                 <th>Department</th>

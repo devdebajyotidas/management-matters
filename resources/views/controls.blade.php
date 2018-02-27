@@ -22,45 +22,51 @@
 
         </div>
         <div class="white-box m-t-15">
-            <form action="{{url('/quotes')}}" method="post">
-                {{ csrf_field() }}
-                <div class="row m-t-10">
-                    <div class="col-sm-12  m-b-20">
-                        <h3 class="box-title m-b-0">Quotes</h3>
-                    </div>
-                    <?php $days = [
-                        'Sunday',
-                        'Monday',
-                        'Tuesday',
-                        'Wednesday',
-                        'Thursday',
-                        'Friday',
-                        'Saturday',
-                    ]; ?>
-                    @if(!empty($quotes) && count($quotes) > 0)
-                        @foreach($quotes as $key=>$quote)
-                            <div class="form-group">
-                                <label for="usr-{{$key}}">{{$key}}:</label>
-                                <input type="text" name="quotes[{{$key}}]" class="form-control" value="{{$quote}}" id="usr-{{$key}}">
-                            </div>
-                        @endforeach
-                        @else
-                        @foreach($days as $day)
-                            <div class="form-group">
-                                <label for="usr-{{$day}}">{{$day}}:</label>
-                                <input type="text" name="quotes[{{$day}}]" class="form-control" id="usr-{{$day}}">
-                            </div>
-                        @endforeach
-                    @endif
 
 
-                </div>
-                <div class="row m-t-10">
+            <div class="row m-t-10">
+                <form action="{{url('/quotes')}}" method="post">
+                    {{ csrf_field() }}
                     <div class="col-sm-12">
-                        <button type="submit" class="btn btn-primary pull-right">Save</button>
+                        <div class="form-group">
+                            <label for="quote">New Quote:</label>
+                            <input type="text" class="form-control" name="name" id="quote">
+                        </div>
                     </div>
+                    <div class="col-sm-12 m-b-20">
+                        <button type="submit" class="btn btn-primary pull-right">Add Quote</button>
+                        <button type="button" class="btn btn-success pull-right m-r-20 new-broadcast">New Broadcast</button>
+                    </div>
+                </form>
+                <div class="col-sm-12  m-b-20">
+                    <h3 class="box-title m-b-0">Quotes</h3>
                 </div>
-            </form>
+                <div class="col-sm-12">
+                    <ul class="list-group">
+                        @foreach($quotes as $key=>$quote)
+                            <li class="list-group-item">{{$quote->name}}
+                                <span class="badge remove-quote-btn" style="cursor: pointer" data-id="{{$quote->id}}"><i class="fa fa-close"></i></span>
+                                @if($quote->is_active==1)
+                                    <span class="badge bg-success m-r-20">Active</span>
+                                @endif
+                                <div class="hidden">
+                                    <form action="{{url('quotes/'.$quote->id.'/delete')}}" method="post">
+                                        {{ csrf_field() }}
+                                        <input type="submit" class="remove-quote-{{$quote->id}}" value="submit">
+                                    </form>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="hidden">
+                    <form action="{{url('quotes/broadcast')}}" method="post">
+                        {{ csrf_field() }}
+                        <input type="submit" class="broadcast-submit" value="submit">
+                    </form>
+                </div>
+            </div>
+
         </div>
     </div>
     <script>
@@ -80,6 +86,15 @@
             }, {{ $timeout * $key }});
             @endforeach
             @endif
+
+            $('.remove-quote-btn').click(function(){
+                var id=$(this).data('id');
+                $('.remove-quote-'+id).trigger('click');
+            });
+
+            $('.new-broadcast').click(function(){
+                $('.broadcast-submit').trigger('click');
+            })
         }
     </script>
 @endsection

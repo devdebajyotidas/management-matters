@@ -23,14 +23,17 @@
             @if(session('role')!='admin')
                 @if(session('role')=='organization')
                     <?php
-                    $tipscount=\App\Models\Ticket::whereIn('learner_id',auth()->user()->account->learners()->pluck('learners.id')->toArray())->whereDate('created_at','=',date('Y-m-d'))->count();
+                    $tickets=\App\Models\Ticket::with(['assignments'])->whereIn('learner_id',auth()->user()->account->learners()->pluck('learners.id')->toArray())->where("is_archived",0)->where('is_completed',0)->whereDate('created_at','=',date('Y-m-d'))->pluck('id');
+                    $assignments=\App\Models\TicketAssignment::whereIn('ticket_id',$tickets)->count();
                     ?>
                 @else
                     <?php
-                    $tipscount=\App\Models\Ticket::where('learner_id',auth()->user()->account_id)->whereDate('created_at','=',date('Y-m-d'))->count();
+                    $tickets=\App\Models\Ticket::where('learner_id',auth()->user()->account_id)->where("is_archived",0)->where('is_completed',0)->whereDate('created_at','=',date('Y-m-d'))->pluck('id');
+                    $assignments=\App\Models\TicketAssignment::whereIn('ticket_id',$tickets)->count();
                     ?>
                 @endif
-                   @if($tipscount > 0)
+
+                   @if($assignments > 0)
                        <li><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false">
                                <i class="fas fa-lightbulb"></i>
                                <div class="notify"><span class="heartbit heartbit-white"></span><span class="point point-white"></span></div>
@@ -40,9 +43,9 @@
                                    <a href="{{url('tickets')}}">
                                        <div>
                                            @if(session('role')=='learner')
-                                               <p>You have a {{$tipscount}} Tickets scheduled for today to Manage Better</p>
+                                               <p>You have {{$assignments}} Ticket(s) scheduled for today to Manage Better!</p>
                                            @else
-                                               <p> There are {{$tipscount}} Managing Better Tickets scheduled for today within your managers in your organizatioin </p>
+                                               <p>Your organization has {{$assignments}} Ticket(s) schedulded for today to Manage Better! </p>
                                            @endif
                                        </div>
                                    </a>
@@ -50,25 +53,25 @@
                            </ul>
                        </li>
                    @endif
-                   <?php
-                    $quotes=unserialize(Storage::disk('public')->get('quotes.txt'));
-                    ?>
-                    @if(!empty($quotes) && isset($quotes[date('l')])))
-                        <li><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false" title="Quote of the day">
-                                <i class="fas fa-quote-right"></i>
-                                <div class="notify"><span class="heartbit heartbit-white"></span><span class="point point-white"></span></div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-tasks animated slideInUp">
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        {{$quotes[date('l')]}}
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    @endif
-            @endif
 
+            @endif
+                <?php
+                $quotes=\App\Models\Quotes::where('is_active',1)->first();
+                ?>
+                @if(isset($quotes->name))
+                <li><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false" title="Quote of the day">
+                        <i class="fas fa-quote-right"></i>
+                        <div class="notify"><span class="heartbit heartbit-white"></span><span class="point point-white"></span></div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks animated slideInUp">
+                        <li>
+                            <a href="javascript:void(0)">
+                                {{$quotes->name}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
              <li class="p-20 text-white">
                 @if(session('role')=='learner')
                     <span>Welcome, {{Auth::user()->account->name}}</span>

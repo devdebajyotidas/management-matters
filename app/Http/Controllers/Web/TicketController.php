@@ -142,7 +142,7 @@ class TicketController extends Controller
         $assignemnt = TicketAssignment::find($data['assignment']['id']);
         $assignemnt->note = ($data['assignment']['note']);
         if(!empty($type) && $type=='completed'){
-            $message="You've earned a management better badge";
+            $message="You have earned your Managing Better badge! ";
         }
         else if(!empty($type)){
             $message="Ticket has been ".$type." successfully";
@@ -161,7 +161,7 @@ class TicketController extends Controller
                     $award['learner_id'] = Auth::user()->account_id;
                     $award['title'] = "Activity award for " . $data['ticket']['title'] ;
                     $award['description']=$awstatus='activity';
-                    $message="You've earned a management better badge";
+                    $message="You have earned your Managing Better badge! ";
                     Award::create($award);
                 }
             }

@@ -33,7 +33,7 @@ class QuizController extends Controller
 
         if(session('role')=='admin'){
             $data['organizations']=Organization::all(['id','name']);
-            $data['quizs']=Quiz::with(['learner','learning'])->get();
+            $data['quizs']=Quiz::with(['learner','learning'])->orderBy('created_at')->get();
             return view('quiz.index', $data);
 
         }
@@ -42,13 +42,13 @@ class QuizController extends Controller
 
             $data['quizs']=Quiz::with(['learning', 'learner' => function($query){
                 $query->whereIn('id', Auth::user()->account->learners()->pluck('learners.id')->toArray());
-            }])->get();
+            }])->orderBy('created_at')->get();
             return view('quiz.index', $data);
         }
         else{
             $data['learnings'] =  Learning::with(['quizTaken' => function($query){
                 $query->where('learner_id','=',Auth::user()->account_id);
-            }])->get();
+            }])->orderBy('created_at')->get();
             $data['active_learning'] = $data['learnings']->find($learningId);
             return view('quiz.quiz', $data);
         }
@@ -167,7 +167,13 @@ class QuizController extends Controller
         if( $q->save()){
 
             DB::commit();
-            return redirect()->back()->with(['success'=>'Quiz result has been updated','award'=>$awstatus]);
+            if(!empty($awstatus)){
+                return redirect()->back()->with(['success'=>"Congratulations for obtaining 100% of this Quiz. You've earned yourself a Managing Better badge!",'award'=>$awstatus]);
+            }
+            else{
+                return redirect()->back()->with(['success'=>'Quiz result has been updated','award'=>$awstatus]);
+            }
+
         }
         else{
             DB::rollBack();

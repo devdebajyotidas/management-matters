@@ -381,7 +381,7 @@
             });
             $('.reset-quiz-btn').click(function(){
                 swal({
-                    title: 'Reset quiz to default?',
+                    title: ' Reset ALL Quizzes for this Learner to Default Settings?',
                     text: "You can't revert this later.",
                     type: 'warning',
                     showCancelButton: true,
