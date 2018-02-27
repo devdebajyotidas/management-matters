@@ -221,7 +221,7 @@
 
         }).call(this);
     </script>
-    @if($role=='learner')
+    @if(session('role')=='learner')
         <script type="text/javascript">
             (function() {
                 window.onload = function() {

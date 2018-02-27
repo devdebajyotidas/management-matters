@@ -7,6 +7,13 @@
         <div class="row m-t-15">
             <div class="col-md-4 col-xs-12">
                 <div class="white-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Profile</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="white-box">
 
                     <div class="user-bg">
                         <img width="100%" alt="user"

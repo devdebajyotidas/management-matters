@@ -25,7 +25,7 @@ class AwardController extends Controller
         $data['prefix']  = session('role');
         if(session('role')=='admin'){
             $data['organizations']=Organization::all(['id','name']);
-            $data['awards']=Award::with('learner')->get();
+            $data['awards']=Award::with('learner')->orderBy('created_at', 'desc')->get();
 
             return view('awards.index', $data);
         }
@@ -34,12 +34,12 @@ class AwardController extends Controller
 
             $data['awards']=Award::with(['learner' => function($query){
                  $query->whereIn('id',Auth::user()->account->learners()->pluck('learners.id')->toArray());
-            }])->whereIn('learner_id',Auth::user()->account->learners()->pluck('learners.id')->toArray())->get();
+            }])->whereIn('learner_id',Auth::user()->account->learners()->pluck('learners.id')->toArray())->orderBy('created_at', 'desc')->get();
 
             return view('awards.index', $data);
         }
         else{
-            $data['awards']=Award::where('learner_id',Auth::user()->account_id)->get();
+            $data['awards']=Award::where('learner_id',Auth::user()->account_id)->orderBy('created_at', 'desc')->get();
             return view('awards.awards', $data);
         }
 

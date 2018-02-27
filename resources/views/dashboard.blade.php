@@ -1104,7 +1104,7 @@
             var date = [];
             var result = $.parseJSON('{!! json_encode($cost) !!}');
             $.each(result, function(k, v) {
-                @if($role == 'learner')
+                @if(session('role') == 'learner')
                 date.push(moment(k).format("MM/DD/YYYY"));
                 @else
                 date.push(k);
@@ -1120,7 +1120,7 @@
                 }
             });
 
-            @if($role != 'admin')
+            @if(session('role') != 'admin')
 
             Highcharts.chart('chart', {
 

@@ -15,7 +15,7 @@
         </div>
         @endif
         <ul class="nav" id="side-menu">
-            @if($role=="admin")
+            @if(session('role')=="admin")
                 <li @if($page=='dashboard') class="tab-current" @endif><a href="{{url('/dashboard')}}" class="sticon ti-home"><span>Dashboard</span></a></li>
                 <li @if($page=='learnings') class="tab-current" @endif><a href="{{url('/learnings')}}" class="sticon ti-blackboard"><span>Learnings</span></a></li>
                 <li @if($page=='cost') class="tab-current" @endif><a href="{{url('/cost/edit')}}" class="sticon ti-stats-down"><span>Cost of Not</span></a></li>
@@ -27,7 +27,7 @@
                 <li @if($page=='awards') class="tab-current" @endif><a href="{{url('/awards')}}" class="sticon ti-crown"><span>Award Board</span></a></li>
             @endif
 
-            @if($role=="organization")
+            @if(session('role')=="organization")
                 <li @if($page=='dashboard') class="tab-current" @endif><a href="{{url('/dashboard')}}" class="waves-effect"><i class="sticon ti-home"></i> <span class="hide-menu">Dashboard</span></a></li>
                 <li @if($page=='learnings') class="tab-current" @endif><a href="{{url('/learnings')}}" class="waves-effect"><i class="sticon ti-blackboard"></i> <span class="hide-menu">Learnings</span></a></li>
                 <li @if($page=='learners') class="tab-current" @endif><a href="{{url('organizations/'. auth()->user()->account_id .'/learners')}}" class="waves-effect"><i class="sticon ti-user"></i> <span class="hide-menu">Learners</span></a></li>
@@ -37,7 +37,7 @@
                 <li @if($page=='awards') class="tab-current" @endif><a href="{{url('/awards')}}" class="waves-effect"><i class="sticon ti-crown"></i> <span class="hide-menu">Award Board</span></a></li>
             @endif
 
-                @if($role=="learner")
+                @if(session('role')=="learner")
                     <li @if($page=='dashboard') class="tab-current" @endif><a href="{{url('/dashboard')}}" class="waves-effect"><i class="sticon ti-home"></i> <span class="hide-menu">Dashboard</span></a></li>
                     <li @if($page=='learnings') class="tab-current" @endif><a href="{{url('/learnings')}}" class="waves-effect"><i class="sticon ti-blackboard"></i> <span class="hide-menu">Learnings</span></a></li>
                     <li @if($page=='cost') class="tab-current" @endif><a href="{{url('/cost')}}" class="waves-effect"><i class="sticon ti-stats-down"></i> <span class="hide-menu">Cost of Not Managing Better</span></a></li>

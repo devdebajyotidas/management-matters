@@ -62,6 +62,7 @@ Route::group(['namespace' => 'Web'], function () {
     Route::put('learners/{id}', 'LearnerController@update');
     Route::delete('learners/{id}', 'LearnerController@delete');
     Route::put('learners/{id}/restore', 'LearnerController@restore');
+    Route::post('learners/{id}/changedepartment', 'LearnerController@changedepartment');
 
     Route::post('learners/{id}/resetassessment', 'LearnerController@resetassessment');
     Route::post('learners/{id}/resetconmb', 'LearnerController@resetconmb');

@@ -158,6 +158,7 @@ class LearnerController extends Controller
         $data['role'] = session('role');
         $data['prefix']  = session('role') . '/' .Auth::user()->account_id;
         $data['learner'] = $learner;
+        $data['departments']=Department::where('organization_id',Auth::user()->account_id)->get();
 
         return view('learners.profile',$data);
     }
@@ -498,4 +499,20 @@ class LearnerController extends Controller
         }
     }
 
+
+    function changedepartment(Request $request,$id){
+        DB::beginTransaction();
+
+        $learner=Learner::find($id);
+        $learner->department_id=$request->department;
+        if($learner->update()){
+            DB::commit();
+            return redirect()->back()->with(['success' => 'Learner department has been changed']);
+        }
+        else{
+            DB::rollBack();
+            return redirect()->back()->withErrors(['Something went wrong']);
+        }
+
+    }
 }

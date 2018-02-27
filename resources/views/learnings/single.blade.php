@@ -4,7 +4,7 @@
 
     <style>
         .learn-banner {
-            height: 80vh;
+            height: 50vh;
             width: calc(100% + 18px);
             margin: 0 -9px;
             background-size: cover;
@@ -40,8 +40,15 @@
         }
     </style>
 
-    <div class="row">
+    <div class="row" >
         <div class="col-md-12">
+            <div class="white-box m-t-15 m-l-15 m-r-15">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Learning Module</h3>
+                    </div>
+                </div>
+            </div>
             <div class="white-box p-0 m-t-0 m-l-15 m-r-15">
                 <div class="col-md-12 col-xs-12 col-sm-12" >
                     <div class="learn-banner" style="background-image: url({{isset($learnings) ? asset('uploads/'.$learnings->image) : 'emails'}})">
@@ -49,7 +56,7 @@
                     <div class="white-box details-learn">
                         <h3 class="m-t-15 m-b-20" style="color: #fff;">{{ $learnings->title }}</h3>
                         <p>{{ $learnings->description }}</p>
-                        @if($role == 'learner')
+                        @if(session('role') == 'learner')
                             <a class="fcbtn btn btn-primary btn-outline btn-1b ticket" href="{{ url('tickets') }}">Create Ticket</a>
                             <a href="{{ url('learnings/'.$learnings->id.'/quiz') }}" class="fcbtn btn btn-primary btn-outline btn-1b quize">Take Quiz</a>
                        @endif
@@ -57,8 +64,9 @@
                 </div>
                 <section class="m-t-40 learning-content">
                     <div class="sttabs tabs-style-linebox">
+                        {{--<nav class="affix-top" data-spy="affix-top" data-offset-top="500">--}}
                         <nav>
-                            <ul>
+                            <ul >
                                 <li class="tab-current"><a href="#chapter-introduction"><span>Introduction</span></a></li>
                                 @foreach($learnings->chapters as $key => $chapter)
                                 <li><a href="#chapter-{{$key+1}}"><span>{{ $chapter['name'] }}</span></a></li>

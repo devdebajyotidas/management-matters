@@ -3,8 +3,16 @@
     @include('includes.main-menu')
     <div class="firework"></div>
     <div class="container-fluid">
+
         <div class="row m-t-15">
             <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="white-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Assessments</h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div id="assessment-chart" style="box-shadow: 0 1px 3px rgba(0,0,0,0.14)"></div>
@@ -13,7 +21,7 @@
                 <div class="row m-t-20">
                     <div class="col-md-12">
                         <div class="scrollable white-box">
-                            @if($role == 'learner')
+                            @if(session('role')== 'learner')
                                 <h3 class="box-title">
                                     <a href="{{ url('assessments/new') }}" class="btn btn-info">
                                         Take New Assessment
@@ -79,12 +87,12 @@
                                                data-page-size="10" data-filter="#search-learner">
                                             <thead>
                                             <tr>
-                                                @if($role='admin')
+                                                @if(session('role')=='admin')
                                                     <th>Organization</th>
-                                                @elseif($role=='organization')
+                                                @elseif(session('role')=='organization')
                                                     <th>Department</th>
                                                 @endif
-                                                @if($role != 'learner')
+                                                @if(session('role')!= 'learner')
                                                     <th>Learner</th>
                                                 @endif
                                                 <th>Score</th>
@@ -95,21 +103,21 @@
                                             @if(isset($assessments))
                                                 @foreach($assessments as $assessment)
                                                     <tr>
-                                                        @if($role == "admin")
+                                                        @if(session('role') == "admin")
                                                             @if(isset($assessment->learner->organization->name))
                                                                 <td>{{ $assessment->learner->organization->name }}</td>
                                                             @else
                                                                 <td>Not Applicable</td>
                                                             @endif
 
-                                                        @elseif($role=='organization')
+                                                        @elseif(session('role')=='organization')
                                                             @if(isset($assessment->learner->department->name))
                                                                 <td>{{ $assessment->learner->department->name }}</td>
                                                             @else
                                                                 <td>Not Applicable</td>
                                                             @endif
                                                         @endif
-                                                        @if($role != 'learner')
+                                                        @if(session('role') != 'learner')
                                                             <td>{{ $assessment->learner->name }}</td>
                                                         @endif
 

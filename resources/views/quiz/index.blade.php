@@ -6,6 +6,13 @@
         <!-- row -->
         <div class="row m-t-15">
             <div class="col-md-12">
+                <div class="white-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Quiz</h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="white-box p-0">
                     <!-- .left-right-aside-column-->
                     <div class="page-aside">
@@ -84,7 +91,7 @@
                                         @if(isset($quizs))
                                         @foreach($quizs as $quiz)
                                             <tr>
-                                                @if($role == "admin")
+                                                @if(session('role') == "admin")
                                                     @if(isset($quiz->learner->organization->name))
                                                         <td>{{ $quiz->learner->organization->name }}</td>
                                                     @else

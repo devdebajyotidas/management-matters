@@ -5,9 +5,16 @@
         <!-- row -->
         <div class="row m-t-15">
             <div class="col-md-12">
+                <div class="white-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Learners</h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="white-box p-0">
                         <div class="hidden">
-                            <input type="hidden" class="user-role" value="{{$role}}">
+                            <input type="hidden" class="user-role" value="{{session('role')}}">
                             @if(isset($organization->subscription->licenses))
                                 <input type="hidden" id="learner-flag" value="{{ $organization->subscription->licenses > (count($organization->learners) - $organization->learners()->archived()->count()) ? '1' : '0'}}" >
                             @else
@@ -20,7 +27,7 @@
                         <div class="left-aside">
                             <div class="scrollable">
                                 <ul id="department-list" class="list-style-none">
-                                    @if($role=='organization' )
+                                    @if(session('role')=='organization' )
                                         <li class="text-primary">
                                             <a href="javascript:void(0)"  style="color:#0275D8">
                                                 Total Licenses
@@ -94,9 +101,9 @@
                                                 @foreach($department->learners as $learner)
                                                     <tr class="{{ $learner->trashed()? 'bg-warning':'' }}">
                                                         <td>
-                                                            <a href="{{ url( '/learners/'. $learner->id) }}">
-                                                                {{--<img src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/images/users/genu.jpg"--}}
-                                                                {{--alt="user" class="img-circle"/>--}}
+                                                           <a href="{{ url( '/learners/'. $learner->id) }}">
+                                                               <img src="{{ ($learner->image)? asset('uploads/'.$learner->image) : 'http://sanarch.in/public/images/defaultAvatar.png' }}"
+                                                                    alt="user" class="img-circle"/>
                                                                 {{ $learner->name }}
                                                             </a>
                                                         </td>
