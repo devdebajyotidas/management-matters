@@ -3,7 +3,7 @@
         <div class="sttabs tabs-style-iconbox">
             <nav>
                 <ul>
-                    @if($role=="admin")
+                    @if(session('role')=="admin")
                         <li @if($page=='dashboard') class="tab-current" @endif><a href="{{url('/dashboard')}}" class="sticon ti-home"><span>Dashboard</span></a></li>
                         <li @if($page=='learnings') class="tab-current" @endif><a href="{{url('/learnings')}}" class="sticon ti-blackboard"><span>Learnings</span></a></li>
                         <li @if($page=='cost') class="tab-current" @endif><a href="{{url('/cost/edit')}}" class="sticon ti-stats-down"><span>Cost of Not</span></a></li>
@@ -15,7 +15,7 @@
                         <li @if($page=='awards') class="tab-current" @endif><a href="{{url('/awards')}}" class="sticon ti-medall"><span>Award Board</span></a></li>
                     @endif
 
-                    @if($role=="organization")
+                    @if(session('role')=="organization")
                         <li @if($page=='dashboard') class="tab-current" @endif><a href="{{url('/dashboard')}}" class="sticon ti-home"><span>Dashboard</span></a></li>
                         <li @if($page=='learnings') class="tab-current" @endif><a href="{{url('/learnings')}}" class="sticon ti-blackboard"><span>Learnings</span></a></li>
                         <li @if($page=='learners') class="tab-current" @endif><a href="{{url('organizations/'. auth()->user()->account_id .'/learners')}}" class="sticon ti-pencil-alt"><span>Learners</span></a></li>
@@ -25,7 +25,7 @@
                         <li @if($page=='awards') class="tab-current" @endif><a href="{{url('/awards')}}" class="sticon ti-medall"><span>Award Board</span></a></li>
                     @endif
 
-                    @if($role=="learner")
+                    @if(session('role')=="learner")
                             <li @if($page=='dashboard') class="tab-current" @endif><a href="{{url('/dashboard')}}" class="sticon ti-home"><span>Dashboard</span></a></li>
                             <li @if($page=='learnings') class="tab-current" @endif><a href="{{url('/learnings')}}" class="sticon ti-blackboard"><span>Learnings</span></a></li>
                             <li @if($page=='cost') class="tab-current" @endif><a href="{{url('/cost')}}" class="sticon ti-stats-down"><span>Cost of Not Managing Better</span></a></li>

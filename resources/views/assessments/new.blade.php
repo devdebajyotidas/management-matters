@@ -44,7 +44,13 @@
     <div class="container-fluid">
 
         <div class="white-box m-t-15">
-
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>New Assessment</h3>
+                </div>
+            </div>
+        </div>
+        <div class="white-box m-t-15">
             <div class="row">
                 <form action="{{ url('assessments/new') }}" method="post">
                     {{ csrf_field() }}

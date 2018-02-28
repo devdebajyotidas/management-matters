@@ -7,6 +7,13 @@
         <div class="row m-t-15">
             <div class="col-md-4 col-xs-12">
                 <div class="white-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Profile</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="white-box">
                     <div class="user-bg">
                         <img width="100%" alt="user"
                              src="{{ ($learner->image)? asset('uploads/'.$learner->image) : 'http://sanarch.in/public/images/defaultAvatar.png' }}">
@@ -296,6 +303,7 @@
                                     <button type="button" class="btn btn-danger waves-effect reset-conmb-btn">Reset CONMB</button>
                                     @if(session('role')=='organization')
                                         <button type="button" class="btn btn-danger waves-effect reset-quiz-btn">Reset Quiz</button>
+                                        <button type="button" class="btn btn-primary waves-effect change-department-btn">Change Department</button>
                                     @endif
                                     @if(session('role')=='learner')
                                         <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
@@ -324,6 +332,44 @@
             </div>
         </div>
         <!-- /.row -->
+        <div id="add-department" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Change Department</h4>
+                    </div>
+                    <form class="form-horizontal" action="{{ url('/learners/'.$learner->id.'/changedepartment')}}" method="post">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="sel1">Select Department:</label>
+                                <select class="form-control" id="sel1" name="department">
+                                    @if(isset($departments) && count($departments) > 0)
+                                        @foreach($departments as $department)
+                                            <option value="{{$department->id}}">{{$department->name}}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="">None</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="hidden">
+                                <input type="hidden" name="learner_department" value="{{isset($learner->department_id) ? $learner->department_id : ''}}">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-info waves-effect">Save</button>
+                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
     </div>
     <!-- /.container-fluid -->
 
@@ -381,7 +427,7 @@
             });
             $('.reset-quiz-btn').click(function(){
                 swal({
-                    title: 'Reset quiz to default?',
+                    title: ' Reset ALL Quizzes for this Learner to Default Settings?',
                     text: "You can't revert this later.",
                     type: 'warning',
                     showCancelButton: true,
@@ -396,6 +442,9 @@
 
                 })
             });
+            $('.change-department-btn').click(function(){
+                $('#add-department').modal('show');
+            })
         }
         function previewImage(input) {
             if (input.files && input.files[0]) {

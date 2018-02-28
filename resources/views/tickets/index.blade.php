@@ -6,6 +6,13 @@
         <!-- row -->
         <div class="row m-t-15">
             <div class="col-md-12">
+                <div class="white-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Tickets</h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="white-box p-0">
                     <!-- .left-right-aside-column-->
                     <div class="page-aside">
@@ -77,7 +84,7 @@
                                            data-page-size="10" data-filter="#search-learner">
                                         <thead>
                                         <tr>
-                                            @if($role=='admin')
+                                            @if(session('role')=='admin')
                                                 <th>Organization</th>
                                             @else
                                                 <th>Department</th>
@@ -94,7 +101,7 @@
 
                                         @foreach($tickets as $ticket)
                                             <tr>
-                                                @if($role=='admin')
+                                                @if(session('role')=='admin')
                                                     <td>{{ isset($ticket->learner->department->organization->name) ? $ticket->learner->department->organization->name : 'Not Applicable' }}</td>
                                                 @else
                                                     <td>{{ isset($ticket->learner->department->name) ? $ticket->learner->department->name : 'Not Applicable'  }}</td>

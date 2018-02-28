@@ -90,9 +90,16 @@
 
     <div class="container-fluid">
         <div class="row m-t-15 m-b-0">
+
             <div class="col-md-12" >
+                <div class="white-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Learning Modules</h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel panel-default block1" style="box-shadow: 0 1px 3px rgba(0,0,0,0.14)">
-                    <div class="panel-heading text-center">Learning Modules</div>
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body text-center">
                             <p>
@@ -100,17 +107,17 @@
                             </p>
                         </div>
                         <div class="panel-footer text-center">
-                            @if($role == 'organization')
+                            @if(session('role') == 'organization')
                                 <p>
                                     As an Organization, you can customize our learning modules to ensure maximum impact on your learners. You can add images and text in the beginning of each modules.
                                 </p>
                             @endif
-                            @if($role == 'learner')
+                            @if(session('role') == 'learner')
                                 <p>
                                     Study and learn how to better manage yourself and the people within your organization. Take quiz,
                                 </p>
                             @endif
-                            @if($role == 'admin')
+                            @if(session('role') == 'admin')
                                 <hr>
                                 <a href="{{ 'learnings/create' }}" class="btn btn-primary">Add Learning Module</a>
                             @endif
@@ -144,10 +151,10 @@
                         {{--</div>--}}
                         {{--<div class="start-learning">--}}
                         <div class="learning-overlay">
-                            @if($role == 'learner')
+                            @if(session('role') == 'learner')
                                 <a href="{{ url('learnings/'.$learning->id) }}" class="btn btn-lg btn-rounded btn-info"> Start Learning</a>
                             @endif
-                            @if($role == 'organization' || $role == 'admin')
+                            @if(session('role') == 'organization' || session('role') == 'admin')
                                     <a href="{{ url('learnings/'. $learning->id) }}" class="btn btn-lg btn-rounded btn-info"> View</a>
                                     <a href="{{ url('learnings/'. $learning->id .'/edit') }}" class="btn btn-lg btn-rounded btn-info" style="margin-left: 25px;"> Edit</a>
                             @endif

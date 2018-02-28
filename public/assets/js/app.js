@@ -53,7 +53,7 @@ $(document).ready(function () {
         ]
     });
 
-    learnersTable.on('click', '.remove-learner', function() {
+    learnersTable.on('click', '.delete-learner', function() {
 
         var that = $(this);
         swal({
@@ -105,7 +105,7 @@ $(document).ready(function () {
         $('#edit-department').modal('show');
     })
 
-    $('#learners-table').on('click', '.archive-learner', function() {
+    $('#learners-table').on('click', '.remove-learner', function() {
 
         var that = $(this);
         swal({

@@ -6,6 +6,13 @@
         <!-- row -->
         <div class="row m-t-15">
             <div class="col-md-12">
+                <div class="white-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Organizations</h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="white-box p-0">
                     <!-- .left-right-aside-column-->
                     <div class="page-aside">
@@ -31,7 +38,8 @@
                                                 @foreach($organizations as $learner)
                                                     <tr class="{{ $learner->trashed()? 'bg-warning':'' }}">
                                                         <td>
-                                                         {{$learner->name}}
+                                                            <span class="image-thumb m-r-5"><img src="{{ ($learner->image) ? asset('uploads/'.$learner->image) : 'http://sanarch.in/public/images/defaultAvatar.png' }}"></span>
+                                                            {{$learner->name}}
                                                         </td>
                                                         <td>{{ isset($learner->user->email) ? $learner->user->email : 'N/A' }}</td>
                                                         <td>{{ $learner->phone }}</td>

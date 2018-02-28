@@ -49,4 +49,7 @@
     .notify{
         margin-top:-35px;
     }
+    .highcharts-credits{
+        display: none !important;
+    }
 </style>

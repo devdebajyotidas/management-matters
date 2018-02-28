@@ -35,8 +35,7 @@ Route::group(['namespace' => 'Web'], function () {
     Route::get('/abort', 'HomeController@abort');
     Route::get('/unauthorized', 'Auth\LoginController@unauthorized')->name('unauthorized');
 
-    Route::get('/controls', 'HomeController@controls');
-    Route::post('/quotes', 'HomeController@savequotes');
+
 
 
 
@@ -63,6 +62,7 @@ Route::group(['namespace' => 'Web'], function () {
     Route::put('learners/{id}', 'LearnerController@update');
     Route::delete('learners/{id}', 'LearnerController@delete');
     Route::put('learners/{id}/restore', 'LearnerController@restore');
+    Route::post('learners/{id}/changedepartment', 'LearnerController@changedepartment');
 
     Route::post('learners/{id}/resetassessment', 'LearnerController@resetassessment');
     Route::post('learners/{id}/resetconmb', 'LearnerController@resetconmb');
@@ -98,6 +98,7 @@ Route::group(['namespace' => 'Web'], function () {
 
     Route::post('assignments','TicketAssignmentController@store');
     Route::put('assignments/{id}','TicketAssignmentController@update');
+    Route::post('assignments/{id}/delete','TicketAssignmentController@delete');
 
     Route::get('awards', 'AwardController@index');
     Route::post('awards/create', 'AwardController@store');
@@ -137,6 +138,10 @@ Route::group(['namespace' => 'Web'], function () {
     Route::delete('organizations/{id}/remove', 'OrganizationController@remove');
     Route::delete('learners/{id}/remove', 'LearnerController@remove');
 
+    Route::post('quotes', 'QuotesController@store');
+    Route::get('controls', 'QuotesController@index');
+    Route::post('quotes/{id}/delete', 'QuotesController@delete');
+    Route::post('quotes/broadcast', 'QuotesController@broadcast');
 
 //    });
 

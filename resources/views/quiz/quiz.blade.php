@@ -224,9 +224,10 @@
                                 @if(isset($_GET['retake']))
                                     <button type="button" class="btn btn-primary btn-next disabled">Next</button>
                                 @else
-                                    @if($active_learning->quizTaken[0]->is_completed==0)
-                                        <a href="?retake=true" type="button" class="btn btn-primary" >Retake</a>
-                                    @endif
+                                    {{--@if($active_learning->quizTaken[0]->is_completed==0)--}}
+                                        {{--<a href="?retake=true" type="button" class="btn btn-primary" >Retake</a>--}}
+                                    {{--@endif--}}
+                                    <a href="?retake=true" type="button" class="btn btn-primary" >Retake</a>
                                 @endif
 
                             @endif

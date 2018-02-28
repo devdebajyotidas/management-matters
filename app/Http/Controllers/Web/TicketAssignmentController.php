@@ -103,4 +103,23 @@ class TicketAssignmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    function delete($id){
+        DB::beginTransaction();
+
+        if(!empty($id)){
+            $assignemnt = TicketAssignment::find($id);
+            if($assignemnt->forceDelete()){
+                DB::commit();
+                return redirect()->back()->with('success', 'Assignment has been removed');
+            }
+            else{
+                DB::rollBack();
+                return redirect()->back()->withErrors(['Something went wrong!']);
+            }
+        }
+        else{
+            return redirect()->back()->withErrors(['Something went wrong!']);
+        }
+    }
 }

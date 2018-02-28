@@ -121,6 +121,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <button id="delete-ticket" type="button" class="btn btn-danger waves-effect pull-left">Delete</button>
                         <button id="archive-ticket" type="submit" name="ticket[archive]" value="true" class="btn btn-warning waves-effect pull-left">Acrhive</button>
                         <button id="complete-ticket" type="submit" name="ticket[complete]"  value="true" class="btn btn-success waves-effect pull-left">Mark Complete</button>
                         <button id="save-ticket" type="submit"  name="submit" value="true" class="btn btn-info waves-effect">Save</button>
@@ -130,7 +131,13 @@
                 <input type="submit" class="hidden" id="submit">
                 <!-- /.modal-content -->
             </form>
-
+            <div class="hidden">
+                <form id="deleteTicketForm" action="" method="post">
+                    {{ csrf_field() }}
+                    <input type="hidden" class="hidden-id">
+                    <input type="submit" class="delete-ticket-submit" value="delete">
+                </form>
+            </div>
         </div>
         <!-- /.modal-dialog -->
     </div>
@@ -202,10 +209,11 @@
                 events: tickets,
                 timezone: 'UTC',
                 eventClick: function (calEvent, jsEvent, view) {
-                     $("input[name='assignment[id]']").val(calEvent.id);
+                    $("input[name='assignment[id]']").val(calEvent.id);
                     initTicketEditor(calEvent,'Edit');
                     $('#ticket-editor').modal('show');
                     $('#award-title').val(calEvent.title);
+                    $('#deleteTicketForm').attr('action', '{{ url('assignments') }}' + '/' + calEvent.id+'/delete');
                 },
                 drop:function( date, jsEvent, ui, resourceId ) {
                     $('#ticket-editor input[name="_method"]').val('post');
@@ -220,14 +228,13 @@
                     $('#ticket-editor input[name="_method"]').val('put');
                     $('#ticket-editor').find('input[name="assignment[target_date]"]').val(event.start.format());
                     $('#ticket-editor').find('input[name="assignment[ticket_id]"]').val(event.ticket.id);
-                    $('#ticket-editor').find('form').attr('action','{{ url('assignments') }}' + '/' + event.id);
+                    $('#ticket-editor').find('form').attr('action', '{{ url('assignments') }}' + '/' + event.id);
                     $('#ticket-editor').find('#submit').trigger('click');
 
                 }
 
             });
         }
-
         window.onload=function () {
 
 
@@ -325,6 +332,10 @@
             @endforeach
             @endif
 
+            $('#delete-ticket').click(function(){
+                $('.delete-ticket-submit').trigger('click');
+            })
+
         };
 
         function initTicketEditor(ticket = null, mode = 'Create') {
@@ -347,28 +358,43 @@
             if(isArchived || isCompleted){
                 mode = '';
                 $("#note").parent().show();
-                $('#archive-ticket,#save-ticket,#ticket-title,#target-date,#note,#impact,#learning-module').attr('readonly','');
+                $('#archive-ticket,#save-ticket,#ticket-title,#target-date,#note,#impact,#learning-module,#delete-ticket').attr('readonly','');
                 $('#ticket-editor .modal-footer').hide();
+                if(isCompleted){
+                    $('#ticket-editor').find('.modal-title').removeClass('text-warning')
+                    $('#ticket-editor').find('.modal-title').text( 'This ticket has been completed').addClass('text-success');
+                }
+                else{
+                    $('#ticket-editor').find('.modal-title').removeClass('text-success');
+                    $('#ticket-editor').find('.modal-title').text( 'This ticket has been archived').addClass('text-warning');
+                }
+
             }else{
                 $("#note").parent().show();
-                $('#archive-ticket,#save-ticket,#ticket-title,#note,#impact,#learning-module').removeAttr('readonly');
+                $('#archive-ticket,#save-ticket,#ticket-title,#note,#impact,#learning-module,#delete-ticket').removeAttr('readonly');
                 $('#ticket-editor .modal-footer').show();
+                $('#ticket-editor').find('.modal-title').removeClass('text-warning');
+                $('#ticket-editor').find('.modal-title').removeClass('text-success');
             }
             if(mode == 'Create'){
                 $("#note").parent().hide();
                 $('#archive-ticket').hide();
                 $("#complete-ticket").hide();
+                $("#delete-ticket").hide();
                 $('#ticket-editor input[name="_method"]').val('post');
+                $('#ticket-editor').find('.modal-title').text(mode + ' Ticket');
             }
             if(mode == 'Edit'){
                 $('#ticket-editor form').attr('action', formAction + '/' + id);
                 $('#archive-ticket').show();
                 $("#complete-ticket").show();
+                $("#delete-ticket").show();
                 $("#note").parent().show();
                 $('#ticket-editor input[name="_method"]').val('put');
+                $('#ticket-editor').find('.modal-title').text(mode + ' Ticket');
             }
 
-            $('#ticket-editor').find('.modal-title').text(mode + ' Ticket');
+
         }
 
 

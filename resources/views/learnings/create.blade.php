@@ -3,14 +3,25 @@
     @include('includes.main-menu')
 
     <div class="container-fluid">
+        <div class="white-box m-t-15">
+            <div class="row ">
+                <div class="col-md-12">
+                    @if(session('role')=='admin')
+                        <h3>New Learning Module</h3>
+                    @else
+                        <h3>Edit Learning Module</h3>
+                    @endif
 
+                </div>
+            </div>
+        </div>
         <form action="" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             @if(isset($learning))
                 {{ method_field('put') }}
             @endif
 
-            @if($role=="admin")
+            @if(session('role')=="admin")
             <div class="row m-t-30">
                 <div class="col-sm-12">
                     <div class="white-box">
@@ -79,7 +90,7 @@
                 </div>
             </div>
 
-            @if($role=="admin")
+            @if(session('role')=="admin")
             <div class="row">
                 <div class="col-sm-12">
                     <div class="white-box">
