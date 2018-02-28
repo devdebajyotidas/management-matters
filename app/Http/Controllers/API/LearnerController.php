@@ -56,6 +56,19 @@ class LearnerController extends Controller
 
             if ($customerValidator->passes() && $userValidator->passes())
             {
+
+                if($request->has('image') && $request->get('image') != null)
+                {
+                    $file = $request->get('image');
+                    $image_base64 = base64_decode($file);
+                    $name = public_path() . '/uploads/' . time() . rand(100,999) . ".jpg";
+                    if(file_put_contents($name, $image_base64)){
+                        $data['learner']['image'] = $name;
+                    }else{
+                        $data['learner']['image'] = null;
+                    }
+                }
+
                 $customer = Learner::create($data['learner']);
                 $user = User::make($data['user']);
                 if($customer->user()->save($user)){
