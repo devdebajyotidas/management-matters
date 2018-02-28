@@ -65,9 +65,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-tasks animated slideInUp">
                         <li>
-                            <a href="javascript:void(0)">
-                                {{$quotes->name}}
-                            </a>
+                            <span class="quotes-text" style="display: block;padding: 10px 20px;">{{$quotes->name}}</span>
                         </li>
                     </ul>
                 </li>
