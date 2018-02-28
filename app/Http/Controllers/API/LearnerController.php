@@ -56,6 +56,20 @@ class LearnerController extends Controller
 
             if ($customerValidator->passes() && $userValidator->passes())
             {
+
+                if($request->has('image') && $request->get('image') != null)
+                {
+                    $file = $request->get('image');
+                    $image_base64 = base64_decode($file);
+                    $name = time() . rand(100,999) . ".jpg";
+                    $path = public_path() . '/uploads/' . $name;
+                    if(file_put_contents($path, $image_base64)){
+                        $data['learner']['image'] = $name;
+                    }else{
+                        $data['learner']['image'] = null;
+                    }
+                }
+
                 $customer = Learner::create($data['learner']);
                 $user = User::make($data['user']);
                 if($customer->user()->save($user)){
@@ -131,6 +145,19 @@ class LearnerController extends Controller
 
             if ($customerValidator->passes() && $userValidator->passes())
             {
+                if($request->has('image') && $request->get('image') != null)
+                {
+                    $file = $request->get('image');
+                    $image_base64 = base64_decode($file);
+                    $name = time() . rand(100,999) . ".jpg";
+                    $path = public_path() . '/uploads/' . $name;
+                    if(file_put_contents($path, $image_base64)){
+                        $data['learner']['image'] = $name;
+                    }else{
+                        $data['learner']['image'] = null;
+                    }
+                }
+
                 $learner = Learner::find($id);
                 $sub=Subscription::where('account_id',$id)->first();
                 $learner->fill($data['learner']);
