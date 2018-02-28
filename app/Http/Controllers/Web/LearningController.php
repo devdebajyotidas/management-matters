@@ -28,7 +28,7 @@ class LearningController extends Controller
         $data['role'] = session('role');
         $data['prefix']  = session('role') . '/' . Auth::user()->account_id;
 
-        $learnings = Learning::all();
+        $learnings = Learning::orderBy('title','ASC')->get();
         $size = ceil($learnings->count() / 3);
         $chunks = $learnings->chunk($size);
 
