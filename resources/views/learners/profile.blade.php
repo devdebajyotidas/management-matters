@@ -305,9 +305,7 @@
                                         <button type="button" class="btn btn-danger waves-effect reset-quiz-btn">Reset Quiz</button>
                                         <button type="button" class="btn btn-primary waves-effect change-department-btn">Change Department</button>
                                     @endif
-                                    @if(session('role')=='learner')
-                                        <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
-                                    @endif
+                                    <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
                                 </div>
                             </form>
 

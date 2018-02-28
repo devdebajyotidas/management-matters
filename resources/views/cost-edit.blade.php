@@ -1,7 +1,11 @@
 ﻿@extends('layouts.app')
 @section('content')
     @include('includes.main-menu')
-
+    <style>
+        .fr-box > div:not(.fr-wrapper) > a{
+            display:none!important;
+        }
+    </style>
     <div class="container-fluid">
         <form action="" method="post">
             {{ csrf_field() }}

@@ -330,17 +330,17 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger waves-effect remove-account">Remove Account</button>
+                                    {{--<button type="button" class="btn btn-danger waves-effect remove-account">Remove Account</button>--}}
                                     <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
                                 </div>
                             </form>
-                            <div class="hidden">
-                                <form id="removeAccountForm" action="{{url('profile/'.$learner->id)}}" method="post">
-                                    {{ csrf_field() }}
-                                    {{ method_field('delete') }}
-                                    <input type="submit" id="deleteaccount" value="true" style="display: none">
-                                </form>
-                            </div>
+                            {{--<div class="hidden">--}}
+                                {{--<form id="removeAccountForm" action="{{url('profile/'.$learner->id)}}" method="post">--}}
+                                    {{--{{ csrf_field() }}--}}
+                                    {{--{{ method_field('delete') }}--}}
+                                    {{--<input type="submit" id="deleteaccount" value="true" style="display: none">--}}
+                                {{--</form>--}}
+                            {{--</div>--}}
                         </div>
                     </div>
                 </div>

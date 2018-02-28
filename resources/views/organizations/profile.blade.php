@@ -313,19 +313,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if(session('role')=='organization')
+
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
+                                        @if(session('role')=='organization')
+                                            <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
+                                        @else
+                                            <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
+                                            <button type="button" class="btn btn-info waves-effect add-license-btn">Add License</button>
+                                            <button type="button" class="btn btn-danger waves-effect reset-assessment-btn">Reset Assessment</button>
+                                            <button type="button" class="btn btn-danger waves-effect reset-conmb-btn">Reset CONMB</button>
+                                        @endif
                                     </div>
-                                @endif
+
 
                             </form>
                             @if(session('role')=='admin')
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-info waves-effect add-license-btn">Add License</button>
-                                    <button type="submit" class="btn btn-danger waves-effect reset-assessment-btn">Reset Assessment</button>
-                                    <button type="submit" class="btn btn-danger waves-effect reset-conmb-btn">Reset CONMB</button>
-                                </div>
                                 <div class="hidden">
                                     <form action="{{url('/organizations/'.$organization->id.'/resetassessment')}}" method="post">
                                         {{ csrf_field() }}
