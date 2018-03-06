@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\Learning;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class LearningController extends Controller
 {
@@ -45,9 +46,29 @@ class LearningController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        return Learning::find($id);
+        $email = $request->get('email');
+        $pass = $request->get('password');
+
+        if(!Auth::attempt(['email' => $email, 'password' => $pass]))
+            dd('No access');
+
+        $data['page'] = 'learnings';
+        $data['role'] = session('role');
+        $data['prefix']  = session('role');
+        if(isset(Auth::user()->account) && !empty(Auth::user()->account->department_id)){
+            $data['learnings'] = Learning::with(['orgintro'=>function($query){
+                $query->where('organization_id',Department::with('organization')->find(Auth::user()->account->department_id)->organization_id)->first();
+            }])->find($id);
+        }
+        else{
+            $data['learnings'] = Learning::find($id);
+        }
+
+        return view('learnings.single-webview', $data);
+
+//        return Learning::find($id);
     }
 
     /**
