@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Department;
 use App\Models\Learning;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
