@@ -637,5 +637,9 @@
         .fr-box > div:not(.fr-wrapper) > a{
             display:none!important;
         }
+
+        .fr-popup.fr-active{
+            z-index: 9999999999999!important;
+        }
     </style>
 @endsection
