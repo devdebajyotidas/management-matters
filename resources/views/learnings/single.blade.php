@@ -90,7 +90,10 @@
                             <?php
                             $chapters=array_values($learnings->chapters);
                             usort($chapters, function($a, $b) {
-                                return $a['index'] - $b['index'];
+                                if(isset($a['index']))
+                                    return $a['index'] - $b['index'];
+                                else
+                                    return 0;
                             });
                             ?>
 
