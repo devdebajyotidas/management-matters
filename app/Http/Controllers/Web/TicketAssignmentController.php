@@ -76,16 +76,34 @@ class TicketAssignmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         DB::beginTransaction();
 
+        $awstatus=null;
         $data['assignment'] = $request->get('assignment');
         $assignemnt = TicketAssignment::find($id);
-        $assignemnt->fill($data['assignment']);
-        $assignemnt->save();
-        if($assignemnt->save()){
+        if($request->submit){
+            $activity=TicketAssignment::where('ticket_id',$data['assignment']['ticket_id'])->whereNotNull('note')->get()->count();
+            if($activity==5){
+
+                $award['learner_id'] = Auth::user()->account_id;
+                $award['title'] = "Activity award for " . $data['ticket']['title'] ;
+                $award['description']=$awstatus='activity';
+                $message="You've earned a management better badge";
+                Award::create($award);
+            }
+            else{
+                $message="Ticket's activity has been updated";
+            }
+            $result=$assignemnt->update(['note'=>$data['assignment']['note']]);
+        }
+        else{
+            $assignemnt->fill($data['assignment']);
+            $result=$assignemnt->save();
+            $message="Ticket has been assigned to a new date";
+        }
+        if($result){
             DB::commit();
-            return redirect()->back()->with('success', 'Target date has been changed');
+            return redirect()->back()->with(['success'=>$message,'award'=>$awstatus]);
         }
         else{
             DB::rollBack();
