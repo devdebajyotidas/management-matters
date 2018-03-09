@@ -17,7 +17,7 @@ class LearningController extends Controller
      */
     public function index()
     {
-        return Learning::all(['id', 'title', 'description', 'highlights']);
+        return Learning::orderBy('title','ASC')->get(['id', 'title', 'description', 'highlights']);
     }
 
     /**

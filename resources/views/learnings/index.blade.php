@@ -127,9 +127,9 @@
             </div>
         </div>
         <div class="row m-t-0">
-            @foreach($learningBundle as $learnings)
-                <div class="col-md-4 col-lg-4 col-xs-6 col-sm-6">
+            {{--@foreach($learningBundle as $learnings)--}}
             @foreach($learnings as $learning)
+                <div class="col-md-4 col-lg-4 col-xs-6 col-sm-6">
                     <div class="learning" style="{{!empty($learning->image) ? "background-image: url('". asset('uploads/'.$learning->image) . "')" : "" }}">
                     <div  style="box-shadow: 0 1px 3px rgba(0,0,0,0.14);background-color: rgba(0, 0, 0, 0.60); padding: 20px; min-height: 300px;">
                         <img src="{{asset('assets/icons/'.strtolower($learning->title).'.png')}}"  class="assessment-icon" style="display: inline;width: 50px;">
@@ -161,9 +161,9 @@
                         </div>
                         </div>
                     </div>
-            @endforeach
                 </div>
             @endforeach
+            {{--@endforeach--}}
         </div>
     </div>
     <div class="scroll-top"><i class="fa fa-chevron-up"></i></div>

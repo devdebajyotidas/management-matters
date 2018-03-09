@@ -118,10 +118,16 @@
                                     <div id="chapter-list" class="list-group m-t-10">
                                         @if(isset($learning))
                                             @if(isset($learning->chapters))
-                                                <?php $chapters=array_values($learning->chapters);sort($chapters); ?>
+                                                <?php $chapters=array_values($learning->chapters);
+                                                usort($chapters, function($a, $b) {
+                                                    return $a['index'] - $b['index'];
+                                                });
+                                                //sort($chapters);
+                                                ?>
                                                 @foreach($chapters as $key => $chapter)
                                                     <a href="javascript:void(0)" class="list-group-item chapter" data-id="{{ $key }}">
                                                         <span class="chapter-name">{{ $chapter['name'] }}</span>
+                                                        <input type="hidden" name="chapters[{{ $key }}][index]" value="{{ isset($chapter['index'])? $chapter['index'] : 1 }}">
                                                         <input type="hidden" name="chapters[{{ $key }}][name]" value="{{ $chapter['name'] }}">
                                                         <input type="hidden" name="chapters[{{ $key }}][content]" value="{{ $chapter['content'] }}">
                                                         <span class="m-l-10 pull-right label label-danger remove">Remove</span>
@@ -216,6 +222,12 @@
                 </div>
 
                 <div class="modal-body">
+
+                    <div class="form-group">
+                        <label>Chapter Index</label>
+                        <input id="chapter-index" type="number" class="form-control" name="index" placeholder="Index no.">
+                    </div>
+
                     <div class="form-group">
                         <label>Name of Chapter</label>
                         <input id="chapter-name" type="text" class="form-control" name="name" placeholder="Name">
@@ -368,10 +380,11 @@
                 selectedChapter = $(this).parent().attr('data-id');
 
                 console.log(selectedChapter);
+                var index = $('#chapter-list > .chapter[data-id="' + selectedChapter + '"]').find('input[name="chapters[' + selectedChapter + '][index]"]').val();
                 var name = $('#chapter-list > .chapter[data-id="' + selectedChapter + '"]').find('input[name="chapters[' + selectedChapter + '][name]"]').val();
                 var content = $('#chapter-list > .chapter[data-id="' + selectedChapter + '"]').find('input[name="chapters[' + selectedChapter + '][content]"]').val();
 
-                initChapterEditor(name, content, 'Edit');
+                initChapterEditor(index, name, content, 'Edit');
                 $('#chapter-editor').modal('show');
             });
 
@@ -392,6 +405,7 @@
                 });
             });
             $('#save-chapter').click(function () {
+                var index = $('#chapter-index').val();
                 var name = $('#chapter-name').val();
                 var content = $('#chapter-content').froalaEditor('html.get').replace(/["']/g, "'");
                 console.log(name, content);
@@ -401,12 +415,14 @@
                 }
                 if (selectedChapter != null) {
                     $('#chapter-list > .chapter[data-id="' + selectedChapter + '"]').find('.chapter-name').text(name);
+                    $('#chapter-list > .chapter[data-id="' + selectedChapter + '"]').find('input[name="chapters[' + selectedChapter + '][index]"]').val(index);
                     $('#chapter-list > .chapter[data-id="' + selectedChapter + '"]').find('input[name="chapters[' + selectedChapter + '][name]"]').val(name);
                     $('#chapter-list > .chapter[data-id="' + selectedChapter + '"]').find('input[name="chapters[' + selectedChapter + '][content]"]').val(content);
                 } else {
                     var count = $('#chapter-list > .chapter').length;
                     var html = '<a href="javascript:void(0)" class="list-group-item chapter" data-id="' + count + '">' +
                         '<span class="chapter-name">' + name + '</span>' +
+                        '<input type="hidden" name="chapters[' + count + '][index]" value="' + index + '">' +
                         '<input type="hidden" name="chapters[' + count + '][name]" value="' + name + '">' +
                         '<input type="hidden" name="chapters[' + count + '][content]" value="' + content + '">' +
                         '<span class="m-l-10 pull-right label label-danger remove">Remove</span>' +
@@ -500,8 +516,8 @@
             });
             //Quiz ends
 
-            function initChapterEditor(name = '', content = '', mode = 'Add') {
-                console.log(name, content, mode);
+            function initChapterEditor(index= 1, name = '', content = '', mode = 'Add') {
+                console.log(index, name, content, mode);
                 $('#chapter-editor').find('.modal-title').text(mode + ' Chapter');
 
                 if ($('#chapter-content').data('froala.editor')) {
@@ -509,6 +525,7 @@
                     $('#chapter-content').froalaEditor('destroy');
                 }
 
+                $('#chapter-index').val(index).focus();
                 $('#chapter-name').val(name).focus();
                 $('#chapter-content').html(content);
 

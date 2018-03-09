@@ -29,10 +29,11 @@ class LearningController extends Controller
         $data['prefix']  = session('role') . '/' . Auth::user()->account_id;
 
         $learnings = Learning::orderBy('title','ASC')->get();
-        $size = ceil($learnings->count() / 3);
-        $chunks = $learnings->chunk($size);
+        $data['learnings'] = $learnings;
+//        $size = ceil($learnings->count() / 3);
+//        $chunks = $learnings->chunk($size);
 
-        $data['learningBundle'] = $chunks;
+//        $data['learningBundle'] = $chunks;
 
         return view('learnings.index', $data);
     }

@@ -84,6 +84,10 @@
             margin: 0px!important;
             padding: 0px;
         }
+
+        .learning-content img{
+            max-width: 100%!important;
+        }
     </style>
 
     <div class="row" >
@@ -114,7 +118,14 @@
 
                                 </p>
                             </section>
-                            @foreach($learnings->chapters as $key => $chapter)
+                            <?php
+                            $chapters=array_values($learnings->chapters);
+                            usort($chapters, function($a, $b) {
+                                return $a['index'] - $b['index'];
+                            });
+                            ?>
+
+                            @foreach($chapters as $key => $chapter)
                             <section id="chapter-{{$key+1}}">
                                 <p>
 
