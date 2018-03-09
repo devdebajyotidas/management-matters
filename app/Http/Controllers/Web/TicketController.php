@@ -117,7 +117,6 @@ class TicketController extends Controller
         $awstatus=null;
         $type=NULL;
         $data['ticket'] = $request->get('ticket');
-        $data['assignment']=$request->get('assignment');
         $ticket=Ticket::find($id);
 
         if(isset($data['ticket']['archive'])){
@@ -136,11 +135,8 @@ class TicketController extends Controller
 
             Award::create($award);
 
-
         }
 
-        $assignemnt = TicketAssignment::find($data['assignment']['id']);
-        $assignemnt->note = ($data['assignment']['note']);
         if(!empty($type) && $type=='completed'){
             $message="You have earned your Managing Better badge! ";
         }
@@ -152,19 +148,11 @@ class TicketController extends Controller
         }
 
 
+        $ticket->title=$data['ticket']['title'];
+        $ticket->impact_level=$data['ticket']['impact_level'];
+        $ticket->learning_id=$data['ticket']['learning_id'];
 
-        if($ticket->save() && $assignemnt->save() ){
-            if(!isset($data['ticket']['archive']) && !isset($data['ticket']['complete'])){
-                $activity=TicketAssignment::where('ticket_id',$id)->whereNotNull('note')->get()->count();
-                if($activity==5){
-
-                    $award['learner_id'] = Auth::user()->account_id;
-                    $award['title'] = "Activity award for " . $data['ticket']['title'] ;
-                    $award['description']=$awstatus='activity';
-                    $message="You have earned your Managing Better badge! ";
-                    Award::create($award);
-                }
-            }
+        if($ticket->save()){
 
             DB::commit();
 

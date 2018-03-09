@@ -98,7 +98,7 @@ Route::group(['namespace' => 'Web'], function () {
 
     Route::post('assignments','TicketAssignmentController@store');
     Route::put('assignments/{id}','TicketAssignmentController@update');
-    Route::post('assignments/{id}/delete','TicketAssignmentController@delete');
+    Route::delete('assignments/delete/{id}','TicketAssignmentController@delete');
 
     Route::get('awards', 'AwardController@index');
     Route::post('awards/create', 'AwardController@store');
