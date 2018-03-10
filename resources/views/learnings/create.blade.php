@@ -128,13 +128,13 @@
                                                 //sort($chapters);
                                                 ?>
                                                 @foreach($chapters as $key => $chapter)
-                                                    <a href="javascript:void(0)" class="list-group-item chapter" data-id="{{ $key }}">
-                                                        <span class="chapter-name">{{ $chapter['name'] }}</span>
+                                                    <a href="javascript:void(0)" class="list-group-item row chapter" data-id="{{ $key }}">
+                                                        <span class="chapter-name col-sm-10">{{ $chapter['name'] }}</span>
                                                         <input type="hidden" name="chapters[{{ $key }}][index]" value="{{ isset($chapter['index'])? $chapter['index'] : 1 }}">
                                                         <input type="hidden" name="chapters[{{ $key }}][name]" value="{{ $chapter['name'] }}">
                                                         <input type="hidden" name="chapters[{{ $key }}][content]" value="{{ $chapter['content'] }}">
-                                                        <span class="m-l-10 pull-right label label-danger remove">Remove</span>
-                                                        <span class="pull-right label label-info edit">Edit</span>
+                                                        <span class="m-l-10 pull-right label label-danger remove btn waves-effect">Remove</span>
+                                                        <span class="pull-right label label-info edit btn waves-effect">Edit</span>
                                                     </a>
                                                 @endforeach
                                             @endif
@@ -148,12 +148,12 @@
                                     <div id="assessment-list" class="list-group m-t-10">
                                         @if(isset($learning) && is_array($learning->assessments))
                                             @foreach($learning->assessments as $key => $assessment)
-                                            <a href="javascript:void(0)" class="list-group-item assessment" data-id="{{ $key }}">
-                                                <span class="statement">{{ $assessment }}</span>
+                                            <div class="list-group-item row assessment" data-id="{{ $key }}">
+                                                <span class="statement col-sm-10">{{ $assessment }}</span>
                                                 <input type="hidden" name="assessments[{{ $key }}]" value="{{ $assessment }}">
-                                                <span class="m-l-10 pull-right label label-danger remove">Remove</span>
-                                                <span class="pull-right label label-info edit">Edit</span>
-                                            </a>
+                                                <span class="m-l-10 pull-right label label-danger remove btn waves-effect">Remove</span>
+                                                <span class="pull-right label label-info edit btn waves-effect">Edit</span>
+                                            </div>
                                             @endforeach
                                         @endif
                                     </div>
@@ -167,32 +167,30 @@
                                             @if(count($learning->quiz) > 0)
                                                 @if(is_array($learning->quiz))
                                                     @foreach($learning->quiz as $key => $quiz)
-                                                        <a href="javascript:void(0)" class="list-group-item question" data-id="{{ $key }}">
-                                                            <span class="qu-name"> {{ $quiz['question'] }} </span>
+                                                        <div class="list-group-item row question" data-id="{{ $key }}">
+                                                            <span class="qu-name col-sm-10"> {{ $quiz['question'] }} </span>
                                                             <input type="hidden" name="quiz[{{$key}}][question]" value="{{ $quiz['question'] }}">
                                                             @foreach($quiz['content'] as $k=>$ans)
                                                                 <input type="hidden" class="answer-block" name="quiz[{{$key}}][content][{{$k}}][answer]" value="{{ $ans['answer'] }}">
                                                                 <input type="hidden" name="quiz[{{$key}}][content][{{$k}}][type]" value="{{ $ans['type'] }}">
                                                                 <input type="hidden" name="quiz[{{$key}}][content][{{$k}}][note]" value="{{ $ans['note'] }}">
                                                             @endforeach
-
-                                                            <span class="m-l-10 pull-right label label-danger remove">Remove</span>
-                                                            <span class="pull-right label label-info edit">Edit</span>
-                                                        </a>
+                                                            <span class="m-l-10 pull-right label label-danger remove btn waves-effect">Remove</span>
+                                                            <span class="pull-right label label-info edit btn waves-effect">Edit</span>
+                                                        </div>
                                                     @endforeach
                                                 @else
-                                                    <a href="javascript:void(0)" class="list-group-item question" data-id="{{ $key }}">
-                                                        <span class="qu-name"> {{ $quiz['question'] }} </span>
+                                                    <div href="javascript:void(0)" class="list-group-item row question" data-id="{{ $key }}">
+                                                        <span class="qu-name col-sm-10"> {{ $quiz['question'] }} </span>
                                                         <input type="hidden" name="quiz[{{$key}}][question]" value="{{ $quiz['question'] }}">
                                                         @foreach($quiz['content'] as $k=>$ans)
                                                             <input type="hidden" class="answer-block" name="quiz[{{$key}}][content][{{$k}}][answer]" value="{{ $ans['answer'] }}">
                                                             <input type="hidden" name="quiz[{{$key}}][content][{{$k}}][type]" value="{{ $ans['type'] }}">
                                                             <input type="hidden" name="quiz[{{$key}}][content][{{$k}}][note]" value="{{ $ans['note'] }}">
                                                         @endforeach
-
-                                                        <span class="m-l-10 pull-right label label-danger remove">Remove</span>
-                                                        <span class="pull-right label label-info edit">Edit</span>
-                                                    </a>
+                                                        <span class="m-l-10 pull-right label label-danger remove btn waves-effect">Remove</span>
+                                                        <span class="pull-right label label-info edit btn waves-effect">Edit</span>
+                                                    </div>
                                                 @endif
                                             @endif
                                         @endif
@@ -333,12 +331,12 @@
                     $('#assessment-list > .assessment[data-id="' + selectedAssessment + '"]').find('input[name="assessments[' + selectedAssessment + ']"]').val(assessment);
                 } else {
                     var count = $('#assessment-list > .assessment').length;
-                    var html = '<a href="javascript:void(0)" class="list-group-item assessment" data-id="' + count + '">' +
-                        '<span class="statement">' + assessment + '</span>' +
+                    var html = '<div class="list-group-item row assessment" data-id="' + count + '">' +
+                        '<span class="statement col-sm-10">' + assessment + '</span>' +
                         '<input type="hidden" name="assessments[' + count + ']" value="' + assessment + '">' +
-                        '<span class="m-l-10 pull-right label label-danger remove">Remove</span>' +
-                        '<span class="pull-right label label-info edit">Edit</span>' +
-                        '</a>';
+                        '<span class="m-l-10 pull-right label label-danger btn waves-effect remove">Remove</span>' +
+                        '<span class="pull-right label label-info btn waves-effect edit">Edit</span>' +
+                        '</div>';
                     $('#assessment-list').append(html);
                 }
                 selectedAssessment = null;
@@ -348,7 +346,6 @@
             $(document).on('click', '#assessment-list > .assessment > .edit', function () {
                 selectedAssessment = $(this).parent().attr('data-id');
 
-                console.log(selectedAssessment);
                 var name = $('#assessment-list > .assessment[data-id="' + selectedAssessment + '"]').find('input[name="assessments[' + selectedAssessment + ']"]').val();
 
                 initAssessmentEditor(name, 'Edit');
@@ -382,7 +379,6 @@
             $(document).on('click', '#chapter-list > .chapter > .edit', function () {
                 selectedChapter = $(this).parent().attr('data-id');
 
-                console.log(selectedChapter);
                 var index = $('#chapter-list > .chapter[data-id="' + selectedChapter + '"]').find('input[name="chapters[' + selectedChapter + '][index]"]').val();
                 var name = $('#chapter-list > .chapter[data-id="' + selectedChapter + '"]').find('input[name="chapters[' + selectedChapter + '][name]"]').val();
                 var content = $('#chapter-list > .chapter[data-id="' + selectedChapter + '"]').find('input[name="chapters[' + selectedChapter + '][content]"]').val();
@@ -411,7 +407,6 @@
                 var index = $('#chapter-index').val();
                 var name = $('#chapter-name').val();
                 var content = $('#chapter-content').froalaEditor('html.get').replace(/["']/g, "'");
-                console.log(name, content);
                 if (name.trim() == '') {
                     swal('Error', 'Please enter chapter name', 'error');
                     return;
@@ -423,14 +418,14 @@
                     $('#chapter-list > .chapter[data-id="' + selectedChapter + '"]').find('input[name="chapters[' + selectedChapter + '][content]"]').val(content);
                 } else {
                     var count = $('#chapter-list > .chapter').length;
-                    var html = '<a href="javascript:void(0)" class="list-group-item chapter" data-id="' + count + '">' +
-                        '<span class="chapter-name">' + name + '</span>' +
+                    var html = '<div class="list-group-item row chapter" data-id="' + count + '">' +
+                        '<span class="chapter-name col-sm-10">' + name + '</span>' +
                         '<input type="hidden" name="chapters[' + count + '][index]" value="' + index + '">' +
                         '<input type="hidden" name="chapters[' + count + '][name]" value="' + name + '">' +
                         '<input type="hidden" name="chapters[' + count + '][content]" value="' + content + '">' +
-                        '<span class="m-l-10 pull-right label label-danger remove">Remove</span>' +
-                        '<span class="pull-right label label-info edit">Edit</span>' +
-                        '</a>';
+                        '<span class="m-l-10 pull-right label label-danger btn waves-effect remove">Remove</span>' +
+                        '<span class="pull-right label label-info btn waves-effect edit">Edit</span>' +
+                        '</div>';
                     $('#chapter-list').append(html);
                 }
                 selectedChapter = null;
@@ -439,8 +434,7 @@
 
             $(document).on('click', '#assessment-list > .assessment > .edit', function () {
                 selectedAssessment = $(this).parent().attr('data-id');
-
-                console.log(selectedAssessment);
+                
                 var name = $('#assessment-list > .assessment[data-id="' + selectedAssessment + '"]').find('input[name="assessments[' + selectedAssessment + ']"]').val();
 
                 initAssessmentEditor(name, 'Edit');
@@ -469,8 +463,26 @@
                 }
 
                 if (selectedQuiz != null) {
-                    $('#question-list > .question[data-id="' + selectedQuiz + '"]').find('.qu-name').text(quiz);
-                    $('#question-list > .question[data-id="' + selectedQuiz + '"]').find('input[name="quiz[' + selectedQuiz + '][question]"]').val(quiz);
+                    // $('#question-list > .question[data-id="' + selectedQuiz + '"]').find('.qu-name').text(quiz);
+                    // $('#question-list > .question[data-id="' + selectedQuiz + '"]').find('input[name="quiz[' + selectedQuiz + '][question]"]').val(quiz);
+                    $('#question-list > .question[data-id="' + selectedQuiz + '"]').remove();
+                    var count = $('#question-list > .question').length;
+                    var anstable='';
+                    for(var i=0;i<4;i++){
+                        var ans=$('#quiz-editor').find('input[name="content[answer]['+i+']"]').val();
+                        var type=$('#quiz-editor').find('input[name="content[type]['+i+']"]:checked').val();
+                        var note=$('#quiz-editor').find('input[name="content[note]['+i+']"]').val();
+                        anstable +='<input type="hidden" class="answer-block" name="quiz['+count+'][content]['+i+'][answer]" value="'+ans+'">';
+                        anstable+= '<input type="hidden" name="quiz['+count+'][content]['+i+'][type]" value="'+type+'">';
+                        anstable+= '<input type="hidden" name="quiz['+count+'][content]['+i+'][note]" value="'+note+'">';
+                    }
+                    var html = '<div  class="list-group-item row question" data-id="' + count + '">' +
+                        '<span class="qu-name col-sm-10">' + quiz + '</span>' +
+                        '<input type="hidden" name="quiz[' + count + '][question]" value="' + quiz + '">' + anstable +
+                        '<span class="m-l-10 pull-right label label-danger btn waves-effect remove">Remove</span>' +
+                        '<span class="pull-right label label-info btn waves-effect edit">Edit</span>' +
+                        '</div>';
+                    $('#question-list').append(html);
 
                 } else {
                     var count = $('#question-list > .question').length;
@@ -483,12 +495,12 @@
                         anstable+= '<input type="hidden" name="quiz['+count+'][content]['+i+'][type]" value="'+type+'">';
                         anstable+= '<input type="hidden" name="quiz['+count+'][content]['+i+'][note]" value="'+note+'">';
                     }
-                    var html = '<a href="javascript:void(0)" class="list-group-item question" data-id="' + count + '">' +
-                        '<span class="qu-name">' + quiz + '</span>' +
+                    var html = '<div  class="list-group-item row question" data-id="' + count + '">' +
+                        '<span class="qu-name col-sm-10">' + quiz + '</span>' +
                         '<input type="hidden" name="quiz[' + count + '][question]" value="' + quiz + '">' + anstable +
-                        '<span class="m-l-10 pull-right label label-danger remove">Remove</span>' +
-                        '<span class="pull-right label label-info edit">Edit</span>' +
-                        '</a>';
+                        '<span class="m-l-10 pull-right label label-danger btn waves-effect remove">Remove</span>' +
+                        '<span class="pull-right label label-info btn waves-effect edit">Edit</span>' +
+                        '</div>';
                     $('#question-list').append(html);
                 }
                 selectedQuiz = null;
@@ -520,11 +532,9 @@
             //Quiz ends
 
             function initChapterEditor(index= 1, name = '', content = '', mode = 'Add') {
-                console.log(index, name, content, mode);
                 $('#chapter-editor').find('.modal-title').text(mode + ' Chapter');
 
                 if ($('#chapter-content').data('froala.editor')) {
-                    console.log('note');
                     $('#chapter-content').froalaEditor('destroy');
                 }
 
