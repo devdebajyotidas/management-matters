@@ -62,7 +62,7 @@
                        @endif
                     </div>
                 </div>
-                <section class="m-t-40 learning-content">
+                <section class="m-t-40 learning-content fr-wrapper">
                     <div class="sttabs tabs-style-linebox">
                         {{--<nav class="affix-top" data-spy="affix-top" data-offset-top="500">--}}
                         <nav>
@@ -73,7 +73,7 @@
                                 @endforeach
                             </ul>
                         </nav>
-                        <div class="content-wrap text-left fr-wrapper ">
+                        <div class="content-wrap text-left fr-element fr-view">
                             <section id="chapter-introduction" class="content-current">
                                 <p>
                                     @php
@@ -98,7 +98,7 @@
                             ?>
 
                             @foreach($chapters as $key => $chapter)
-                            <section id="chapter-{{$key+1}}" class="fr-element fr-view">
+                            <section id="chapter-{{$key+1}}" class="">
                                 <p>
 
                                         {!! $chapter['content'] !!}
