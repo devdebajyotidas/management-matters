@@ -15,13 +15,13 @@ use Illuminate\Support\Facades\DB;
 class QuizController extends Controller
 {
 
-    public function index($learningId = null)
+    public function index($learnerId = null)
     {
-        $data['learnings'] =  Learning::with(['quizTaken' => function($query){
-            $query->where('learner_id','=',Auth::user()->account_id);
-        }])->get();
-        $data['active_learning'] = $data['learnings']->find($learningId);
-        return view('quiz.quiz', $data);
+        $data['quiz'] = Learning::with(['quizTaken' => function($query) use($learnerId){
+            $query->where('learner_id','=', $learnerId);
+        }])->get(['id','title','quiz']);
+
+        return response()->json($data);
     }
 
     public function store(Request $request, $learningId)
