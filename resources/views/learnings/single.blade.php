@@ -73,7 +73,7 @@
                                 @endforeach
                             </ul>
                         </nav>
-                        <div class="content-wrap text-left">
+                        <div class="content-wrap text-left fr-wrapper ">
                             <section id="chapter-introduction" class="content-current">
                                 <p>
                                     @php
@@ -98,7 +98,7 @@
                             ?>
 
                             @foreach($chapters as $key => $chapter)
-                            <section id="chapter-{{$key+1}}">
+                            <section id="chapter-{{$key+1}}" class="fr-element fr-view">
                                 <p>
 
                                         {!! $chapter['content'] !!}
