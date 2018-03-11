@@ -62,7 +62,7 @@
                        @endif
                     </div>
                 </div>
-                <section class="m-t-40 learning-content fr-wrapper">
+                <section class="m-t-40 learning-content">
                     <div class="sttabs tabs-style-linebox">
                         {{--<nav class="affix-top" data-spy="affix-top" data-offset-top="500">--}}
                         <nav>

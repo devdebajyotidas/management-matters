@@ -104,7 +104,7 @@
                                 @endforeach
                             </ul>
                         </nav>
-                        <div class="content-wrap text-left">
+                        <div class="content-wrap text-left fr-element fr-view">
                             <section id="chapter-introduction" class="content-current">
                                 <p>
                                     @php

@@ -95,6 +95,7 @@ Route::group(['namespace' => 'API'], function () {
 
     Route::post('assignments','TicketAssignmentController@store');
     Route::put('assignments/{id}','TicketAssignmentController@update');
+    Route::delete('assignments/{id}','TicketAssignmentController@delete');
 
     Route::get('learners/{learnerId}/assessments','AssessmentController@index');
     Route::get('learners/{learnerId}/assessments/new','AssessmentController@create');

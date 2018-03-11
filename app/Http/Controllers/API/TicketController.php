@@ -113,22 +113,25 @@ class TicketController extends Controller
 
         if($ticket->save())
         {
-            foreach ($data['assignments'] as $assignment)
+            if (isset($data['assignments']))
             {
-                if(!isset($assignment['ticket_id']))
-                    $assignment['ticket_id'] = $id;
+                foreach ($data['assignments'] as $assignment)
+                {
+                    if(!isset($assignment['ticket_id']))
+                        $assignment['ticket_id'] = $id;
 
-                if(isset($assignment['id']) && $assignment['id'] > 0)
-                {
-                    $ticketAssignemnt = TicketAssignment::find($assignment['id']);
-                    $ticketAssignemnt->fill($assignment);
-                }
-                else
-                {
-                    $ticketAssignemnt = TicketAssignment::make($assignment);
-                }
+                    if(isset($assignment['id']) && $assignment['id'] > 0)
+                    {
+                        $ticketAssignemnt = TicketAssignment::find($assignment['id']);
+                        $ticketAssignemnt->fill($assignment);
+                    }
+                    else
+                    {
+                        $ticketAssignemnt = TicketAssignment::make($assignment);
+                    }
 //                $assignemnt->note = $assignment['note'];
-                $ticketAssignemnt->save();
+                    $ticketAssignemnt->save();
+                }
             }
 
             DB::commit();
