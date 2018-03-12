@@ -214,7 +214,7 @@
     <div id="assignment-editor" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <form action="" method="post" id="assignmentFrom">
+            <form action="" method="post" id="assignmentForm">
 
                 {{ csrf_field() }}
                 {{ method_field('put') }}
