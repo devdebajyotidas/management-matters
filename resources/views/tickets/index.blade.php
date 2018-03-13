@@ -202,7 +202,7 @@
             });
             $('#department-list .department').click(function () {
                 var name = $(this).attr('data-name');
-                ticketTable.columns(1).search(name).draw();
+                ticketTable.columns(0).search(name).draw();
                 $('#department-list li').removeClass('box-label');
                 $(this).parent('li').addClass('box-label');
             });

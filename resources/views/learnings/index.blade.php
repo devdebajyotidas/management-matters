@@ -156,7 +156,8 @@
                             @endif
                             @if(session('role') == 'organization' || session('role') == 'admin')
                                     <a href="{{ url('learnings/'. $learning->id) }}" class="btn btn-lg btn-rounded btn-info"> View</a>
-                                    <a href="{{ url('learnings/'. $learning->id .'/edit') }}" class="btn btn-lg btn-rounded btn-info" style="margin-left: 25px;"> Edit</a>
+                                    <a href="{{ url('learnings/'. $learning->id .'/edit') }}" class="btn btn-lg btn-rounded btn-info" style="margin-left: 25px"> Edit</a>
+
                             @endif
                         </div>
                         </div>
@@ -167,4 +168,21 @@
         </div>
     </div>
     <div class="scroll-top"><i class="fa fa-chevron-up"></i></div>
+    <script>
+        window.onload=function(){
+            @if(session()->has('success') || session('success'))
+            setTimeout(function () {
+                showToast('Success', '{{ session('success') }}', 'success');
+            }, 500);
+            @endif
+
+            @if(isset($errors) && count($errors->all()) > 0 && $timeout = 700)
+            @foreach ($errors->all() as $key => $error)
+            setTimeout(function () {
+                showToast('Error', '{{ $error }}', 'error');
+            }, {{ $timeout * $key }});
+            @endforeach
+            @endif
+        }
+    </script>
 @endsection

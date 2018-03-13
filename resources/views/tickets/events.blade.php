@@ -6,6 +6,13 @@
         <!-- row -->
         <div class="row m-t-15">
             <div class="col-md-12">
+                <div class="white-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>All Tickets</h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="white-box p-0">
 
                     <!-- .left-right-aside-column-->

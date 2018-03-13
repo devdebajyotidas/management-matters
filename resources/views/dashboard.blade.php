@@ -2,10 +2,17 @@
 @section('content')
     @include('includes.main-menu')
     <div class="container-fluid">
+        <div class="white-box  m-t-15">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Dashboard</h3>
+                </div>
+            </div>
+        </div>
         <!-- .row -->
-        <div class="row m-t-15">
+        <div class="row">
             <div class="col-lg-12 col-sm-12 col-xs-12">
-                <div id="chart">
+                <div id="chart" style="box-shadow: 0 1px 3px rgba(0,0,0,.14)">
                 </div>
             </div>
         </div>

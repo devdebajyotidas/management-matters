@@ -37,12 +37,12 @@ class AssessmentController extends Controller
         }
         elseif(session('role') == 'admin'){
             $data['organizations']=Organization::all(['id','name']);
-            $assessments = Assessment::with(['learner'])->get();
+            $assessments = Assessment::with(['learner.department.organization'])->get();
         }
         else {
             $data['departments'] = Department::where('organization_id', Auth::user()->account_id)->get();
             $learners = Auth::user()->account->learners()->select('learners.id')->pluck('id');
-            $assessments = Assessment::with('learner')->whereIn('learner_id', $learners)->get();
+            $assessments = Assessment::with('learner.department')->whereIn('learner_id', $learners)->get();
         }
         $data['assessments'] = $assessments;
         $data['dates'] = $assessments->pluck('created_at');

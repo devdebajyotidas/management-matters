@@ -7,6 +7,8 @@ use App\Models\Department;
 use App\Models\Introduction;
 use App\Models\Learner;
 use App\Models\Organization;
+use App\Models\Quiz;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -153,5 +155,52 @@ class LearningController extends Controller
             return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong!']);
         }
 
+    }
+
+    function delete($id){
+        $quiz_count=0;
+        $tickets_count=0;
+        if(!empty($id)){
+            DB::beginTransaction();
+
+            $learning=Learning::find($id);
+            $quiz=Quiz::where('learning_id',$id)->get();
+            $tickets=Ticket::where('learning_id',$id)->get();
+
+            if(!empty($learning)){
+                if(count($quiz) > 0){
+                    foreach ($quiz as $q){
+                        $q->delete();
+                        $quiz_count++;
+                    }
+                }
+                else{
+                    $quiz_count=1;
+                }
+
+                if(count($tickets) > 0){
+                    foreach ($tickets as $ticket){
+                        $ticket->update(['is_archived'=>1]);
+                        $ticket->delete();
+                        $tickets_count++;
+                    }
+                }
+                else{
+                    $tickets_count=1;
+                }
+
+                if($learning->delete() && $tickets_count > 0 && $quiz_count > 0){
+                    DB::commit();
+                    return redirect()->intended(url('learnings'))->with('success', 'Module has been deleted successfully');
+                }
+            }
+            else{
+                DB::rollBack();
+                return redirect()->back()->withErrors(['Something went wrong!']);
+            }
+        }
+        else{
+            return redirect()->back()->withErrors(['Could not found the learning module']);
+        }
     }
 }

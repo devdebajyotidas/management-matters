@@ -466,7 +466,7 @@ class LearnerController extends Controller
 
         if($amcount > 0){
             DB::commit();
-            return redirect()->back()->with(['success' => 'Cost of not has been reset']);
+            return redirect()->back()->with(['success' => 'Cost of not managing better has been reset']);
         }
         else{
             DB::rollBack();

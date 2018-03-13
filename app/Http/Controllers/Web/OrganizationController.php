@@ -580,7 +580,7 @@ class OrganizationController extends Controller
             }
         }
         else{
-            return redirect()->back()->with(['success' => 'Cost of not has been reset']);
+            return redirect()->back()->with(['success' => 'Cost of not managing better has been reset']);
         }
 
         if($amcount > 0){
@@ -712,7 +712,7 @@ class OrganizationController extends Controller
 
         if($amcount > 0 && $lamcount > 0){
             DB::commit();
-            return redirect()->back()->with(['success' => 'Assessment has been reset']);
+            return redirect()->back()->with(['success' => 'Cost of not managing better has been reset']);
         }
         else{
             DB::rollBack();

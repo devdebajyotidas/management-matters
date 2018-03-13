@@ -21,7 +21,15 @@
 
     <div class="container-fluid">
         <div class="row m-t-15">
+
             <div class="col-md-12">
+                <div class="white-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Cost of Not Managing Better</h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="white-box">
                     {!! $content !!}
                     <table id="mainTable" class="table editable-table table-bordered table-striped m-b-0" style="margin: 20px 0">
