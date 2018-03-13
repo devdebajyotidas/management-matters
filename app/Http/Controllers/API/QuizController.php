@@ -38,7 +38,8 @@ class QuizController extends Controller
         if($totalQues==intval($data['result']))
         {
             $data['is_completed'] = 1;
-            $award['title']='Quiz completed for - '.$data['title'];
+            $award = [];
+            $award['title']='Quiz completed for - '.$learning->title;
             $award['learner_id']=$data['learner_id'];
             $award = Award::create($award);
         }
@@ -83,7 +84,7 @@ class QuizController extends Controller
         $totalQues = count($learning->quiz);
         if($totalQues==intval($data['result'])){
             $data['is_completed'] = 1;
-            $award['title']='Quiz completed for - '.$data['title'];
+            $award['title']='Quiz completed for - '.$learning->title;
             $award['learner_id']=$data['learner_id'];
             $award = Award::create($award);
         }
