@@ -59,6 +59,9 @@
                         @foreach($learnings as $num=>$learning)
                             {{ ( ($assessments = $learning->assessments) && shuffle($assessments))   ? '' : '' }}
 
+                            @if(!is_array($assessments))
+                                @continue;
+                            @endif
                             @foreach($assessments as $key => $assessment)
                                 @if($key == 3) @break @endif
                             <div class="assessment-wrapper">
