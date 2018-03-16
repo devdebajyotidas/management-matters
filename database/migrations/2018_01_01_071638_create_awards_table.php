@@ -19,6 +19,7 @@ class CreateAwardsTable extends Migration
             $table->integer('learner_id');
             $table->string('title');
             $table->string('description')->nullable();
+            $table->string('type');
             $table->timestamps();
         });
     }

@@ -68,9 +68,11 @@
                         <nav>
                             <ul >
                                 <li class="tab-current"><a href="#chapter-introduction"><span>Introduction</span></a></li>
-                                @foreach($learnings->chapters as $key => $chapter)
-                                <li><a href="#chapter-{{$key+1}}"><span>{{ $chapter['name'] }}</span></a></li>
-                                @endforeach
+                                @if(is_array($learnings->chapters))
+                                    @foreach($learnings->chapters as $key => $chapter)
+                                    <li><a href="#chapter-{{$key+1}}"><span>{{ $chapter['name'] }}</span></a></li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </nav>
                         <div class="content-wrap text-left fr-element fr-view">

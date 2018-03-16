@@ -9,7 +9,8 @@ class Award extends Model
     protected $fillable=[
         'learner_id',
         'title',
-        'description'
+        'description',
+        'type'
     ];
 
     public function learner(){
