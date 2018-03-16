@@ -94,8 +94,7 @@ class AssessmentController extends Controller
             $scores[$learning] = (float)number_format((float)$avg, 2, '.', '');
         }
 
-        $scores = arsort($scores);
-
+        arsort($scores);
         $totalAvg = $totalAvg / count($data['assessments']);
         $scores['Average'] = (float)number_format((float)($totalAvg), 2, '.', '');
 
