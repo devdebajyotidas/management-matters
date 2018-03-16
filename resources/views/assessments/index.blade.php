@@ -173,12 +173,14 @@
             Highcharts.chart('assessment-chart', {
 
                 title: {
-                    text: 'Statistics'
+                    text: '{{ auth()->user()->account->name }}'
                 },
-
+                subtitle: {
+                    text: "Assessment Report"
+                },
                 xAxis: {
                     title: {
-                        text: 'Assessments'
+                        text: 'Date'
                     },
 //                    categories: [1,2,3,4,5,6,7,8,9,10]
                     categories: dates
