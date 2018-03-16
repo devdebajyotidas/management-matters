@@ -54,7 +54,20 @@
             @endif
 
             <div class="row m-t-10">
-
+                <div class="col-sm-12">
+                    <div class="white-box">
+                        <h3 class="box-title m-b-0">Featured Image</h3>
+                        <div class="m-b-0" id="image-preview">
+                            @if(!empty($learning->image))
+                                <img id="preview" src="{{asset('uploads/'.$learning->image)}}" alt="" style="max-height: 300px">
+                            @endif
+                        </div>
+                        <div class="m-b-0 m-t-15">
+                            <button type="button" class="btn btn-primary waves-effect waves-light" onclick="$('#image-change').trigger('click')">Upload Image</button>
+                            <input class="hidden" id="image-change" type="file" name="image" onchange="previewImage(this)">
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="row m-t-10">
