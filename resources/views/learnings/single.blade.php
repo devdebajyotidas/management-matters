@@ -100,6 +100,7 @@
 
                                 </p>
                             </section>
+                            @if(is_array($learnings->chapters))
                             <?php
                             $chapters=array_values($learnings->chapters);
                             usort($chapters, function($a, $b) {
@@ -119,6 +120,7 @@
 
                             </section>
                             @endforeach
+                            @endif
                         </div>
                         <!-- /content -->
                     </div>

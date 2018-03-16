@@ -99,9 +99,11 @@
                         <nav>
                             <ul >
                                 <li class="tab-current"><a href="javascript:void(0)" data-target="#chapter-introduction"><span>Introduction</span></a></li>
+                                @if(is_array($learnings->chapters))
                                 @foreach($learnings->chapters as $key => $chapter)
                                 <li><a href="javascript:void(0)" data-target="#chapter-{{$key+1}}"><span>{{ $chapter['name'] }}</span></a></li>
                                 @endforeach
+                                @endif
                             </ul>
                         </nav>
                         <div class="content-wrap text-left fr-element fr-view">
@@ -118,6 +120,7 @@
 
                                 </p>
                             </section>
+                            @if(is_array($learnings->chapters))
                             <?php
                             $chapters=array_values($learnings->chapters);
                             usort($chapters, function($a, $b) {
@@ -137,6 +140,7 @@
 
                             </section>
                             @endforeach
+                            @endif
                         </div>
                         <!-- /content -->
                     </div>
