@@ -104,8 +104,8 @@
                                                 @foreach($assessments as $assessment)
                                                     <tr>
                                                         @if(session('role') == "admin")
-                                                            @if(isset($assessment->learner->organization->name))
-                                                                <td>{{ $assessment->learner->organization->name }}</td>
+                                                            @if(isset($assessment->learner->department->organization->name))
+                                                                <td>{{ $assessment->learner->department->organization->name }}</td>
                                                             @else
                                                                 <td>Not Applicable</td>
                                                             @endif

@@ -41,6 +41,13 @@
             <div class="col-md-12">
                 <div class="white-box">
                     <div class="row">
+                        <div class="col-md-12">
+                            <h3>Tickets</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="white-box">
+                    <div class="row">
                         <div class="col-lg-3 p-20">
                             <div class="m-b-0 m-t-0 btn-wrapper">
                                 <button type="button" class="btn btn-success" id="add-event">Add Ticket</button>
@@ -541,11 +548,11 @@
                 $('#assignment-editor .modal-footer').hide();
                 if(isCompleted){
                     $('#assignment-editor').find('.modal-title').removeClass('text-warning')
-                    $('#assignment-editor').find('.modal-title').text( 'This ticket has been completed').addClass('text-success');
+                    $('#assignment-editor').find('.modal-title').text( 'This ticket has been Completed.').addClass('text-success');
                 }
                 else{
                     $('#assignment-editor').find('.modal-title').removeClass('text-success');
-                    $('#assignment-editor').find('.modal-title').text( 'This ticket has been archived').addClass('text-warning');
+                    $('#assignment-editor').find('.modal-title').text( 'This ticket has been Archived.').addClass('text-warning');
                 }
 
             }else{

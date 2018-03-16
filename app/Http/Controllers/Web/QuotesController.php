@@ -99,5 +99,4 @@ class QuotesController extends Controller
         }
 
     }
-
 }

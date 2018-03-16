@@ -341,6 +341,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger waves-effect reset-assessment-btn">Reset Assessment</button>
+                                    <button type="button" class="btn btn-danger waves-effect reset-conmb-btn">Reset CONMB</button>
                                     <button type="button" class="btn btn-danger waves-effect remove-account">Remove Account</button>
                                     <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
                                 </div>
@@ -351,6 +353,14 @@
                                     {{ method_field('delete') }}
                                     <input type="submit" id="deleteaccount" value="true" style="display: none">
                                 </form>
+                                {{--<form action="{{url('/organizations/'.$organization->id.'/resetassessment/')}}" method="post">--}}
+                                    {{--{{ csrf_field() }}--}}
+                                    {{--<input type="submit" id="reset-assessment-submit" value="submit">--}}
+                                {{--</form>--}}
+                                {{--<form action="{{url('/organizations/'.$organization->id.'/resetconmb')}}" method="post">--}}
+                                    {{--{{ csrf_field() }}--}}
+                                    {{--<input type="submit" id="reset-conmb-submit" value="submit">--}}
+                                {{--</form>--}}
                             </div>
                         </div>
                     </div>
@@ -358,6 +368,45 @@
             </div>
         </div>
         <!-- /.row -->
+
+        <div id="reset-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Reset By Departments</h4>
+                    </div>
+                    <form class="form-horizontal" action="{{ url('organization/'. $organization->id.'/departments/reset') }}" method="post">
+                        {{ csrf_field() }}
+
+                        <div class="modal-body">
+                            <div class="form-group p-20">
+                                <label for="sel1" class="col-md-12 m-0">Select Department:</label>
+                                <select class="form-control col-md-12 m-t-10" id="sel1" name="department">
+                                    @if(isset($departments) && count($departments) > 0)
+                                        <option value="all">All Departments</option>
+                                        @foreach($departments as $department)
+                                            <option value="{{$department->id}}">{{$department->name}}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="">None</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <input type="hidden" name="action" id="reset-action">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger waves-effect">Reset</button>
+                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
     </div>
     <!-- /.container-fluid -->
 
@@ -397,7 +446,19 @@
             });
             $('.resubscribe-button').click(function(){
                 $('#organizationForm').submit();
+            });
+
+            $('.reset-assessment-btn').click(function(){
+                $('#myModalLabel').html('Reset assessment')
+                $('#reset-action').val('assessment')
+                $('#reset-modal').modal('show');
             })
+            $('.reset-conmb-btn').click(function(){
+                $('#myModalLabel').html('Reset Cost of Not')
+                $('#reset-action').val('cost of not')
+                $('#reset-modal').modal('show');
+            })
+
         }
         function previewImage(input) {
             if (input.files && input.files[0]) {

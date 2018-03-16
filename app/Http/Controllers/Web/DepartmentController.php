@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Models\Assessment;
+use App\Models\CostOfNot;
+use App\Models\Learner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -93,8 +96,61 @@ class DepartmentController extends Controller
         }
     }
 
-    public function delete($id)
+    public function reset(Request $request,$id)
     {
+        DB::beginTransaction();
+
+        $action=$request->action;
+        $dep=$request->department;
+
+        $reset=0;
+
+        if(!empty($id)){
+            if(!empty($dep)){
+                if($dep=='all'){
+                    $deplist=Department::where('organization_id',$id)->pluck('id')->toArray();
+                    $learner=Learner::whereIn('department_id',$deplist)->pluck('id')->toArray();
+                }
+                else{
+                    $learner=Learner::where('department_id',$dep)->pluck('id')->toArray();
+                }
+            }
+            else{
+                $learner=null;
+            }
+            if(!empty($learner)){
+                if($action=='assessment'){
+                    $data=Assessment::whereIn('learner_id',$learner)->get();
+                }
+                else{
+                    $data=CostOfNot::whereIn('learner_id',$learner)->get();
+                }
+                if(count($data) > 0){
+                    foreach ($data as $d){
+                        $d->delete();
+                        $reset++;
+                    }
+                }
+                else{
+                    $reset=1;
+                }
+
+                if($reset > 0){
+                    DB::commit();
+                    return redirect()->back()->with('success', ucfirst($action).' has been reset successfully');
+                }
+                else{
+                    DB::rollback();
+                    return redirect()->back()->withErrors(['Something went wrong']);
+                }
+            }
+            else{
+                return redirect()->back()->withErrors(['Learners not avilable']);
+            }
+        }
+        else{
+            return redirect()->back()->withErrors(["Could'nt found the department"]);
+        }
 
     }
 }

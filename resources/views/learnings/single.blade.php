@@ -44,9 +44,20 @@
         <div class="col-md-12">
             <div class="white-box m-t-15 m-l-15 m-r-15">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-9">
                         <h3>Learning Module</h3>
                     </div>
+                    @if(session('role')=='admin')
+                        <div class="col-md-3 ">
+                            <button class="btn m-t-10 btn-danger waves-effect pull-right delete-learning">Delete</button>
+                            <div class="hidden">
+                                <form action="{{url('/learnings/'.$learnings->id.'/delete')}}" method="post">
+                                    {{ csrf_field() }}
+                                    <input type="submit" id="submit-delete" value="submit">
+                                </form>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="white-box p-0 m-t-0 m-l-15 m-r-15">
@@ -117,4 +128,40 @@
         </div>
     </div>
     <div class="scroll-top"><i class="fa fa-chevron-up"></i></div>
+    <script>
+        window.onload=function(){
+
+            @if(session()->has('success') || session('success'))
+            setTimeout(function () {
+                showToast('Success', '{{ session('success') }}', 'success');
+            }, 500);
+            @endif
+
+            @if(isset($errors) && count($errors->all()) > 0 && $timeout = 700)
+            @foreach ($errors->all() as $key => $error)
+            setTimeout(function () {
+                showToast('Error', '{{ $error }}', 'error');
+            }, {{ $timeout * $key }});
+            @endforeach
+            @endif
+
+            $('.delete-learning').click(function() {
+                swal({
+                    title: 'Are you sure?',
+                    text: "You can't revert this later.",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete'
+                }).then(function(result){
+                    if(result.value){
+                        $('#submit-delete').trigger('click');
+                        return false;
+                    }
+
+                })
+            });
+        }
+    </script>
 @endsection

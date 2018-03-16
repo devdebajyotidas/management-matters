@@ -92,8 +92,8 @@
                                         @foreach($quizs as $quiz)
                                             <tr>
                                                 @if(session('role') == "admin")
-                                                    @if(isset($quiz->learner->organization->name))
-                                                        <td>{{ $quiz->learner->organization->name }}</td>
+                                                    @if(isset($quiz->learner->department->organization->name))
+                                                        <td>{{ $quiz->learner->department->organization->name }}</td>
                                                     @else
                                                         <td>Not Applicable</td>
                                                     @endif

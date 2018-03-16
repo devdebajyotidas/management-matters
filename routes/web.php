@@ -75,9 +75,10 @@ Route::group(['namespace' => 'Web'], function () {
     Route::delete('organization/{orgId}/learners/{id}', 'OrganizationLearnerController@delete');
     Route::put('organization/{orgId}/learners/{id}/restore', 'OrganizationLearnerController@restore');
 
+
     Route::post('organization/{orgId}/departments/', 'DepartmentController@store');
     Route::put('organization/{orgId}/departments/{id}', 'DepartmentController@update');
-
+    Route::post('organization/{orgId}/departments/reset', 'DepartmentController@reset');
 
     Route::get('learnings', 'LearningController@index');
     Route::get('learnings/create', 'LearningController@create');
@@ -85,6 +86,7 @@ Route::group(['namespace' => 'Web'], function () {
     Route::get('learnings/{id}', 'LearningController@show');
     Route::get('learnings/{id}/edit', 'LearningController@edit');
     Route::put('learnings/{id}/edit', 'LearningController@update');
+    Route::post('learnings/{id}/delete', 'LearningController@delete');
 
     Route::get('assessments', 'AssessmentController@index');
     Route::get('assessments/new', 'AssessmentController@create');

@@ -33,16 +33,15 @@ class QuizController extends Controller
 
         if(session('role')=='admin'){
             $data['organizations']=Organization::all(['id','name']);
-            $data['quizs']=Quiz::with(['learner','learning'])->orderBy('created_at')->get();
+            $data['quizs']=Quiz::with(['learner.department.organization','learning'])->orderBy('created_at')->get();
             return view('quiz.index', $data);
 
         }
         else if(session('role')=='organization'){
             $data['departments'] = Department::where('organization_id',Auth::user()->account_id)->get();
 
-            $data['quizs']=Quiz::with(['learning', 'learner' => function($query){
-                $query->whereIn('id', Auth::user()->account->learners()->pluck('learners.id')->toArray());
-            }])->orderBy('created_at')->get();
+            $learner_id=Auth::user()->account->learners()->pluck('learners.id')->toArray();
+            $data['quizs']=Quiz::with(['learning', 'learner.department'])->whereIn('learner_id',$learner_id)->orderBy('created_at')->get();
             return view('quiz.index', $data);
         }
         else{
@@ -69,7 +68,6 @@ class QuizController extends Controller
      */
     public function store(Request $request, $learningId)
     {
-
         DB::beginTransaction();
         $awstatus=null;
         $data = $request->all();
@@ -88,10 +86,17 @@ class QuizController extends Controller
             $data['is_completed'] = 0;
         }
 
+        if(!empty($awstatus)){
+            $message="You've earned a management better badge.";
+        }
+        else{
+            $message='Quiz result has been updated';
+        }
+
         if(Quiz::create($data)){
 
             DB::commit();
-            return redirect()->back()->with(['success'=>'Quiz result has been updated','award'=>$awstatus]);
+            return redirect()->back()->with(['success'=>$message,'award'=>$awstatus]);
         }
         else{
             DB::rollBack();
@@ -142,18 +147,23 @@ class QuizController extends Controller
         $data = $request->all();
 
         $awstatus=null;
-
         $data['learner_id'] = Auth::user()->account_id;
         $data['learning_id'] = $learningId;
         $id=$data['taken_id'];
         $learning=Learning::find($learningId);
         $totalQues = count($learning->quiz);
+        $quizTaken=Quiz::find($request->taken_id);
         if($totalQues==intval($data['result'])){
-            $data['is_completed'] = 1;
-            $award['title']='Quiz completed for - '.$data['title'];
-            $award['learner_id']=$data['learner_id'];
-            $award['description']=$awstatus='quiz';
-            Award::create($award);
+            if($quizTaken['is_completed']==0){
+                $data['is_completed'] = 1;
+                $award['title']='Quiz completed for - '.$data['title'];
+                $award['learner_id']=$data['learner_id'];
+                $award['description']=$awstatus='quiz';
+                Award::create($award);
+            }
+            else{
+                $data['is_completed'] = 1;
+            }
         }
         else{
             $data['is_completed'] = 0;
