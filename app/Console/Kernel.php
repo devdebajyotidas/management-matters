@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\QuotesSchedule'
+         Commands\QuotesSchedule::class
     ];
 
     /**
@@ -25,8 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('quotes:schedule')->everyMinute();
-
+        $schedule->command('quotes:schedule')->daily();
     }
 
     /**
