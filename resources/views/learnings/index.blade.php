@@ -134,7 +134,11 @@
                 <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
                     <div class="learning" style="{{!empty($learning->image) ? "background-image: url('". asset('uploads/'.$learning->image) . "')" : "" }}">
                     <div  style="box-shadow: 0 1px 3px rgba(0,0,0,0.14);background-color: rgba(0, 0, 0, 0.60); padding: 20px; min-height: 300px;">
-                        <img src="{{asset('assets/icons/'.strtolower(str_repalce(' ','-',str_replace("'",'',$learning->title).'.png'))}}"  class="assessment-icon" style="display: inline;width: 50px;">
+                        <?php
+                        $replace=str_replace("'",'',$learning->title);
+                        $img=strtolower(str_replace(' ','-',$replace));
+                        ?>
+                        <img src="{{asset('assets/icons/'.$img.'.png')}}"  class="assessment-icon" style="display: inline;width: 50px;">
                             <h2 class="learning-title">
                                 {{ $learning->title }}
                             </h2>
