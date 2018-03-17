@@ -60,38 +60,40 @@
                             </div>
                             <hr>
                             <?php
-                            $completed=array();
-                            $archived=array();
-                            $open=array();
-                            foreach ($tickets as $ticket){
-                                if($ticket->is_completed==1){
-                                    array_push($completed,$ticket);
-                                }
-                                elseif($ticket->is_archived){
-                                    array_push($archived,$ticket);
-                                }
-                                else{
-                                    array_push($open,$ticket);
-                                }
-                            }
+                            $completed=$tickets->where('is_completed',1)->all();
+                            $archived=$tickets->where('is_archived',1)->all();
+                            $open=$tickets->where('is_completed',0)->where('is_archived',0)->all();
+
+//                            foreach ($tickets as $ticket){
+//                          if($ticket->is_archived && $ticket->is_completed==0){
+//                                array_push($archived,$ticket);
+//                            }
+//                          elseif($ticket->is_completed==1 && $ticket->is_archived==0 ){
+//                                    array_push($completed,$ticket);
+//                                }
+//
+//                                elseif($ticket->is_completed==0&&$ticket->is_archived==0){
+//                                    array_push($open,$ticket);
+//                                }
+//                            }
                             ?>
                             <div class="m-t-15">
                                 @if(count($open) > 0)
                                     <a href="#open-tickets" data-toggle="collapse" class="ticket-type">Open tickets</a>
                                     <div class="m-t-5 collapse in" id="open-tickets">
-                                        @foreach($open as $ticket)
-                                            <div class="calendar-event draggble" data-id="{{$ticket->id}}" data-class="bg-custom">{{$ticket->title}} <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a> <a href="javascript:void(0);" data-id="{{$ticket->id}}" class="edit-calendar-event"><i class="ti-pencil"></i></a></div>
+                                        @foreach($open as $oticket)
+                                            <div class="calendar-event draggble" data-id="{{$oticket->id}}" data-class="bg-custom">{{$oticket->title}} <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a> <a href="javascript:void(0);" data-id="{{$oticket->id}}" class="edit-calendar-event"><i class="ti-pencil"></i></a></div>
                                         @endforeach
                                     </div>
                                 @endif
                             </div>
 
                             <div class="m-t-15">
-                                @if(count($completed) > 0)
+                                @if(count($archived) > 0)
                                     <a href="#archived-tickets" class="text-warning ticket-type" data-toggle="collapse">Archived tickets</a>
                                     <div class="m-t-5 collapse" id="archived-tickets">
-                                        @foreach($completed as $ticket)
-                                            <div class="calendar-event  bg-warning" data-id="{{$ticket->id}}" data-class="bg-custom" style="background-color: #ffc107">{{$ticket->title}} <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a> <a data-id="{{$ticket->id}}" href="javascript:void(0);" class="edit-calendar-event"><i class="ti-pencil"></i></a></div>
+                                        @foreach($archived as $cticket)
+                                            <div class="calendar-event  bg-warning" data-id="{{$cticket->id}}" data-class="bg-custom" style="background-color: #ffc107">{{$cticket->title}} <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a> <a data-id="{{$cticket->id}}" href="javascript:void(0);" class="edit-calendar-event"><i class="ti-pencil"></i></a></div>
                                         @endforeach
                                     </div>
                                 @endif
@@ -101,8 +103,8 @@
                                 @if(count($completed) > 0)
                                     <a href="#completed-tickets" class="text-success ticket-type" data-toggle="collapse">Completed tickets</a>
                                     <div class="m-t-5 collapse" id="completed-tickets">
-                                        @foreach($completed as $ticket)
-                                            <div class="calendar-event" data-id="{{$ticket->id}}" data-class="bg-custom" style="background-color: #28a745;">{{$ticket->title}} <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a> <a data-id="{{$ticket->id}}" href="javascript:void(0);" class="edit-calendar-event"><i class="ti-pencil"></i></a> </div>
+                                        @foreach($completed as $aticket)
+                                            <div class="calendar-event" data-id="{{$aticket->id}}" data-class="bg-custom" style="background-color: #28a745;">{{$aticket->title}} <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a> <a data-id="{{$aticket->id}}" href="javascript:void(0);" class="edit-calendar-event"><i class="ti-pencil"></i></a> </div>
                                         @endforeach
                                     </div>
                                 @endif

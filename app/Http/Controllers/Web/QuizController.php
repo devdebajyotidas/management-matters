@@ -90,7 +90,7 @@ class QuizController extends Controller
             $message="You've earned a management better badge.";
         }
         else{
-            $message='Quiz result has been updated';
+            $message='Quiz result has been updated, keep up the good work to get a management matters badge!';
         }
 
         if(Quiz::create($data)){

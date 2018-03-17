@@ -42,9 +42,9 @@
                                   @if(isset($learning))  @endif>{{ isset($learning) ? trim($learning->description): ''}}</textarea>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="highlights"
+                            <input class="form-control tags-input" type="text" name="highlights"
                                    value="@if(isset($learning->highlights)) {{ implode(',', $learning->highlights) }} @endif"
-                                   data-role="tagsinput" placeholder="Key features (Type and press Return)"
+                                   placeholder="Key features (Type and press Return)"
                                    style="width: 100%!important;">
                         </div>
                     </div>
@@ -62,10 +62,13 @@
                                 <img id="preview" src="{{asset('uploads/'.$learning->image)}}" alt="" style="max-height: 300px">
                             @endif
                         </div>
-                        <div class="m-b-0 m-t-15">
-                            <button type="button" class="btn btn-primary waves-effect waves-light" onclick="$('#image-change').trigger('click')">Upload Image</button>
-                            <input class="hidden" id="image-change" type="file" name="image" onchange="previewImage(this)">
-                        </div>
+                        @if(session('role')=='admin')
+                            <div class="m-b-0 m-t-15">
+                                <button type="button" class="btn btn-primary waves-effect waves-light" onclick="$('#image-change').trigger('click')">Upload Image</button>
+                                <input class="hidden" id="image-change" type="file" name="image" onchange="previewImage(this)">
+                            </div>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -163,7 +166,7 @@
                                     </button>
                                     <div id="question-list" class="list-group m-t-10">
                                         @if(isset($learning))
-                                            @if(count($learning->quiz) > 0)
+                                            @if(!empty($learning->quiz) && count($learning->quiz) > 0)
                                                 @if(is_array($learning->quiz))
                                                     @foreach($learning->quiz as $key => $quiz)
                                                         <div class="list-group-item row question" data-id="{{ $key }}">
@@ -302,6 +305,11 @@
 
     <script>
         window.onload = function () {
+
+            $('.tags-input').tagsinput({
+                maxChars: 50,
+                confirmKeys: [13, 44]
+            });
 
             $('.modal').on('hidden.bs.modal', function () {
                 selectedChapter = null;
