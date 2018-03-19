@@ -306,7 +306,7 @@ class LearnerController extends Controller
         $learner = Learner::withTrashed()->find($id);
 
         $srole='App\Models\Learner';
-        $subscription=Subscription::where('account_id',$id)->where('acccount_type',$srole)->first();
+        $subscription=Subscription::where('account_id',$id)->where('account_type',$srole)->first();
         $user=User::where('account_id',$id)->first();
         $assessment=Assessment::where('learner_id',$id)->get();
         $award=Award::where('learner_id',$id)->get();

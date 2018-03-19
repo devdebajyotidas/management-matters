@@ -109,13 +109,13 @@ $(document).ready(function () {
 
         var that = $(this);
         swal({
-            title: 'Archive Learner?',
+            title: 'Remove Learner?',
             text: "You can revert this later.",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, archive'
+            confirmButtonText: 'Yes, remove'
         }).then((result) => {
             if (result.value) {
             that.parent().submit();
