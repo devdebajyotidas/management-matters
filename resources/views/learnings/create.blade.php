@@ -472,7 +472,6 @@
             $('#save-quiz').click(function () {
                 var quiz = $('#question').val();
                 var index=$('#question-index').val();
-                alert(index);
                 var nonempty=$('#quiz-editor').find('input:text').filter(function() { return $(this).val() !== ""; });
                 if ((quiz.trim() == '')) {
                     swal('Error', 'You must add a question', 'error');
