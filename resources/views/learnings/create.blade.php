@@ -168,10 +168,18 @@
                                         @if(isset($learning))
                                             @if(!empty($learning->quiz) && count($learning->quiz) > 0)
                                                 @if(is_array($learning->quiz))
-                                                    @foreach($learning->quiz as $key => $quiz)
+                                                    <?php $quizs=$learning->quiz ?>
+
+                                                  <?php usort($quizs, function ($a, $b) {
+                                                        if(isset($a['index'])){
+                                                            return strnatcmp($a['index'], $b['index']);
+                                                        }});
+                                                   ?>
+                                                    @foreach($quizs as $key => $quiz)
                                                         <div class="list-group-item row question" data-id="{{ $key }}">
                                                             <span class="qu-name col-sm-10"> {{ $quiz['question'] }} </span>
                                                             <input type="hidden" name="quiz[{{$key}}][question]" value="{{ $quiz['question'] }}">
+                                                            <input type="hidden" name="quiz[{{$key}}][index]" value="{{ isset($quiz['index']) ? $quiz['index'] : $key }}">
                                                             @foreach($quiz['content'] as $k=>$ans)
                                                                 <input type="hidden" class="answer-block" name="quiz[{{$key}}][content][{{$k}}][answer]" value="{{ $ans['answer'] }}">
                                                                 <input type="hidden" name="quiz[{{$key}}][content][{{$k}}][type]" value="{{ $ans['type'] }}">
@@ -285,6 +293,10 @@
                     <h4 class="modal-title" id="myModalLabel">Add Question</h4>
                 </div>
                 <div class="modal-body">
+                    <div class="form-group">
+                        <label>Index</label>
+                        <input id="question-index" type="number" class="form-control" name="index[]" placeholder="1">
+                    </div>
                     <div class="form-group">
                         <label>Question</label>
                         <input id="question" type="text" class="form-control" name="question[]" placeholder="Name">
@@ -459,6 +471,8 @@
 
             $('#save-quiz').click(function () {
                 var quiz = $('#question').val();
+                var index=$('#question-index').val();
+                alert(index);
                 var nonempty=$('#quiz-editor').find('input:text').filter(function() { return $(this).val() !== ""; });
                 if ((quiz.trim() == '')) {
                     swal('Error', 'You must add a question', 'error');
@@ -485,6 +499,7 @@
                     }
                     var html = '<div  class="list-group-item row question" data-id="' + selectedQuiz + '">' +
                         '<span class="qu-name col-sm-10">' + quiz + '</span>' +
+                        '<input type="hidden" name="quiz[' + selectedQuiz + '][index]" value="' + index + '">' +
                         '<input type="hidden" name="quiz[' + selectedQuiz + '][question]" value="' + quiz + '">' + anstable +
                         '<span class="m-l-10 pull-right label label-danger btn waves-effect remove">Remove</span>' +
                         '<span class="pull-right label label-info btn waves-effect edit">Edit</span>' +
@@ -505,6 +520,7 @@
                     }
                     var html = '<div  class="list-group-item row question" data-id="' + count + '">' +
                         '<span class="qu-name col-sm-10">' + quiz + '</span>' +
+                        '<input type="hidden" name="quiz[' + count + '][index]" value="' + index + '">' +
                         '<input type="hidden" name="quiz[' + count + '][question]" value="' + quiz + '">' + anstable +
                         '<span class="m-l-10 pull-right label label-danger btn waves-effect remove">Remove</span>' +
                         '<span class="pull-right label label-info btn waves-effect edit">Edit</span>' +
@@ -582,6 +598,8 @@
             var html='';
             if(mode==='add'){
                 $('#question').val('');
+                var len=parseInt(parseInt($('#question-list > .question').length)+1);
+                $('#question-index').val(len);
                 for(var i=0;i<4;i++){
                     html+='<div class="form-group">\n' +
                         '                                <label>Option '+number_arr[i]+'</label>\n' +
@@ -598,6 +616,8 @@
             }
             else{
                 var question=$('#question-list > .question[data-id="' + id + '"]').find('input[name="quiz['+id+'][question]"]').val();
+                var index=$('#question-list > .question[data-id="' + id + '"]').find('input[name="quiz['+id+'][index]"]').val();
+                $('#question-index').val(index);
                 $('#question').val(question);
                 var len=$('#question-list > .question[data-id="' + id + '"]').find('.answer-block').length;
                 for(var i=0;i<len;i++){
