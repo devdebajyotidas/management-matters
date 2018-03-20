@@ -11,7 +11,7 @@
             background-repeat: no-repeat;
             background-position: center top;
             background-color: rgba(0, 0, 0, 0.60);
-            min-height: 300px;
+            height: 300px;
         }
 
         .learning-thumbnail {
@@ -75,6 +75,8 @@
 
         .learning-highlights {
             display: block;
+            max-height: 80px;
+            overflow: hidden;
         }
 
         .learning-highlights .highlight {
@@ -129,24 +131,36 @@
         <div class="row m-t-0">
             {{--@foreach($learningBundle as $learnings)--}}
             @foreach($learnings as $learning)
-                <div class="col-md-4 col-lg-4 col-xs-6 col-sm-6">
+                <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
                     <div class="learning" style="{{!empty($learning->image) ? "background-image: url('". asset('uploads/'.$learning->image) . "')" : "" }}">
                     <div  style="box-shadow: 0 1px 3px rgba(0,0,0,0.14);background-color: rgba(0, 0, 0, 0.60); padding: 20px; min-height: 300px;">
-                        <img src="{{asset('assets/icons/'.strtolower($learning->title).'.png')}}"  class="assessment-icon" style="display: inline;width: 50px;">
+                        <?php
+                        $replace=str_replace("'",'',$learning->title);
+                        $img=strtolower(str_replace(' ','-',$replace));
+                        ?>
+                        <img src="{{asset('assets/icons/'.$img.'.png')}}"  class="assessment-icon" style="display: inline;width: 50px;">
                             <h2 class="learning-title">
                                 {{ $learning->title }}
                             </h2>
                             <div class="learning-highlights">
                                 @if(isset($learning->highlights))
-                                    @foreach($learning->highlights as $highlight)
+                                <?php $len=!empty($learning->highlights) ? count($learning->highlights) : 0 ?>
+                                    @if($len > 3)
+                                        @for($i=0;$i<3;$i++)
+                                            <span class="highlight">{{ $learning->highlights[$i] }}</span>
+                                        @endfor
+                                        <span class="highlight">+{{$len - 3}} More</span>
+                                    @else
+                                        @foreach($learning->highlights as $highlight)
                                         <span class="highlight">{{ $highlight }}</span>
                                         @endforeach
+                                    @endif
                                 @endif
                             </div>
                             <div class="learning-details">
-                                <span class="chapter-count">{{ count($learning->chapters) }} Chapters</span>
-                                <span class="quiz-count">{{ count($learning->quiz) }} Quiz</span>
-                                <span class="assessment-count">{{ count($learning->assessments) }} Assessments</span>
+                                <span class="chapter-count">{{ !empty($learning->chapters) ? count($learning->chapters) : 0 }} Chapters</span>
+                                <span class="quiz-count">{{ !empty($learning->quiz) ? count($learning->quiz) : 0 }} Quiz</span>
+                                <span class="assessment-count">{{ !empty($learning->assessments) ? count($learning->assessments) : 0 }} Assessments</span>
                             </div>
                         {{--</div>--}}
                         {{--<div class="start-learning">--}}

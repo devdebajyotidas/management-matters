@@ -8,6 +8,13 @@
                 <input type="hidden" class="award-flag" value="{{count($awards) > 0 ? 1 : 0}}">
             </div>
             <div class="col-md-12">
+                <div class="white-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Awards Achieved</h3>
+                        </div>
+                    </div>
+                </div>
                 <ul class="timeline">
                     @if(isset($awards))
                         @foreach($awards as $num=>$award)

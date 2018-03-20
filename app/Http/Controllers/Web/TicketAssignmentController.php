@@ -6,6 +6,8 @@ use App\Models\TicketAssignment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Award;
 
 class TicketAssignmentController extends Controller
 {
@@ -77,24 +79,23 @@ class TicketAssignmentController extends Controller
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
-
         $awstatus=null;
         $data['assignment'] = $request->get('assignment');
+        $data['ticket'] = $request->get('ticket');
         $assignemnt = TicketAssignment::find($id);
+        $result=$assignemnt->update(['note'=>$data['assignment']['note']]);
         if($request->submit){
             $activity=TicketAssignment::where('ticket_id',$data['assignment']['ticket_id'])->whereNotNull('note')->get()->count();
             if($activity==5){
-
                 $award['learner_id'] = Auth::user()->account_id;
                 $award['title'] = "Activity award for " . $data['ticket']['title'] ;
                 $award['description']=$awstatus='activity';
-                $message="You've earned a management better badge";
+                $message="You've earned a management better badge! Keep up the good work!";
                 Award::create($award);
             }
             else{
                 $message="Ticket's activity has been updated";
             }
-            $result=$assignemnt->update(['note'=>$data['assignment']['note']]);
         }
         else{
             $assignemnt->fill($data['assignment']);

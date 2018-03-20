@@ -24,12 +24,12 @@
                 @if(session('role')=='organization')
                     <?php
                     $tickets=\App\Models\Ticket::with(['assignments'])->whereIn('learner_id',auth()->user()->account->learners()->pluck('learners.id')->toArray())->where("is_archived",0)->where('is_completed',0)->whereDate('created_at','=',date('Y-m-d'))->pluck('id');
-                    $assignments=\App\Models\TicketAssignment::whereIn('ticket_id',$tickets)->count();
+                    $assignments=\App\Models\TicketAssignment::whereIn('ticket_id',$tickets)->where('target_date',date("Y-m-d"))->count();
                     ?>
                 @else
                     <?php
                     $tickets=\App\Models\Ticket::where('learner_id',auth()->user()->account_id)->where("is_archived",0)->where('is_completed',0)->whereDate('created_at','=',date('Y-m-d'))->pluck('id');
-                    $assignments=\App\Models\TicketAssignment::whereIn('ticket_id',$tickets)->count();
+                    $assignments=\App\Models\TicketAssignment::whereIn('ticket_id',$tickets)->where('target_date',date("Y-m-d"))->count();
                     ?>
                 @endif
 

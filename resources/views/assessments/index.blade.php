@@ -3,7 +3,6 @@
     @include('includes.main-menu')
     <div class="firework"></div>
     <div class="container-fluid">
-
         <div class="row m-t-15">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="white-box">
@@ -173,7 +172,7 @@
             Highcharts.chart('assessment-chart', {
 
                 title: {
-                    text: '{{ auth()->user()->account->name }}'
+                    text: "{{ !empty(auth()->user()->account) ? auth()->user()->account->name : 'SuperAdmin' }}"
                 },
                 subtitle: {
                     text: "Assessment Report"

@@ -22,6 +22,6 @@ class Assessment extends Model implements AuditableContract
     ];
 
     public function learner(){
-        return $this->belongsTo('App\Models\Learner');
+        return $this->belongsTo('App\Models\Learner')->withTrashed();
     }
 }
