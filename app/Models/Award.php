@@ -14,6 +14,6 @@ class Award extends Model
     ];
 
     public function learner(){
-        return $this->belongsTo('App\Models\Learner');
+        return $this->belongsTo('App\Models\Learner')->withTrashed();
     }
 }

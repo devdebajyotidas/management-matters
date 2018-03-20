@@ -3,7 +3,6 @@
     @include('includes.main-menu')
     <div class="firework"></div>
     <div class="container-fluid">
-
         <div class="row m-t-15">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="white-box">
