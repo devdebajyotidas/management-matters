@@ -93,6 +93,7 @@
             </div>
 
             @if(session('role')=="admin")
+             <a href="javascript:void(0)" onclick="checkQuiz()">Check Quiz</a>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="white-box">
@@ -472,27 +473,28 @@
                 if (selectedQuiz != null) {
                     // $('#question-list > .question[data-id="' + selectedQuiz + '"]').find('.qu-name').text(quiz);
                     // $('#question-list > .question[data-id="' + selectedQuiz + '"]').find('input[name="quiz[' + selectedQuiz + '][question]"]').val(quiz);
-                    $('#question-list > .question[data-id="' + selectedQuiz + '"]').remove();
-                    var count = $('#question-list > .question').length;
+                    // $('#question-list > .question[data-id="' + selectedQuiz + '"]').remove();
+                    // var count = $('#question-list > .question').length;
                     var anstable='';
                     for(var i=0;i<4;i++){
                         var ans=$('#quiz-editor').find('input[name="content[answer]['+i+']"]').val();
                         var type=$('#quiz-editor').find('input[name="content[type]['+i+']"]:checked').val();
                         var note=$('#quiz-editor').find('input[name="content[note]['+i+']"]').val();
-                        anstable +='<input type="hidden" class="answer-block" name="quiz['+count+'][content]['+i+'][answer]" value="'+ans+'">';
-                        anstable+= '<input type="hidden" name="quiz['+count+'][content]['+i+'][type]" value="'+type+'">';
-                        anstable+= '<input type="hidden" name="quiz['+count+'][content]['+i+'][note]" value="'+note+'">';
+                        anstable +='<input type="hidden" class="answer-block" name="quiz['+selectedQuiz+'][content]['+i+'][answer]" value="'+ans+'">';
+                        anstable+= '<input type="hidden" name="quiz['+selectedQuiz+'][content]['+i+'][type]" value="'+type+'">';
+                        anstable+= '<input type="hidden" name="quiz['+selectedQuiz+'][content]['+i+'][note]" value="'+note+'">';
                     }
-                    var html = '<div  class="list-group-item row question" data-id="' + count + '">' +
+                    var html = '<div  class="list-group-item row question" data-id="' + selectedQuiz + '">' +
                         '<span class="qu-name col-sm-10">' + quiz + '</span>' +
-                        '<input type="hidden" name="quiz[' + count + '][question]" value="' + quiz + '">' + anstable +
+                        '<input type="hidden" name="quiz[' + selectedQuiz + '][question]" value="' + quiz + '">' + anstable +
                         '<span class="m-l-10 pull-right label label-danger btn waves-effect remove">Remove</span>' +
                         '<span class="pull-right label label-info btn waves-effect edit">Edit</span>' +
                         '</div>';
-                    $('#question-list').append(html);
+                    $('#question-list > .question[data-id="' + selectedQuiz + '"]').replaceWith(html);
+
 
                 } else {
-                    var count = $('#question-list > .question').length;
+                    var count = parseInt(parseInt($('#question-list > .question').length)+1);
                     var anstable='';
                     for(var i=0;i<4;i++){
                         var ans=$('#quiz-editor').find('input[name="content[answer]['+i+']"]').val();
@@ -667,6 +669,14 @@
 
                 reader.readAsDataURL(input.files[0]);
             }
+        }
+
+        function checkQuiz(){
+            var arr=[];
+           $('.question').each(function(){
+               arr.push($(this).data('id'));
+           });
+           alert(arr.toString());
         }
     </script>
 
