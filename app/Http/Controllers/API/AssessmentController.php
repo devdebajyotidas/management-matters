@@ -15,7 +15,7 @@ class AssessmentController extends Controller
 {
     public function index($id)
     {
-        $assessments = Assessment::where(['learner_id' => $id])->get();
+        $assessments = Assessment::where(['learner_id' => $id])->orderBy('id', 'DESC')->get();
 
         $data['assessments'] = $assessments;
 
