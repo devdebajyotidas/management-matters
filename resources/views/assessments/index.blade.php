@@ -172,7 +172,7 @@
             Highcharts.chart('assessment-chart', {
 
                 title: {
-                    text: "{{ !empty(auth()->user()->account) ? auth()->user()->account->name : 'SuperAdmin' }}"
+                    text: "{{ !empty(auth()->user()->account) ? auth()->user()->account->name : 'SuperAdmin' }}",
                 },
                 subtitle: {
                     text: "Assessment Report"
@@ -224,10 +224,9 @@
         }
 
         window.onload = function () {
-
             renderChart();
 
-            ticketTable = $('#organization-table').DataTable({
+            var ticketTable = $('#organization-table').DataTable({
                 dom: 'Bfrtip',
                 buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
             });
