@@ -21,6 +21,11 @@ class QuizController extends Controller
             $query->where('learner_id','=', $learnerId);
         }])->get(['id','title','quiz']);
 
+        foreach ($data['quiz'] as $quiz)
+        {
+            $quiz['quiz'] = is_array($quiz->quiz) ? array_values($quiz->quiz) : [];
+        }
+
         return response()->json($data);
     }
 
