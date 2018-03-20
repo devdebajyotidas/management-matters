@@ -138,7 +138,7 @@
                                                                 <br>
                                                             @endforeach
                                                         </td>
-                                                        <td>{{ $assessment->created_at->format('m/d/Y') }}</td>
+                                                        <td>{{ $assessment->created_at->format('m/d/Y h:i') }}</td>
                                                     </tr>
                                                 @endforeach
                                             @endif
@@ -166,7 +166,7 @@
         function renderChart() {
 
             for(var i=0; i<dates.length; i++){
-                dates[i] = moment(dates[i].date).format("MM/DD/YYYY");
+                dates[i] = moment(dates[i].date).format("MM/DD/YYYY HH:mm");
             }
 
             Highcharts.chart('assessment-chart', {
