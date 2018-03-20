@@ -224,10 +224,10 @@
         }
 
         window.onload = function () {
-
+            alert('x');
             renderChart();
 
-            ticketTable = $('#organization-table').DataTable({
+            var ticketTable = $('#organization-table').DataTable({
                 dom: 'Bfrtip',
                 buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
             });
