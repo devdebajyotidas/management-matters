@@ -172,7 +172,7 @@
             Highcharts.chart('assessment-chart', {
 
                 title: {
-                    text: "{{ !empty(auth()->user()->account) ? auth()->user()->account->name : 'SuperAdmin' }}"
+                    text: "{{ !empty(auth()->user()->account) ? auth()->user()->account->name : 'SuperAdmin' }}",
                 },
                 subtitle: {
                     text: "Assessment Report"
