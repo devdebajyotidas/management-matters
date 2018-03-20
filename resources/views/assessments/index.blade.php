@@ -138,7 +138,7 @@
                                                                 <br>
                                                             @endforeach
                                                         </td>
-                                                        <td>{{ $assessment->created_at->format('m/d/Y h:i') }}</td>
+                                                        <td>{{ $assessment->created_at->format('m/d/Y H:i') }}</td>
                                                     </tr>
                                                 @endforeach
                                             @endif
