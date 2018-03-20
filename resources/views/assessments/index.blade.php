@@ -224,7 +224,6 @@
         }
 
         window.onload = function () {
-            alert('x');
             renderChart();
 
             var ticketTable = $('#organization-table').DataTable({
