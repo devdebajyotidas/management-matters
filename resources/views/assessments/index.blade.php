@@ -227,6 +227,7 @@
             renderChart();
 
             var ticketTable = $('#organization-table').DataTable({
+                "order": [[ 1, "desc" ]],
                 dom: 'Bfrtip',
                 buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
             });
