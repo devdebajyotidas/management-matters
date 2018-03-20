@@ -93,7 +93,6 @@
             </div>
 
             @if(session('role')=="admin")
-             <a href="javascript:void(0)" onclick="checkQuiz()">Check Quiz</a>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="white-box">
@@ -671,13 +670,6 @@
             }
         }
 
-        function checkQuiz(){
-            var arr=[];
-           $('.question').each(function(){
-               arr.push($(this).data('id'));
-           });
-           alert(arr.toString());
-        }
     </script>
 
     <style>
