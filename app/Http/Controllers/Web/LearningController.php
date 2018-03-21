@@ -114,6 +114,11 @@ class LearningController extends Controller
         DB::beginTransaction();
 
         $data =  ($request->all());
+
+        if(!isset($data['quiz'])){
+            $data['quiz']='';
+        }
+
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $name = time().rand(100,999).".".$file->getClientOriginalExtension();
