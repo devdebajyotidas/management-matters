@@ -101,6 +101,7 @@
                                     <input type="hidden" id="total-question" value="{{count($active_learning->quiz)}}">
                                 </div>
                                 <div class="col-sm-4">
+
                                     @if(isset($active_learning->quizTaken[0]))
                                         @if(isset($_GET['retake']))
                                             <span class="question-progress-text">1/{{ count($active_learning->quiz) }}</span>
@@ -121,7 +122,7 @@
                                         @endif
 
                                     @else
-                                        <span class="question-progress-text">1/{{ count($active_learning->quiz) }}</span>
+                                        <span class="question-progress-text">1/{{ is_array($active_learning->quiz) ? count($active_learning->quiz) : 0 }}</span>
                                         <div class="progress">
                                             <div class="progress-bar question-progress-bar progress-bar-success" role="progressbar" aria-valuenow="70"
                                                  aria-valuemin="0" aria-valuemax="100" style="width:{{count($active_learning->quiz) > 0 ? intval((1/count($active_learning->quiz))*100) : 0}}%">
@@ -136,7 +137,14 @@
                             <div class="row">
                                 @if(!isset($active_learning->quizTaken[0]) )
                                     @if(isset($active_learning->quiz) && !empty($active_learning->quiz))
-                                        @foreach($active_learning->quiz as $key=>$qdata)
+                                        <?php $quizs=$active_learning->quiz ?>
+
+                                        <?php usort($quizs, function ($a, $b) {
+                                            if(isset($a['index'])){
+                                                return strnatcmp($a['index'], $b['index']);
+                                            }});
+                                        ?>
+                                        @foreach($quizs as $key=>$qdata)
                                             <div class="col-lg-12 question-block" id="goto-{{$key}}" data-toggle="{{$key}}" style="display: none">
                                                 <h3>Q: {{$qdata['question']}}</h3>
                                                 <div class="row">
