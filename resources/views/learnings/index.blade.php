@@ -171,8 +171,15 @@
                             @if(session('role') == 'organization' || session('role') == 'admin')
                                     <a href="{{ url('learnings/'. $learning->id) }}" class="btn btn-lg btn-rounded btn-info"> View</a>
                                     <a href="{{ url('learnings/'. $learning->id .'/edit') }}" class="btn btn-lg btn-rounded btn-info" > Edit</a>
-                                    <a href="{{ url('learnings/'. $learning->id .'/edit') }}" class="btn btn-lg btn-rounded btn-info"> Delete</a>
-
+                                    @if(session('role')=='admin')
+                                        <a href="javascript:void(0)" class="btn btn-lg btn-rounded btn-info delete-learning"> Delete</a>
+                                        <div class="hidden">
+                                            <form action="{{url('/learnings/'.$learning->id.'/delete')}}" method="post">
+                                                {{ csrf_field() }}
+                                                <input type="submit" id="submit-delete" value="submit">
+                                            </form>
+                                        </div>
+                                    @endif
                             @endif
                         </div>
                         </div>
@@ -182,6 +189,7 @@
             {{--@endforeach--}}
         </div>
     </div>
+
     <div class="scroll-top"><i class="fa fa-chevron-up"></i></div>
     <script>
         window.onload=function(){
@@ -198,6 +206,24 @@
             }, {{ $timeout * $key }});
             @endforeach
             @endif
+
+            $('.delete-learning').click(function() {
+                swal({
+                    title: 'Are you sure?',
+                    text: "You can't revert this later.",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete'
+                }).then(function(result){
+                    if(result.value){
+                        $('#submit-delete').trigger('click');
+                        return false;
+                    }
+
+                })
+            });
         }
     </script>
 @endsection

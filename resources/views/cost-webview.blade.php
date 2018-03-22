@@ -29,6 +29,7 @@
         <div class="row m-t-15">
             <div class="col-md-12">
                 <div class="white-box">
+
                     {!! $content !!}
 
                     <p>Because we all are responsible for the bottom line, to one degree or another, the costs of doing business are

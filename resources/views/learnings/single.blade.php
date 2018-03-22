@@ -47,17 +47,6 @@
                     <div class="col-md-9">
                         <h3>Learning Module</h3>
                     </div>
-                    @if(session('role')=='admin')
-                        <div class="col-md-3 ">
-                            <button class="btn m-t-10 btn-danger waves-effect pull-right delete-learning">Delete</button>
-                            <div class="hidden">
-                                <form action="{{url('/learnings/'.$learnings->id.'/delete')}}" method="post">
-                                    {{ csrf_field() }}
-                                    <input type="submit" id="submit-delete" value="submit">
-                                </form>
-                            </div>
-                        </div>
-                    @endif
                 </div>
             </div>
             <div class="white-box p-0 m-t-0 m-l-15 m-r-15">
@@ -147,23 +136,7 @@
             @endforeach
             @endif
 
-            $('.delete-learning').click(function() {
-                swal({
-                    title: 'Are you sure?',
-                    text: "You can't revert this later.",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete'
-                }).then(function(result){
-                    if(result.value){
-                        $('#submit-delete').trigger('click');
-                        return false;
-                    }
 
-                })
-            });
         }
     </script>
 @endsection
