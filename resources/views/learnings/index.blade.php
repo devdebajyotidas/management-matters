@@ -36,16 +36,13 @@
             margin: 5px;
         }
 
-        .learning-overlay a {
-            position: absolute;
-            left: 45%;
-            top: 50%;
-            margin-left: -60px;
-            margin-top: -30px;
+        .learning-overlay .btn {
+            display: inline-block;
+            margin: 0 5px ;
         }
 
         .learning-overlay{
-            padding: 20px;
+            padding: 0;
             position: absolute;
             top: 0;
             bottom: 0;
@@ -55,6 +52,9 @@
             height: 100%;
             transition: all .5s;
             background-color: rgba(0, 0, 0, 0.60);
+            justify-content: center;
+            align-items: center;
+            display: flex;
         }
 
         .learning-overlay {
@@ -170,7 +170,8 @@
                             @endif
                             @if(session('role') == 'organization' || session('role') == 'admin')
                                     <a href="{{ url('learnings/'. $learning->id) }}" class="btn btn-lg btn-rounded btn-info"> View</a>
-                                    <a href="{{ url('learnings/'. $learning->id .'/edit') }}" class="btn btn-lg btn-rounded btn-info" style="margin-left: 25px"> Edit</a>
+                                    <a href="{{ url('learnings/'. $learning->id .'/edit') }}" class="btn btn-lg btn-rounded btn-info" > Edit</a>
+                                    <a href="{{ url('learnings/'. $learning->id .'/edit') }}" class="btn btn-lg btn-rounded btn-info"> Delete</a>
 
                             @endif
                         </div>

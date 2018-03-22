@@ -22,6 +22,8 @@ use net\authorize\api\contract\v1 as AnetAPI;
 use net\authorize\api\controller AS AnetController;
 use League\Flysystem\Config;
 
+define("AUTHORIZENET_LOG_FILE", "phplog");
+
 class SubscriptionController extends Controller
 {
     public function __construct(){
@@ -174,10 +176,16 @@ class SubscriptionController extends Controller
         DB::beginTransaction();
 
         $subs=Subscription::where('account_id',$id)->first();
+        if(is_null($subs->subscription_id)){
+            return redirect()->back()->withErrors(["Please subscribe before purchase new licenses"]);
+        }
         if(isset($req->licenses)){
+            $name_arr=explode(' ',$req->name);
+            if(!isset($name_arr[0]) || !isset($name_arr[1])){
+                return redirect()->back()->withErrors(["Enter a valid name"]);
+            }
             $license=$req->licenses;
             $cardnum=$req->number;
-            $name=!empty($req->name) ? $req->name : 'No Name';
             $expdate=$req->expdate;
             $cvv=$req->cvv;
             $invoiceno=config('constants.INVOICE_NO')+1;
@@ -210,8 +218,9 @@ class SubscriptionController extends Controller
             $order->setDescription("Extra ".$license." licenses purchase");
 
             $customerAddress = new AnetAPI\CustomerAddressType();
-            $customerAddress->setFirstName((explode(' ',$name))[0]);
-            $customerAddress->setLastName((explode(' ',$name))[1]);
+
+            $customerAddress->setFirstName($name_arr[0]);
+            $customerAddress->setLastName($name_arr[1]);
 
             $duplicateWindowSetting = new AnetAPI\SettingType();
             $duplicateWindowSetting->setSettingName("duplicateWindow");
@@ -238,6 +247,7 @@ class SubscriptionController extends Controller
 
             $controller = new AnetController\CreateTransactionController($request);
             $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::SANDBOX);
+
             if ($response != null) {
 
                 if ($response->getMessages()->getResultCode() =='Ok') {

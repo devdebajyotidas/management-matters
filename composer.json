@@ -11,7 +11,7 @@
         "laravelcollective/html": "^5.4.0",
         "owen-it/laravel-auditing": "^5.0",
         "santigarcor/laratrust": "5.0.*",
-        "authorizenet/authorizenet": "~1.9"
+        "authorizenet/authorizenet": "~1.9.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

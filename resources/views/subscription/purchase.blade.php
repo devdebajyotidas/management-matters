@@ -38,7 +38,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="expdate">Expiry Date:</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="expdate" id="expdate" placeholder="MM/YY" value="{{isset($organization->expiry_date) ? $organization->expiry_date : ''}}">
+                                        <input type="text" class="form-control" name="expdate" id="expdate" placeholder="YYYY-MM" value="{{isset($organization->expiry_date) ? $organization->expiry_date : ''}}">
                                     </div>
                                 </div>
                                 <div class="form-group">
