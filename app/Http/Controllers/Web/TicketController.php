@@ -138,7 +138,7 @@ class TicketController extends Controller
         }
 
         if(!empty($type) && $type=='completed'){
-            $message="You have earned your Managing Better badge! ";
+            $message="You've earned a management better badge! Keep up the good work!";
         }
         else if(!empty($type)){
             $message="Ticket has been ".$type." successfully";

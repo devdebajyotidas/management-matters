@@ -281,6 +281,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @if(session('role')=='organization')
                                         <div class="panel panel-default">
                                             <div class="panel-heading" role="tab" id="headingFour">
                                                 <h4 class="panel-title">
@@ -311,6 +312,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                            @endif
                                     </div>
                                 </div>
 

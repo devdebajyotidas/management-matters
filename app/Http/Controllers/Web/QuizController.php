@@ -87,7 +87,7 @@ class QuizController extends Controller
         }
 
         if(!empty($awstatus)){
-            $message="You've earned a management better badge.";
+            $message="You've earned a management better badge! Keep up the good work!";
         }
         else{
             $message='Quiz result has been updated, keep up the good work to get a management matters badge!';
@@ -178,7 +178,7 @@ class QuizController extends Controller
 
             DB::commit();
             if(!empty($awstatus)){
-                return redirect()->back()->with(['success'=>"Congratulations for obtaining 100% of this Quiz. You've earned yourself a Managing Better badge!",'award'=>$awstatus]);
+                return redirect()->back()->with(['success'=>"You've earned a management better badge! Keep up the good work!",'award'=>$awstatus]);
             }
             else{
                 return redirect()->back()->with(['success'=>'Quiz result has been updated','award'=>$awstatus]);

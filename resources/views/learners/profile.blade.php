@@ -1,7 +1,11 @@
 @extends('layouts.app')
 @section('content')
     @include('includes.main-menu')
-
+    <style>
+        .btn{
+            margin: 5px !important;
+        }
+    </style>
     <div class="container-fluid">
         <!-- row -->
         <div class="row m-t-15">
@@ -263,6 +267,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @if(session('role')=='learner' && !isset($learner->department->id))
                                         <div class="panel panel-default">
                                             <div class="panel-heading" role="tab" id="headingFour">
                                                 <h4 class="panel-title">
@@ -296,6 +301,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="modal-footer">

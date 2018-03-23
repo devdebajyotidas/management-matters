@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            <div class="white-box p-0 m-t-0 m-l-15 m-r-15">
+            <div class="white-box p-0 m-t-0 m-l-15 m-r-15" style="margin-top: -25px !important;">
                 <div class="col-md-12 col-xs-12 col-sm-12" >
                     <div class="learn-banner" style="background-image: url({{isset($learnings) ? asset('uploads/'.$learnings->image) : 'emails'}})">
                     </div>

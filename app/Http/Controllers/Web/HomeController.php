@@ -72,12 +72,12 @@ class HomeController extends Controller
         $data['role'] = session('role');
         $data['prefix']  = session('role');
          if(session('role')=='organization'){
-             $data['departments']=Department::where('organization_id',Auth::user()->account_id)->get();
-             $data['organization']=Organization::with(['subscription'])->find(Auth::user()->account_id);
+             $data['departments']=Department::withTrashed()->where('organization_id',Auth::user()->account_id)->get();
+             $data['organization']=Organization::withTrashed()->with(['subscription'])->find(Auth::user()->account_id);
              return view('profile.organization', $data);
          }
          elseif(session('role')=='learner'){
-             $data['learner']=Learner::with(['subscription'])->find(Auth::user()->account_id);
+             $data['learner']=Learner::withTrashed()->with(['subscription'])->find(Auth::user()->account_id);
              return view('profile.learner', $data);
          }
     }

@@ -17,7 +17,7 @@
 
                     <div class="user-bg">
                         <img width="100%" alt="user"
-                             src="{{ ($learner->image)? asset('uploads/'.$learner->image) : 'http://sanarch.in/public/images/defaultAvatar.png' }}">
+                             src="{{ isset($learner->image)? asset('uploads/'.$learner->image) : 'http://sanarch.in/public/images/defaultAvatar.png' }}">
                     </div>
                     <div class="user-btm-box">
                         <!-- .row -->
@@ -291,7 +291,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @if(!isset($learner->department->id))
+                                        @if(!isset($learner->department->id) && session('role')=='learner')
                                             <div class="panel panel-default">
                                                 <div class="panel-heading" role="tab" id="headingFour">
                                                     <h4 class="panel-title">
