@@ -57,6 +57,10 @@ class HomeController extends Controller
         return view('errors.verification');
     }
 
+    public function suspend(){
+        return view('errors.suspend');
+    }
+
     public function cost()
     {
         return view('cost', ['page' => 'cost', 'role' => session('role')]);

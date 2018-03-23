@@ -2155,7 +2155,7 @@
     <div class="container">
 
         <!-- Your Copy Right -->
-        <p>Copyright &copy; 2018. Management Matters</p>
+        <p>Copyright &copy; {{date('Y')}}. Management Matters</p>
 
         <!-- Your Social Network Links-->
 

@@ -33,6 +33,7 @@ Route::group(['namespace' => 'Web'], function () {
     Route::get('/restricted', 'HomeController@restricted')->name('restricted');
     Route::get('/message', 'HomeController@message');
     Route::get('/abort', 'HomeController@abort');
+    Route::get('/suspend', 'HomeController@suspend');
     Route::get('/unauthorized', 'Auth\LoginController@unauthorized')->name('unauthorized');
 
 

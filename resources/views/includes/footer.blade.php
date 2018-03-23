@@ -1,1 +1,1 @@
-<footer class="footer text-center" style="background-color:transparent"> &copy; 2018 Management Matters</footer>
+<footer class="footer text-center" style="background-color:transparent"> &copy; {{date('Y')}} Management Matters</footer>

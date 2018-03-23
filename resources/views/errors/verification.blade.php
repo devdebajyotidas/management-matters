@@ -40,7 +40,7 @@
             <a href="{{url('resendconfirmation')}}" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Resend Email</a>
             <a href="{{url('logout')}}" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Retry Login</a>
         </div>
-        <footer class="footer text-center">&copy; 2018 Management Matters</footer>
+        <footer class="footer text-center">&copy; {{date('Y')}} Management Matters</footer>
     </div>
 </section>
 <script src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/bower_components/jquery/dist/jquery.min.js"></script>
