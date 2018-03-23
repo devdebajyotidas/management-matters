@@ -38,7 +38,7 @@ class LearnerController extends Controller
         $data['page'] = 'learners';
         $data['role'] = session('role');
         $data['departments'] = Department::all();
-        $data['learners'] = Learner::withTrashed()->with(['department.organization','user'])->get();
+        $data['learners'] = Learner::withTrashed()->with(['department.organization','user'])->orderBy('created_at','desc')->get();
         $data['organizations'] = Organization::all();
         $data['prefix']  = '';
         return view('learners.index', $data);

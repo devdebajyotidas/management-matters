@@ -33,7 +33,7 @@ class QuizController extends Controller
 
         if(session('role')=='admin'){
             $data['organizations']=Organization::all(['id','name']);
-            $data['quizs']=Quiz::with(['learner.department.organization','learning'])->orderBy('created_at')->get();
+            $data['quizs']=Quiz::with(['learner.department.organization','learning'])->orderBy('created_at','desc')->get();
             return view('quiz.index', $data);
 
         }
@@ -41,13 +41,13 @@ class QuizController extends Controller
             $data['departments'] = Department::where('organization_id',Auth::user()->account_id)->get();
 
             $learner_id=Auth::user()->account->learners()->pluck('learners.id')->toArray();
-            $data['quizs']=Quiz::with(['learning', 'learner.department'])->whereIn('learner_id',$learner_id)->orderBy('created_at')->get();
+            $data['quizs']=Quiz::with(['learning', 'learner.department'])->whereIn('learner_id',$learner_id)->orderBy('created_at','desc')->get();
             return view('quiz.index', $data);
         }
         else{
             $data['learnings'] =  Learning::with(['quizTaken' => function($query){
                 $query->where('learner_id','=',Auth::user()->account_id);
-            }])->orderBy('created_at')->get();
+            }])->orderBy('created_at','desc')->get();
             $data['active_learning'] = $data['learnings']->find($learningId);
             return view('quiz.quiz', $data);
         }

@@ -33,16 +33,16 @@ class AssessmentController extends Controller
         $data['CSS_COLOR_NAMES'] = array_slice($CSS_COLOR_NAMES, 10, $data['learnings']->count());
 
         if(session('role') == 'learner'){
-            $assessments = Assessment::where(['learner_id' => Auth::user()->account_id])->get();
+            $assessments = Assessment::where(['learner_id' => Auth::user()->account_id])->orderBy('created_at','desc')->get();
         }
         elseif(session('role') == 'admin'){
             $data['organizations']=Organization::all(['id','name']);
-            $assessments = Assessment::with(['learner.department.organization'])->get();
+            $assessments = Assessment::with(['learner.department.organization'])->orderBy('created_at','desc')->get();
         }
         else {
             $data['departments'] = Department::where('organization_id', Auth::user()->account_id)->get();
             $learners = Auth::user()->account->learners()->select('learners.id')->pluck('id');
-            $assessments = Assessment::with('learner.department')->whereIn('learner_id', $learners)->get();
+            $assessments = Assessment::with('learner.department')->whereIn('learner_id', $learners)->orderBy('created_at','desc')->get();
         }
         $data['assessments'] = $assessments;
         $data['dates'] = $assessments->pluck('created_at');

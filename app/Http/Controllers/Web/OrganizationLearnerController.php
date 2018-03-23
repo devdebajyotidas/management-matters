@@ -41,7 +41,7 @@ class OrganizationLearnerController extends Controller
         if (!$id)
             $id = Auth::user()->account_id;
 
-        $organization = Organization::withTrashed()->with(['departments.learners.user','subscription'])->find($id);
+        $organization = Organization::withTrashed()->with(['departments.learners.user','subscription'])->orderBy('created_at','desc')->find($id);
         $data['page'] = 'learners';
         $data['role'] = session('role');
         $data['prefix'] = '/organization/' . $id;
