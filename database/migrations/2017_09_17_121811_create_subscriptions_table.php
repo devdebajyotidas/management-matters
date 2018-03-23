@@ -24,7 +24,7 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('licenses')->default(1);
             $table->integer('status')->default(1);
             $table->integer('amount')->nullable();
-            $table->integer('is_subscribed')->default(1);
+            $table->integer('is_subscribed')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

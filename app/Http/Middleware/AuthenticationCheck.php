@@ -48,8 +48,8 @@ class AuthenticationCheck
             if(isset($subscription->created_at)){
                 $trial = strtotime('+ ' . config('constants.TRIAL_PERIOD'), strtotime($subscription->created_at));
                 $today = strtotime(date('Y-m-d H:i:s'));
-                if ($today-$trial > 0) {
-                    if (empty($subscription->subcription_id) && $subscription->is_subscribed == 0) {
+                if ($today >= $trial) {
+                    if (is_null($subscription->subcription_id) && $subscription->is_subscribed == 0) {
                         return redirect('message');
                     } else if (!empty($subscription->subcription_id) && $subscription->is_subscribed == 0) {
                         return redirect('message');
