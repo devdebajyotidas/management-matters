@@ -44,17 +44,18 @@
                         <!-- /.row -->
                         <hr>
                         <!-- .row -->
-                        <div class="row text-center m-t-10">
-                            <div class="col-md-6 b-r"><strong>Subscription Amount</strong>
-                                <p>{{ isset($learner->subscription) ? $learner->subscription->amount : 'N/A' }}</p>
-                            </div>
-                            <div class="col-md-6"><strong>Subscription Interval</strong>
-                                <p>{{ isset($learner->subscription) ? $learner->subscription->billing_interval.' days' : 'N/A'  }}</p>
-                            </div>
-                        </div>
-                        <hr>
+
                         @if(!isset($learner->department->id))
                             @if(isset($learner->subscription) && !empty($learner->subscription->subscription_id))
+                                <div class="row text-center m-t-10">
+                                    <div class="col-md-6 b-r"><strong>Subscription Amount</strong>
+                                        <p>{{ isset($learner->subscription) ? $learner->subscription->amount : 'N/A' }}</p>
+                                    </div>
+                                    <div class="col-md-6"><strong>Subscription Interval</strong>
+                                        <p>{{ isset($learner->subscription) ? $learner->subscription->billing_interval.' days' : 'N/A'  }}</p>
+                                    </div>
+                                </div>
+                                <hr>
                                 <div class="row text-center m-t-10">
                                     <form action="{{url('profile/'.$learner->subscription->subscription_id)}}" method="post">
                                         {{ csrf_field() }}
@@ -65,9 +66,15 @@
                                 <button type="button" class="btn resubscribe-button btn-success">Re Subscribe</button>
                             @else
                                 <div class="row text-left m-t-10 m-l-5 m-r-5">
-                                    <span class="text-danger"><i class="fa fa-info-circle "></i> Please add your credit card information to enjoy interrupted services</span>
+                                    <span class="text-danger"><i class="fa fa-info-circle "></i> Please add your credit card information to enjoy uninterrupted services</span>
                                 </div>
                         @endif
+                        @else
+                            <div class="row text-center m-t-10">
+                                <div class="col-md-12"><strong>Department</strong>
+                                    <p>{{ !empty($learner->department->name) ? $learner->department->name : 'N/A'}}</p>
+                                </div>
+                            </div>
                     @endif
 
 

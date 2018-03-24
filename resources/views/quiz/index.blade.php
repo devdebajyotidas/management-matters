@@ -35,9 +35,9 @@
                                             <a href="javascript:void(0)" class="department" data-id="" data-name="">
                                                 All Quiz
                                              </a>
-                                            <a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">
-                                                Not Applicable
-                                            </a>
+                                            {{--<a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">--}}
+                                                {{--Not Applicable--}}
+                                            {{--</a>--}}
                                         </li>
 
                                     @endif
@@ -57,9 +57,9 @@
                                             <a href="javascript:void(0)" class="department" data-id="" data-name="">
                                                 All Quiz
                                             </a>
-                                            <a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">
-                                                Not Applicable
-                                            </a>
+                                            {{--<a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">--}}
+                                                {{--Not Applicable--}}
+                                            {{--</a>--}}
                                         </li>
                                     @endif
 
@@ -88,7 +88,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @if(isset($quizs))
+                                        @if(isset($quizs) && count($quizs) > 0)
                                         @foreach($quizs as $quiz)
                                             <tr>
                                                 @if(session('role') == "admin")
@@ -106,7 +106,7 @@
                                                     @endif
                                                 @endif
                                                 <td>{{ isset($quiz->learner->name) ? $quiz->learner->name : 'N/A' }}</td>
-                                                <td>{{ $quiz->learning->title }}</td>
+                                                <td>{{ isset($quiz->learning->title) ? $quiz->learning->title : 'N/A' }}</td>
                                                 <td>{{number_format(floatval((($quiz->result)/count($quiz->learning->quiz)) * 100) ,2) }} %</td>
                                                 <td>{{ ($quiz->complete_flag == 1) ? 'Yes' : 'No'  }}</td>
                                                 <td>{{ $quiz->created_at->format('m/d/Y') }}</td>

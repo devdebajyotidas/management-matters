@@ -38,7 +38,7 @@
             <h1>Oops</h1>
             <h3 class="text-uppercase">Account Susupended.</h3>
             <p class="text-muted m-t-30 m-b-30">Please contact admin</p>
-            <a href="{{url('/')}}" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Home Page</a> </div>
+            <a href="{{url('/logout')}}" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Home Page</a> </div>
         <footer class="footer text-center">&copy; {{date('Y')}} Management Matters</footer>
     </div>
 </section>

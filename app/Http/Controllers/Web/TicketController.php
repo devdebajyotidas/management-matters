@@ -46,7 +46,7 @@ class TicketController extends Controller
 
         if(session('role') == 'organization')
         {
-            $data['departments'] = Department::all(['id','name'])->find($id);
+            $data['departments'] = Department::where('organization_id',$id)->get(['id','name']);
             $learner_ids=Auth::user()->account->learners()->pluck('learners.id')->toArray();
             $data['tickets'] = Ticket::with(['assignments','learner.department.organization'])->whereIn('learner_id', $learner_ids)->get();
 

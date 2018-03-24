@@ -42,17 +42,24 @@ class TicketAssignmentController extends Controller
 
         $data['assignment'] = $request->get('assignment');
 
-        $assignment = TicketAssignment::create($data['assignment']);
 
-       if($assignment){
+        $activity=TicketAssignment::where('ticket_id',$data['assignment']['ticket_id'])->whereDate('created_at','=',date('Y-m-d'))->get()->count();
+        if($activity < 5){
+            $assignment = TicketAssignment::create($data['assignment']);
 
-           DB::commit();
-           return redirect()->back()->with('success', 'Ticket has been assigned successfully');
-       }
-       else{
-           DB::rollBack();
-           return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong!']);
-       }
+            if($assignment){
+
+                DB::commit();
+                return redirect()->back()->with('success', 'Ticket has been assigned successfully');
+            }
+            else{
+                DB::rollBack();
+                return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong!']);
+            }
+        }
+        else{
+            return redirect()->back()->withErrors(['You can have only 5 activities for the same ticket for the day']);
+        }
 
     }
 
@@ -85,7 +92,7 @@ class TicketAssignmentController extends Controller
         $assignemnt = TicketAssignment::find($id);
         $result=$assignemnt->update(['note'=>$data['assignment']['note']]);
         if($request->submit){
-            $activity=TicketAssignment::where('ticket_id',$data['assignment']['ticket_id'])->whereNotNull('note')->get()->count();
+            $activity=TicketAssignment::where('ticket_id',$data['assignment']['ticket_id'])->whereNotNull('note')->whereDate('created_at','=',date('Y-m-d'))->get()->count();
             if($activity==5){
                 $award['learner_id'] = Auth::user()->account_id;
                 $award['title'] = "Activity award for " . $data['ticket']['title'] ;

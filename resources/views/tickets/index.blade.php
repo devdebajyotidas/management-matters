@@ -35,14 +35,13 @@
                                             <a href="javascript:void(0)" class="department" data-id="" data-name="">
                                                 All Tickets
                                             </a>
-                                            <a href="javascript:void(0)" class="department" data-id="0" data-name="Not Applicable">
-                                                Not Applicable
-                                            </a>
+                                            {{--<a href="javascript:void(0)" class="department" data-id="0" data-name="Not Applicable">--}}
+                                                {{--Not Applicable--}}
+                                            {{--</a>--}}
                                         </li>
                                     @endif
-                                    @if(session('role')=='organization')
-                                        @if(isset($departments))
-                                            @if(is_array($departments))
+                                        @if(session('role')=='organization')
+                                            @if(isset($departments) && count($departments) > 0)
                                                 @foreach($departments as $department)
                                                     <li>
                                                         <a href="javascript:void(0)" class="department"
@@ -51,25 +50,16 @@
                                                         </a>
                                                     </li>
                                                 @endforeach
-                                            @else
-                                                <li>
-                                                    <a href="javascript:void(0)" class="department"
-                                                       data-id="{{ $departments->id }}" data-name="{{ $departments->name }}">
-                                                        {{ $departments->name }}
-                                                    </a>
-                                                </li>
                                             @endif
-
+                                            <li class="box-label">
+                                                <a href="javascript:void(0)" class="department" data-id="" data-name="">
+                                                    All Tickets
+                                                </a>
+                                                {{--<a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">--}}
+                                                    {{--Not Applicable--}}
+                                                {{--</a>--}}
+                                            </li>
                                         @endif
-                                        <li class="box-label">
-                                            <a href="javascript:void(0)" class="department" data-id="" data-name="">
-                                                All Tickets
-                                            </a>
-                                            <a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">
-                                                Not Applicable
-                                            </a>
-                                        </li>
-                                    @endif
 
                                 </ul>
                             </div>

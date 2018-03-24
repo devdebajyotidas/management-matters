@@ -35,9 +35,9 @@
                                             <a href="javascript:void(0)" class="department" data-id="" data-name="">
                                                 All Awards
                                             </a>
-                                            <a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">
-                                                Not Applicable
-                                            </a>
+                                            {{--<a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">--}}
+                                                {{--Not Applicable--}}
+                                            {{--</a>--}}
                                         </li>
                                     @endif
                                     @if(session('role')=='organization')
@@ -55,9 +55,9 @@
                                             <a href="javascript:void(0)" class="department" data-id="" data-name="">
                                                 All Awards
                                             </a>
-                                            <a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">
-                                                Not Applicable
-                                            </a>
+                                            {{--<a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">--}}
+                                                {{--Not Applicable--}}
+                                            {{--</a>--}}
                                         </li>
                                     @endif
 

@@ -34,9 +34,9 @@
                                         <a href="javascript:void(0)" class="department" data-id="" data-name="">
                                             All Learners
                                         </a>
-                                        <a href="javascript:void(0)" class="department" data-id="" data-name="N/A">
-                                            Not Applicable
-                                        </a>
+                                        {{--<a href="javascript:void(0)" class="department" data-id="" data-name="N/A">--}}
+                                            {{--Not Applicable--}}
+                                        {{--</a>--}}
                                     </li>
                                 </ul>
                             </div>

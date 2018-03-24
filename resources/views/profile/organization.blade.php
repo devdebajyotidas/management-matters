@@ -82,7 +82,7 @@
                         <button type="button" class="btn resubscribe-button btn-success">Re Subscribe</button>
                     @else
                         <div class="row text-left m-t-10 m-l-5 m-r-5">
-                            <span class="text-danger"><i class="fa fa-info-circle "></i> Please add your credit card information to enjoy interrupted services</span>
+                            <span class="text-danger"><i class="fa fa-info-circle "></i> Please add your credit card information to enjoy uninterrupted services</span>
                         </div>
                     @endif
                 </div>

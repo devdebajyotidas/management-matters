@@ -48,9 +48,9 @@
                                                     <a href="javascript:void(0)" class="department" data-id="" data-name="">
                                                         All Assessment
                                                     </a>
-                                                    <a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">
-                                                        Not Applicable
-                                                    </a>
+                                                    {{--<a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">--}}
+                                                        {{--Not Applicable--}}
+                                                    {{--</a>--}}
                                                 </li>
 
                                             @endif
@@ -70,9 +70,9 @@
                                                     <a href="javascript:void(0)" class="department" data-id="" data-name="">
                                                         All Assessment
                                                     </a>
-                                                    <a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">
-                                                        Not Applicable
-                                                    </a>
+                                                    {{--<a href="javascript:void(0)" class="department" data-id="" data-name="Not Applicable">--}}
+                                                        {{--Not Applicable--}}
+                                                    {{--</a>--}}
                                                 </li>
                                             @endif
 
