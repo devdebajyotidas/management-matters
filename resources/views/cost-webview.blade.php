@@ -27,19 +27,19 @@
 
     <div class="container">
         <div class="row m-t-15">
-            <div class="col-md-12">
+            <div class="col-md-12 fr-element fr-view">
                 <div class="white-box">
 
                     {!! $content !!}
 
-                    <p>Because we all are responsible for the bottom line, to one degree or another, the costs of doing business are
-                        important to each and every one of us. It’s easy to find out the cost of wages, machines, tools, supplies and
-                        services so our attention can become fixed on those tangible items. However, when it come to the performance of
-                        people the costs are not so obvious. Management Matters makes a commitment to help you identify these costs in
-                        all our Modules, when appropriate. </p>
-                    <p>MUST PROVIDE SIMILAR TYPE WORKSHEET, RIGTH AFTER THIS EXAMPLE AND TEXT, THEN THIS SECTION TOTAL GETS TOTALED TO
-                        THE DASHBOARD SECTION….CUMULATIVE TO THE NUMBER OF MODULES THEY HAVE PURCHASED.</p>
-                    <hr>
+                    {{--<p>Because we all are responsible for the bottom line, to one degree or another, the costs of doing business are--}}
+                        {{--important to each and every one of us. It’s easy to find out the cost of wages, machines, tools, supplies and--}}
+                        {{--services so our attention can become fixed on those tangible items. However, when it come to the performance of--}}
+                        {{--people the costs are not so obvious. Management Matters makes a commitment to help you identify these costs in--}}
+                        {{--all our Modules, when appropriate. </p>--}}
+                    {{--<p>MUST PROVIDE SIMILAR TYPE WORKSHEET, RIGTH AFTER THIS EXAMPLE AND TEXT, THEN THIS SECTION TOTAL GETS TOTALED TO--}}
+                        {{--THE DASHBOARD SECTION….CUMULATIVE TO THE NUMBER OF MODULES THEY HAVE PURCHASED.</p>--}}
+                    {{--<hr>--}}
                     <p>
                         <span> <b>A</b> = Behavior/Personality Issue or Concern </span>
                         <br>
