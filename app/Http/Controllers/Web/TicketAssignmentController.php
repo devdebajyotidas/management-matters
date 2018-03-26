@@ -88,6 +88,7 @@ class TicketAssignmentController extends Controller
         DB::beginTransaction();
         $awstatus=null;
         $data['assignment'] = $request->get('assignment');
+        $data['assignment']['note']=str_replace(array("\r\n", "\n", "\r"),' ',$data['assignment']['note']);
         $data['ticket'] = $request->get('ticket');
         $assignemnt = TicketAssignment::find($id);
         $result=$assignemnt->update(['note'=>$data['assignment']['note']]);
