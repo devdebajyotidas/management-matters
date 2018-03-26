@@ -48,22 +48,6 @@ class DashboardController extends Controller
         $orgs = Organization::with(['learners.costs'])->get();
 
 
-        $cost = [];
-        foreach ($orgs as  $org)
-        {
-            $cost[$org->name] = 0;
-            foreach ($org->learners as $learner)
-            {
-                foreach ($learner->costs as $c)
-                {
-                    if($now->gt($resetDate))
-                        $cost[$org->name] += $c->total;
-                }
-            }
-        }
-
-        $data['cost'] = $cost;
-
         if(session('role')=='admin'){
             $data['learnings'] = $learnings;
             $data['outstandingTickets'] = $outstandingTickets->count();
@@ -75,6 +59,27 @@ class DashboardController extends Controller
             $data['quiz'] = $quiz->count();
             $data['organizations'] = Organization::count();
             $data['learners'] = Learner::count();
+
+            $cost = [];
+            foreach ($orgs as  $org)
+            {
+                $cost[$org->name] = 0;
+                foreach ($org->learners as $learner)
+                {
+                    $temp = $learner->costs;
+                    if(count($temp))
+                        $cost[$org->name] = $temp[count($temp) - 1]->total;
+
+//                    foreach ($learner->costs as $c)
+//                    {
+//                    if($now->gt($resetDate))
+//                        $cost[$org->name] += $c->total;
+//                    }
+                }
+            }
+
+            $data['cost'] = $cost;
+
 //            return view('admin.dashboard', $data);
         }
         else if(session('role')=='organization'){
@@ -102,10 +107,14 @@ class DashboardController extends Controller
             foreach ($data['cost'] as $month => $c)
             {
                 $cost[$month] = 0;
-                foreach ($c as $c2)
+                if(count($c))
                 {
-                    $cost[$month] += $c2->total;
+                    $cost[$month] += $c[count($c) -1]->total;
                 }
+//                foreach ($c as $c2)
+//                {
+//                    $cost[$month] += $c2->total;
+//                }
             }
             $data['cost'] = $cost;
 //            dd(, CostOfNot::whereIn('learner_id', $learnersId)->pluck('total', 'created_at'));
@@ -150,6 +159,8 @@ class DashboardController extends Controller
             $data['learners'] = Learner::count();
 //            return view('dashboard', $data);
         }
+
+//        dd($data['cost']);
 
         return view('dashboard', $data);
     }
