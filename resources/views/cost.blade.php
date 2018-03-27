@@ -16,6 +16,7 @@
             text-align: center;
             cursor: pointer;
             box-shadow: 0 3px 7px rgba(0,0,0,.14);
+            z-index:9999;
         }
     </style>
 
