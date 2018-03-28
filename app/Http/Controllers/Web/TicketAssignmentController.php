@@ -88,6 +88,7 @@ class TicketAssignmentController extends Controller
         DB::beginTransaction();
         $awstatus=null;
         $data['assignment'] = $request->get('assignment');
+        $data['assignment']['note']=str_replace(array("\r\n", "\n", "\r"),' ',$data['assignment']['note']);
         $data['ticket'] = $request->get('ticket');
         $assignemnt = TicketAssignment::find($id);
         $result=$assignemnt->update(['note'=>$data['assignment']['note']]);
@@ -97,7 +98,7 @@ class TicketAssignmentController extends Controller
                 $award['learner_id'] = Auth::user()->account_id;
                 $award['title'] = "Activity award for " . $data['ticket']['title'] ;
                 $award['description']=$awstatus='activity';
-                $message="You've earned a management better badge! Keep up the good work!";
+                $message="Activity Award!  Keep up the good work!";
                 Award::create($award);
             }
             else{

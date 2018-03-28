@@ -328,8 +328,6 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
-
     <script>
 
         var selectedTicketDate = null;
