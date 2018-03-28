@@ -56,26 +56,30 @@ class TicketAssignmentController extends Controller
         $awstatus = null;
         $data['assignment'] = $request->all();
         $assignemnt = TicketAssignment::find($id);
-        $activity = TicketAssignment::where('ticket_id', $id)->whereNotNull('note')->get()->count();
-        if ($activity % 5 == 0) {
 
-            $ticket = $assignemnt->ticket;
-            $award['learner_id'] = $ticket->learner->id;
-            $award['title'] = "Activity award for " . $ticket->title;
-            $award['description'] = $awstatus = 'activity';
-            $message = "You've earned a management better badge";
-            $award = Award::create($award);
-        } else {
-            $award = null;
-            $message = "Ticket's activity has been updated";
-        }
-        $result = $assignemnt->update(['note' => $data['assignment']['note']]);
+//        $result = $assignemnt->update(['note' => $data['assignment']['note']]);
 
         $assignemnt->fill($data['assignment']);
         $result = $assignemnt->save();
-        $message = "Ticket has been assigned to a new date";
 
-        if ($result) {
+
+        if ($result)
+        {
+            $activity = TicketAssignment::where('ticket_id', $id)->whereNotNull('note')->get()->count();
+            if ($activity >= 5)
+            {
+                $ticket = $assignemnt->ticket;
+                $award['learner_id'] = $ticket->learner->id;
+                $award['title'] = "Activity award for " . $ticket->title;
+                $award['description'] = $awstatus = 'activity';
+                $message = "You've earned a better management  badge";
+                $award = Award::create($award);
+            } else
+            {
+                $award = null;
+                $message = "Ticket's activity has been updated";
+            }
+
             DB::commit();
             return response()->json(['success' => true, 'message' => $message, 'award' => $award]);
         } else {

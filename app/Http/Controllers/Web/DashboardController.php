@@ -68,7 +68,7 @@ class DashboardController extends Controller
                 {
                     $temp = $learner->costs;
                     if(count($temp))
-                        $cost[$org->name] = $temp[count($temp) - 1]->total;
+                        $cost[$org->name] += $temp[count($temp) - 1]->total;
 
 //                    foreach ($learner->costs as $c)
 //                    {
