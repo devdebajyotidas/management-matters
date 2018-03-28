@@ -112,7 +112,7 @@ class AssessmentController extends Controller
             Award::create($data['awards']);
 
             DB::commit();
-            return redirect()->intended('assessments')->with('success', "You've earned a management better badge! Keep up the good work!");
+            return redirect()->intended('assessments')->with('success', "Assessment Completion! Use to Manage Better!");
         }
 
         else{
