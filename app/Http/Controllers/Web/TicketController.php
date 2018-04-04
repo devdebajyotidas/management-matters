@@ -54,7 +54,7 @@ class TicketController extends Controller
         }
 
         if(session('role') == 'learner'){
-            $data['tickets'] = Ticket::with(['assignments'])->where(['learner_id' => $id])->get();
+            $data['tickets'] = Ticket::with(['assignments'])->where(['learner_id' => $id])->orderBy('title','asc')->get();
             $assignments = TicketAssignment::with(['ticket' => function($query){
                 $query->where(['learner_id' => Auth::user()->account_id]);
             }])->get();

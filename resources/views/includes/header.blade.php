@@ -59,13 +59,14 @@
                 $quotes=\App\Models\Quotes::where('is_active',1)->first();
                 ?>
                 @if(isset($quotes->name))
+                    <?php $quote_arr=explode('.',$quotes->name) ?>
                 <li><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false" title="Quote of the day">
                         <i class="fas fa-quote-right"></i>
                         <div class="notify"><span class="heartbit heartbit-white"></span><span class="point point-white"></span></div>
                     </a>
                     <ul class="dropdown-menu dropdown-tasks animated slideInUp">
                         <li>
-                            <span class="quotes-text" style="display: block;padding: 10px 20px;">{{$quotes->name}}</span>
+                            <span class="quotes-text" style="display: block;padding: 10px 20px;"><b>{{$quote_arr[0]}}.</b><i>{{$quote_arr[1]}}</i></span>
                         </li>
                     </ul>
                 </li>
