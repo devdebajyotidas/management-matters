@@ -65,6 +65,31 @@ class QuotesController extends Controller
           }
     }
 
+    public function update(Request $request){
+        DB::beginTransaction();
+        $id=$request->id;
+
+        if(empty($id)){
+            return redirect()->back()->withErrors(['Invalid quote selection']);
+        }
+
+        $quotes=Quotes::find($id);
+        if($quotes){
+            $update=$quotes->update(['name'=>$request->name]);
+            if($update){
+                DB::commit();
+                return redirect()->back()->with(['success'=>'Quotes has been updated']);
+            }
+            else{
+                DB::rollBack();
+                return redirect()->back()->withErrors(['Something went wrong!']);
+            }
+        }
+        else{
+            return redirect()->back()->withErrors(['Something went wrong!']);
+        }
+    }
+
     function broadcast(){
         DB::beginTransaction();
         $allquotes=Quotes::all();

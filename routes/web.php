@@ -144,6 +144,7 @@ Route::group(['namespace' => 'Web'], function () {
     Route::post('quotes', 'QuotesController@store');
     Route::get('controls', 'QuotesController@index');
     Route::post('quotes/{id}/delete', 'QuotesController@delete');
+    Route::post('quotes/update', 'QuotesController@update');
     Route::post('quotes/broadcast', 'QuotesController@broadcast');
 
 //    });
