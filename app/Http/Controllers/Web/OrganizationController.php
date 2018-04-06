@@ -505,15 +505,14 @@ class OrganizationController extends Controller
 
     }
 
-
     function updatelicense(Request $request,$id){
         $subscription=Subscription::where('account_id',$id)->where('account_type','App\Models\Organization')->first();
         if(!empty($subscription->subscription_id)) {
             $newreq= new \Illuminate\Http\Request();
-            $newreq->amount=$amount=$request->license*config('constants.BASE_PRICE');
+            $newreq->amount=$amount=($subscription->licenses + $request->license)*config('constants.BASE_PRICE');
             $result=app('App\Http\Controllers\Web\SubscriptionController')->update($newreq,$subscription->subscription_id);
             if($result){
-                $subscription->update(['licenses'=>$request->license]);
+                $subscription->update(['licenses'=>($subscription->licenses + $request->license)]);
                 return redirect()->back()->with(['success' => 'Licenses has been updated']);
             }
             else{

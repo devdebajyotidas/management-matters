@@ -360,9 +360,9 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-md-12">New License</label>
+                                <label class="col-md-12">Licenses to add</label>
                                 <div class="col-md-12">
-                                    <input type="text" class="form-control" name="license" placeholder="New License"
+                                    <input type="text" class="form-control" name="license" placeholder="Licenses to add"
                                            value="{{ old('license') }}">
                                 </div>
                             </div>
