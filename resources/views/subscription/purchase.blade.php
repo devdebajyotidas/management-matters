@@ -3,6 +3,7 @@
     @include('includes.main-menu')
 
     <div class="container-fluid">
+        <?php  $old_license=(session()->has('license')) ? session('license') : 1 ?>
         <!-- row -->
         <div class="white-box m-t-15">
             <div class="row ">
@@ -11,7 +12,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Purchase Licences
-                            <label class="pull-right text-success payable-amount" >Payable Amount: &#36; {{1 * config('constants.price')}}</label>
+                            <label class="pull-right text-success payable-amount" >Payable Amount: &#36; {{$old_license * config('constants.BASE_PRICE')}}</label>
                         </div>
                         <div class="panel-body" >
                             <form class="form-horizontal" action="{{url('subscription/').'/'.$organization->id.'/process'}}" method="post">
@@ -20,7 +21,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="licenses">Licenses:</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" name="licenses" id="licenses" placeholder="Number of License" value="1">
+                                        <input type="number" class="form-control" name="licenses" id="licenses" placeholder="Number of License" value="{{$old_license}}">
                                     </div>
                                 </div>
                                 <div class="form-group">

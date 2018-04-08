@@ -67,14 +67,16 @@
                                         </a>
                                     </li>
                                 </ul>
-                                <ul class="list-style-none">
-                                    <li class="divider"></li>
-                                    <li class="box-label">
-                                        <a href="javascript:void(0)" data-toggle="modal" data-target="#add-department">
-                                            + Add New Department
-                                        </a>
-                                    </li>
-                                </ul>
+                                @if(session('role')=='organization')
+                                    <ul class="list-style-none">
+                                        <li class="divider"></li>
+                                        <li class="box-label">
+                                            <a href="javascript:void(0)" data-toggle="modal" data-target="#add-department">
+                                                + Add New Department
+                                            </a>
+                                        </li>
+                                    </ul>
+                                @endif
                             </div>
                         </div>
                         <!-- /.left-aside-column-->

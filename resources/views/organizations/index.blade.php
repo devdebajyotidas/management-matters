@@ -14,6 +14,7 @@
                     </div>
                 </div>
                 <div class="white-box p-0">
+
                     <!-- .left-right-aside-column-->
                     <div class="page-aside">
                         <!-- .left-aside-column-->
@@ -46,7 +47,7 @@
                                                         <td>
                                                             <a href="{{  url('/organizations'.'/'. $learner->id . '/learners') }}">
                                                                 <span class="label label-info">
-                                                                    {{ $learner->learners()->count() }}
+                                                                    {{ $learner->learners()->count() }}/{{isset($learner->subscription->licenses) ? $learner->subscription->licenses : 0}}
                                                                 </span>
                                                             </a>
                                                         </td>

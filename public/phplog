@@ -390,3 +390,134 @@
  Sat, 24 Mar 2018 13:26:23 +0000 INFO : [_sendRequest] (D:\Works\management\vendor\authorizenet\authorizenet\lib\net\authorize\util\HttpClient.php : 96) - Response from AnetApi: ﻿<?xml version="1.0" encoding="utf-8"?><ErrorResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd"><messages><resultCode>Error</resultCode><message><code>E00003</code><text>The element 'creditCard' in namespace 'AnetApi/xml/v1/schema/AnetApiSchema.xsd' has incomplete content. List of possible elements expected: 'expirationDate' in namespace 'AnetApi/xml/v1/schema/AnetApiSchema.xsd'.</text></message></messages></ErrorResponse>
  Sat, 24 Mar 2018 13:26:23 +0000 INFO : [execute] (D:\Works\management\vendor\authorizenet\authorizenet\lib\net\authorize\api\controller\base\ApiOperationBase.php : 128) - Response De-Serialization Begin
  Sat, 24 Mar 2018 13:26:23 +0000 INFO : [execute] (D:\Works\management\vendor\authorizenet\authorizenet\lib\net\authorize\api\controller\base\ApiOperationBase.php : 130) - Response De-Serialization End
+ Sun, 08 Apr 2018 03:42:03 +0000 INFO : [execute] (D:\Works\management\vendor\authorizenet\authorizenet\lib\net\authorize\api\controller\base\ApiOperationBase.php : 114) - Request Serialization Begin
+ Sun, 08 Apr 2018 03:42:03 +0000 DEBUG : [execute] (D:\Works\management\vendor\authorizenet\authorizenet\lib\net\authorize\api\controller\base\ApiOperationBase.php : 115) - net\authorize\api\contract\v1\ARBCreateSubscriptionRequest Object
+(
+    [subscription:net\authorize\api\contract\v1\ARBCreateSubscriptionRequest:private] => net\authorize\api\contract\v1\ARBSubscriptionType Object
+        (
+            [name:net\authorize\api\contract\v1\ARBSubscriptionType:private] => Sample Subscription
+            [paymentSchedule:net\authorize\api\contract\v1\ARBSubscriptionType:private] => net\authorize\api\contract\v1\PaymentScheduleType Object
+                (
+                    [interval:net\authorize\api\contract\v1\PaymentScheduleType:private] => net\authorize\api\contract\v1\PaymentScheduleType\IntervalAType Object
+                        (
+                            [length:net\authorize\api\contract\v1\PaymentScheduleType\IntervalAType:private] => 30
+                            [unit:net\authorize\api\contract\v1\PaymentScheduleType\IntervalAType:private] => days
+                        )
+
+                    [startDate:net\authorize\api\contract\v1\PaymentScheduleType:private] => DateTime Object
+                        (
+                            [date] => 2018-04-09 00:00:00.000000
+                            [timezone_type] => 3
+                            [timezone] => UTC
+                        )
+
+                    [totalOccurrences:net\authorize\api\contract\v1\PaymentScheduleType:private] => 12
+                    [trialOccurrences:net\authorize\api\contract\v1\PaymentScheduleType:private] => 0
+                )
+
+            [amount:net\authorize\api\contract\v1\ARBSubscriptionType:private] => 5
+            [trialAmount:net\authorize\api\contract\v1\ARBSubscriptionType:private] => 0
+            [payment:net\authorize\api\contract\v1\ARBSubscriptionType:private] => net\authorize\api\contract\v1\PaymentType Object
+                (
+                    [creditCard:net\authorize\api\contract\v1\PaymentType:private] => net\authorize\api\contract\v1\CreditCardType Object
+                        (
+                            [cardCode:net\authorize\api\contract\v1\CreditCardType:private] => 
+                            [isPaymentToken:net\authorize\api\contract\v1\CreditCardType:private] => 
+                            [cryptogram:net\authorize\api\contract\v1\CreditCardType:private] => 
+                            [cardNumber:net\authorize\api\contract\v1\CreditCardSimpleType:private] => xxxx-1111
+                            [expirationDate:net\authorize\api\contract\v1\CreditCardSimpleType:private] => xxxx
+                        )
+
+                    [bankAccount:net\authorize\api\contract\v1\PaymentType:private] => 
+                    [trackData:net\authorize\api\contract\v1\PaymentType:private] => 
+                    [encryptedTrackData:net\authorize\api\contract\v1\PaymentType:private] => 
+                    [payPal:net\authorize\api\contract\v1\PaymentType:private] => 
+                    [opaqueData:net\authorize\api\contract\v1\PaymentType:private] => 
+                    [emv:net\authorize\api\contract\v1\PaymentType:private] => 
+                )
+
+            [order:net\authorize\api\contract\v1\ARBSubscriptionType:private] => net\authorize\api\contract\v1\OrderType Object
+                (
+                    [invoiceNumber:net\authorize\api\contract\v1\OrderType:private] => 7583621905
+                    [description:net\authorize\api\contract\v1\OrderType:private] => Description of the subscription
+                )
+
+            [customer:net\authorize\api\contract\v1\ARBSubscriptionType:private] => 
+            [billTo:net\authorize\api\contract\v1\ARBSubscriptionType:private] => net\authorize\api\contract\v1\NameAndAddressType Object
+                (
+                    [firstName:net\authorize\api\contract\v1\NameAndAddressType:private] => don
+                    [lastName:net\authorize\api\contract\v1\NameAndAddressType:private] => tapping
+                    [company:net\authorize\api\contract\v1\NameAndAddressType:private] => 
+                    [address:net\authorize\api\contract\v1\NameAndAddressType:private] => 
+                    [city:net\authorize\api\contract\v1\NameAndAddressType:private] => 
+                    [state:net\authorize\api\contract\v1\NameAndAddressType:private] => 
+                    [zip:net\authorize\api\contract\v1\NameAndAddressType:private] => 
+                    [country:net\authorize\api\contract\v1\NameAndAddressType:private] => 
+                )
+
+            [shipTo:net\authorize\api\contract\v1\ARBSubscriptionType:private] => 
+            [profile:net\authorize\api\contract\v1\ARBSubscriptionType:private] => 
+        )
+
+    [merchantAuthentication:net\authorize\api\contract\v1\ANetApiRequestType:private] => net\authorize\api\contract\v1\MerchantAuthenticationType Object
+        (
+            [name:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 6Udf7V22
+            [transactionKey:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => xxxx
+            [sessionToken:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 
+            [password:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 
+            [impersonationAuthentication:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 
+            [fingerPrint:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 
+            [clientKey:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 
+            [accessToken:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 
+            [mobileDeviceId:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 
+        )
+
+    [clientId:net\authorize\api\contract\v1\ANetApiRequestType:private] => sdk-php-1.9.5
+    [refId:net\authorize\api\contract\v1\ANetApiRequestType:private] => ref1523158918
+)
+
+ Sun, 08 Apr 2018 03:42:04 +0000 INFO : [execute] (D:\Works\management\vendor\authorizenet\authorizenet\lib\net\authorize\api\controller\base\ApiOperationBase.php : 118) - Request  Serialization End
+ Sun, 08 Apr 2018 03:42:04 +0000 INFO : [_sendRequest] (D:\Works\management\vendor\authorizenet\authorizenet\lib\net\authorize\util\HttpClient.php : 75) -  Url: https://apitest.authorize.net/xml/v1/request.api
+ Sun, 08 Apr 2018 03:42:04 +0000 INFO : [_sendRequest] (D:\Works\management\vendor\authorizenet\authorizenet\lib\net\authorize\util\HttpClient.php : 77) - Request to AnetApi: 
+<?xml version="1.0" encoding="UTF-8"?>
+<ARBCreateSubscriptionRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+  <merchantAuthentication>
+    <name><![CDATA[6Udf7V22]]></name>
+    <transactionKey>xxxx</transactionKey>
+  </merchantAuthentication>
+  <clientId><![CDATA[sdk-php-1.9.5]]></clientId>
+  <refId><![CDATA[ref1523158918]]></refId>
+  <subscription>
+    <name><![CDATA[Sample Subscription]]></name>
+    <paymentSchedule>
+      <interval>
+        <length>30</length>
+        <unit><![CDATA[days]]></unit>
+      </interval>
+      <startDate><![CDATA[2018-04-09]]></startDate>
+      <totalOccurrences>12</totalOccurrences>
+      <trialOccurrences>0</trialOccurrences>
+    </paymentSchedule>
+    <amount>5</amount>
+    <trialAmount>0</trialAmount>
+    <payment>
+      <creditCard>
+        <cardNumber>xxxx-1111</cardNumber>
+        <expirationDate>xxxx</expirationDate>
+      </creditCard>
+    </payment>
+    <order>
+      <invoiceNumber><![CDATA[7583621905]]></invoiceNumber>
+      <description><![CDATA[Description of the subscription]]></description>
+    </order>
+    <billTo>
+      <firstName><![CDATA[don]]></firstName>
+      <lastName><![CDATA[tapping]]></lastName>
+    </billTo>
+  </subscription>
+</ARBCreateSubscriptionRequest>
+
+ Sun, 08 Apr 2018 03:42:04 +0000 INFO : [_sendRequest] (D:\Works\management\vendor\authorizenet\authorizenet\lib\net\authorize\util\HttpClient.php : 89) - Sending 'XML' Request type
+ Sun, 08 Apr 2018 03:42:04 +0000 INFO : [_sendRequest] (D:\Works\management\vendor\authorizenet\authorizenet\lib\net\authorize\util\HttpClient.php : 94) - Sending http request via Curl
+ Sun, 08 Apr 2018 03:42:05 +0000 INFO : [_sendRequest] (D:\Works\management\vendor\authorizenet\authorizenet\lib\net\authorize\util\HttpClient.php : 96) - Response from AnetApi: 
+ Sun, 08 Apr 2018 03:42:05 +0000 ERROR : [_sendRequest] (D:\Works\management\vendor\authorizenet\authorizenet\lib\net\authorize\util\HttpClient.php : 106) - CURL ERROR: SSL certificate problem: unable to get local issuer certificate

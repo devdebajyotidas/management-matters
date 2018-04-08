@@ -341,10 +341,11 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger waves-effect reset-assessment-btn">Reset Assessment</button>
-                                    <button type="button" class="btn btn-danger waves-effect reset-conmb-btn">Reset CONMB</button>
+                                    <button type="button" class="btn btn-success waves-effect add-license-btn">Change License</button>
+                                    <button type="button" class="btn btn-warning waves-effect reset-assessment-btn">Reset Assessment</button>
+                                    <button type="button" class="btn btn-warning waves-effect reset-conmb-btn">Reset CONMB</button>
                                     <button type="button" class="btn btn-danger waves-effect remove-account">Remove Account</button>
-                                    <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
+                                    <button type="submit" class="btn btn-info waves-effect m-t-10">Update Profile</button>
                                 </div>
                             </form>
                             <div class="hidden">
@@ -410,6 +411,46 @@
     </div>
     <!-- /.container-fluid -->
 
+    <div id="add-license" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Update License</h4>
+                </div>
+                <form class="form-horizontal" action="{{ url('/organizations/'.$organization->id.'/license') }}" method="post">
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <div class="form-group m-l-0">
+                            <div class="radio radio-custom col-md-6"  style="margin:10px 0">
+                                <input type="radio" id="rad1" name="action" value="upgrade">
+                                <label for="rad1">Add License</label>
+                            </div>
+                            <div class="radio radio-custom col-md-6"  style="margin:10px 0">
+                                <input type="radio" id="rad2" name="action" value="downgrade">
+                                <label for="rad2">Remove License</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12 m-b-10">Licenses to change</label>
+                            <div class="col-md-12">
+                                <input type="number" class="form-control" name="license" placeholder="Licenses to change"
+                                       value="{{ old('license') }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info waves-effect">Update</button>
+                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
     <script>
         window.onload = function () {
             @if(session()->has('success') || session('success'))
@@ -427,6 +468,9 @@
             @endforeach
             @endif
 
+            $('.add-license-btn').click(function(){
+                $('#add-license').modal('show');
+            });
             $('.remove-account').click(function(){
                 swal({
                     title: 'Delete Account?',
@@ -471,5 +515,7 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+
     </script>
 @endsection

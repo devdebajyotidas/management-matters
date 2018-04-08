@@ -321,7 +321,7 @@
                                             <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
                                         @else
                                             <button type="submit" class="btn btn-info waves-effect">Update Profile</button>
-                                            <button type="button" class="btn btn-info waves-effect add-license-btn">Add License</button>
+                                            <button type="button" class="btn btn-info waves-effect add-license-btn">Update License</button>
                                             <button type="button" class="btn btn-danger waves-effect reset-assessment-btn">Reset Assessment</button>
                                             <button type="button" class="btn btn-danger waves-effect reset-conmb-btn">Reset CONMB</button>
                                         @endif
@@ -359,10 +359,20 @@
                     <form class="form-horizontal" action="{{ url('/organizations/'.$organization->id.'/license') }}" method="post">
                         {{ csrf_field() }}
                         <div class="modal-body">
+                            <div class="form-group m-l-0">
+                                <div class="radio radio-custom col-md-6"  style="margin:10px 0">
+                                    <input type="radio" id="rad1" name="action" value="upgrade">
+                                    <label for="rad1">Add License</label>
+                                </div>
+                                <div class="radio radio-custom col-md-6"  style="margin:10px 0">
+                                    <input type="radio" id="rad2" name="action" value="downgrade">
+                                    <label for="rad2"> Remove License</label>
+                                </div>
+                            </div>
                             <div class="form-group">
-                                <label class="col-md-12">Licenses to add</label>
+                                <label class="col-md-12 m-b-10">Licenses to change</label>
                                 <div class="col-md-12">
-                                    <input type="text" class="form-control" name="license" placeholder="Licenses to add"
+                                    <input type="number" class="form-control" name="license" placeholder="Licenses to change"
                                            value="{{ old('license') }}">
                                 </div>
                             </div>

@@ -48,7 +48,7 @@ class OrganizationController extends Controller
     {
         $data['page'] = 'organizations';
         $data['role'] = session('role');
-        $data['organizations'] = Organization::withTrashed()->get();
+        $data['organizations'] = Organization::withTrashed()->with('subscription')->get();
         $data['prefix']  = session('role');
 
         return view('organizations.index', $data);
@@ -506,13 +506,30 @@ class OrganizationController extends Controller
     }
 
     function updatelicense(Request $request,$id){
+
+        if(!isset($request->action))
+            $request->action='upgrade';
+
+        if(session('role')=='organization' && $request->action=='upgrade'){
+            return redirect()->intended(url('subscription/'.$id.'/purchase'))->with(['license' => $request->license]);
+        }
+
         $subscription=Subscription::where('account_id',$id)->where('account_type','App\Models\Organization')->first();
+        if($request->action=='upgrade'){
+            $licenses=$subscription->licenses + $request->license;
+        }
+        else{
+            $licenses=$subscription->licenses - $request->license;
+            if($licenses < 0){
+                $licenses=0;
+            }
+        }
         if(!empty($subscription->subscription_id)) {
             $newreq= new \Illuminate\Http\Request();
-            $newreq->amount=$amount=($subscription->licenses + $request->license)*config('constants.BASE_PRICE');
+            $newreq->amount=$amount=$licenses*config('constants.BASE_PRICE');
             $result=app('App\Http\Controllers\Web\SubscriptionController')->update($newreq,$subscription->subscription_id);
             if($result){
-                $subscription->update(['licenses'=>($subscription->licenses + $request->license)]);
+                $subscription->update(['licenses'=>$licenses]);
                 return redirect()->back()->with(['success' => 'Licenses has been updated']);
             }
             else{
