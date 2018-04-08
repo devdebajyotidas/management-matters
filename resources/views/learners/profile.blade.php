@@ -48,6 +48,15 @@
                         <hr>
                         <!-- .row -->
                         <!-- /.row -->
+                        @if(!isset($learner->department->id))
+                            @if(is_null($learner->subscription->subscription_id))
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 text-center">
+                                        <p class="text-danger">Not Subscribed Yet</p>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                     </div>
                 </div>
             </div>

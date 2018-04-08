@@ -424,7 +424,7 @@
                     <div class="modal-body">
                         <div class="form-group m-l-0">
                             <div class="radio radio-custom col-md-6"  style="margin:10px 0">
-                                <input type="radio" id="rad1" name="action" value="upgrade">
+                                <input type="radio" id="rad1" name="action" value="upgrade" checked>
                                 <label for="rad1">Add License</label>
                             </div>
                             <div class="radio radio-custom col-md-6"  style="margin:10px 0">

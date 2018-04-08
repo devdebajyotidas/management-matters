@@ -53,11 +53,18 @@
                             <h1>{{ isset( $organization->subscription)? $organization->subscription->licenses : 0 }}</h1>
                         </div>
                         <div class="col-md-4 col-sm-4 text-center">
-
                             <p class="text-info">Active Learners</p>
                             <h1>{{ $organization->learners()->count() }}</h1>
                         </div>
                     </div>
+                    @if(is_null($organization->subscription->subscription_id))
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 text-center">
+                                <p class="text-danger">Not Subscribed Yet</p>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="col-md-8 col-xs-12">
@@ -361,7 +368,7 @@
                         <div class="modal-body">
                             <div class="form-group m-l-0">
                                 <div class="radio radio-custom col-md-6"  style="margin:10px 0">
-                                    <input type="radio" id="rad1" name="action" value="upgrade">
+                                    <input type="radio" id="rad1" name="action" value="upgrade" checked>
                                     <label for="rad1">Add License</label>
                                 </div>
                                 <div class="radio radio-custom col-md-6"  style="margin:10px 0">

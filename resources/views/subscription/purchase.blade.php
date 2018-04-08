@@ -74,9 +74,9 @@
     <script>
         window.onload = function () {
             $('#licenses').on('keyup',function(){
-                var price="{{config('constants.price')}}";
-                var discount="{{config('constants.discount')}}";
-                var discountabove="{{config('constants.discountabove')}}";
+                var price="{{config('constants.BASE_PRICE')}}";
+                var discount="{{config('constants.DISCOUNT')}}";
+                var discountabove="{{config('constants.DISCOUNT_ABOVE')}}";
                 var licence=$(this).val();
                 var amount=price*licence;
                 if(parseInt(licence) >= parseInt(discountabove) ){
