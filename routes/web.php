@@ -116,6 +116,7 @@ Route::group(['namespace' => 'Web'], function () {
     Route::post('organizations/{id}/license', 'OrganizationController@updatelicense');
     Route::post('organizations/{id}/resetassessment', 'OrganizationController@resetassessment');
     Route::post('organizations/{id}/resetconmb', 'OrganizationController@resetconmb');
+    Route::delete('organizations/department/{id}', 'OrganizationController@deleteDepartment');
 
 
     Route::post('organizations/resetassessmentall', 'OrganizationController@resetassessmentall');

@@ -42,7 +42,6 @@
                                         </a>
                                     </li>
                                     <li class="divider"></li>
-
                                     @if(isset($organization->departments))
                                         @foreach($organization->departments as $department)
                                             <li>
@@ -233,6 +232,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" id="delete-department" class="btn btn-info btn-danger waves-effect pull-left">Delete</button>
                         <button type="submit" class="btn btn-info waves-effect">Save</button>
                         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
                     </div>
@@ -298,31 +298,48 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    <div class="hidden">
+        <form id="depDeleteForm" class="form-horizontal form-material" method="post" action="">
+            {{ csrf_field() }}
+            {{method_field('delete')}}
+            <input type="submit" id="submit-dep-delete" value="submit">
+        </form>
+    </div>
     <div class="scroll-top"><i class="fa fa-chevron-up"></i></div>
 
         <script>
             window.onload = function () {
                 @if(session()->has('success') || session('success'))
-                    setTimeout(function () {
-                        showToast('Success', '{{ session('success') }}', 'success');
-                    }, 500);
+                setTimeout(function () {
+                    showToast('Success', '{{ session('success') }}', 'success');
+                }, 500);
                 @endif
 
                 @if(count($errors->department->all()) > 0 && $timeout = 700 )
-                    $('#add-department').modal('show');
-                    @foreach ($errors->department->all() as $key => $error)
-                    setTimeout(function () {
-                        showToast('Error', '{{ $error }}', 'error');
-                    }, {{ $timeout * $key }});
-                    @endforeach
+                $('#add-department').modal('show');
+                @foreach ($errors->department->all() as $key => $error)
+                setTimeout(function () {
+                    showToast('Error', '{{ $error }}', 'error');
+                }, {{ $timeout * $key }});
+                @endforeach
                 @endif
 
                 @if(count($errors->learner->all()) > 0 && $timeout = 700)
-                    @foreach ($errors->learner->all() as $key => $error)
-                    setTimeout(function () {
-                        showToast('Error', '{{ $error }}', 'error');
-                    }, {{ $timeout * $key }});
-                    @endforeach
+                @foreach ($errors->learner->all() as $key => $error)
+                setTimeout(function () {
+                    showToast('Error', '{{ $error }}', 'error');
+                }, {{ $timeout * $key }});
+                @endforeach
+                @endif
+
+                @if(count($errors->learner->all())==0 && count($errors->department->all()) ==0 )
+                @if(isset($errors) && count($errors->all()) > 0 && $timeout = 700)
+                @foreach ($errors->all() as $key => $error)
+                setTimeout(function () {
+                    showToast('Error', '{{ $error }}', 'error');
+                }, {{ $timeout * $key }});
+                @endforeach
+                @endif
                 @endif
 
 
@@ -353,6 +370,12 @@
                     else{
                         $('#add-learner').modal('show');
                     }
+                })
+                $('#delete-department').click(function(){
+                    var id=$('#department-id').val();
+                    var url="{{url('/organizations/department')}}"+"/"+id;
+                    $('#depDeleteForm').attr('action',url);
+                    $('#submit-dep-delete').trigger('click');
                 })
             };
         </script>

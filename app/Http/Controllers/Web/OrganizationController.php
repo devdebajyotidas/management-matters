@@ -738,4 +738,27 @@ class OrganizationController extends Controller
     }
 
 
+    /*Delete Department*/
+    function deleteDepartment($id){
+        if(isset($id) && !empty($id)){
+            $exist=Learner::where('department_id',$id)->exists();
+            if($exist){
+                return redirect()->back()->withErrors(['This department has active learners, try to remove them first']);
+            }
+            else{
+                $department=Department::find($id);
+                $delete=$department->delete();
+                if($delete){
+                    return redirect()->back()->with(['success' => 'Department has been  deleted']);
+                }
+                else{
+                    return redirect()->back()->withErrors(['Something went wrong']);
+                }
+            }
+        }
+        else{
+            return redirect()->back()->withErrors(['No department selected']);
+
+        }
+    }
 }
