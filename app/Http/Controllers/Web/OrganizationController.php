@@ -758,7 +758,6 @@ class OrganizationController extends Controller
         }
         else{
             return redirect()->back()->withErrors(['No department selected']);
-
         }
     }
 }

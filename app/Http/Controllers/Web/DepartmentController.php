@@ -32,68 +32,79 @@ class DepartmentController extends Controller
     public function store(Request $request, $orgId)
     {
         DB::beginTransaction();
-
         $data = $request->all();
-        $department = Department::where('organization_id','=',$orgId)->where('name','=',trim($data['name']))->get();
-        if($department->count() == 0)
-        {
-            $departmentValidator = Validator::make($data, Department::$rules['create']);
+        if(empty($data['name'])){
+            return redirect()->back()->withErrors(['Please provide a valid name']);
+        }
+        else{
+            $department = Department::where('organization_id','=',$orgId)->where('name','=',trim($data['name']))->get();
+            if($department->count() == 0)
+            {
+                $departmentValidator = Validator::make($data, Department::$rules['create']);
 
-            if ($departmentValidator->passes()) {
+                if ($departmentValidator->passes()) {
 
-                $department = Department::create($data);
+                    $department = Department::create($data);
 
-                DB::commit();
-                return redirect()->back()->with('success', 'Department added successfully');
+                    DB::commit();
+                    return redirect()->back()->with('success', 'Department added successfully');
 
+                }
+                else
+                {
+                    DB::rollBack();
+                    $errors = $departmentValidator->errors();
+
+                    return redirect()->back()->withInput($request->all())->withErrors($errors,'department');
+
+
+                }
             }
             else
             {
-                DB::rollBack();
-                $errors = $departmentValidator->errors();
-
-                return redirect()->back()->withInput($request->all())->withErrors($errors,'department');
-
-
+                return redirect()->back()->withInput($request->all())->withErrors(['This Department Already exist'],'department');
             }
         }
-        else
-        {
-            return redirect()->back()->withInput($request->all())->withErrors(['This Department Already exist'],'department');
-        }
+
+
     }
 
     public function update(Request $request)
     {
         $data = $request->all();
-        $department = Department::findWhere(['name'=>trim($data['name'])]);
-
-        if($department->count() == 0)
-        {
-            $departmentValidator = Validator::make($data, Department::rules('update'));
-
-            // Check if validation passes
-            if ($departmentValidator->passes()) {
-                $department = Department::update([
-                    'name' => $data['name']
-                ],$data['id']);
-                session()->flash('success','Department updated successfully');
-                $request->session()->flash('success', 'Department updated successfully');
-                return redirect()->back();
-            }else{
-                $error = json_decode($departmentValidator->errors(),TRUE);
-                $msg = new MessageBag;
-                $msg->add('update',$data['id']);
-                $departmentValidator->messages()->merge($msg->messages());
-                return redirect()->back()->withInput($data)->withErrors($departmentValidator,'department');
-            }
-        }else
-        {
-            $error = new MessageBag;
-            $error->add('name','Another department with same name already exists');
-            $error->add('update',$data['id']);
-            return redirect()->back()->withInput($data)->withErrors($error,'department');
+        if(empty($data['name'])){
+            return redirect()->back()->withErrors(['Please provide a valid name']);
         }
+        else{
+            $department = Department::where('name',trim($data['name']))->get();
+
+            if($department->count() == 0)
+            {
+                $departmentValidator = Validator::make($data, Department::$rules['update']);
+
+                // Check if validation passes
+                if ($departmentValidator->passes()) {
+                    $department = Department::find($data['id']);
+                    $department->update(['name'=>$data['name']]);
+                    session()->flash('success','Department updated successfully');
+                    $request->session()->flash('success', 'Department updated successfully');
+                    return redirect()->back();
+                }else{
+                    $error = json_decode($departmentValidator->errors(),TRUE);
+                    $msg = new MessageBag;
+                    $msg->add('update',$data['id']);
+                    $departmentValidator->messages()->merge($msg->messages());
+                    return redirect()->back()->withInput($data)->withErrors($departmentValidator,'department');
+                }
+            }else
+            {
+                $error = new MessageBag;
+                $error->add('name','Another department with same name already exists');
+                $error->add('update',$data['id']);
+                return redirect()->back()->withInput($data)->withErrors($error,'department');
+            }
+        }
+
     }
 
     public function reset(Request $request,$id)
