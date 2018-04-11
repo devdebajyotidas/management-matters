@@ -743,7 +743,7 @@ class OrganizationController extends Controller
         if(isset($id) && !empty($id)){
             $exist=Learner::where('department_id',$id)->exists();
             if($exist){
-                return redirect()->back()->withErrors(['This department has active learners, try to remove them first']);
+                return redirect()->back()->withErrors(['Learners must be removed from this Department before it can be deleted.']);
             }
             else{
                 $department=Department::find($id);
