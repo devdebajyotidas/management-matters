@@ -172,9 +172,9 @@
                                     <a href="{{ url('learnings/'. $learning->id) }}" class="btn btn-lg btn-rounded btn-info"> View</a>
                                     <a href="{{ url('learnings/'. $learning->id .'/edit') }}" class="btn btn-lg btn-rounded btn-info" > Edit</a>
                                     @if(session('role')=='admin')
-                                        <a href="javascript:void(0)" class="btn btn-lg btn-rounded btn-info delete-learning"> Delete</a>
+                                        <a href="javascript:void(0)" class="btn btn-lg btn-rounded btn-info delete-learning" data-id="{{$learning->id}}"> Delete</a>
                                         <div class="hidden">
-                                            <form action="{{url('/learnings/'.$learning->id.'/delete')}}" method="post">
+                                            <form id="learningDeleteForm" action="{{url('/learnings/'.$learning->id.'/delete')}}" method="post">
                                                 {{ csrf_field() }}
                                                 <input type="submit" id="submit-delete" value="submit">
                                             </form>
@@ -208,6 +208,7 @@
             @endif
 
             $('.delete-learning').click(function() {
+                var id=$(this).data('id');
                 swal({
                     title: 'Are you sure?',
                     text: "You can't revert this later.",
@@ -218,6 +219,8 @@
                     confirmButtonText: 'Yes, delete'
                 }).then(function(result){
                     if(result.value){
+                        var url="{{url('/learnings/')}}"+"/"+id+'/delete';
+                        $('#learningDeleteForm').attr('action',url);
                         $('#submit-delete').trigger('click');
                         return false;
                     }
