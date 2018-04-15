@@ -22,7 +22,7 @@ use net\authorize\api\contract\v1 as AnetAPI;
 use net\authorize\api\controller AS AnetController;
 use League\Flysystem\Config;
 
-define("AUTHORIZENET_LOG_FILE", "phplog");
+//define("AUTHORIZENET_LOG_FILE", "phplog");
 
 class SubscriptionController extends Controller
 {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Models\Award;
 use App\Models\Department;
+use App\Models\Learner;
 use App\Models\Organization;
 use App\Models\TicketAssignment;
 use App\Http\Middleware\AuthenticationCheck;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Ticket;
 use App\Models\Learning;
+use App\Models\User;
 
 class TicketController extends Controller
 {
