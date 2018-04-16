@@ -153,7 +153,7 @@ class LearnerController extends Controller
      */
     public function show($id)
     {
-        $learner = Learner::find($id);
+        $learner = Learner::withTrashed()->find($id);
         $data['page'] = 'learners';
         $data['role'] = session('role');
         $data['prefix']  = session('role') . '/' .Auth::user()->account_id;

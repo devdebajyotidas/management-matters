@@ -22,7 +22,7 @@
             @endif
 
             @if(session('role')=="admin")
-            <div class="row m-t-30">
+            <div class="row m-t-10">
                 <div class="col-sm-12">
                     <div class="white-box">
                         @if(isset($learning))
@@ -53,7 +53,7 @@
             <!-- /.row -->
             @endif
 
-            <div class="row m-t-10">
+            <div class="row m-t-0">
                 <div class="col-sm-12">
                     <div class="white-box">
                         <h3 class="box-title m-b-0">Featured Image</h3>
@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <div class="row m-t-10">
+            <div class="row m-t-0">
                 <div class="col-sm-12">
                     <div class="white-box">
                         <h3 class="box-title m-b-0">Introduction</h3>
@@ -132,7 +132,7 @@
                                                 @foreach($chapters as $key => $chapter)
                                                     <a href="javascript:void(0)" class="list-group-item row chapter" data-id="{{ $key }}">
                                                         <span class="chapter-name col-sm-10">{{ $chapter['name'] }}</span>
-                                                        <input type="hidden" name="chapters[{{ $key }}][index]" value="{{ isset($chapter['index'])? $chapter['index'] : 1 }}">
+                                                        <input type="hidden" name="chapters[{{ $key }}][index]" value="{{ isset($chapter['index'])? $chapter['index'] : $key }}">
                                                         <input type="hidden" name="chapters[{{ $key }}][name]" value="{{ $chapter['name'] }}">
                                                         <input type="hidden" name="chapters[{{ $key }}][content]" value="{{ $chapter['content'] }}">
                                                         <span class="m-l-10 pull-right label label-danger remove btn waves-effect">Remove</span>
@@ -391,7 +391,8 @@
 
             var selectedChapter;
             $('#add-chapter').click(function () {
-                initChapterEditor();
+                var index=parseInt($('#chapter-list .chapter').length)+1;
+                initChapterEditor(index);
                 $('#chapter-editor').modal('show');
             });
 
@@ -554,7 +555,7 @@
             });
             //Quiz ends
 
-            function initChapterEditor(index= 1, name = '', content = '', mode = 'Add') {
+            function initChapterEditor(index='1', name = '', content = '', mode = 'Add') {
                 $('#chapter-editor').find('.modal-title').text(mode + ' Chapter');
 
                 if ($('#chapter-content').data('froala.editor')) {

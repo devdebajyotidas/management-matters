@@ -57,7 +57,7 @@ class OrganizationController extends Controller
 
     public function show($id)
     {
-        $organization = Organization::with(['user','subscription'])->find($id);
+        $organization = Organization::withTrashed()->with(['user','subscription'])->find($id);
         $data['page'] = 'organizations';
         $data['role'] = session('role');
         $data['prefix']  = session('role') . '/' .Auth::user()->account_id;
