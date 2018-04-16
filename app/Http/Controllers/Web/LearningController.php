@@ -50,6 +50,11 @@ class LearningController extends Controller
                 $query->where('organization_id',Department::with('organization')->find(Auth::user()->account->department_id)->organization_id)->first();
             }])->find($id);
         }
+        elseif(session('role')=='organization'){
+            $data['learnings'] = Learning::with(['orgintro'=>function($query){
+                $query->where('organization_id',Auth::user()->account_id)->first();
+            }])->find($id);
+        }
         else{
             $data['learnings'] = Learning::find($id);
         }

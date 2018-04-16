@@ -81,7 +81,7 @@
                                     @php
                                         $intro=!empty($learnings->introduction) ? $learnings->introduction : 'Introduction not available';
                                     @endphp
-                                    @if(!empty(Auth::user()->account->department_id))
+                                    @if(!empty(Auth::user()->account->department_id) || session('role')=='organization')
                                         {!! isset($learnings->orgintro->org_introduction) ? $learnings->orgintro->org_introduction : $intro !!}
                                     @else
                                         {!! $intro !!}
