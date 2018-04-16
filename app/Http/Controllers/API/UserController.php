@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Learner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
@@ -20,12 +21,23 @@ class UserController extends Controller
         if($request->get('password') && Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')], true))
         {
             $user = Auth::user();
-            $user->fcm_token = $request->get('fcm_token');
-            $user->save();
 
-            $response['success'] = true;
-            $response['account'] = $user->account->load('user', 'department.organization');
-            $response['error'] = '';
+            if ($user->account instanceof Learner)
+            {
+                $user->fcm_token = $request->get('fcm_token');
+                $user->save();
+
+                $response['success'] = true;
+                $response['account'] = $user->account->load('user', 'department.organization');
+                $response['error'] = '';
+            }
+            else
+            {
+                $response['success'] = false;
+                $response['account'] = null;
+                $response['error'] = 'Invalid Email or Password!';
+            }
+
 
         }
         else
