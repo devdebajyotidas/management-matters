@@ -182,7 +182,7 @@
 
                                                     <div class="form-group">
                                                         <label>Do's & Dont's:</label>
-                                                        <a href="javascript:" class="dos-donts">Click here</a>
+                                                        <a href="{{url('learnings/'.$ticket->learning_id.'?dos=true')}}" target="_blank" class="dos-donts">Click here</a>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">

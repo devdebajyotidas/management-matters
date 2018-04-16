@@ -449,12 +449,16 @@ class HomeController extends Controller
             $table=User::where('verification_token',$request->token);
             if( $table->update(['is_verified'=>1])){
                 DB::commit();
+                Auth::logout();
                 return redirect()->intended('login');
             }
             else{
                 DB::rollBack();
                 return redirect()->intended('abort');
             }
+        }else{
+            DB::rollBack();
+            return redirect()->intended('abort');
         }
     }
 

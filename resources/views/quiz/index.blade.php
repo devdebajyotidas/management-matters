@@ -107,7 +107,7 @@
                                                 @endif
                                                 <td>{{ isset($quiz->learner->name) ? $quiz->learner->name : 'N/A' }}</td>
                                                 <td>{{ isset($quiz->learning->title) ? $quiz->learning->title : 'N/A' }}</td>
-                                                <td>{{number_format(floatval((($quiz->result)/count($quiz->learning->quiz)) * 100) ,2) }} %</td>
+                                                <td>{{number_format(floatval(((isset($quiz->result) ? $quiz->result : 0)/count(isset($quiz->learning->quiz) ? $quiz->learning->quiz : 0)) * 100) ,2) }} %</td>
                                                 <td>{{ ($quiz->complete_flag == 1) ? 'Yes' : 'No'  }}</td>
                                                 <td>{{ $quiz->created_at->format('m/d/Y') }}</td>
                                             </tr>

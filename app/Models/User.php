@@ -64,7 +64,7 @@ class User extends Authenticatable implements AuditableContract, UserResolver
         ],
         "update" => [
             'email' => 'email',
-            'password' => 'min:6',
+            'password' => 'confirmed|min:6',
         ],
 
     ];

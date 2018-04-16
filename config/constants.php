@@ -25,8 +25,9 @@ $constants=[
 
     'IN_TOUCH_EMAIL'=>'info@mgmt-matters.com',
     'EMAIL_FROM'=>'no-reply@mgmt-matters.com',
-    'EMAIL_BCC'=>'dev.debajyotidas@gmail.com',
-    'EMAIL_CC'=>'maikap.samir@gmail.com'
+    'EMAIL_BCC'=>'testmyprojects2017@gmail.com',
+    'EMAIL_CC'=>'sam.maikap@live.com',
+
 
 ];
 return $constants;

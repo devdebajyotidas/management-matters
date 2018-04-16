@@ -70,18 +70,18 @@
                                 <li class="tab-current"><a href="#chapter-introduction"><span>Introduction</span></a></li>
                                 @if(is_array($learnings->chapters))
                                     @foreach($learnings->chapters as $key => $chapter)
-                                    <li><a href="#chapter-{{$key+1}}"><span>{{ $chapter['name'] }}</span></a></li>
+                                    <li id="chapter-{{$key+1}}"><a href="#chapter-{{$key+1}}"><span>{{ $chapter['name'] }}</span></a></li>
                                     @endforeach
                                 @endif
                             </ul>
                         </nav>
-                        <div class="content-wrap text-left fr-element fr-view">
+                        <div class="content-wrap text-left fr-element fr-view all-chapters">
                             <section id="chapter-introduction" class="content-current">
                                 <p>
                                     @php
                                         $intro=!empty($learnings->introduction) ? $learnings->introduction : 'Introduction not available';
                                     @endphp
-                                    @if(!empty(Auth::user()->account->department_id))
+                                    @if(!empty(Auth::user()->account->department_id) || session('role')=='organization')
                                         {!! isset($learnings->orgintro->org_introduction) ? $learnings->orgintro->org_introduction : $intro !!}
                                     @else
                                         {!! $intro !!}
@@ -134,6 +134,14 @@
                 showToast('Error', '{{ $error }}', 'error');
             }, {{ $timeout * $key }});
             @endforeach
+            @endif
+
+
+           @if(session('role')=='learner')
+           @if(isset($_GET['dos']) && $_GET['dos'])
+            var tab=$('.all-chapters section').length - 1;
+            $('#chapter-'+tab).trigger('click');
+            @endif
             @endif
 
 

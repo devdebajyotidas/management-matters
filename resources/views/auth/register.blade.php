@@ -15,7 +15,22 @@
     <!--Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-
+    <style>
+        #toast{
+            position: fixed;
+            bottom: 20px;
+            width: 300px;
+            height: auto;
+            left: calc(50% - 170px);
+            padding: 20px;
+            background-color:#FFAB00;
+            color:#fff;
+            box-shadow: 0 5px 7px rgba(0,0,0,.29);
+            border-radius: 2px;
+            text-align: left;
+            z-index: 99999;
+        }
+    </style>
 </head>
 
 <body>
@@ -101,7 +116,7 @@
     </div>
 
 </div> <!-- end #main-wrapper -->
-
+<div id="toast" style="display: none"></div>
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://dcrazed.com/html/signup-pack/js/scripts.js"></script>
@@ -155,6 +170,13 @@
             $("#cross2,#btn2,#join2").show();
             $("#role").val('M');
         });
+
+        @if(isset($errors) && count($errors->all()) > 0)
+        @foreach ($errors->all() as $key => $error)
+        var error="{{$error}}"
+        frontToast(error);
+        @endforeach
+        @endif
     });
 
     function slideInRight(){
@@ -204,9 +226,12 @@
         });
     }
 
-
-
-
+    function frontToast(error){
+        $('#toast').empty().append(error).show('fast');
+        setTimeout(function () {
+            $('#toast').hide();
+        }, 5000);
+    }
 
 </script>
 
