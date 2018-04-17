@@ -178,7 +178,7 @@ class LearnerController extends Controller
         $data['user'] = $request->get('user');
         $srole='App\Models\Learner';
         $sub=Subscription::where('account_id',$id)->where('account_type',$srole)->first();
-        
+
         $learnerValidator = Validator::make($data['learner'], Learner::$rules['update']);
         if(trim($data['user']['password']) == '' || $data['user']['password'] == null){
             unset($data['user']['password']);
