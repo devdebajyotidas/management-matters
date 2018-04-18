@@ -513,16 +513,47 @@ class OrganizationController extends Controller
         if(session('role')=='organization' && $request->action=='upgrade'){
             return redirect()->intended(url('subscription/'.$id.'/purchase'))->with(['license' => $request->license]);
         }
+        $organization=Organization::with('departments.learners')->where('id',$id)->first();
+        if(isset($organization->departments)){
+            if(count($organization->departments) > 0){
+                $learner=0;
+                foreach ($organization->departments as $deps){
+                    $len=count($deps->learners);
+                    $learner+=$len;
+                }
+            }
+            else{
+                $learner=0;
+            }
+        }
+        else{
+            $learner=0;
+        }
+
 
         $subscription=Subscription::where('account_id',$id)->where('account_type','App\Models\Organization')->first();
+
+        if(empty($subscription)){
+            return redirect()->back()->withErrors(['Subscription not found']);
+        }
+
+        if(is_null($subscription->subscription_id)){
+            return redirect()->back()->withErrors(['Please subscribe before changing your license']);
+        }
+
         if($request->action=='upgrade'){
             $licenses=$subscription->licenses + $request->license;
         }
         else{
-            $licenses=$subscription->licenses - $request->license;
-            if($licenses < 0){
-                $licenses=0;
+            $licenses = $subscription->licenses - $request->license;
+            if($licenses > 0) {
+                if ($licenses < $learner) {
+                    return redirect()->back()->withErrors(['You have more active learners than your licenses']);
+                }
+            }else{
+                return redirect()->back()->withErrors(['You must have license more than 0']);
             }
+
         }
         if(!empty($subscription->subscription_id)) {
             $newreq= new \Illuminate\Http\Request();
