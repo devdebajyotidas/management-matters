@@ -63,10 +63,13 @@ class AssessmentController extends Controller
         {
             $assessments[$num]['name'] = $learning->title;
             $assessments[$num]['assessments'] = [];
-            foreach($learning->assessments as $key => $assessment)
+            if(is_array($learning->assessments))
             {
-                $assessments[$num]['assessments'][$i] = $assessment;
-                $i++;
+                foreach($learning->assessments as $key => $assessment)
+                {
+                    $assessments[$num]['assessments'][$i] = $assessment;
+                    $i++;
+                }
             }
             shuffle($assessments[$num]['assessments']);
             $assessments[$num]['assessments'] = array_slice($assessments[$num]['assessments'], 0, 3, true);
