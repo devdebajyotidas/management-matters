@@ -69,7 +69,7 @@ class OrganizationLearnerController extends Controller
                 $learner->user()->save($user);
                 $user->attachRole('learner');
 
-                $email['logo']=asset('assets/img/mm-logo.png');
+                $email['logo']=asset('assets/img/email-logo.png');
                 $email['name']=$learner->name;
                 $email['url']=url('verification').'?token='.$vtoken;
 
@@ -98,7 +98,7 @@ class OrganizationLearnerController extends Controller
                         $message->cc($config->cc,'Samir Maikap');
                         $message->bcc($config->bcc,'Debajyoti Das');
                         $message->to($user->email);
-                        $message->subject('Welcome Abord');
+                        $message->subject('Welcome Aboard!');
 
                     });
                 }

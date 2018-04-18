@@ -336,7 +336,7 @@ class HomeController extends Controller
        if($user > 0){
            $save=Password::create($data);
            if($save){
-               $email['logo']=asset('assets/img/mm-logo.png');
+               $email['logo']=asset('assets/img/email-logo.png');
                $email['url']=url('setpassword').'?token='.$data['token'];
 
                $config=new \stdClass();
@@ -413,7 +413,7 @@ class HomeController extends Controller
     function resendconfirmation(){
         $id=Auth::user()->account_id;
         $user=User::where('account_id',$id)->select('verification_token','email')->get()->first();
-        $data['logo']=asset('assets/img/mm-logo.png');
+        $data['logo']=asset('assets/img/email-logo.png');
         if(session('role')=='learner'){
             $data['name']=Learner::find($id)->name;
         }
@@ -464,7 +464,7 @@ class HomeController extends Controller
 
     public function getintouch(Request $request){
 
-        $data['logo']=asset('assets/img/mm-logo.png');
+        $data['logo']=asset('assets/img/email-logo.png');
         $data['name']=$request->name;
         $data['email']=$request->email;
         $data['emessage']=$request->message;

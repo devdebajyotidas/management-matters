@@ -118,7 +118,7 @@ class OrganizationController extends Controller
                 app('App\Http\Controllers\Web\SubscriptionController')->subscribe($newreq,$organization->id);
             }
 
-            $email['logo']=asset('assets/img/mm-logo.png');
+            $email['logo']=asset('assets/img/email-logo.png');
             $email['name']=$organization->name;
             $email['url']=url('verification').'?token='.$vtoken;
 
@@ -147,7 +147,7 @@ class OrganizationController extends Controller
                     $message->cc($config->cc,'Samir Maikap');
                     $message->bcc($config->bcc,'Debajyoti Das');
                     $message->to($user->email);
-                    $message->subject('Welcome Abord');
+                    $message->subject('Welcome Aboard!');
 
                 });
             }
@@ -478,7 +478,7 @@ class OrganizationController extends Controller
         if($organization->forceDelete() && $subdel > 0 && $user->forceDelete() && $count > 0 && $depcount > 0){
 
             $email['name']=$organization->name;
-            $email['logo']=asset('assets/img/mm-logo.png');
+            $email['logo']=asset('assets/img/email-logo.png');
 
             $config=new \stdClass();
             $config->from=config('constants.EMAIL_FROM');

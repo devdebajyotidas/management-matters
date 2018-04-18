@@ -92,7 +92,7 @@ class LearnerController extends Controller
 
                 }
 
-                $email['logo']=asset('assets/img/mm-logo.png');
+                $email['logo']=asset('assets/img/email-logo.png');
                 $email['name']=$learner->name;
                 $email['url']=url('verification').'?token='.$vtoken;
 
@@ -122,7 +122,7 @@ class LearnerController extends Controller
                         $message->cc($config->cc,'Samir Maikap');
                         $message->bcc($config->bcc,'Debajyoti Das');
                         $message->to($user->email);
-                        $message->subject('Welcome Abord');
+                        $message->subject('Welcome Aboard!');
 
                     });
                 }
@@ -395,7 +395,7 @@ class LearnerController extends Controller
         if($subdel > 0 && $tcount > 0 && $qcount > 0 && $awardcount > 0 && $amcount > 0 && $ldel && $udel  ){
 
             $email['name']=isset($learner->name) ? $learner->name : '';
-            $email['logo']=asset('assets/img/mm-logo.png');
+            $email['logo']=asset('assets/img/email-logo.png');
 
             $config=new \stdClass();
             $config->from=config('constants.EMAIL_FROM');

@@ -59,7 +59,8 @@
                         <div class="panel-body" style="padding: 0">
 
                             <div class="list-group">
-                                @foreach($learnings as $learning)
+                                <?php  $sorted_learnings=$learnings->sortBy('title') ?>
+                                @foreach($sorted_learnings as $learning)
                                     <a href="{{ url('/learnings/'. $learning->id .'/quiz') }}" class="list-group-item" >
                                         <span class="pull-left">
                                             <span class="text-block text-dark">
@@ -138,11 +139,12 @@
                                 @if(!isset($active_learning->quizTaken[0]) )
                                     @if(isset($active_learning->quiz) && !empty($active_learning->quiz))
                                         <?php $quizs=$active_learning->quiz ?>
-
-                                        <?php usort($quizs, function ($a, $b) {
+                                        <?php
+                                        usort($quizs, function ($a, $b) {
                                             if(isset($a['index'])){
                                                 return strnatcmp($a['index'], $b['index']);
-                                            }});
+                                            }
+                                        });
                                         ?>
                                         @foreach($quizs as $key=>$qdata)
                                             <div class="col-lg-12 question-block" id="goto-{{$key}}" data-toggle="{{$key}}" style="display: none">

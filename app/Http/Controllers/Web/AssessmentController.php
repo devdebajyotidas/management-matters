@@ -45,11 +45,13 @@ class AssessmentController extends Controller
             $assessments = Assessment::with('learner.department')->whereIn('learner_id', $learners)->orderBy('created_at','desc')->get();
         }
         $data['assessments'] = $assessments;
-        $data['dates'] = $assessments->pluck('created_at');
+        $new_assessments=$assessments->reverse();
+        $data['dates'] = $new_assessments->pluck('created_at');
 
 
         $scores = [];
-        foreach ($assessments as $key => $assessment) {
+       
+        foreach ($new_assessments as $key => $assessment) {
             $key = 0;
             foreach ($assessment->scores as $learning => $score) {
                 if (isset($scores[$key]['name'])) {

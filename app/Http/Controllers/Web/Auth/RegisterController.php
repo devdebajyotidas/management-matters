@@ -102,7 +102,7 @@ class RegisterController extends Controller
 
                 }
 
-                $email['logo']=asset('assets/img/mm-logo.png');
+                $email['logo']=asset('assets/img/email-logo.png');
                 $email['name']=$learner->name;
                 $email['url']=url('verification').'?token='.$vtoken;
 
@@ -144,7 +144,7 @@ class RegisterController extends Controller
             $sub = Subscription::make($subscription);
 
             if($organization->subscription()->save($sub)){
-                $email['logo']=asset('assets/img/mm-logo.png');
+                $email['logo']=asset('assets/img/email-logo.png');
                 $email['name']=$organization->name;
                 $email['url']=url('verification').'?token='.$vtoken;
 
