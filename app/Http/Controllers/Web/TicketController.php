@@ -48,10 +48,25 @@ class TicketController extends Controller
 
         if(session('role') == 'organization')
         {
+            $filter=isset($_GET['filter']) ? $_GET['filter'] : '';
+            $today=Carbon::today()->toDateString();
+            $week=Carbon::now()->subWeek(1)->toDateString();
+            $month=Carbon::now()->subMonth(1)->toDateString();
+
             $data['departments'] = Department::where('organization_id',$id)->get(['id','name']);
             $learner_ids=Auth::user()->account->learners()->pluck('learners.id')->toArray();
-            $data['tickets'] = Ticket::with(['assignments','learner.department.organization'])->whereIn('learner_id', $learner_ids)->get();
-
+            if($filter=='today'){
+                $data['tickets'] = Ticket::with(['assignments','learner.department.organization'])->whereIn('learner_id', $learner_ids)->whereDate('created_at','=',$today)->get();
+            }
+            elseif($filter=='week'){
+                $data['tickets'] = Ticket::with(['assignments','learner.department.organization'])->whereIn('learner_id', $learner_ids)->whereDate('created_at','>=',$week)->get();
+            }
+            elseif($filter=='month'){
+                $data['tickets'] = Ticket::with(['assignments','learner.department.organization'])->whereIn('learner_id', $learner_ids)->whereDate('created_at','>=',$month)->get();
+            }
+            else{
+                $data['tickets'] = Ticket::with(['assignments','learner.department.organization'])->whereIn('learner_id', $learner_ids)->get();
+            }
             return view('tickets.index', $data);
         }
 

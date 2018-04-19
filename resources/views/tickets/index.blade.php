@@ -13,7 +13,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="white-box p-0">
+                <div class="row">
+                    <div class="col-md-12 m-t-10 m-b-15">
+                        <?php $filter=isset($_GET['filter']) ? $_GET['filter'] : '' ?>
+
+                        <a href="{{url('tickets?filter=today')}}" class="btn {{$filter=='today' ? 'btn-success' : 'btn-default'}} pull-right m-l-5">Today</a>
+                        <a href="{{url('tickets?filter=week')}}" class="btn {{$filter=='week' ? 'btn-success' : 'btn-default'}} pull-right m-l-5">This Week</a>
+                        <a href="{{url('tickets?filter=month')}}" class="btn {{$filter=='month' ? 'btn-success' : 'btn-default'}} pull-right m-l-5">This Month</a>
+                        <a href="{{url('tickets')}}" class="btn {{$filter=='' ? 'btn-success' : 'btn-default'}} pull-right m-l-5">All</a>
+                    </div>
+                </div>
+                <div class="white-box p-0 m-t-10">
                     <!-- .left-right-aside-column-->
                     <div class="page-aside">
                         <!-- .left-aside-column-->
