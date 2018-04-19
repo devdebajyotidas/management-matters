@@ -101,12 +101,12 @@
                                 <li class="tab-current"><a href="javascript:void(0)" data-target="#chapter-introduction"><span>Introduction</span></a></li>
                                 @if(is_array($learnings->chapters))
                                 @foreach($learnings->chapters as $key => $chapter)
-                                <li><a href="javascript:void(0)" data-target="#chapter-{{$key+1}}"><span>{{ $chapter['name'] }}</span></a></li>
+                                <li id="chapter-tab-{{$key+1}}"><a href="javascript:void(0)" data-target="#chapter-{{$key+1}}"><span>{{ $chapter['name'] }}</span></a></li>
                                 @endforeach
                                 @endif
                             </ul>
                         </nav>
-                        <div class="content-wrap text-left fr-element fr-view">
+                        <div class="content-wrap text-left fr-element fr-view all-chapters">
                             <section id="chapter-introduction" class="content-current">
                                 <p>
                                     @php
@@ -161,6 +161,11 @@
                 $('.content-wrap > section').removeClass('content-current');
                 $(target).addClass('content-current');
             });
+
+                    @if(isset($_GET['dos']) && $_GET['dos'])
+            var tab=$('.all-chapters section').length - 1;
+            $('#chapter-tab-'+tab).trigger('click');
+            @endif
         }
     </script>
 

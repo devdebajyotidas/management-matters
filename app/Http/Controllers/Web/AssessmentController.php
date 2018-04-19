@@ -50,7 +50,7 @@ class AssessmentController extends Controller
 
 
         $scores = [];
-       
+
         foreach ($new_assessments as $key => $assessment) {
             $key = 0;
             foreach ($assessment->scores as $learning => $score) {

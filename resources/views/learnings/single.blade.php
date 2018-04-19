@@ -70,7 +70,7 @@
                                 <li class="tab-current"><a href="#chapter-introduction"><span>Introduction</span></a></li>
                                 @if(is_array($learnings->chapters))
                                     @foreach($learnings->chapters as $key => $chapter)
-                                    <li id="chapter-{{$key+1}}"><a href="#chapter-{{$key+1}}"><span>{{ $chapter['name'] }}</span></a></li>
+                                    <li id="chapter-tab-{{$key+1}}"><a href="#chapter-{{$key+1}}"><span>{{ $chapter['name'] }}</span></a></li>
                                     @endforeach
                                 @endif
                             </ul>
@@ -140,7 +140,7 @@
            @if(session('role')=='learner')
            @if(isset($_GET['dos']) && $_GET['dos'])
             var tab=$('.all-chapters section').length - 1;
-            $('#chapter-'+tab).trigger('click');
+            $('#chapter-tab-'+tab).trigger('click');
             @endif
             @endif
 
