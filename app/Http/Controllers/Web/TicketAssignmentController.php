@@ -41,25 +41,25 @@ class TicketAssignmentController extends Controller
         DB::beginTransaction();
 
         $data['assignment'] = $request->get('assignment');
+        $assignment = TicketAssignment::create($data['assignment']);
 
+        if($assignment){
 
-        $activity=TicketAssignment::where('ticket_id',$data['assignment']['ticket_id'])->whereDate('created_at','=',date('Y-m-d'))->get()->count();
-        if($activity < 5){
-            $assignment = TicketAssignment::create($data['assignment']);
-
-            if($assignment){
-
-                DB::commit();
-                return redirect()->back()->with('success', 'Ticket has been assigned successfully');
-            }
-            else{
-                DB::rollBack();
-                return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong!']);
-            }
+            DB::commit();
+            return redirect()->back()->with('success', 'Ticket has been assigned successfully');
         }
         else{
-            return redirect()->back()->withErrors(['You can have only 5 activities for the same ticket for the day']);
+            DB::rollBack();
+            return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong!']);
         }
+
+//        $activity=TicketAssignment::where('ticket_id',$data['assignment']['ticket_id'])->whereDate('created_at','=',date('Y-m-d'))->get()->count();
+//        if($activity < 5){
+//
+//        }
+//        else{
+//            return redirect()->back()->withErrors(['You can have only 5 activities for the same ticket for the day']);
+//        }
 
     }
 
