@@ -79,7 +79,7 @@ class TicketAssignmentController extends Controller
             } else
             {
                 $award = null;
-                $message = "Ticket's activity has been updated, $activity";
+                $message = "Ticket's activity has been updated";
             }
 
             DB::commit();
