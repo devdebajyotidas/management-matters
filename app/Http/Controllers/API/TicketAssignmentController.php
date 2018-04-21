@@ -65,15 +65,17 @@ class TicketAssignmentController extends Controller
 
         if ($result)
         {
-            $activity = TicketAssignment::where('ticket_id', $id)->whereNotNull('note')->get()->count();
-            if ($activity >= 5)
+            $activity=TicketAssignment::where('ticket_id',$id)->whereNotNull('note')->whereDate('created_at','=',date('Y-m-d'))->get()->count();
+
+            if ($activity == 5)
             {
                 $ticket = $assignemnt->ticket;
                 $award['learner_id'] = $ticket->learner->id;
                 $award['title'] = "Activity award for " . $ticket->title;
                 $award['description'] = $awstatus = 'activity';
-                $message = "You've earned a better management  badge";
+                $message = "Activity Award!  Keep up the good work!";
                 $award = Award::create($award);
+
             } else
             {
                 $award = null;
