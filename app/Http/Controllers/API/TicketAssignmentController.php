@@ -65,7 +65,7 @@ class TicketAssignmentController extends Controller
 
         if ($result)
         {
-            $activity=TicketAssignment::where('ticket_id',$id)->whereNotNull('note')->whereDate('created_at','=',date('Y-m-d'))->get()->count();
+            $activity=TicketAssignment::where('ticket_id',$assignemnt->ticket->id)->whereNotNull('note')->whereDate('created_at','=',date('Y-m-d'))->get()->count();
 
             if ($activity == 5)
             {
@@ -83,7 +83,7 @@ class TicketAssignmentController extends Controller
             }
 
             DB::commit();
-            return response()->json(['success' => true, 'message' => $data['assignment'], 'award' => $award]);
+            return response()->json(['success' => true, 'message' => $message, 'award' => $award]);
         } else {
             DB::rollBack();
             return response()->json(['success' => false, 'message' => 'Something went wrong!', 'award' => null]);
