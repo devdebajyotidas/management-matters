@@ -65,7 +65,7 @@ class TicketAssignmentController extends Controller
 
         if ($result)
         {
-            $activity=TicketAssignment::where('ticket_id',$id)->whereNotNull('note')->whereDate('created_at','=',date('Y-m-d'))->get()->count();
+            $activity=TicketAssignment::where('ticket_id',$data['assignment']['ticket_id'])->whereNotNull('note')->whereDate('created_at','=',date('Y-m-d'))->get()->count();
 
             if ($activity == 5)
             {
