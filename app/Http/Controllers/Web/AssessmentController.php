@@ -44,6 +44,7 @@ class AssessmentController extends Controller
             $learners = Auth::user()->account->learners()->select('learners.id')->pluck('id');
             $assessments = Assessment::with('learner.department')->whereIn('learner_id', $learners)->orderBy('created_at','desc')->get();
         }
+
         $data['assessments'] = $assessments;
         $new_assessments=$assessments->reverse();
         $data['dates'] = $new_assessments->pluck('created_at');

@@ -32,43 +32,47 @@
                         <hr>
                         <!-- .row -->
                         <div class="row text-center m-t-10">
-                            <div class="col-md-6 b-r"><strong>Email ID</strong>
+                            <div class="col-md-12 b-r"><strong>Email ID</strong>
                                 <p>{{ $organization->user->email }}</p>
                             </div>
-                            <div class="col-md-6"><strong>Phone</strong>
+                        </div>
+                        <hr>
+                        <div class="row text-center m-t-10">
+                            <div class="col-md-6 b-r"><strong>Phone</strong>
                                 <p>{{ $organization->phone }}</p>
+                            </div>
+                            <div class="col-md-6"><strong>Departments</strong>
+                                <p>{{ $organization->departments()->count() }}</p>
                             </div>
                         </div>
                         <!-- /.row -->
                         <hr>
                         <!-- .row -->
                         <!-- /.row -->
-                        <div class="col-md-4 col-sm-4 text-center">
-
-                            <p class="text-purple">Departments</p>
-                            <h1>{{ $organization->departments()->count() }}</h1>
-                        </div>
-                        <div class="col-md-4 col-sm-4 text-center">
+                        <div class="col-md-6 col-sm-6 text-center b-r">
 
                             <p class="text-blue">Total Licenses</p>
                             <h1>{{ isset( $organization->subscription)? $organization->subscription->licenses : 0 }}</h1>
                         </div>
-                        <div class="col-md-4 col-sm-4 text-center">
+                        <div class="col-md-6 col-sm-6 text-center">
 
                             <p class="text-info">Active Learners</p>
                             <h1>{{ $organization->learners()->count() }}</h1>
                         </div>
                     </div>
                     <!-- .row -->
-                    <hr>
-                    <div class="row text-center m-t-10">
-                        <div class="col-md-6 b-r"><strong>Subscription Amount</strong>
-                            <p>{{ isset($organization->subscription) ? $organization->subscription->amount : 'N/A' }}</p>
+                    @if(isset($organization->subscription))
+                        <hr>
+                        <div class="row text-center m-t-10">
+                            <div class="col-md-6 b-r"><strong>Subscription Amount</strong>
+                                <p>{{ !empty($organization->subscription) ? $organization->subscription->amount : '0' }}</p>
+                            </div>
+                            <div class="col-md-6"><strong>Subscription Interval</strong>
+                                <p>{{ isset($organization->subscription) ? $organization->subscription->billing_interval.' days' : 'N/A'  }}</p>
+                            </div>
                         </div>
-                        <div class="col-md-6"><strong>Subscription Interval</strong>
-                            <p>{{ isset($organization->subscription) ? $organization->subscription->billing_interval.' days' : 'N/A'  }}</p>
-                        </div>
-                    </div>
+                    @endif
+
                     <hr>
 
                     @if(isset($organization->subscription) && !empty($organization->subscription->subscription_id))

@@ -37,10 +37,13 @@
                         <hr>
                         <!-- .row -->
                         <div class="row text-center m-t-10">
-                            <div class="col-md-6 b-r"><strong>Email ID</strong>
+                            <div class="col-md-12 b-r"><strong>Email ID</strong>
                                 <p>{{ isset($learner->user->email) ? $learner->user->email : 'N/A' }}</p>
                             </div>
-                            <div class="col-md-6"><strong>Phone</strong>
+                        </div>
+                        <hr>
+                        <div class="row text-center m-t-10">
+                            <div class="col-md-12"><strong>Phone</strong>
                                 <p>{{ !empty($learner->phone) ? $learner->phone : 'N/A'  }}</p>
                             </div>
                         </div>
