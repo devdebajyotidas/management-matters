@@ -204,11 +204,9 @@
     <div class="nav-wrapper">
 
         <!-- Add your Logo and Name here -->
-        <a class="brand-logo design-font waves-effect waves-light no-bg" data-scroll-nav="0" href="#">
-            <img class="responsive-img logo" src="{{asset('assets/img/mm-logo.png')}}" alt="">
-            <p class="title-link">
-                <span>M</span><span>M</span>
-            </p>
+        <a class="design-font waves-effect waves-light no-bg" data-scroll-nav="0" href="#" style="width: 45px;height: 45px;display: inline-block;">
+            {{--<img class="responsive-img logo" src="{{asset('assets/img/mm-logo.png')}}" alt="" style="border: 2px solid #fff">--}}
+            <img src="{{asset('assets/img/mm-logo.png')}}" alt="" style="border: 2px solid #fff;width: 100%;height: 100%;display: block;box-shadow: 0 1px 3px rgba(0,0,0,.14);border-radius: 2px">
         </a>
 
         <!-- Main Menu Hamburger Icon for Mobile And Screen Width less than 993px -->

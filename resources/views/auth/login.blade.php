@@ -64,7 +64,7 @@
                 {{ csrf_field() }}
                 <a href="/" class="text-center db">
                     <img src="{{ asset('assets/img/mm-logo.png') }}"
-                         style="width: 200px"
+                         style="width: 100px"
                          alt="Home"/>
                 </a>
 

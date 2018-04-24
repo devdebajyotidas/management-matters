@@ -9,9 +9,9 @@
                     {{--<!--This is dark logo icon--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="dark-logo" width="100">--}}
                     {{--<!--This is light logo icon--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="light-logo" width="100">--}}
                 {{--</b>--}}
-                <span class="hidden-xs text-center" style="display: block">
-                        <!--This is dark logo text--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="dark-logo" width="100">
-                    <!--This is light logo text--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="light-logo" width="100">
+                <span class="hidden-xs text-left" style="display: block">
+                        <!--This is dark logo text--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="dark-logo" width="50">
+                    <!--This is light logo text--><img src="http://ec2-54-245-205-243.us-west-2.compute.amazonaws.com/assets/img/mm-logo.png" alt="home" class="light-logo m-t-10 m-l-20" width="50">
                      </span>
             </a>
         </div>
