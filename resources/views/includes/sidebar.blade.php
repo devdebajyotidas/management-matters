@@ -1,5 +1,5 @@
 <!-- .right-sidebar -->
-<div class="navbar-default sidebar" role="navigation">
+<div class="navbar-default sidebar m-t-10" role="navigation">
     <div class="sidebar-nav navbar-collapse slimscrollsidebar" style="height: 100%;">
         <ul class="nav" id="side-menu">
             @if(session('role')=="admin")
