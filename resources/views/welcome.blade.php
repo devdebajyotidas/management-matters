@@ -23,7 +23,8 @@
     <meta name="twitter:app:id:googleplay" content="">
 
     <!-- Favicon logo -->
-    <link rel="icon" href="">
+    <link rel="icon" type="image/png"
+          href="{{asset('assets/img/favicon.png')}}">
     <!-- Plugins CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/landing_resource/css/plugins.css')}}">
     <!-- Our Min CSS -->
@@ -210,7 +211,7 @@
         </a>
 
         <!-- Main Menu Hamburger Icon for Mobile And Screen Width less than 993px -->
-        <a href="#" data-activates="mobile-demo" class="button-collapse">
+        <a href="#" data-activates="mobile-demo" class="button-collapse" style="display: inline-block !important;margin-top: -15px">
 
             <div class="very_small_hamburger" id="hamburger-menu">
                 <svg viewBox="0 0 800 600">
@@ -447,9 +448,9 @@
         <div class="owl-carousel owl-header">
 
             <!-- Mobiles Image-->
-            <img class="responsive-img" src={{asset('assets/landing_resource/images/iphone-mock/red/1-4.png')}} alt="">
-            <img class="responsive-img" src={{asset('assets/landing_resource/images/iphone-mock/red/1-3.png')}} alt="">
-            <img class="responsive-img" src={{asset('assets/landing_resource/images/iphone-mock/red/1-4.png')}} alt="">
+            <img class="responsive-img" src={{asset('assets/landing_resource/img/dashboard.png')}} alt="">
+            <img class="responsive-img" src={{asset('assets/landing_resource/img/assessment.png')}} alt="">
+            <img class="responsive-img" src={{asset('assets/landing_resource/img/quiz.png')}} alt="">
 
         </div>
     </div>
@@ -646,37 +647,37 @@
 
                     <div>
                         <img class="responsive-img"
-                             src={{asset('assets/landing_resource/images/iphone-mock/red/1-4.png')}} alt="image of the
+                             src={{asset('assets/landing_resource/img/assessment-one.png')}} alt="image of the
                              iPhone app">
                     </div>
 
                     <div>
                         <img class="responsive-img"
-                             src={{asset('assets/landing_resource/images/iphone-mock/red/1-1.png')}} alt="image of the
+                             src={{asset('assets/landing_resource/img/quiz-taken.png')}} alt="image of the
                              iPhone app">
                     </div>
 
                     <div>
                         <img class="responsive-img"
-                             src={{asset('assets/landing_resource/images/iphone-mock/red/1-2.png')}} alt="image of the
+                             src={{asset('assets/landing_resource/img/quiz.png')}} alt="image of the
                              iPhone app">
                     </div>
 
                     <div>
                         <img class="responsive-img"
-                             src={{asset('assets/landing_resource/images/iphone-mock/red/1-3.png')}} alt="image of the
+                             src={{asset('assets/landing_resource/img/dashboard.png')}} alt="image of the
                              iPhone app">
                     </div>
 
                     <div>
                         <img class="responsive-img"
-                             src={{asset('assets/landing_resource/images/iphone-mock/red/1-4.png')}} alt="image of the
+                             src={{asset('assets/landing_resource/img/calender.png')}} alt="image of the
                              iPhone app">
                     </div>
 
                     <div>
                         <img class="responsive-img"
-                             src={{asset('assets/landing_resource/images/iphone-mock/red/1-3.png')}} alt="image of the
+                             src={{asset('assets/landing_resource/img/award.png')}} alt="image of the
                              iPhone app">
                     </div>
 
@@ -859,10 +860,10 @@
             <div class="col s12 l6 center-align" data-aos="fade-left" data-aos-delay="200">
 
                 <!--Images-->
-                <img src={{asset('assets/landing_resource/images/iphone-mock/red/3-1.png')}} alt="">
+                <img src={{asset('assets/landing_resource/img/quiz-taken.png')}} alt="">
 
                 <img class="absolute-image"
-                     src={{asset('assets/landing_resource/images/iphone-mock/red/3-2.png')}} alt="">
+                     src={{asset('assets/landing_resource/img/assessment.png')}} alt="">
 
             </div>
 
@@ -964,10 +965,10 @@
             <div class="col s12 l6 opposite center-align" data-aos="fade-right" data-aos-delay="100">
 
                 <!--Images-->
-                <img src={{asset('assets/landing_resource/images/iphone-mock/red/2-1.png')}} alt="">
+                <img src={{asset('assets/landing_resource/img/quiz-taken.png')}} alt="">
 
                 <img class="absolute-image"
-                     src={{asset('assets/landing_resource/images/iphone-mock/red/2-2.png')}} alt="">
+                     src={{asset('assets/landing_resource/img/quiz-taken.png')}} alt="">
 
             </div>
 
@@ -1056,10 +1057,10 @@
             <div class="col s12 l6 center-align" data-aos="fade-left" data-aos-delay="100">
 
                 <!--Images-->
-                <img src={{asset('assets/landing_resource/images/iphone-mock/red/3-2.png')}} alt="">
+                <img src={{asset('assets/landing_resource/img/calender.png')}} alt="">
 
                 <img class="absolute-image"
-                     src={{asset('assets/landing_resource/images/iphone-mock/red/3-1.png')}} alt="">
+                     src={{asset('assets/landing_resource/img/calender.png')}} alt="" >
 
             </div>
 
@@ -1136,10 +1137,10 @@
             <div class="col s12 l6 opposite center-align" data-aos="fade-right" data-aos-delay="100">
 
                 <!--Images-->
-                <img src={{asset('assets/landing_resource/images/iphone-mock/red/3-2.png')}} alt="">
+                <img src={{asset('assets/landing_resource/img/award.png')}} alt="">
 
                 <img class="absolute-image"
-                     src={{asset('assets/landing_resource/images/iphone-mock/red/3-1.png')}} alt="">
+                     src={{asset('assets/landing_resource/img/award.png')}} alt="">
 
             </div>
 
@@ -1151,51 +1152,51 @@
 <!-- End Showcase Section-->
 
 <!-- Start Subscribe Section-->
-<section id="subscribe" class="main-section center-align">
+{{--<section id="subscribe" class="main-section center-align">--}}
 
-    <div class="container row" data-aos="fade-up" data-aos-delay="100">
+    {{--<div class="container row" data-aos="fade-up" data-aos-delay="100">--}}
 
-        <div class="subscribe-container">
-            <div class="col s12 l4">
+        {{--<div class="subscribe-container">--}}
+            {{--<div class="col s12 l4">--}}
 
-                <h4 class="title p-b-2">Subscribe</h4>
+                {{--<h4 class="title p-b-2">Subscribe</h4>--}}
 
-            </div>
+            {{--</div>--}}
 
-            <!-- Subscription Form -->
-            <form id="subscribe-form" name="subscribe-form" class="subscribe-input input-field col s12 l8">
+            {{--<!-- Subscription Form -->--}}
+            {{--<form id="subscribe-form" name="subscribe-form" class="subscribe-input input-field col s12 l8">--}}
 
-                <!-- Email Field -->
-                <input name="subscribe-email" id="subscribe-email" type="email" class="validate">
+                {{--<!-- Email Field -->--}}
+                {{--<input name="subscribe-email" id="subscribe-email" type="email" class="validate">--}}
 
-                <label data-error="Invalid Email" for="subscribe-email">Email</label>
+                {{--<label data-error="Invalid Email" for="subscribe-email">Email</label>--}}
 
-                <!-- Submit Button -->
-                <button id="subscribe-submit" class="gradient-color waves-effect waves-light" type="submit">
+                {{--<!-- Submit Button -->--}}
+                {{--<button id="subscribe-submit" class="gradient-color waves-effect waves-light" type="submit">--}}
 
-                    <i class="fa fa-paper-plane first"></i>
+                    {{--<i class="fa fa-paper-plane first"></i>--}}
 
-                    <i class="fa fa-paper-plane second"></i>
+                    {{--<i class="fa fa-paper-plane second"></i>--}}
 
-                </button>
+                {{--</button>--}}
 
-                <!-- ! Anti-spam field ! Invisible for users, it will trick most bots to fill it and prevent the email from being sent to you -->
-                <div class="input-field col s12 hidden">
+                {{--<!-- ! Anti-spam field ! Invisible for users, it will trick most bots to fill it and prevent the email from being sent to you -->--}}
+                {{--<div class="input-field col s12 hidden">--}}
 
-                    <input type="text" id="subscribe-check-spam" placeholder="Leave field empty" name="check-spam">
+                    {{--<input type="text" id="subscribe-check-spam" placeholder="Leave field empty" name="check-spam">--}}
 
-                </div>
+                {{--</div>--}}
 
-            </form>
+            {{--</form>--}}
 
-        </div>
+        {{--</div>--}}
 
-        <!-- Alert Message -->
-        <div class="col s12 alert-message p-t-2" id="subscribe-alert-message"></div>
+        {{--<!-- Alert Message -->--}}
+        {{--<div class="col s12 alert-message p-t-2" id="subscribe-alert-message"></div>--}}
 
-    </div>
+    {{--</div>--}}
 
-</section>
+{{--</section>--}}
 <!-- End Subscribe Section-->
 
 <!-- Start Screenshot Section-->
@@ -1207,20 +1208,18 @@
         <h4 class="reflection-text p-b-2">Screenshots</h4>
 
         <!-- Description -->
-        <p class="p-t-1 desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum cupiditate deleniti eaque
-            earum iste itaque quia rerum! Ea excepturi facere incidunt ipsam iure libero nemo, non pariatur rerum sequi
-            voluptatibus.</p>
+        <p class="p-t-1 desc">Here is some sample of our product</p>
 
         <div class="carousel">
 
             <div class="carousel-item">
 
                 <!-- Link to the image to open in full screen when clicked with lity plugin -->
-                <a src={{asset('assets/landing_resource/images/iphone-mock/red/1-4.png')}} data-lity>
+                <a src={{asset('assets/landing_resource/img/dashaboard.png')}} data-lity>
 
                     <!-- Screenshot Image -->
                     <img class="responsive-img"
-                         src={{asset('assets/landing_resource/images/iphone-mock/red/1-4.png')}} alt="mobile mockup
+                         src={{asset('assets/landing_resource/img/dashboard.png')}} alt="mobile mockup
                          image">
 
                 </a>
@@ -1230,11 +1229,11 @@
             <div class="carousel-item">
 
                 <!-- Link to the image to open in full screen when clicked with lity plugin -->
-                <a src={{asset('assets/landing_resource/images/iphone-mock/red/1-3.png')}} data-lity>
+                <a src={{asset('assets/landing_resource/img/assessment.png')}} data-lity>
 
                     <!-- Screenshot Image -->
                     <img class="responsive-img"
-                         src={{asset('assets/landing_resource/images/iphone-mock/red/1-3.png')}} alt="mobile mockup
+                         src={{asset('assets/landing_resource/img/assessment.png')}} alt="mobile mockup
                          image">
 
                 </a>
@@ -1244,11 +1243,11 @@
             <div class="carousel-item">
 
                 <!-- Link to the image to open in full screen when clicked with lity plugin -->
-                <a src={{asset('assets/landing_resource/images/iphone-mock/red/1-2.png')}} data-lity>
+                <a src={{asset('assets/landing_resource/img/quiz.png')}} data-lity>
 
                     <!-- Screenshot Image -->
                     <img class="responsive-img"
-                         src={{asset('assets/landing_resource/images/iphone-mock/red/1-2.png')}} alt="mobile mockup
+                         src={{asset('assets/landing_resource/img/quiz.png')}} alt="mobile mockup
                          image">
 
                 </a>
@@ -1258,11 +1257,11 @@
             <div class="carousel-item">
 
                 <!-- Link to the image to open in full screen when clicked with lity plugin -->
-                <a src={{asset('assets/landing_resource/images/iphone-mock/red/1-3.png')}} data-lity>
+                <a src={{asset('assets/landing_resource/img/award.png')}} data-lity>
 
                     <!-- Screenshot Image -->
                     <img class="responsive-img"
-                         src={{asset('assets/landing_resource/images/iphone-mock/red/1-3.png')}} alt="mobile mockup
+                         src={{asset('assets/landing_resource/img/award.png')}} alt="mobile mockup
                          image">
 
                 </a>
@@ -1272,11 +1271,11 @@
             <div class="carousel-item">
 
                 <!-- Link to the image to open in full screen when clicked with lity plugin -->
-                <a href="images/iphone-mock/red/1-1.png" data-lity>
+                <a href="{{asset('assets/landing_resource/img/tickets.png')}}" data-lity>
 
                     <!-- Screenshot Image -->
                     <img class="responsive-img"
-                         src={{asset('assets/landing_resource/images/iphone-mock/red/1-1.png')}} alt="mobile mockup
+                         src={{asset('assets/landing_resource/img/tickets.png')}} alt="mobile mockup
                          image">
 
                 </a>
@@ -1454,12 +1453,12 @@
                 <!-- Link to download on the Windows store -->
 
 
-                <a class="m-t-1 grey darken-4 waves-effect waves-light"
-                   href="landing_resource/images/iphone-mock/qrcode.jpg">
-                    <span class="big-icon">
-                        <i class="fa fa-qrcode"></i>
-                    </span> Scan QR Code</a>
-                </a>
+                {{--<a class="m-t-1 grey darken-4 waves-effect waves-light"--}}
+                   {{--href="landing_resource/images/iphone-mock/qrcode.jpg">--}}
+                    {{--<span class="big-icon">--}}
+                        {{--<i class="fa fa-qrcode"></i>--}}
+                    {{--</span> Scan QR Code</a>--}}
+                {{--</a>--}}
 
             </div>
 
@@ -1467,7 +1466,7 @@
             <div class="col s12 l3 hide-on-med-and-down" data-aos="fade-left" data-aos-delay="100">
 
                 <img class="responsive-img"
-                     src={{asset('assets/landing_resource/images/iphone-mock/red/1-1.png')}} alt="">
+                     src={{asset('assets/landing_resource/img/dashboard.png')}} alt="">
 
             </div>
 
@@ -1721,9 +1720,9 @@
                 <!-- FAQ Image -->
                 <div>
                     <img class="responsive-img"
-                         src={{asset('assets/landing_resource/images/iphone-mock/red/1-2.png')}} alt="">
+                         src={{asset('assets/landing_resource/img/assessment-one.png')}} alt="">
                     <img class="responsive-img absolute-image"
-                         src={{asset('assets/landing_resource/images/iphone-mock/red/1-4.png')}} alt="">
+                         src={{asset('assets/landing_resource/img/tickets.png')}} alt="">
                 </div>
 
             </div>

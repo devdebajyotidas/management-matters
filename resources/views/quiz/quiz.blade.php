@@ -148,18 +148,18 @@
                                         ?>
                                         @foreach($quizs as $key=>$qdata)
                                             <div class="col-lg-12 question-block" id="goto-{{$key}}" data-toggle="{{$key}}" style="display: none">
-                                                <h3>Q: {{$qdata['question']}}</h3>
+                                                <h3>{{$qdata['question']}}</h3>
                                                 <div class="row">
                                                     @foreach($qdata['content'] as $num => $anstable)
                                                         <div class="radio radio-custom"  style="margin:10px 0">
                                                             <input type="radio" id="rad{{$key.$num}}" name="qradio{{$key}}" value="{{$anstable['type']}}" data-toggle="collapse" data-target="#enlarge-{{$key.$num}}">
-                                                            <label for="rad{{$key.$num}}"> {{($num+1).". ".$anstable['answer']}} </label>
+                                                            <label for="rad{{$key.$num}}"> {{$anstable['answer']}} </label>
                                                         </div>
                                                     @endforeach
                                                 </div>
                                                 @foreach($qdata['content'] as $num => $anstable)
                                                     <div id="enlarge-{{$key.$num}}" class="panel-collapse collapse" style="margin-top: 20px">
-                                                        {{"Note ".($num+1).": ".$anstable['note']}}
+                                                        {{"Note: ".$anstable['note']}}
                                                     </div>
                                                 @endforeach
                                             </div>
