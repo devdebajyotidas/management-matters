@@ -63,12 +63,13 @@
                                 @continue;
                             @endif
                             @foreach($assessments as $key => $assessment)
-                                @if($key == 3) @break @endif
-                            <div class="assessment-wrapper">
-                                {{--<img src="{{asset('assets/icons/'.strtolower($learning->title).'.png')}}"  class="assessment-icon">--}}
                                 <h4>
                                     {{ $assessment }}
                                 </h4>
+                                @if($key == 3) @break @endif
+                            <div class="assessment-wrapper">
+                                {{--<img src="{{asset('assets/icons/'.strtolower($learning->title).'.png')}}"  class="assessment-icon">--}}
+
                                 <br>
                                 <div class="radio radio-custom">
                                     <input type="radio" id="rad1{{$num.$key}}" name="assessments[{{ $learning->title }}][{{  $key }}]" value="1" required>
