@@ -94,7 +94,7 @@ class AssessmentController extends Controller
             foreach ($answers as $answer) {
                 $score += intval($answer);
             }
-            $totalAvg += $avg = $score / 3;
+            $totalAvg += $avg = $score / count($answers);
             $scores[$learning] = (float)number_format((float)$avg, 2, '.', '');
         }
 

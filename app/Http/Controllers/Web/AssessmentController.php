@@ -85,7 +85,6 @@ class AssessmentController extends Controller
 
         $assessments = [];
         $data = $request->all();
-
         $totalAvg = 0;
         $scores = [];
         foreach ($data['assessments'] as $learning => $answers) {
@@ -93,7 +92,7 @@ class AssessmentController extends Controller
             foreach ($answers as $answer) {
                 $score += intval($answer);
             }
-            $totalAvg += $avg = $score / 3;
+            $totalAvg += $avg = $score / count($answers);
             $scores[$learning] = (float)number_format((float)$avg, 2, '.', '');
         }
 
