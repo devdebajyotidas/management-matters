@@ -76,7 +76,6 @@ class TicketController extends Controller
                 $query->where(['learner_id' => Auth::user()->account_id]);
             }])->get();
 
-            $data['assignments'] = [];
             foreach ($assignments as $assignment)
             {
                 if(!empty($assignment->ticket)){
@@ -86,7 +85,6 @@ class TicketController extends Controller
                     $assignment->impact_level = $assignment->ticket->impact_level;
                     $assignment->is_archived = $assignment->ticket->is_archived;
                     $assignment->is_completed = $assignment->ticket->is_completed;
-
                     $data['assignments'][] = $assignment;
                 }
 

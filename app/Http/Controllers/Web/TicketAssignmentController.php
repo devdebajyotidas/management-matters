@@ -77,9 +77,11 @@ class TicketAssignmentController extends Controller
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
+
         $awstatus=null;
         $data['assignment'] = $request->get('assignment');
-        $data['assignment']['note']=str_replace(array("\r\n", "\n", "\r"),' ',$data['assignment']['note']);
+        $note=$data['assignment']['note'];
+        $data['assignment']['note']=str_replace(array("\r\n", "\n", "\r","'",'"','\\'),' ',$note);
         $data['ticket'] = $request->get('ticket');
         $assignemnt = TicketAssignment::find($id);
         $result=$assignemnt->update(['note'=>$data['assignment']['note']]);
@@ -112,7 +114,41 @@ class TicketAssignmentController extends Controller
 
     }
 
+    function escapeJsonValues($json_str){
+        $patern = '~(?:,\s*"((?:.(?!"\s*:))+.)"\s*(?=\:))(?:\:\s*(?:(\d+)|("\s*")|(?:"((?!\s*")(?:.(?!"\s*,))+.)")))~';
+        //remove { }
+        $json_str = rtrim(trim(trim($json_str),'{'),'}');
+        if(strlen($json_str)<5) {
+            //not valid json string;
+            return null;
+        }
+        //put , at the start nad the end of the string
+        $json_str = ($json_str[strlen($json_str)-1] ===',') ?','.$json_str :','.$json_str.',';
+        //strip all new lines from the string
+        $json_str=preg_replace('~[\r\n\t]~','',$json_str);
 
+        preg_match_all($patern, $json_str, $matches);
+        $json='{';
+        for($i=0;$i<count($matches[0]);$i++){
+
+            $json.='"'.$matches[1][$i].'":';
+            //value is digit
+            if(strlen($matches[2][$i])>0){
+                $json.=$matches[2][$i].',';
+            }
+            //no value
+            elseif (strlen($matches[3][$i])>0) {
+                $json.='"",';
+            }
+            //text, and now we can see if there is quotations it will be related to the text not json
+            //so we can add slashes safely
+            //also foreword slashes should be escaped
+            else{
+                $json.='"'.str_replace(['\\','"' ],['/','\"'],$matches[4][$i]).'",';
+            }
+        }
+        return trim(rtrim($json,','),',').'}';
+    }
 
 
     /**
