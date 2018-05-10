@@ -52,7 +52,7 @@
             {{ csrf_field() }}
             <div class="row" style="margin-top: 20px">
                 <div class="col-sm-4">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" style="box-shadow: 0 1px 3px rgba(0,0,0,.14)">
                         <div class="panel-heading" style="height: 85px;line-height: 45px">
                             All quizes
                         </div>
@@ -61,7 +61,7 @@
                             <div class="list-group">
                                 <?php  $sorted_learnings=$learnings->sortBy('title') ?>
                                 @foreach($sorted_learnings as $learning)
-                                    <a href="{{ url('/learnings/'. $learning->id .'/quiz') }}" class="list-group-item" >
+                                    <a href="{{ url('/learnings/'. $learning->id .'/quiz') }}" class="list-group-item" style="{{($active_learning->id == $learning->id) ? 'background-color:#f3f3f3' : ''}}">
                                         <span class="pull-left">
                                             <span class="text-block text-dark">
                                             Quiz for {{$learning->title}}
@@ -92,11 +92,11 @@
                     </div>
                 </div>
                 <div class="col-sm-8">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" >
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-sm-8">
-                                    <span style="margin-top: 13px;display: block">Quiz for {{$active_learning->title}}</span>
+                                    <span class="{{isset($_GET['retake']) ? "text-danger" : ''}}" style="margin-top: 13px;display: block">{{isset($_GET['retake']) ? "Retaking " : ''}}Quiz for {{$active_learning->title}}</span>
                                     <input type="hidden" id="result-correct" name="result" value="0">
                                     <input type="hidden" id="result-incorrect" value="0">
                                     <input type="hidden" id="total-question" value="{{count($active_learning->quiz)}}">
@@ -177,10 +177,12 @@
                                                 <h3>Q: {{$qdata['question']}}</h3>
                                                 <div class="btn-group-vertical">
                                                     @foreach($qdata['content'] as $num => $anstable)
-                                                        <div class="radio radio-custom"  style="margin:10px 0">
-                                                            <input type="radio" id="rad{{$key.$num}}" name="qradio{{$key}}" value="{{$anstable['type']}}" data-toggle="collapse" data-target="#enlarge-{{$key.$num}}">
-                                                            <label for="rad{{$key.$num}}"> {{($num+1).". ".$anstable['answer']}} </label>
-                                                        </div>
+                                                        @if(!empty($anstable['answer']))
+                                                            <div class="radio radio-custom"  style="margin:10px 0">
+                                                                <input type="radio" id="rad{{$key.$num}}" name="qradio{{$key}}" value="{{$anstable['type']}}" data-toggle="collapse" data-target="#enlarge-{{$key.$num}}">
+                                                                <label for="rad{{$key.$num}}"> {{$anstable['answer']}} </label>
+                                                            </div>
+                                                        @endif
                                                     @endforeach
                                                 </div>
                                                 @foreach($qdata['content'] as $num => $anstable)
@@ -227,11 +229,12 @@
 
                         </div>
                         <div class="panel-footer" style="text-align: right">
-                            <input type="submit" id="submit-result" name="submit" class="hidden btn btn-primary" value="Submit">
                             @if(!isset($active_learning->quizTaken[0]))
+                                <input type="submit" id="submit-result" name="submit" class="hidden btn btn-primary" value="Submit">
                                 <button type="button" class="btn btn-primary btn-next disabled">Next</button>
                             @else
                                 @if(isset($_GET['retake']))
+                                    <input type="submit" id="submit-result" name="submit" class="hidden btn btn-primary" value="Submit">
                                     <button type="button" class="btn btn-primary btn-next disabled">Next</button>
                                 @else
                                     {{--@if($active_learning->quizTaken[0]->is_completed==0)--}}
@@ -253,6 +256,11 @@
     </div>
     <script>
         window.onload=function(){
+            if($('#total-question').val() == 1){
+                $("#submit-result").addClass('disabled').removeClass('hidden');
+                $('.btn-next').hide();
+            }
+
             $('.question-block:eq(0)').stop(0).fadeIn('fast').addClass('active-question');
             $("input[type='radio']").each(function(){
                 $(this).change(function(){
@@ -262,6 +270,9 @@
                     if(!$(this).hasClass('disabled')){
                         $btnnext.removeClass('disabled');
                         $btnnext.addClass('active');
+                        if(!$(this).hasClass('hidden')){
+                            $("#submit-result").removeClass('disabled');
+                        }
                         $(this).parent().siblings().addClass('disabled');
                         $(this).parent().siblings().find("input[type='radio']").attr('disabled',true);
                         if($(this).val()==='true'){
@@ -286,7 +297,6 @@
                     var currentq=$('.active-question').data('toggle');
                     var next=parseInt(currentq)+1;
                     var progress=parseInt(next)+1;
-                    console.log(next+'/'+progress);
                     if(total >= next){
                         $(this).addClass('disabled');
                         $('#goto-'+currentq).removeClass('active-question').stop(0).fadeOut('fast',function(){
@@ -295,7 +305,7 @@
                         $('.question-progress-text').html(progress+'/'+total);
                         $('.question-progress-bar').css("width",parseInt((progress/total)*100)+"%");
                         if( parseInt(total) - parseInt(progress) == 0){
-                            $("#submit-result").removeClass('hidden');
+                            $("#submit-result").addClass('disabled').removeClass('hidden');
                             $(this).hide();
                         }
                     }
@@ -304,7 +314,12 @@
 
             });
 
-
+            $("#submit-result").click(function(e){
+                if($(this).hasClass('disabled')){
+                    e.stopImmediatePropagation();
+                    return false;
+                }
+            })
 
             @if(session()->has('success') || session('success'))
 

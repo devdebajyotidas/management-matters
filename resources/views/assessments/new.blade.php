@@ -62,6 +62,7 @@
                             @if(!is_array($assessments))
                                 @continue;
                             @endif
+                            <?php $assessments=array_slice($assessments, 0, 3) ?>
                             @foreach($assessments as $key => $assessment)
                                 <h4>
                                     {{ $assessment }}

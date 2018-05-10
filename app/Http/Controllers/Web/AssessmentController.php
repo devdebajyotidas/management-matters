@@ -49,7 +49,6 @@ class AssessmentController extends Controller
         $new_assessments=$assessments->reverse();
         $data['dates'] = $new_assessments->pluck('created_at');
 
-
         $scores = [];
 
         foreach ($new_assessments as $key => $assessment) {

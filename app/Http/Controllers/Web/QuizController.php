@@ -69,6 +69,7 @@ class QuizController extends Controller
     public function store(Request $request, $learningId)
     {
         DB::beginTransaction();
+
         $awstatus=null;
         $data = $request->all();
         $data['learner_id'] = Auth::user()->account_id;
