@@ -354,8 +354,12 @@
             notes_arr[id] = noteslist
         }
         function initCalendar() {
-
-            var len=ticketsJSON.length;
+            if($.isArray(ticketsJSON)){
+                var len=ticketsJSON.length;
+            }
+            else{
+                len=0;
+            }
             if(!len)len=0;
             for(var i =0; i<len; i++){
 
