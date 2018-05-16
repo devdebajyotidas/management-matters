@@ -355,7 +355,9 @@
         }
         function initCalendar() {
 
-            for(var i =0; i<ticketsJSON.length; i++){
+            var len=ticketsJSON.length;
+            if(!len)len=0;
+            for(var i =0; i<len; i++){
 
                 if(ticketsJSON[i].is_archived){
                     var color = '#ffc107';
