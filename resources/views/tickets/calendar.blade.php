@@ -328,15 +328,20 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    <?php
+    $assign=isset($assignments) ? json_encode($assignments) : "";
+    $tick=isset($tickets) ? json_encode($tickets) : "";
+    ?>
     <script>
 
         var selectedTicketDate = null;
         var tickets = [];
         var notes_arr={};
 
-        var ticketsJSON = JSON.parse('{!! isset($assignments) ? json_encode($assignments) : "" !!}');
+
+        var ticketsJSON = JSON.parse('{!! $assign !!}');
         var formAction = document.querySelector('#assignment-editor form').getAttribute('action');
-        var tickets_arr=JSON.parse('{!! isset($tickets) ? json_encode($tickets) : "" !!}');
+        var tickets_arr=JSON.parse('{!! $tick !!}');
 
         for (var j=0;j<tickets_arr.length;j++){
             var id=tickets_arr[j]['id'];
