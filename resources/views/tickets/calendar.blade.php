@@ -329,8 +329,8 @@
         <!-- /.modal-dialog -->
     </div>
     <?php
-    $assign=isset($assignments) ? json_encode($assignments) : "";
-    $tick=isset($tickets) ? json_encode($tickets) : "";
+    $assign=isset($assignments) ? json_encode($assignments) : "null";
+    $tick=isset($tickets) ? json_encode($tickets) : "null";
     ?>
     <script>
 
