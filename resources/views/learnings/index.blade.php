@@ -103,7 +103,7 @@
                 </div>
                 <div class="panel panel-default block1" style="box-shadow: 0 1px 3px rgba(0,0,0,0.14)">
                     <div class="panel-wrapper collapse in">
-                        <div class="panel-body text-center">
+                        <div class="panel-body text-left">
                             <p>
                                 A new and innovative approach to learn and apply new skills to Coaching, Collaboration, Communication, Discipline, Engaging Today’s Workforce, Innovation and Creativity, Integrating Change, Meetings, Motivation, Performance Improvement, Problem Solving, Remote Supervising, Time Management, and Trust Building. Study and learn how to better manage yourself and the people within your organization. Learn, take quiz for knowledge attainment, and manager better through the Ticket Board!
                             </p>
