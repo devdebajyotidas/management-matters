@@ -110,7 +110,6 @@
                         </div>
                         @if(session('role') == 'admin')
                             <div class="panel-footer text-center">
-                                <hr>
                                 <a href="{{ 'learnings/create' }}" class="btn btn-primary">Add Learning Module</a>
                             </div>
                         @endif
