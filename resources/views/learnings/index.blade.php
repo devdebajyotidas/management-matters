@@ -105,25 +105,16 @@
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body text-center">
                             <p>
-                                A new and innovative approach to learn and apply new skills to Coaching, Collaboration, Communication, Discipline, Engaging Today’s Workforce, Innovation and Creativity, Integrating Change, Meetings, Motivation, Performance Improvement, Problem Solving, Remote Supervising, Time Management, and Trust.
+                                A new and innovative approach to learn and apply new skills to Coaching, Collaboration, Communication, Discipline, Engaging Today’s Workforce, Innovation and Creativity, Integrating Change, Meetings, Motivation, Performance Improvement, Problem Solving, Remote Supervising, Time Management, and Trust Building. Study and learn how to better manage yourself and the people within your organization. Learn, take quiz for knowledge attainment, and manager better through the Ticket Board!
                             </p>
                         </div>
-                        <div class="panel-footer text-center">
-                            @if(session('role') == 'organization')
-                                <p>
-                                    As an Organization, you can customize our learning modules to ensure maximum impact on your learners. You can add images and text in the beginning of each modules.
-                                </p>
-                            @endif
-                            @if(session('role') == 'learner')
-                                <p>
-                                    Study and learn how to better manage yourself and the people within your organization. Take quiz,
-                                </p>
-                            @endif
-                            @if(session('role') == 'admin')
+                        @if(session('role') == 'admin')
+                            <div class="panel-footer text-center">
                                 <hr>
                                 <a href="{{ 'learnings/create' }}" class="btn btn-primary">Add Learning Module</a>
-                            @endif
-                        </div>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
             </div>
