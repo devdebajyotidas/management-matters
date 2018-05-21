@@ -1123,7 +1123,7 @@
             });
 
             @if(session('role') != 'admin')
-            console.log(cost);
+
             Highcharts.chart('chart', {
 
                 title: {
