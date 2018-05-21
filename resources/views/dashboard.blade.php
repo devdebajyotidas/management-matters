@@ -1101,7 +1101,7 @@
 
     <script>
         window.onload = function () {
-
+            Highcharts.seriesTypes.column.prototype.getExtremesFromAll = true;
 
 
             var parsed = JSON.parse('{!! json_encode($cost) !!}');

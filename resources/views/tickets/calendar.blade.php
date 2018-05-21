@@ -109,7 +109,7 @@
                                     </div>
                                 @endif
                             </div>
-                            
+
                             @foreach($tickets as $ticket)
 
                                 @if($ticket->is_completed==1)

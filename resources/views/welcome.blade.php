@@ -440,7 +440,7 @@
                     critical thinking skills to obtain superior performance from everyone in the organization.</p>
 
                 <!-- App Slogan -->
-                <p class="slogan">Tomorrow's Management Solution Today!</p>
+                <p class="slogan">Tomorrow's Management Solutions Today!</p>
             </div>
 
         </div>
