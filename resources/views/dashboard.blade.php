@@ -1101,11 +1101,8 @@
 
     <script>
         window.onload = function () {
-            Highcharts.seriesTypes.column.prototype.getExtremesFromAll = true;
-
 
             var parsed = JSON.parse('{!! json_encode($cost) !!}');
-            console.log(parsed);
 
             var cost = [];
             var date = [];
@@ -1119,8 +1116,6 @@
                 cost.push(v);
             });
 
-            console.log(cost,date);
-
             Highcharts.setOptions({
                 lang: {
                     thousandsSep: ','
@@ -1128,7 +1123,7 @@
             });
 
             @if(session('role') != 'admin')
-
+            console.log(cost);
             Highcharts.chart('chart', {
 
                 title: {
@@ -1150,8 +1145,7 @@
                     },
                     labels: {
                         format: '{value:,.0f}'
-                    },
-                    categories: cost
+                    }
                 },
                 legend: {
                     layout: 'vertical',
