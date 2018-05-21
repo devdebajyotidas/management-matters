@@ -60,7 +60,7 @@
                             </div>
                             <hr>
                             <?php
-                            $completed=$tickets->where('is_completed',1)->all();
+                            $completed=$tickets->where('is_completed',1)->where('is_archived',0)->all();
                             $archived=$tickets->where('is_archived',1)->all();
                             $open=$tickets->where('is_completed',0)->where('is_archived',0)->all();
 
@@ -89,17 +89,6 @@
                             </div>
 
                             <div class="m-t-15">
-                                @if(count($archived) > 0)
-                                    <a href="#archived-tickets" class="text-warning ticket-type" data-toggle="collapse">Archived tickets</a>
-                                    <div class="m-t-5 collapse" id="archived-tickets">
-                                        @foreach($archived as $cticket)
-                                            <div class="calendar-event  bg-warning" data-id="{{$cticket->id}}" data-class="bg-custom" style="background-color: #ffc107">{{$cticket->title}} <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a> <a data-id="{{$cticket->id}}" href="javascript:void(0);" class="edit-calendar-event"><i class="ti-pencil"></i></a></div>
-                                        @endforeach
-                                    </div>
-                                @endif
-                            </div>
-
-                            <div class="m-t-15">
                                 @if(count($completed) > 0)
                                     <a href="#completed-tickets" class="text-success ticket-type" data-toggle="collapse">Completed tickets</a>
                                     <div class="m-t-5 collapse" id="completed-tickets">
@@ -109,6 +98,18 @@
                                     </div>
                                 @endif
                             </div>
+
+                            <div class="m-t-15">
+                                @if(count($archived) > 0)
+                                    <a href="#archived-tickets" class="text-warning ticket-type" data-toggle="collapse">Archived tickets</a>
+                                    <div class="m-t-5 collapse" id="archived-tickets">
+                                        @foreach($archived as $cticket)
+                                            <div class="calendar-event  bg-warning" data-id="{{$cticket->id}}" data-class="bg-custom" style="background-color: #ffc107">{{$cticket->title}} <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a> <a data-id="{{$cticket->id}}" href="javascript:void(0);" class="edit-calendar-event"><i class="ti-pencil"></i></a></div>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </div>
+                            
                             @foreach($tickets as $ticket)
 
                                 @if($ticket->is_completed==1)
@@ -187,9 +188,11 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     @if($ticket->is_completed==0 && $ticket->is_archived==0)
-                                                        <button id="archive-ticket" type="submit" name="ticket[archive]" value="true" class="btn btn-warning waves-effect pull-left">Acrhive</button>
+                                                        {{--<button id="archive-ticket" type="submit" name="ticket[archive]" value="true" class="btn btn-warning waves-effect pull-left">Acrhive</button>--}}
                                                         <button id="complete-ticket" type="submit" name="ticket[complete]"  value="true" class="btn btn-success waves-effect pull-left">Mark Complete</button>
                                                         <button id="save-ticket" type="submit"  name="submit" value="true" class="btn btn-info waves-effect">Save</button>
+                                                    @elseif($ticket->is_completed==1 && $ticket->is_archived==0)
+                                                        <button id="archive-ticket" type="submit" name="ticket[archive]" value="true" class="btn btn-warning waves-effect pull-left">Acrhive</button>
                                                     @endif
 
                                                     <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>

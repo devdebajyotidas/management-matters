@@ -174,7 +174,7 @@
                                     @if(isset($_GET['retake']))
                                         @foreach($active_learning->quiz as $key=>$qdata)
                                             <div class="col-lg-12 question-block" id="goto-{{$key}}" data-toggle="{{$key}}" style="display: none">
-                                                <h3>Q: {{$qdata['question']}}</h3>
+                                                <h3>{{$qdata['question']}}</h3>
                                                 <div class="btn-group-vertical">
                                                     @foreach($qdata['content'] as $num => $anstable)
                                                         @if(!empty($anstable['answer']))
