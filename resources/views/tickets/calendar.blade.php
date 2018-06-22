@@ -50,7 +50,7 @@
                     <div class="row">
                         <div class="col-lg-3 p-20">
                             <div class="m-b-0 m-t-0 btn-wrapper">
-                                <button type="button" class="btn btn-success" id="add-event">Add Ticket</button>
+                                <button type="button" class="btn btn-success" id="add-event">Create Ticket</button>
                                 <button type="button" class="btn btn-default m-l-10" id="event-list" onclick="$('#eventlistForm').submit()">All Tickets</button>
                                 <div class="hidden">
                                     <form id="eventlistForm" action="{{url('tickets/events')}}" method="get">
@@ -169,7 +169,7 @@
                                                                     <ul class="list-group" id="activity">
                                                                         @if(count($ticket->assignments) > 0)
                                                                             @foreach($ticket->assignments as $assignment)
-                                                                                <li class="row list-group-item"><span class="col-sm-3">{{$assignment->target_date}}</span> <span class="col-sm-9">{{!empty($assignment->note) ? $assignment->note : 'No activity'}}</span></li>
+                                                                                <li class="row list-group-item"><span class="col-sm-3">{{\Illuminate\Support\Carbon::parse($assignment->target_date)->format('m/d/Y')}}</span> <span class="col-sm-9">{{!empty($assignment->note) ? $assignment->note : 'No activity'}}</span></li>
                                                                             @endforeach
                                                                         @else
                                                                             <li class="row list-group-item">No activity yet</li>
