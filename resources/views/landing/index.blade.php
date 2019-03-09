@@ -348,7 +348,7 @@
             <div class="row justify-content-center ">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="" style="padding-top: 30px; text-align: center;">
-                        <h2 class="tool_more"><a href="tools.html">+ 8 more</a></h2>
+                        <h2 class="tool_more"><a href="{{url('/tools')}}">+ 8 more</a></h2>
                         <!-- <a href="">see more</a> -->
                     </div>
                 </div>
