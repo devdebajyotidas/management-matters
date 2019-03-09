@@ -157,7 +157,7 @@
                 <!-- / -->
                 <div class="collapse navbar-collapse justify-content-end" id="navbar">
                     <ul class="navbar-nav ml-auto">
-                        <li><a class="nav-link activated" href="{{url('/')}}.html">Home</a></li>
+                        <li><a class="nav-link activated" href="{{url('/')}}">Home</a></li>
                         <li><a class="nav-link" href="{{url('/tools')}}">Tools</a></li>
                         <li><a class="nav-link" href="{{url('/workflow')}}">How It Works</a></li>
                         <li><a class="nav-link " href="{{url('/faq')}}">FAQs</a></li>
