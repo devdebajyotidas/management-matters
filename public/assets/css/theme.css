@@ -1,0 +1,171 @@
+/* FONTS */
+@import url('https://fonts.googleapis.com/css?family=Karla|Lato|Nanum+Gothic|Poppins|Roboto|Source+Sans+Pro|Ubuntu|Abel|Montserrat');
+
+/* ANIMATE.CSS */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css');
+
+:root {
+    --primary-color: #0080FF;
+    --primary-color-darker: #1063b5;
+    
+    --secondary-color: #FF6C3B;
+    --secondary-color-darker: #b94620;
+    
+    --disabled-color: #dddede;
+    --disabled-color-darker: #b2b7b7;
+    
+    --theme-shadow-y-35: 0 5px 15px 5px rgba(0, 0, 0, 0.35);
+    --theme-shadow-y-25: 0 5px 8px 2px rgba(0, 0, 0, 0.25);
+    --theme-shadow-y-15: 0 4px 10px 1px rgba(0, 0, 0, 0.15);
+    --theme-shadow-y-05: 0 3px 10px 2px rgba(0, 0, 0, 0.15);
+    --theme-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.25);
+}
+
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+/* THEME TEXTS */
+.theme-text-primary {
+    color: var(--primary-color);
+}
+.theme-text-secondary {
+    color: var(--secondary-color);
+}
+.theme-text-disabled {
+    color: var(--disabled-color);
+}
+
+/* THEME BACKGROUNDS */
+.theme-bg-primary {
+    color: var(--primary-color);
+}
+.theme-bg-secondary {
+    color: var(--secondary-color);
+}
+.theme-bg-disabled {
+    color: var(--disabled-color);
+}
+
+/* THEME BUTTONS */
+
+    /* PRIMARY BUTTON */
+.btn.btn-primary.theme-btn {
+    background: var(--primary-color);
+    padding: 8px 30px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: var(--theme-shadow-y-25);
+    border: 0;
+    outline: 0;
+    border-radius: 7px;
+}
+.btn.btn-primary.theme-btn:hover, .btn.btn-primary.theme-btn:focus {
+    background: var(--primary-color-darker);
+}
+
+    /* PRIMARY BUTTON OULTINE */
+.btn.btn-primary.theme-btn.outline {
+    background: white;
+    padding: 8px 30px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: var(--theme-shadow-y-25);
+    border: 0;
+    outline: 0;
+    border-radius: 7px;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+.btn.btn-primary.theme-btn.outline:hover, .btn.btn-primary.theme-btn.outline:focus {
+    background: var(--primary-color-darker);
+    border-color: var(--primary-color-darker);
+    color: white;
+}
+
+    /* SECONDARY BUTTON */
+.btn.btn-secondary.theme-btn {
+    background: var(--secondary-color);
+    padding: 8px 30px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: var(--theme-shadow-y-25);
+    border: 0;
+    outline: 0;
+    border-radius: 7px;
+}
+.btn.btn-secondary.theme-btn:hover, .btn.btn-secondary.theme-btn:focus {
+    background: var(--secondary-color-darker);
+}
+
+    /* SECONDARY BUTTON OUTLINE */
+.btn.btn-secondary.theme-btn.outline {
+    background: white;
+    padding: 8px 30px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: var(--theme-shadow-y-25);
+    border: 0;
+    outline: 0;
+    border-radius: 7px;
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+}
+.btn.btn-secondary.theme-btn.outline:hover, .btn.btn-secondary.theme-btn.outline:focus {
+    background: var(--secondary-color-darker);
+    border-color: var(--secondary-color-darker);
+    color: white;
+}
+
+    /* DISABLED BUTTON */
+.btn.btn-disabled.theme-btn {
+    background: var(--disabled-color);
+    padding: 8px 30px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: var(--theme-shadow-y-25);
+    border: 0;
+    outline: 0;
+    border-radius: 7px;
+    color: dimgray;
+}
+.btn.btn-disabled.theme-btn:hover, .btn.btn-disabled.theme-btn:focus {
+    background: var(--disabled-color-darker);
+    color: white;
+}
+
+    /* DISABLED BUTTON OUTLINE */
+.btn.btn-disabled.theme-btn.outline {
+    background: white;
+    padding: 8px 30px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: var(--theme-shadow-y-25);
+    border: 0;
+    outline: 0;
+    border-radius: 7px;
+    color: var(--disabled-color-darker);
+    border: 2px solid var(--disabled-color-darker);
+}
+.btn.btn-disabled.theme-btn.outline:hover, .btn.btn-disabled.theme-btn.outline:focus {
+    background: var(--disabled-color-darker);
+    border-color: var(--disabled-color-darker);
+    color: white;
+}
+
+/* THEME TITLES */
+.theme-title-primary {
+    color: var(--primary-color);
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+.theme-title-secondary {
+    color: var(--secondary-color);
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+.theme-title-disabled {
+    color: var(--disabled-color);
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}

@@ -11,8 +11,29 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
+});
+Route::get('/', function () {
+    return view('landing.index');
+});
+Route::get('/tools', function () {
+    return view('landing.tools');
+});
+Route::get('/workflow', function () {
+    return view('landing.workflow');
+});
+Route::get('/faq', function () {
+    return view('landing.faq');
+});
+Route::get('/about', function () {
+    return view('landing.about');
+});
+Route::get('/pricing', function () {
+    return view('landing.pricing');
+});
+Route::get('/products', function () {
+    return view('landing.products');
 });
 
 Route::get('/test', function () {

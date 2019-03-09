@@ -1,0 +1,549 @@
+@import url(theme.css);
+
+/* FIRST SECTION ON EVERY PAGE */
+@media only screen and (max-width: 768px) {
+    section:first-child {
+        padding-top: 80px;
+    }
+}
+
+/* NAV STYLE */
+@media only screen and (max-width: 992px) {
+    .nav li.nav-link.activated {
+        color: var(--secondary-color) !important;
+    }
+}
+
+/* SWAP HOME SECTIONS COLUMNS ON TAB SCREEN AND LESS */
+@media only screen and (max-width: 768px) {
+    section#home .row .col:first-child {
+        order: 2;
+        margin-top: 40px;
+    }
+}
+
+/* COMMON DESIGNS */
+.text-line-through {
+    text-decoration: line-through;
+}
+
+/* GET IT NOW BUTTON */
+.get-it-now-button {
+    display: inline-flex;
+    background: var(--primary-color);
+    color: white;
+    font-family: 'Lato', sans-serif;
+    padding: 10px 25px;
+    min-width: 200px;
+    width: auto;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 100;
+    flex-wrap: nowrap;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: var(--theme-shadow-y-25);
+}
+
+.get-it-now-button:hover,
+.get-it-now-button:focus {
+    background: var(--primary-color-darker);
+    color: white;
+}
+
+.get-it-now-button i {
+    flex-direction: column;
+}
+
+.get-it-now-button span {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.get-it-now-button span .available-on {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    font-weight: normal;
+}
+
+section#getItNow .theme-after-bg,
+section#getItNow .cont {
+    text-align: left;
+}
+
+@media only screen and (max-width: 768px) {
+
+    section#getItNow .theme-after-bg,
+    section#getItNow .cont {
+        text-align: center !important;
+    }
+}
+
+/* PAGE FOOTER */
+footer {
+    background: #343B43;
+}
+
+footer .cols:first-child {
+    text-align: left;
+}
+
+footer .cols:nth-child(2) {
+    text-align: center;
+}
+
+footer .cols:last-child {
+    text-align: right;
+}
+
+@media only screen and (max-width: 992px) and (min-width: 768px) {
+    footer .footer-text {
+        width: 100% !important;
+    }
+
+    footer .cols {
+        text-align: center !important;
+    }
+
+    footer .cols:not(:first-child) {
+        margin-top: 30px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    footer .cols {
+        text-align: center !important;
+    }
+
+    footer .cols:not(:first-child) {
+        margin-top: 30px;
+    }
+
+    footer .cols h4 {
+        color: var(--secondary-color) !important;
+    }
+}
+
+
+/* TOMORROW MANAGEMENT SECTION */
+section#tomorrowManagement {
+    background-image: url(../images/home_2nd_bg.svg);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+}
+
+section#tomorrowManagement img {
+    width: 60%;
+}
+
+@media only screen and (max-width: 768px) {
+
+    section#tomorrowManagement,
+    section#tomorrowManagement h2 {
+        text-align: center !important;
+    }
+}
+
+.theme-after-bg {
+    color: var(--primary-color);
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* CARDS ON HOME PAGE */
+.home-3rd-section-cards {
+    box-shadow: var(--theme-shadow-y-05);
+    border-radius: 10px;
+    display: block;
+    text-align: center;
+    width: 90%;
+    height: 95%;
+    padding: 30px;
+    margin: 0 auto;
+    transition: transform 0.3s;
+}
+
+.home-3rd-section-cards:hover {
+    transform: scale(1.1);
+}
+
+.home-3rd-section-cards .card-logo-container {
+    width: 130px;
+    height: 130px;
+    border-radius: 100%;
+    box-shadow: var(--theme-shadow-y-15);
+    text-align: center;
+    vertical-align: middle;
+    justify-content: center;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+.home-3rd-section-cards .card-logo-container img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+}
+
+.home-3rd-section-cards .card-body-container {
+    font-family: 'Poppins', sans-serif;
+    display: block;
+}
+
+.home-3rd-section-cards .card-body-container .card-heading {
+    text-transform: uppercase;
+}
+
+.home-3rd-section-cards .card-body-container p {
+    font-size: 13px;
+}
+
+@media only screen and (max-width: 768px) {
+    .home-3rd-section-cards {
+        height: auto;
+        margin: 20px auto;
+        width: 100%
+    }
+
+    section#getItNow .col-to-center {
+        text-align: center;
+    }
+
+    section#getItNow .col-to-center a:first-child {
+        margin-right: 10px;
+    }
+
+    .home-3rd-section-cards:hover {
+        transform: unset;
+    }
+}
+
+/* CARDS ON ABOUT PAGE */
+.founders-cards {
+    margin-top: 50px;
+}
+
+.founders-cards .card {
+    box-shadow: var(--theme-shadow-y-15);
+    margin: 0 auto;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    width: 90%;
+    cursor: pointer;
+}
+
+.founders-cards .card .card-close i {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 20px;
+    color: var(--secondary-color);
+    cursor: pointer;
+    z-index: 1000;
+    transition: color 0.3s;
+}
+
+.founders-cards .card .card-close i:hover,
+.founders-cards .card .card-close i:focus {
+    color: var(--secondary-color-darker);
+}
+
+.founders-cards .card.active {
+    cursor: unset;
+    transition: all 0.3s ease-in-out;
+    box-shadow: var(--theme-shadow-y-15);
+}
+
+.founders-cards .card.active:hover {
+    transform: unset;
+}
+
+.founders-cards .card:hover,
+.founders-cards .card:focus {
+    transform: scale(1.1);
+}
+
+.founders-cards .card-container {
+    display: -webkit-box;
+    flex-direction: row;
+    transition: all 0.3s ease-in-out;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .founders-cards .card {
+        width: 100%;
+        margin: 20px auto;
+    }
+
+    .founders-cards .card:hover {
+        transform: unset;
+    }
+
+    .founders-cards .card .card-close i {
+        display: none;
+    }
+}
+
+.founders-cards .card .card-heading {
+    height: 70%;
+    padding: 0;
+    object-fit: contain;
+}
+
+.founders-cards .card .card-heading img {
+    object-fit: fill;
+    height: 100%;
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.3s;
+}
+
+.founders-cards .card.active .card-heading img {
+    width: 20% !important;
+    object-fit: unset;
+    border-radius: 8px 0 0 0;
+}
+
+.founders-cards .card .card-body {
+    text-align: center;
+}
+
+.founders-cards .card .card-body p {
+    display: none;
+}
+
+.founders-cards .card.active .card-body p {
+    /*    display: block;*/
+    text-align: left;
+}
+
+@media only screen and (max-width: 768px) {
+    .founders-cards .card .card-body p {
+        text-align: justify !important;
+    }
+}
+
+.founders-cards .card .card-body a {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 3px 20px;
+    border-radius: 50px;
+    background: white;
+    transition: background 0.3s, color 0.3s;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.founders-cards .card .card-body a:hover,
+.founders-cards .card .card-body a:focus {
+    background: var(--primary-color);
+    color: white;
+}
+
+.founders-cards .card .card-footer {
+    background: white;
+    border: none;
+    text-align: center;
+}
+
+/* CARDS ON PRODUCTS PAGE */
+.founders-cards.override-products-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.founders-cards.override-products-cards .card {
+    box-sizing: border-box;
+    cursor: default;
+}
+
+.founders-cards.override-products-cards .card-heading {
+    padding: 20px 40px;
+}
+
+.founders-cards.override-products-cards .card-heading img {
+    height: 80px;
+}
+
+.founders-cards.override-products-cards .card-footer {
+    padding-top: 0;
+    padding-bottom: 25px;
+}
+
+/* PRICE TABLE */
+table.price-table {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    padding: 15px;
+    border: 0;
+    color: dimgray;
+    overflow: unset;
+    margin: 5px;
+}
+
+table.price-table td,
+table.price-table th {
+    vertical-align: middle;
+    border: 0;
+}
+
+table.price-table th {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+table.price-table th .previous-price {
+    font-size: 16px;
+    text-decoration: line-through;
+}
+
+table.price-table th .current-price {
+    font-size: 20px;
+}
+
+table.price-table th:first-child {
+    font-size: 24px;
+    width: 400px;
+}
+
+@media only screen and (max-width: 640px) {
+    .table-div {
+        padding: 0;
+        margin: 0;
+    }
+
+    table.price-table {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    table.price-table tbody {
+        box-shadow: unset !important;
+    }
+
+    table.price-table tfoot a {
+        font-size: 12px !important;
+    }
+
+    table.price-table th {
+        font-size: 16px;
+    }
+
+    table.price-table th .previous-price {
+        font-size: 12px;
+    }
+
+    table.price-table th .current-price {
+        font-size: 14px;
+    }
+
+    table.price-table th:first-child {
+        font-size: 18px;
+    }
+
+    table.price-table tbody tr td {
+        font-size: 12px !important;
+    }
+
+    table.price-table thead th:nth-child(2) {
+        border-radius: 0 0 0 0 !important;
+    }
+
+    table.price-table thead th:last-child {
+        border-radius: 0 0 0 0 !important;
+    }
+}
+
+table.price-table thead th:nth-child(2) {
+    border-radius: 15px 0 0 0;
+}
+
+table.price-table thead th:last-child {
+    border-radius: 0 15px 0 0;
+}
+
+table.price-table tbody {
+    border-radius: 15px 0 15px 15px;
+    box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.2);
+}
+
+table.price-table tbody tr td:first-child {
+    text-align: left;
+}
+
+table.price-table tbody tr td {
+    text-align: center;
+}
+
+table.price-table tbody tr:first-child {
+    border-radius: 15px 15px 0 0;
+}
+
+table.price-table tbody tr:last-child {
+    border-radius: 0 0 15px 15px;
+}
+
+table.price-table tbody td .fa {
+    color: var(--primary-color);
+    font-size: 20px;
+}
+
+table.price-table tbody td .fa-times {
+    color: gray;
+}
+
+table.price-table tfoot {
+    text-align: center;
+    margin-top: 20px;
+    line-height: 4;
+}
+
+table.price-table tfoot a {
+    border-radius: 3px;
+    padding: 10px;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out;
+    white-space: nowrap;
+}
+
+table.price-table tfoot td:nth-child(2) a {
+    background: var(--primary-color);
+}
+
+table.price-table tfoot td:nth-child(2) a:hover,
+table.price-table tfoot td:nth-child(2) a:focus {
+    background: var(--primary-color-darker);
+}
+
+table.price-table tfoot td:last-child a {
+    background: var(--secondary-color);
+}
+
+table.price-table tfoot td:last-child a:hover,
+table.price-table tfoot td:last-child a:focus {
+    background: var(--secondary-color-darker);
+}
+
+table.price-table tbody tr:nth-of-type(even) {
+    background-color: rgba(0, 0, 0, .02);
+}
+
+
+
+/* ANIMATIONS */
+.zoomOut,
+.zoomIn {
+    animation-duration: 0.3s;
+}
