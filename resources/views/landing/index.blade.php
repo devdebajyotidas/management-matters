@@ -184,12 +184,13 @@
                 <div class="row full-screen align-items-center">
                     <div class="col col-md-12 col-lg-5 col-xl-5 p-80px-tb md-p-30px-b sm-p-60px-t m-50px-t">
                         <div class="home-text-center p-50px-r md-p-0px-r">
-                            <h1 class="font-alt" style="color: #0080FF;"><span style="font-weight: bold;">MANAGEMENT</span> FITT</h1>
-                            <p>Say HELLO to a whole new way to managing BETTER!</p>
-                            <p style="line-height: 1.6">MF is a breakthrough on-line program that inspires emerging and experienced managers and supervisors with the necessary critical thinking skills to obtain superior performance from everyone in the organization.</p>
-                            <a href="javascript:void(0)" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Try It Now</a>
-                            <h2 class="mt-4 mb-2 theme-text-secondary">free trial for 30 days !</h2>
-                            <p class="theme-text-secondary">(no credit card required !)</p>
+                            <h1 class="font-alt" style="color: #0080FF;"><span style="font-weight: bold;">Say HELLO!</span></h1>
+                            <p>to a whole new way to managing BETTER!</p>
+                            <h3 class="mt-4 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-primary theme-btn" style="border-radius: 50px; box-shadow: none; font-size: unset; padding: 2px 20px;">Try It Now</a>
+                                free trial for 30 days !
+                            </h3>
+                            <h4>(no credit card required !)</h4>
                         </div> <!-- home-text-center -->
                     </div>
                 </div>

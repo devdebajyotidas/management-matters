@@ -134,20 +134,7 @@
                                 <p>LeanFITT™ harnesses the power of continuous improvement, employee engagement, and standardized knowledge and tool usage to inspire process changes that make a big impact. LeanFITT™ surrounds you with the right Functional, Integrated, Technology, and Training during your journey of getting your process FITT– FOREVER!</p>
                             </div>
                             <div class="col-md-12 card-footer">
-                                <a href="javascript:void(0)" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Click to Visit</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 card-container">
-                        <div class="row card">
-                            <div class="col-md-12 card-heading">
-                                <img src="{{asset('assets/images/managementfitt_logo.svg')}}" alt="ManagementFITT&trade;" />
-                            </div>
-                            <div class="col-md-12 card-body">
-                                <p>MF harnesses the power of behavioral change to inspire small changes that make a big impact. MF surrounds you with the right Learnings, Tools, and Technology during your journey of becoming a better manager - FOREVER!</p>
-                            </div>
-                            <div class="col-md-12 card-footer">
-                                <a href="javascript:void(0)" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Click to Visit</a>
+                                <a href="http://leanfitt.com/" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Click to Visit</a>
                             </div>
                         </div>
                     </div>
@@ -160,7 +147,20 @@
                                 <p> Lorem ipsum dolor sit abet, consectetur adipisicing elite. In, venial! Lorem ipsum dolor sit abet, consectetur. Lorem ipsum dolor sit abet, consectetur adipisicing elite. In, venial! Lorem ipsum dolor sit abet, consectetur.</p>
                             </div>
                             <div class="col-md-12 card-footer">
-                                <a href="javascript:void(0)" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Click to Visit</a>
+                                <a href="https://theleanstore.com/" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Click to Visit</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 card-container">
+                        <div class="row card">
+                            <div class="col-md-12 card-heading">
+                                <img src="{{asset('assets/images/leanfoxsolutions_logo.png')}}" alt="LeanFoxSolutions&trade;" />
+                            </div>
+                            <div class="col-md-12 card-body">
+                                <p>MF harnesses the power of behavioral change to inspire small changes that make a big impact. MF surrounds you with the right Learnings, Tools, and Technology during your journey of becoming a better manager - FOREVER!</p>
+                            </div>
+                            <div class="col-md-12 card-footer">
+                                <a href="http://www.leanfoxsolutions.com/" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Click to Visit</a>
                             </div>
                         </div>
                     </div>

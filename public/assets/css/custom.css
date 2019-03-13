@@ -81,9 +81,9 @@ section#getItNow .cont {
 }
 
 /* PAGE FOOTER */
-footer {
-    background: #343B43;
-}
+/*footer {*/
+    /*background: #343B43;*/
+/*}*/
 
 footer .cols:first-child {
     text-align: left;

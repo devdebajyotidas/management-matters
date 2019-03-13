@@ -140,17 +140,15 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col col-md-6 col-lg-6 col-sm-12">
+                    <div class="col col-md-12 col-lg-12 col-sm-12 text-center">
                         <div class="home-text-center theme-after md-m-20px-t sm-m-0px-t">
-                            <h3 class="theme-title-disabled-darker mb-4">4 Eye-Opening and Easy to Follow Phases </h3>
-                            <p class="text-left">1 Career-Changing Way to Better Manage Employees In Management Matters, POSITIVE BEHAVIORS are introduced &amp; reinforced day-to-day ensuring a change in EMPLOYEE ATTITUDES and performance; contributing greatly to a CHANGE IN ORGANIZATONAL CULTURE.</p>
-                            <a href="javascript:void(0)" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Try It Now</a>
-                            <h2 class="mt-4 mb-2 theme-text-secondary">free trial for 30 days !</h2>
-                            <p class="theme-text-secondary">(no credit card required !)</p>
-
+                            <label class="theme-title-disabled-darker mb-4" style="background: var(--primary-color); border-radius: 50px; padding: 10px 20px; color: white; font-size: 24px;">4 Eye-Opening and Easy to Follow Phases </label>
+                            <p>1 Career-Changing Way to Better Manage Employees In Management Matters, POSITIVE BEHAVIORS are introduced &amp; reinforced day-to-day ensuring a change in EMPLOYEE ATTITUDES and performance; contributing greatly to a CHANGE IN ORGANIZATONAL CULTURE.</p
                         </div> <!-- home-text-center -->
                     </div>
-                    <div class="col col-md-6 col-lg-6 col-sm-12">
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col col-md-12 col-lg-12 col-sm-12">
                         <div class="home-right-inner text-center">
                             <img src="{{asset('assets/images/home-admin.svg')}}" title="" alt="">
                         </div>

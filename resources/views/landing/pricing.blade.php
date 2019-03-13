@@ -104,220 +104,125 @@
                 </div>
 
                 <div class="row" style="overflow-x: auto;">
-                <div class="col-md-12 text-center table-div">
-                    <table class="table price-table" style="margin: 5px;">
-                        <thead>
-                            <tr>
-                                <th>Price Table</th>
-                                <th style="background: var(--primary-color); color: white;">Basic <br><br>
-                                    <span class="previous-price">$4.99 month/user</span><br>
-                                    <span class="current-price">$0.99 month/user</span>
-                                </th>
-                                <th style="background: var(--secondary-color); color: white;">Premium <br><br>
-                                    <span class="previous-price">$9.99 month/user</span><br>
-                                    <span class="current-price">$1.99 month/user</span>
-                                </th>
-                            </tr>
-                        </thead>
+                    <div class="col-md-12 text-center table-div">
+                        <table class="table price-table" style="margin: 5px;">
+                            <thead>
+                                <tr>
+                                    <th>Price Table</th>
+                                    <th style="background: var(--primary-color); color: white;">Basic <br><br>
+                                        <span class="previous-price">$4.99 month/user</span><br>
+                                        <span class="current-price">$0.99 month/user</span>
+                                    </th>
+                                    <th style="background: var(--secondary-color); color: white;">Premium <br><br>
+                                        <span class="previous-price">$9.99 month/user</span><br>
+                                        <span class="current-price">$1.99 month/user</span>
+                                    </th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
-                            <tr>
-                                <td>Unlimited Users</td>
-                                <td><i class="fa fa-check"></i></td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>ManagementFITT&trade; Domain</td>
-                                <td>
-                                    <i class="fa fa-check"></i><br>
-                                </td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Daily Management Tool</td>
-                                <td><i class="fa fa-check"></i></td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Ticket / Activity Kanban Board</td>
-                                <td><i class="fa fa-check"></i></td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Notifications and Awards</td>
-                                <td><i class="fa fa-check"></i></td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Detailed Learnings and Quizzes On 14 Management and Leadership Tools</td>
-                                <td><i class="fa fa-check"></i></td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Tokens Earned Based On Activities</td>
-                                <td><i class="fa fa-check"></i></td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>360 Degree Assessment</td>
-                                <td><i class="fa fa-check"></i></td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Track Assessment Progress</td>
-                                <td><i class="fa fa-check"></i></td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Recommended Learnings Due to Assessment Scores</td>
-                                <td><i class="fa fa-check"></i></td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Create Your Own Internal Awards</td>
-                                <td>
-                                    <i class="fa fa-check"></i><br>
-                                </td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Edit And Add Your Content (Learnings and Quizzes) With The ManagementFITT&trade;  Editor (requires yearly licensing fee of 10K)</td>
-                                <td><i class="fa fa-times"></i><br></td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Your Own Eco Systems</td>
-                                <td><i class="fa fa-times"></i><br>
-                                </td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Available ON</td>
-                                <td>
-                                    <i class="fa fa-desktop mr-2"></i>
-                                    <i class="fa fa-apple mr-2"></i>
-                                    <i class="fa fa-android"></i>
-                                </td>
-                                <td>
-                                    <i class="fa fa-desktop mr-2"></i>
-                                    <i class="fa fa-apple mr-2"></i>
-                                    <i class="fa fa-android"></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td></td>
-                                <td><a href="{{url('register')}}">Sign Up Now</a></td>
-                                <td><a href="{{url('register')}}">Sign Up Now</a></td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                            <tbody>
+                                <tr>
+                                    <td>Unlimited Users</td>
+                                    <td><i class="fa fa-check"></i></td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>ManagementFITT&trade; Domain</td>
+                                    <td>
+                                        <i class="fa fa-check"></i><br>
+                                    </td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Daily Management Tool</td>
+                                    <td><i class="fa fa-check"></i></td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Ticket / Activity Kanban Board</td>
+                                    <td><i class="fa fa-check"></i></td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Notifications and Awards</td>
+                                    <td><i class="fa fa-check"></i></td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Detailed Learnings and Quizzes On 14 Management and Leadership Tools</td>
+                                    <td><i class="fa fa-check"></i></td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Tokens Earned Based On Activities</td>
+                                    <td><i class="fa fa-check"></i></td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>360 Degree Assessment</td>
+                                    <td><i class="fa fa-check"></i></td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Track Assessment Progress</td>
+                                    <td><i class="fa fa-check"></i></td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Recommended Learnings Due to Assessment Scores</td>
+                                    <td><i class="fa fa-check"></i></td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Create Your Own Internal Awards</td>
+                                    <td>
+                                        <i class="fa fa-check"></i><br>
+                                    </td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Edit And Add Your Content (Learnings and Quizzes) With The ManagementFITT&trade;  Editor (requires yearly licensing fee of 10K)</td>
+                                    <td><i class="fa fa-times"></i><br></td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Your Own Eco Systems</td>
+                                    <td><i class="fa fa-times"></i><br>
+                                    </td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Available ON</td>
+                                    <td>
+                                        <i class="fa fa-desktop mr-2"></i>
+                                        <i class="fa fa-apple mr-2"></i>
+                                        <i class="fa fa-android"></i>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-desktop mr-2"></i>
+                                        <i class="fa fa-apple mr-2"></i>
+                                        <i class="fa fa-android"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td><a href="{{url('register')}}">Sign Up Now</a></td>
+                                    <td><a href="{{url('register')}}">Sign Up Now</a></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
-            </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <h5 class="text-center">On-site and remote training on all the functions of ManagementFITT&trade; is available. Please call <span class="theme-text-primary">734-475-4301</span> or email <span class="theme-text-primary">info@managementfitt.com</span>. We offer a 4-hour training session (maximum per group is 12), taking users through a ManagementFITT&trade; business case study and assist in setting up first projects. Cost 2500 per day, plus expenses (minimum 1 day).</h5>
+                    </div>
+                </div>
             </div> <!-- container -->
         </section>
-        
-        <section id="contatus" class="section border-bottom">
-            <div class="container">
-                <div class="row justify-content-center m-45px-b md-m-25px-b">
-                    <div class="col-md-10 col-lg-8">
-                        <h2 class="theme-after-bg">Quick Contact</h2>
-                        <p class="footer-text text-center">We would love to answer any and all questions you may have with Management FITT™. It can be optimized for your organization. We just need to hear from you! And Management FITT™ can accelerate your continuous improvement journey like nothing else!</p>
-                    </div> <!-- col -->
-                </div> <!-- row -->
 
-                <div class="row">
-                    <div class="col-md-6 col-lg-4 m-15px-tb">
-                        <div class="contact-info-box">
-                            <h2>contact information</h2>
-                            <div class="contact-info mt-4">
-                                <p class="ml-3">
-                                    <i class="fa fa-map-marker theme-text-primary mr-3" style="font-size: 18px;"></i>
-                                    <span>
-                                        MCS Media, Inc. <br>
-                                    </span>
-                                    <span style="margin-left: 28px;">
-                                        (TheLeanStore)<br>
-                                    </span>
-                                    <span style="margin-left: 28px;">
-                                        888 Ridge Road <br>
-                                    </span>
-                                    <span style="margin-left: 28px;">
-                                        Chelsea, Michigan 48118
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="contact-info">
-                                <p class="ml-3">
-                                    <i class="fa fa-phone theme-text-primary mr-3" style="font-size: 18px;"></i>
-                                    +734-475-4301
-                                </p>
-                            </div>
-                            <div class="contact-info">
-                                <p class="ml-3">
-                                    <i class="fa fa-envelope theme-text-primary mr-3" style="font-size: 18px;"></i>
-                                    info@managementfitt.com
-                                </p>
-                            </div>
-                            <div class="contact-info">
-                                <p class="ml-3">
-                                    <i class="fa fa-internet-explorer theme-text-primary mr-3" style="font-size: 18px;"></i>
-                                    www.managementfitt.com
-                                </p>
-                            </div>
-                        </div>
-                    </div> <!-- col -->
-                    <div class="col-md-6 col-lg-8 m-15px-tb">
-                        <div class="contact-form m-50px-l md-m-0px-l">
-                            <h2>Drop Us A Message</h2>
-                            <form id="contactForm" class="contactform" method="post" onsubmit="javascript:void(0)">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input name="name" type="text" placeholder="Name" class="validate form-control" required="">
-                                            <span class="input-focus-effect"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="email" placeholder="Email" name="email" class="validate form-control" required="">
-                                            <span class="input-focus-effect"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Subject" name="subject" class="validate form-control" required="">
-                                            <span class="input-focus-effect"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Phone" name="phone" class="validate form-control" required="">
-                                            <span class="input-focus-effect"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <textarea placeholder="Your Comment" name="message" class="form-control" required=""></textarea>
-                                            <span class="input-focus-effect"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="send">
-                                            <button class="m-btn m-btn-theme2nd" type="submit" name="send"> Send</button>
-                                        </div>
-                                        <div class="form-group mt-4 dropmessage-response" style="display: none">
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div> <!-- col -->
-                </div> <!-- row -->
-            </div> <!-- Container -->
-        </section>
         <!-- / -->
     </main>
     <!-- Main End -->

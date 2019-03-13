@@ -103,28 +103,21 @@
         <section class="section" id="faq-intro">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-md-6 col-sm-12">
-                        <h2 class="theme-title-primary text-left">Frequently<br> Asked Questions</h2>
-                        <p style="line-height: 1.3" class="mt-4">If you can't find your answers below please drop<br> us a mail or visit contact us section.</p>
-                        <a href="javascript:void(0)" class="btn btn-secondary theme-btn mt-4" style="border-radius: 7px;">Try It Now</a>
+                    <div class="col-md-12 col-sm-12">
+                        <h2 class="theme-title-primary text-center">Frequently Asked Questions</h2>
+                        <p style="line-height: 1.3" class="mt-4 text-center">If you can't find your answers below please drop us a mail or visit contact us section.</p>
                     </div>
-                    <div class="col-md-6 col-sm-12">
-                        <img src="{{asset('assets/images/faq_1st_section_image.svg')}}" alt="FAQ" />
-                    </div>
+                    {{--<div class="col-md-6 col-sm-12">--}}
+                        {{--<img src="{{asset('assets/images/faq_1st_section_image.svg')}}" alt="FAQ" />--}}
+                    {{--</div>--}}
                 </div>
-            </div>
-        </section>
-
-        <!-- FAQ's -->
-        <section class="section">
-            <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mt-5">
                     <div class="col-md-10">
                         <div class="faq-box" id="accordion">
                             <div class="faq-row">
                                 <div class="faq-header" id="faqa-1">
                                     <h5 class="faq-title" data-toggle="collapse" data-target="#faqc-1" data-aria-expanded="true" data-aria-controls="faqc-1">
-                                        <span class="no theme-g-bg" style="box-shadow: --var(--theme-shadow-y-25);"></span> 
+                                        <span class="no theme-g-bg" style="box-shadow: --var(--theme-shadow-y-25);"></span>
                                         <span style="margin-right: 10px;">What is Management Matters?</span>
                                         <span style="position: absolute; right: 10px; font-size: 18px; top: 15px;">
                                             <i class="fa fa-plus theme-text-primary"></i>
@@ -142,9 +135,8 @@
                         </div>
                     </div>
                 </div>
-            </div> <!-- container -->
+            </div>
         </section>
-        <!-- / -->
 
         <!-- Contact uss -->
         <section id="contatus" class="section border-bottom">

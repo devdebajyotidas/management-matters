@@ -80,8 +80,19 @@ Table of contents
 
 .landing_logo img {
     position: relative;
-    width: 188px;
+    max-width: unset;
+    width: 230px;
     margin-bottom: auto !important;
+}
+@media only screen and (max-width: 1280px) {
+    .landing_logo img {
+        width: 200px;
+    }
+}
+@media only screen and (max-width: 1070px) {
+    .landing_logo img {
+        width: 180px;
+    }
 }
 
 .footer-text {
@@ -641,6 +652,7 @@ img {
 
 .header-nav .navbar-nav > li {
     position: relative;
+    white-space: nowrap;
 }
 
 @media(min-width: 992px) {
@@ -1572,8 +1584,9 @@ img {
     text-align: center;
     border-radius: 3px;
     padding:20px 10px;
-    background: #fff;
-    border: 1px solid var(--primary-color);
+    background: linear-gradient(to right, #0080ff1a, white);
+    /*border: 1px solid var(--primary-color);*/
+    box-shadow: var(--theme-shadow-y-15);
 }
 .our-team .img:after {
     display: inline-block;
@@ -1612,17 +1625,6 @@ img {
     padding: 25px;
     position: relative;
     overflow: hidden;
-}
-
-.price-table:after {
-    content: "";
-    width: 210px;
-    height: 200px;
-    background: #eff1ff;
-    position: absolute;
-    top: -30px;
-    left: -40px;
-    opacity: 0.5;
 }
 
 .price-table .price-title {
@@ -1956,7 +1958,7 @@ section#faq-intro {
     content: "";
     left: 0;
     bottom: 0;
-    background: #fff;
+    background: var(--primary-color);
     opacity: 0.8;
 }
 
@@ -2026,7 +2028,7 @@ section#faq-intro {
 }
 
 .footer-section .footer-text {
-    width: 360px;
+    /*width: 360px;*/
     max-width: 100%;
 }
 .footer-section p {
@@ -2050,12 +2052,12 @@ section#faq-intro {
 }
 
 .footer-light .footer-section h4 {
-    color: white;
+    color: var(--primary-color);
     font-weight: 600;
 }
 .footer-light .footer-section .fot-link a,
 .footer-light .footer-section p {
-    color: white;
+    color: dimgray;
     font-weight: 500;
 }
 .footer-light .footer-section h4 {
