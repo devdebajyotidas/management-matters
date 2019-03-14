@@ -2062,6 +2062,10 @@ section#faq-intro {
 .footer-light .footer-section p {
     color: dimgray;
     font-weight: 500;
+    transition: color 0.3s;
+}
+.footer-light .footer-section .fot-link a:hover {
+    color: var(--secondary-color);
 }
 .footer-light .footer-section h4 {
 /*    border-bottom: 1px solid var(--primary-color);*/
