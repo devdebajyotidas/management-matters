@@ -1588,6 +1588,9 @@ img {
     /*border: 1px solid var(--primary-color);*/
     box-shadow: var(--theme-shadow-y-15);
 }
+.our-team.bg-reverse {
+    background: linear-gradient(to left, #0080ff1a, white);
+}
 .our-team .img:after {
     display: inline-block;
     content: "";

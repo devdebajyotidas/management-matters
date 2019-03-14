@@ -233,7 +233,7 @@
                     </div>
 
                     <div class="col-md-12 col-lg-12 m-15px-tb">
-                        <div class="our-team row">
+                        <div class="our-team  bg-reverse row">
                             <div class="col-md-3 col-lg-2">
                                 <div class="img" style="background-image: url({{asset('assets/images/joe_d_buys.jpg')}});">
                                 </div>
@@ -310,7 +310,7 @@
                     </div>
 
                     <div class="col-md-12 col-lg-12 m-15px-tb">
-                        <div class="our-team row">
+                        <div class="our-team bg-reverse row">
                             <div class="col-md-3 col-lg-2">
                                 <div class="img" style="background-image: url({{asset('assets/images/rob_ptacek.png')}});">
                                 </div>
@@ -371,7 +371,7 @@
 
                 <div class="row">
                     <div class="col-md-12 col-lg-12 m-15px-tb">
-                        <div class="our-team row">
+                        <div class="our-team bg-reverse row">
                             <div class="col-md-3 col-lg-2">
                                 <div class="img" style="background-image: url({{asset('assets/images/don_tapping.jpg')}});">
                                 </div>
