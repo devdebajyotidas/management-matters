@@ -214,7 +214,7 @@
                             <div class="col-md-9 col-lg-10">
                                 <div class="info" style="text-align: left;">
                                     <h6>Don Tapping</h6>
-                                    <label>Publisher and Author</label>
+                                    <label class="theme-text-secondary mb-2">Publisher and Author</label>
                                     <div class="content hideContent">
                                         <p style="line-height: 21px;">
                                             Don Tapping graduated from The University of Michigan in 1976. He spent the next four years as a Lieutenant in the United States Marine Corps in various positions during his tour. After completing his Corps duties, Don worked in the medical technology, education, and aerospace industries for the next 20 years. Don authored the best-selling book, Value Stream Management for the Lean Office (Productivity Press 2003), Lean Office Demystified (II), Who Hollered Fore?, and over 50 other books and apps on business performance - setting the bar for continuous improvements. He continues to enlighten organizations with his ability to design step-by-step implementation methodologies identifying processes that require improvement, and then introducing proactive steps to improve or redesign them - reducing costs, boosting performance, and increasing customer (patient) satisfaction. Don today is using his experience in developing apps on how Lean can be applied using smart devices. Don also received his MBA from The University of Notre Dame.
@@ -235,41 +235,13 @@
                     <div class="col-md-12 col-lg-12 m-15px-tb">
                         <div class="our-team row">
                             <div class="col-md-3 col-lg-2">
-                                <div class="img" style="background-image: url({{asset('assets/images/cynthia_guy.jpg')}});">
+                                <div class="img" style="background-image: url({{asset('assets/images/joe_d_buys.jpg')}});">
                                 </div>
                             </div>
-                            <div class="col-md-9 col-lg-10">
-                                <div class="info" style="text-align: left;">
-                                    <h6>Cynthia Guy</h6>
-                                    <label>Partner</label>
-                                    <div class="content hideContent">
-                                        <p style="line-height: 21px;">
-                                            Cynthia Guy is a senior partner at Crystal Clear Concepts, a management consulting firm. She holds a BA from Michigan State University in Journalism. She is a Communications and a Leadership specialist from Harvard/McBer Institute. She’s a certified T.A. analyst as well as certified by the AMA and Time Manager/Denmark. Her strengths are being a catalyst of organizational change, leadership and innovation. She has been certified in the Sycronist (Lean) Manufacturing program from General Motors. She is the author of Finding Profit, a book about the transformation of a business through lean manufacturing principles. In addition to a decade of human resource management expertise, Guy's strength lies in her ability as a catalyst of change. She’s been quoted as a change expert in the New York Times. Through close interaction with top management, she has been responsible for ushering in significant, positive change in a number of areas such as leadership, improved productivity and quality, resulting in increased profitability for companies. She developed her management skills as an owner of a major advertising agency that she operated before becoming a management consultant. She has gained the respect and admiration of top executives in business throughout the nation.<br><br>
-                                            <strong style="color: black;">Credentials:</strong><br><br>
-                                            B.A. - Michigan State University<br>
-                                            McBer Institute, Harvard - Managing Motivation for Performance Improvement<br>
-                                            Author – Finding Profit, the story of Lean transformation<br>
-                                            ITTA - Transactional Analyst<br>
-                                            Time Management/Denmark - Certified as trainer's trainer<br>
-                                            Trained for Michigan State University, University of Michigan, Grand Rapids Community College, Muskegon Junior College <br>
-                                            Former Director of Management Education for the Employers' Association of Western<br>
-                                            Michigan
-                                        </p>
-                                    </div>
-                                    <div class="show-more">
-                                        <a href="javascript:void(0)">Show more</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12 col-lg-12 m-15px-tb">
-                        <div class="our-team row">
                             <div class="col-md-9 col-lg-10">
                                 <div class="info" style="text-align: left;">
                                     <h6>Joe D Buys</h6>
-                                    <label>Partner</label>
+                                    <label class="theme-text-secondary mb-2">Partner</label>
                                     <div class="content hideContent">
                                         <p style="line-height: 21px;">
                                             As a senior partner, Joe Buys has been an innovator in Cross-Functional Team Development, Creative Problem Solving, and Leadership Development. More recently, he’s been working on developing strategies for companies to implement Lean processes into both areas of production and administration. He has been an expert contributor on the www.Allexperts.com website for over 10 years.<br>
@@ -302,14 +274,151 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 m-15px-tb">
+                        <div class="our-team row">
+                            <div class="col-md-9 col-lg-10">
+                                <div class="info" style="text-align: left;">
+                                    <h6>Cynthia Guy</h6>
+                                    <label class="theme-text-secondary mb-2">Partner</label>
+                                    <div class="content hideContent">
+                                        <p style="line-height: 21px;">
+                                            Cynthia Guy is a senior partner at Crystal Clear Concepts, a management consulting firm. She holds a BA from Michigan State University in Journalism. She is a Communications and a Leadership specialist from Harvard/McBer Institute. She’s a certified T.A. analyst as well as certified by the AMA and Time Manager/Denmark. Her strengths are being a catalyst of organizational change, leadership and innovation. She has been certified in the Sycronist (Lean) Manufacturing program from General Motors. She is the author of Finding Profit, a book about the transformation of a business through lean manufacturing principles. In addition to a decade of human resource management expertise, Guy's strength lies in her ability as a catalyst of change. She’s been quoted as a change expert in the New York Times. Through close interaction with top management, she has been responsible for ushering in significant, positive change in a number of areas such as leadership, improved productivity and quality, resulting in increased profitability for companies. She developed her management skills as an owner of a major advertising agency that she operated before becoming a management consultant. She has gained the respect and admiration of top executives in business throughout the nation.<br><br>
+                                            <strong style="color: black;">Credentials:</strong><br><br>
+                                            B.A. - Michigan State University<br>
+                                            McBer Institute, Harvard - Managing Motivation for Performance Improvement<br>
+                                            Author – Finding Profit, the story of Lean transformation<br>
+                                            ITTA - Transactional Analyst<br>
+                                            Time Management/Denmark - Certified as trainer's trainer<br>
+                                            Trained for Michigan State University, University of Michigan, Grand Rapids Community College, Muskegon Junior College <br>
+                                            Former Director of Management Education for the Employers' Association of Western<br>
+                                            Michigan
+                                        </p>
+                                    </div>
+                                    <div class="show-more">
+                                        <a href="javascript:void(0)">Show more</a>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-3 col-lg-2">
-                                <div class="img" style="background-image: url({{asset('assets/images/joe_d_buys.jpg')}});">
+                                <div class="img" style="background-image: url({{asset('assets/images/cynthia_guy.jpg')}});">
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-12 col-lg-12 m-15px-tb">
+                        <div class="our-team row">
+                            <div class="col-md-3 col-lg-2">
+                                <div class="img" style="background-image: url({{asset('assets/images/rob_ptacek.png')}});">
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-lg-10">
+                                <div class="info" style="text-align: left;">
+                                    <h6 class="mb-2">Rob Ptacek</h6>
+                                    {{--<label>Partner</label>--}}
+                                    <div class="content hideContent">
+                                        <p style="line-height: 21px;">
+                                            Rob Ptacek is a Partner in the Global Lean Institute and President and CEO of Competitive Edge Training and Consulting, a firm specializing in leader and organizational development, and Lean Enterprise transformations. Rob holds a BS in Metallurgical Engineering from Michigan Technological University and a Masters of Management from Aquinas College. Rob has held leadership positions in Quality, Sales, and Operations Management, and has over 25 years of practical experience implementing continuous improvements in a variety of industries. Rob can be contacted at ptacek@i2k.com.
+                                        </p>
+                                    </div>
+                                    <div class="show-more">
+                                        <a href="javascript:void(0)">Show more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 m-15px-tb">
+                        <div class="our-team row">
+                            <div class="col-md-9 col-lg-10">
+                                <div class="info" style="text-align: left;">
+                                    <h6>Deborah Salimi</h6>
+                                    <label class="theme-text-secondary mb-2">Project Management Professional (PMP), PhD</label>
+                                    <div class="content hideContent">
+                                        <p style="line-height: 21px;">
+                                            Deborah brings a practical approach to Lean, based on applied learning. Her experience spans three continents in manufacturing, project management, logistics, not for profit health care and higher education. She co-founded and is a key leader at the Lean Gulf Institute, spreading Lean awareness, professional development and empowerment through process improvement activities. She holds an Engineering degree from Boston University, an MBA and PhD. Deborah can be contacted at deb@leangulf.org or visit www.leangulf.org.
+                                        </p>
+                                    </div>
+                                    <div class="show-more">
+                                        <a href="javascript:void(0)">Show more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-2">
+                                <div class="img" style="background-image: url({{asset('assets/images/deborah_salimi.png')}});">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div> <!-- row -->
             </div> <!-- container -->
+        </section>
+
+        <!-- Advisory Board -->
+
+        <section class="section border-bottom">
+            <div class="container">
+                <div class="row justify-content-center m-45px-b md-m-25px-b">
+                    <div class="col-md-10 col-lg-8">
+                        <h2 class="theme-title-primary">Our Advisors</h2>
+                    </div>
+                </div> <!-- row -->
+
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 m-15px-tb">
+                        <div class="our-team row">
+                            <div class="col-md-3 col-lg-2">
+                                <div class="img" style="background-image: url({{asset('assets/images/don_tapping.jpg')}});">
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-lg-10">
+                                <div class="info" style="text-align: left;">
+                                    <h6 class="mb-2">Sam Salimi</h6>
+                                    {{--<label class="theme-text-secondary mb-2">Publisher and Author</label>--}}
+                                    <div class="content hideContent">
+                                        <p style="line-height: 21px;">
+                                            NEED CONTENT
+                                        </p>
+                                    </div>
+                                    <div class="show-more">
+                                        <a href="javascript:void(0)">Show more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 m-15px-tb">
+                        <div class="our-team row">
+                            <div class="col-md-9 col-lg-10">
+                                <div class="info" style="text-align: left;">
+                                    <h6 class="mb-2">Todd Sperl</h6>
+                                    {{--<label class="theme-text-secondary mb-2">Publisher and Author</label>--}}
+                                    <div class="content hideContent">
+                                        <p style="line-height: 21px;">
+                                            Todd Sperl is an enthusiastic, creative speaker and process improvement expert who looks beyond today’s problems to find tomorrow’s solutions. As Owner and Managing Partner of Lean Fox Solutions, Todd’s vision is to improve the patient care experience from one healthcare touch point to the next. As a Master Black Belt and Lean Sensei, Todd’s exceptional track record of process improvement has been based on his philosophy of total enterprise engagement in change. Todd received his BS in Psychology from the University of Wisconsin-River Falls and an MS in Industrial-Organizational Psychology from St. Mary’s University in San Antonio, Texas. Todd can be contacted at tsperl@leanfoxsolutions.com or visit www.leanfoxsolutions.com.
+                                        </p>
+                                    </div>
+                                    <div class="show-more">
+                                        <a href="javascript:void(0)">Show more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-2">
+                                <div class="img" style="background-image: url({{asset('assets/images/todd_sperl.png')}});">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- DEVELOPERS -->
@@ -323,7 +432,7 @@
                 <div class="row justify-content-center mt-5">
                     <div class="col-md-12 col-lg-12 justify-content-center text-center team">
                         <div class="row justify-content-center">
-                            <div class="col-md-12">
+                            <div class="col-md-4 col-6">
                                 <img src="{{asset('assets/images/team/logo.png')}}" alt="">
                             </div>
                         </div>
