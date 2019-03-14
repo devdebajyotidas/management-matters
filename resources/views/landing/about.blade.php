@@ -369,34 +369,38 @@
                     </div>
                 </div> <!-- row -->
 
+                {{--<div class="row">--}}
+                    {{--<div class="col-md-12 col-lg-12 m-15px-tb">--}}
+                        {{--<div class="our-team bg-reverse row">--}}
+                            {{--<div class="col-md-3 col-lg-2">--}}
+                                {{--<div class="img" style="background-image: url({{asset('assets/images/sam_salimi.jpg')}});">--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-md-9 col-lg-10">--}}
+                                {{--<div class="info" style="text-align: left;">--}}
+                                    {{--<h6 class="mb-2">Sam Salimi</h6>--}}
+                                    {{--<label class="theme-text-secondary mb-2">Publisher and Author</label>--}}
+                                    {{--<div class="content hideContent">--}}
+                                        {{--<p style="line-height: 21px;">--}}
+                                            {{--NEED CONTENT--}}
+                                        {{--</p>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="show-more">--}}
+                                        {{--<a href="javascript:void(0)">Show more</a>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
                 <div class="row">
                     <div class="col-md-12 col-lg-12 m-15px-tb">
                         <div class="our-team bg-reverse row">
                             <div class="col-md-3 col-lg-2">
-                                <div class="img" style="background-image: url({{asset('assets/images/don_tapping.jpg')}});">
+                                <div class="img" style="background-image: url({{asset('assets/images/todd_sperl.png')}});">
                                 </div>
                             </div>
-                            <div class="col-md-9 col-lg-10">
-                                <div class="info" style="text-align: left;">
-                                    <h6 class="mb-2">Sam Salimi</h6>
-                                    {{--<label class="theme-text-secondary mb-2">Publisher and Author</label>--}}
-                                    <div class="content hideContent">
-                                        <p style="line-height: 21px;">
-                                            NEED CONTENT
-                                        </p>
-                                    </div>
-                                    <div class="show-more">
-                                        <a href="javascript:void(0)">Show more</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12 col-lg-12 m-15px-tb">
-                        <div class="our-team row">
                             <div class="col-md-9 col-lg-10">
                                 <div class="info" style="text-align: left;">
                                     <h6 class="mb-2">Todd Sperl</h6>
@@ -409,10 +413,6 @@
                                     <div class="show-more">
                                         <a href="javascript:void(0)">Show more</a>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-lg-2">
-                                <div class="img" style="background-image: url({{asset('assets/images/todd_sperl.png')}});">
                                 </div>
                             </div>
                         </div>
