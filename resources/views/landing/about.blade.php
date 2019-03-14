@@ -422,53 +422,53 @@
         </section>
 
         <!-- DEVELOPERS -->
-        <section class="section border-bottom">
-            <div class="container">
-                <div class="row justify-content-center m-45px-b md-m-25px-b">
-                    <div class="col-md-10 col-lg-8">
-                        <h2 class="theme-title-primary">The Developers</h2>
-                    </div>
-                </div>
-                <div class="row justify-content-center mt-5">
-                    <div class="col-md-12 col-lg-12 justify-content-center text-center team">
-                        <div class="row justify-content-center">
-                            <div class="col-md-4 col-6">
-                                <img src="{{asset('assets/images/team/logo.png')}}" alt="">
-                            </div>
-                        </div>
-                        <div class="row justify-content-center mt-5 team-avatar-group">
-                            <div class="col-md-3 text-center">
-                                <img src="{{asset('assets/images/team/abhishek_paul.jpg')}}" alt="" class="avatar team-avatar">
-                                <h6 class="fs-16 mt-3">
-                                    Abhishek Paul<br>
-                                    <span style="white-space: nowrap">(Founder of Astakyuta)</span>
-                                </h6>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <img src="{{asset('assets/images/team/debajyoti_das.jpg')}}" alt="" class="avatar team-avatar">
-                                <h6 class="fs-16 mt-3">
-                                    Debajyoti Das<br>
-                                    <span style="white-space: nowrap">(Co-Founder of Astakyuta)</span>
-                                </h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row team-social-group">
-                    <div class="col-md-6 px-0 mt-3">
-                        <h6 class="text-muted" style="font-size: 0.8rem;">To know more about us, please visit <a href="https://astakyuta.com/" target="_blank" class="theme-text-primary">https://astakyuta.com/</a></h6>
-                    </div>
-                    <div class="col-md-6 px-0 social-icons">
-                        <a class="team-social facebook" href="https://www.facebook.com/Astakyuta-pvt-ltd-328771107985184/" target="_blank">
-                            <i class="fa fa-facebook-official"></i>
-                        </a>
-                        <a class="team-social linkedin" href="https://www.linkedin.com/company/astakyuta-pvt-ltd/" target="_blank">
-                            <i class="fa fa-linkedin-square"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        {{--<section class="section border-bottom">--}}
+            {{--<div class="container">--}}
+                {{--<div class="row justify-content-center m-45px-b md-m-25px-b">--}}
+                    {{--<div class="col-md-10 col-lg-8">--}}
+                        {{--<h2 class="theme-title-primary">The Developers</h2>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="row justify-content-center mt-5">--}}
+                    {{--<div class="col-md-12 col-lg-12 justify-content-center text-center team">--}}
+                        {{--<div class="row justify-content-center">--}}
+                            {{--<div class="col-md-4 col-6">--}}
+                                {{--<img src="{{asset('assets/images/team/logo.png')}}" alt="">--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="row justify-content-center mt-5 team-avatar-group">--}}
+                            {{--<div class="col-md-3 text-center">--}}
+                                {{--<img src="{{asset('assets/images/team/abhishek_paul.jpg')}}" alt="" class="avatar team-avatar">--}}
+                                {{--<h6 class="fs-16 mt-3">--}}
+                                    {{--Abhishek Paul<br>--}}
+                                    {{--<span style="white-space: nowrap">(Founder of Astakyuta)</span>--}}
+                                {{--</h6>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-md-3 text-center">--}}
+                                {{--<img src="{{asset('assets/images/team/debajyoti_das.jpg')}}" alt="" class="avatar team-avatar">--}}
+                                {{--<h6 class="fs-16 mt-3">--}}
+                                    {{--Debajyoti Das<br>--}}
+                                    {{--<span style="white-space: nowrap">(Co-Founder of Astakyuta)</span>--}}
+                                {{--</h6>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="row team-social-group">--}}
+                    {{--<div class="col-md-6 px-0 mt-3">--}}
+                        {{--<h6 class="text-muted" style="font-size: 0.8rem;">To know more about us, please visit <a href="https://astakyuta.com/" target="_blank" class="theme-text-primary">https://astakyuta.com/</a></h6>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-md-6 px-0 social-icons">--}}
+                        {{--<a class="team-social facebook" href="https://www.facebook.com/Astakyuta-pvt-ltd-328771107985184/" target="_blank">--}}
+                            {{--<i class="fa fa-facebook-official"></i>--}}
+                        {{--</a>--}}
+                        {{--<a class="team-social linkedin" href="https://www.linkedin.com/company/astakyuta-pvt-ltd/" target="_blank">--}}
+                            {{--<i class="fa fa-linkedin-square"></i>--}}
+                        {{--</a>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</section>--}}
 
     </main>
     <!-- Main End -->
