@@ -68,13 +68,22 @@
         * Header Fixed
     ----------------------*/
     WAY.HeaderFixed = function () {
-        var varHeaderFix = $(window).scrollTop() >= 20;
-        if (varHeaderFix) {
-            $('.navbar').addClass('fixed-header');
+        if ($(window).width() < 992) {
+            if (window.pageYOffset >= 20) {
+                $('.navbar').addClass('fixed-header');
+            } else {
+                if (!$('.navbar-collapse').hasClass('show')) {
+                    $('.navbar').removeClass('fixed-header');
+                }
+            }
         } else {
-            if (!$('.navbar-collapse').hasClass('show')) {
+            if (window.pageYOffset >= 20) {
+                $('.navbar').addClass('fixed-header');
+            } else {
                 $('.navbar').removeClass('fixed-header');
             }
+            $('.navbar-toggler').addClass('collapsed');
+            $('.navbar-collapse').removeClass('show');
         }
     }
     WAY.NavLinkStyles = function () {
@@ -236,6 +245,7 @@
     });
     $(window).on('resize', function () {
         WAY.NavLinkStyles();
+        WAY.HeaderFixed();
     })
 
 })(jQuery);

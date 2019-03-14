@@ -28,14 +28,19 @@
         section#home {
             background-size: auto;
         }
+        @media only screen and (min-width: 1600px) {
+            section#home {
+                background-position: 75% center !important;
+            }
+        }
         @media only screen and (max-width: 1600px) {
             section#home {
-                background-size: 75%;
+                background-size: 55%;
             }
         }
         @media only screen and (max-width: 1200px) {
             section#home {
-                background-size: 80%;
+                background-size: 45%;
             }
             section#home .container .full-screen {
                 min-height: unset;
@@ -43,14 +48,11 @@
         }
         @media only screen and (max-width: 992px) {
             section#home {
-                background-size: contain;
-                background-image: url(assets/images/zone3-1.svg) !important;
-            }
-            .navbar {
-                background: #8bc4ff90;
+                background-image: none !important;
             }
             section#home .container .full-screen .col {
-                padding-top: 100px;
+                padding-top: 0;
+                margin-top: 70px;
             }
         }
         @media only screen and (max-width: 768px) {
@@ -60,9 +62,6 @@
             section#home .container .full-screen .col {
                 padding-top: 0;
                 margin-top: 0;
-            }
-            .navbar {
-                background: white;
             }
         }
         .conter_row {
@@ -91,25 +90,6 @@
             padding: 15px 10px;
             background-color: #f8f8f8;
             border-left: 5px solid #00B289;
-        }
-        .header-nav-light .navbar-nav .nav-link {
-            color: white;
-            font-weight: 500;
-        }
-        .header-nav-light .navbar-nav .nav-link.activated {
-            color: var(--secondary-color);
-        }
-        .header-nav-light .navbar-nav .nav-link.nav-btn {
-            border-color: white;
-        }
-        .header-nav-light .navbar-nav .nav-link.activated.nav-btn {
-            border-color: var(--secondary-color);
-        }
-        .header-nav-light .navbar-nav .nav-link:after {
-            background: white;
-        }
-        .header-nav-light .navbar-nav .nav-link.activated:after {
-            background: var(--secondary-color);
         }
         .feature-box-01 {
             border: none;
@@ -179,7 +159,7 @@
     <!-- Main Start -->
     <main>
         <!-- Home Banner Start -->
-        <section id="home" class="home-banner-01 gray-bg-g border-bottom" style="background-image: url('{{asset('assets/images/zone-3.svg')}}');background-repeat: no-repeat;background-position: right top;">
+        <section id="home" class="home-banner-01 gray-bg-g border-bottom" style="background-image: url('{{asset('assets/images/zone-3.svg')}}');background-repeat: no-repeat;background-position: right center;">
             <div class="container">
                 <div class="row full-screen align-items-center">
                     <div class="col col-md-12 col-lg-5 col-xl-5 p-80px-tb md-p-30px-b sm-p-60px-t m-50px-t">
