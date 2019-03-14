@@ -184,7 +184,7 @@
                 <div class="row full-screen align-items-center">
                     <div class="col col-md-12 col-lg-5 col-xl-5 p-80px-tb md-p-30px-b sm-p-60px-t m-50px-t">
                         <div class="home-text-center p-50px-r md-p-0px-r">
-                            <h1 class="font-alt" style="color: #0080FF;"><span style="font-weight: bold;">Say HELLO!</span></h1>
+                            <h1 class="font-alt" style="color: var(--primary-color);"><span style="font-weight: bold;">Say HELLO!</span></h1>
                             <p>to a whole new way to managing BETTER!</p>
                             <h3 class="mt-4 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-primary theme-btn" style="border-radius: 50px; box-shadow: none; font-size: unset; padding: 2px 20px;">Try It Now</a>
