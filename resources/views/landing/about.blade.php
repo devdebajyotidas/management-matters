@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" />
-    <title>ManagementFITT - About Us</title>
+    <title>ManagementFITT&trade; - About Us</title>
 
     <!-- ICONS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -183,14 +183,13 @@
         <!-- Featre -->
         <section class="section gray-bg aboutus-section">
             <div class="container">
-                <div class="row justify-content-center m-50px-b md-m-35px-b">
+                <div class="row justify-content-center m-50px-b md-m-35px-b mt-100px">
                     <div class="col-md-10 col-lg-12 col-xl-12 col-sm-12 text-center">
-                        <h2 class="theme-title-primary">About Us</h2>
+                        <h2 class="theme-title-primary">About <i>Management</i><span class="theme-text-secondary">FITT</span>&trade;</h2>
                         <img src="{{asset('assets/images/about_1st_section_image.svg')}}" alt="About Us" class="mt-5" />
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-md-offset-1">
-                                <h4 class="mt-5">About ManagementFITT&trade;</h4>
-                                <p class="mt-3">MangementFITT&trade; harnesses the power of behavioral change to inspire small changes that make a big impact.  ManagementFITT&trade; surrounds you with the right Functional, Integrated, Technology, and Training during your journey to becoming a more FITT manager!</p>
+                                <p class="mt-3">MangementFITT&trade; harnesses the power of behavioral change to inspire small changes that make a big impact.  <i>Management</i><span class="theme-text-secondary">FITT</span>&trade; surrounds you with the right Functional, Integrated, Technology, and Training during your journey to becoming a more FITT manager!</p>
                             </div>
                         </div>
                     </div>
@@ -204,7 +203,7 @@
             <div class="container">
                 <div class="row justify-content-center m-45px-b md-m-25px-b">
                     <div class="col-md-10 col-lg-8">
-                        <h2 class="theme-title-primary">The Founders</h2>
+                        <h2 class="theme-title-primary"><i>Management</i><span class="theme-text-secondary">FITT</span>&trade; Founders</h2>
                     </div>
                 </div> <!-- row -->
 
@@ -365,7 +364,7 @@
             <div class="container">
                 <div class="row justify-content-center m-45px-b md-m-25px-b">
                     <div class="col-md-10 col-lg-8">
-                        <h2 class="theme-title-primary">Our Advisors</h2>
+                        <h2 class="theme-title-primary"><i>Management</i><span class="theme-text-secondary">FITT</span>&trade; Advisors</h2>
                     </div>
                 </div> <!-- row -->
 
@@ -511,7 +510,7 @@
                 <div class="footer-copy">
                     <div class="row">
                         <div class="col-12">
-                            <p>Copyright © 2018 ManagementFITT&trade;. All rights reserved.</p>
+                            <p>Copyright © 2018 <i>Management</i><span class="theme-text-secondary">FITT</span>&trade;. All rights reserved.</p>
                         </div><!-- col -->
                     </div> <!-- row -->
                 </div> <!-- footer-copy -->

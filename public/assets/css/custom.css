@@ -364,6 +364,8 @@ section#tomorrowManagement img {
 .founders-cards.override-products-cards .card {
     box-sizing: border-box;
     cursor: default;
+    flex-direction: row;
+    padding-bottom: 20px;
 }
 
 .founders-cards.override-products-cards .card-heading {
@@ -375,8 +377,7 @@ section#tomorrowManagement img {
 }
 
 .founders-cards.override-products-cards .card-footer {
-    padding-top: 0;
-    padding-bottom: 25px;
+    padding-top: 20px;
 }
 
 /* PRICE TABLE */
@@ -546,4 +547,12 @@ table.price-table tbody tr:nth-of-type(even) {
 .zoomOut,
 .zoomIn {
     animation-duration: 0.3s;
+}
+
+/* COMMON */
+.nowrap {
+    white-space: nowrap;
+}
+.mt-100px {
+    margin-top: 100px;
 }

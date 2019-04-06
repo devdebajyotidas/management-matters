@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" />
-    <title>ManagementFITT</title>
+    <title>ManagementFITT&trade;</title>
 
     <!-- ICONS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -166,11 +166,12 @@
                         <div class="home-text-center p-50px-r md-p-0px-r">
                             <h1 class="font-alt" style="color: var(--primary-color);"><span style="font-weight: bold;">Say HELLO!</span></h1>
                             <p>to a whole new way to managing BETTER!</p>
-                            <h3 class="mt-4 mb-2">
-                                <a href="javascript:void(0)" class="btn btn-primary theme-btn" style="border-radius: 50px; box-shadow: none; font-size: unset; padding: 2px 20px;">Try It Now</a>
-                                free trial for 30 days !
+                            <h3 class="mt-4 mb-2 nowrap text-capitalize">
+                                <a href="javascript:void(0)" class="btn btn-primary theme-btn" style="border-radius: 50px; box-shadow: none; font-size: unset; padding: 2px 20px; margin-bottom: 20px;">Join Now</a>
+                                <br>
+                                <span>free trial for 30 days !</span>
                             </h3>
-                            <h4>(no credit card required !)</h4>
+                            <h4 class="text-capitalize" style="font-size: 16px;">(no credit card required !)</h4>
                         </div> <!-- home-text-center -->
                     </div>
                 </div>
@@ -257,7 +258,7 @@
         <div class="container">
             <div class="row justify-content-center m-20px-b">
                 <div class="col-md-10 col-lg-8 col-xl-7">
-                    <h2 class="theme-title-primary">ManagementFITT&trade; tools</h2>
+                    <h2 class="theme-title-primary"><i>Management</i><span class="theme-text-secondary">FITT</span>&trade; tools</h2>
                     <p class="text-center">We sort 14 tools to improve your business communications</p>
                 </div>
             </div>
@@ -521,7 +522,7 @@
                 <div class="footer-copy">
                     <div class="row">
                         <div class="col-12">
-                            <p>Copyright © 2018 ManagementFITT&trade;. All rights reserved.</p>
+                            <p>Copyright © 2018 <i>Management</i><span class="theme-text-secondary">FITT</span>&trade;. All rights reserved.</p>
                         </div><!-- col -->
                     </div> <!-- row -->
                 </div> <!-- footer-copy -->

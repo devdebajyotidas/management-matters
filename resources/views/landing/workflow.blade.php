@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" />
-    <title>ManagementFITT - Workflow</title>
+    <title>ManagementFITT&trade; - Workflow</title>
 
     <!-- ICONS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -134,7 +134,7 @@
         <!-- Home Banner Start -->
         <section id="home" class="home-banner-02 gray-bg-g border-bottom">
             <div class="container">
-                <div class="row justify-content-center m-50px-b md-m-35px-b">
+                <div class="row justify-content-center m-50px-b md-m-35px-b mt-100px">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <h2 class="theme-title-primary">How It Works?</h2>
                     </div>
@@ -304,7 +304,7 @@
                 <div class="footer-copy">
                     <div class="row">
                         <div class="col-12">
-                            <p>Copyright © 2018 ManagementFITT&trade;. All rights reserved.</p>
+                            <p>Copyright © 2018 <i>Management</i><span class="theme-text-secondary">FITT</span>&trade;. All rights reserved.</p>
                         </div><!-- col -->
                     </div> <!-- row -->
                 </div> <!-- footer-copy -->

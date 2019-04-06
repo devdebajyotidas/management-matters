@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" />
-    <title>ManagementFITT - Products</title>
+    <title>ManagementFITT&trade; - Products</title>
 
     <!-- ICONS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -117,7 +117,7 @@
         <!-- Featre -->
         <section class="section gray-bg aboutus-section">
             <div class="container">
-                <div class="row justify-content-center m-50px-b md-m-35px-b">
+                <div class="row justify-content-center m-50px-b md-m-35px-b mt-100px">
                     <div class="col-md-12 col-lg-10 col-xl-10 col-sm-12 text-center">
                         <h2 class="theme-title-disabled" style="color: var(--primary-color)">The <span class="theme-text-secondary">FITT</span> Products</h2>
                         <p class="text-center mt-4">On-site and remote training on all the functions of LeanFITT™ is available. Please call 734-475-4301 or email info@leanfitt.com. We offer a 4-hour training session (maximum per group is 12), taking users through a LeanFITT™ business case study and assist in setting up first projects. Cost 2500 per day, plus expenses (minimum 1 day).</p>
@@ -129,12 +129,8 @@
                             <div class="col-md-12 card-heading">
                                 <img src="{{asset('assets/images/leanfitt_logo.svg')}}" alt="LeanFITT&trade;" />
                             </div>
-                            <div class="col-md-12 card-body">
-                                
-                                <p>LeanFITT™ harnesses the power of continuous improvement, employee engagement, and standardized knowledge and tool usage to inspire process changes that make a big impact. LeanFITT™ surrounds you with the right Functional, Integrated, Technology, and Training during your journey of getting your process FITT– FOREVER!</p>
-                            </div>
                             <div class="col-md-12 card-footer">
-                                <a href="http://leanfitt.com/" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Click to Visit</a>
+                                <a href="https://leanfitt.com/" target="_blank" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Click to Visit</a>
                             </div>
                         </div>
                     </div>
@@ -143,11 +139,8 @@
                             <div class="col-md-12 card-heading">
                                 <img src="{{asset('assets/images/leanstore_logo.svg')}}" alt="TheLeanStore&trade;" />
                             </div>
-                            <div class="col-md-12 card-body">
-                                <p> Lorem ipsum dolor sit abet, consectetur adipisicing elite. In, venial! Lorem ipsum dolor sit abet, consectetur. Lorem ipsum dolor sit abet, consectetur adipisicing elite. In, venial! Lorem ipsum dolor sit abet, consectetur.</p>
-                            </div>
                             <div class="col-md-12 card-footer">
-                                <a href="https://theleanstore.com/" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Click to Visit</a>
+                                <a href="https://theleanstore.com/" target="_blank" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Click to Visit</a>
                             </div>
                         </div>
                     </div>
@@ -156,11 +149,8 @@
                             <div class="col-md-12 card-heading">
                                 <img src="{{asset('assets/images/leanfoxsolutions_logo.png')}}" alt="LeanFoxSolutions&trade;" />
                             </div>
-                            <div class="col-md-12 card-body">
-                                <p>MF harnesses the power of behavioral change to inspire small changes that make a big impact. MF surrounds you with the right Learnings, Tools, and Technology during your journey of becoming a better manager - FOREVER!</p>
-                            </div>
                             <div class="col-md-12 card-footer">
-                                <a href="http://www.leanfoxsolutions.com/" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Click to Visit</a>
+                                <a href="http://www.leanfoxsolutions.com/" target="_blank" class="btn btn-secondary theme-btn" style="border-radius: 7px;">Click to Visit</a>
                             </div>
                         </div>
                     </div>
@@ -209,7 +199,7 @@
                 <div class="footer-copy">
                     <div class="row">
                         <div class="col-12">
-                            <p>Copyright © 2018 ManagementFITT&trade;. All rights reserved.</p>
+                            <p>Copyright © 2018 <i>Management</i><span class="theme-text-secondary">FITT</span>&trade;. All rights reserved.</p>
                         </div><!-- col -->
                     </div> <!-- row -->
                 </div> <!-- footer-copy -->

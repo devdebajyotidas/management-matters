@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" />
-    <title>ManagementFITT - Pricing</title>
+    <title>ManagementFITT&trade; - Pricing</title>
 
     <!-- ICONS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -96,10 +96,10 @@
         <!-- Price Table -->
         <section id="price" class="section border-bottom">
             <div class="container">
-                <div class="row justify-content-center m-60px-b md-m-40px-b">
+                <div class="row justify-content-center m-60px-b md-m-40px-b mt-100px">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <h2 class="theme-title-primary text-center">INTRODUCTORY PRICE OFFERING!</h2>
-                        <h5 class="theme-title-desabled-darker text-center">INTRODUCTORY PRICE OFFERING!</h5>
+                        <h5 class="theme-title-desabled-darker text-center">LIMITED TIME ONLY</h5>
                     </div>
                 </div>
 
@@ -127,7 +127,7 @@
                                     <td><i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <td>ManagementFITT&trade; Domain</td>
+                                    <td><i>Management</i><span class="theme-text-secondary">FITT</span>&trade; Domain</td>
                                     <td>
                                         <i class="fa fa-check"></i><br>
                                     </td>
@@ -181,7 +181,7 @@
                                     <td><i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <td>Edit And Add Your Content (Learnings and Quizzes) With The ManagementFITT&trade;  Editor (requires yearly licensing fee of 10K)</td>
+                                    <td>Edit And Add Your Content (Learnings and Quizzes) With The <i>Management</i><span class="theme-text-secondary">FITT</span>&trade;  Editor (requires yearly licensing fee of 10K)</td>
                                     <td><i class="fa fa-times"></i><br></td>
                                     <td><i class="fa fa-check"></i></td>
                                 </tr>
@@ -217,7 +217,7 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-12">
-                        <h5 class="text-center">On-site and remote training on all the functions of ManagementFITT&trade; is available. Please call <span class="theme-text-primary">734-475-4301</span> or email <span class="theme-text-primary">info@managementfitt.com</span>. We offer a 4-hour training session (maximum per group is 12), taking users through a ManagementFITT&trade; business case study and assist in setting up first projects. Cost 2500 per day, plus expenses (minimum 1 day).</h5>
+                        <h5 class="text-center">On-site and remote training on all the functions of <i>Management</i><span class="theme-text-secondary">FITT</span>&trade; is available. Please call <span class="theme-text-primary">734-475-4301</span> or email <span class="theme-text-primary">info@managementfitt.com</span>. We offer a 4-hour training session (maximum per group is 12), taking users through a <i>Management</i><span class="theme-text-secondary">FITT</span>&trade; business case study and assist in setting up first projects. Cost 2500 per day, plus expenses (minimum 1 day).</h5>
                     </div>
                 </div>
             </div> <!-- container -->
@@ -266,7 +266,7 @@
                 <div class="footer-copy">
                     <div class="row">
                         <div class="col-12">
-                            <p>Copyright © 2018 ManagementFITT&trade;. All rights reserved.</p>
+                            <p>Copyright © 2018 <i>Management</i><span class="theme-text-secondary">FITT</span>&trade;. All rights reserved.</p>
                         </div><!-- col -->
                     </div> <!-- row -->
                 </div> <!-- footer-copy -->

@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" />
-    <title>ManagementFITT - Tools</title>
+    <title>ManagementFITT&trade; - Tools</title>
 
     <!-- ICONS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -124,9 +124,9 @@
         <!-- Price Table -->
         <section id="tools" class="section border-bottom">
             <div class="container">
-                <div class="row justify-content-center m-60px-b md-m-40px-b">
+                <div class="row justify-content-center m-60px-b md-m-40px-b mt-100px">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <h2 class="theme-title-primary text-center">ManagementFITT&trade; Tools</h2>
+                        <h2 class="theme-title-primary text-center"><i>Management</i><span class="theme-text-secondary">FITT</span>&trade; Tools</h2>
                     </div>
                 </div>
 
@@ -139,7 +139,7 @@
                                 </div>
                                 <h4><a href="#">Coaching</a></h4>
                                 <div class="fix_height">
-                                    <p>ManagementFITT&trade;  “Coaching” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the coaching process and how to use it every day to influence your employees to improve their performance. It will help you use coaching techniques in situations you never thought possible.</p>
+                                    <p><i>Management</i><span class="theme-text-secondary">FITT</span>&trade;  “Coaching” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the coaching process and how to use it every day to influence your employees to improve their performance. It will help you use coaching techniques in situations you never thought possible.</p>
                                     <p> You can coach today’s employees more effectively with: </p>
                                     <ul class=''>
                                         <li>Understanding the Keys of: Acknowledge Good Performance, Improve Poor Performance, Address Poor Personal Habits, Prepare for Conflict Resolution, Create Contracts for Consequences, Ask the Right Questions, and Know What “Good” Looks Like</li>
@@ -176,7 +176,7 @@
                                 </div>
                                 <h4><a href="#">Communications</a></h4>
                                 <div class="fix_height">
-                                    <p>ManagementFITT&trade;  “Communications” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand how to communicate more effectively and use it every day to influence your employees to improve their performance. It will help you use communicating techniques in situations you never thought possible. </p>
+                                    <p><i>Management</i><span class="theme-text-secondary">FITT</span>&trade;  “Communications” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand how to communicate more effectively and use it every day to influence your employees to improve their performance. It will help you use communicating techniques in situations you never thought possible. </p>
                                     <p>You can communicate with employees more effectively with:</p>
                                     <ul class=''>
                                         <li>Understanding the Keys of:  Six Facets of Communication, Consider the “Meaning” more than the Words, Establish an Approach, Emphasize, Gotta Have Those Difficult Conversations, Understand Body Language and Non-Verbal Communications, Understand Why Communication Breaks Down, Use Technology</li>
@@ -199,7 +199,7 @@
                                 </div>
                                 <h4><a href="#">Discipline</a></h4>
                                 <div class="fix_height">
-                                    <p>ManagementFITT&trade;  “Discipline” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the coaching process and how to use it every day to influence your employees to improve their performance. It will help you use coaching techniques in situations you never thought possible.</p>
+                                    <p><i>Management</i><span class="theme-text-secondary">FITT</span>&trade;  “Discipline” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the coaching process and how to use it every day to influence your employees to improve their performance. It will help you use coaching techniques in situations you never thought possible.</p>
                                     <p>You can discipline today’s employees more effectively with: </p>
                                     <ul class=''>
                                         <li>Understanding the Keys of: Understand the Disciplinary Process, 2. Discipline in Private , Consider Non-punitive Discipline, Use the Disciplinary Flow Chart, and Conduct a Disciplinary Warning Interview</li>
@@ -222,7 +222,7 @@
                                 </div>
                                 <h4><a href="#">Engaging Today’s Workforce</a></h4>
                                 <div class="fix_height">
-                                    <p>ManagementFITT&trade;  “Engaging Today’s Workforce” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the generational nuances and how to use that every day to better engage your employees to improve their performance. It will help you use” generational awareness” in situations you never thought possible.</p>
+                                    <p><i>Management</i><span class="theme-text-secondary">FITT</span>&trade;  “Engaging Today’s Workforce” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the generational nuances and how to use that every day to better engage your employees to improve their performance. It will help you use” generational awareness” in situations you never thought possible.</p>
                                     <p>You can engage today’s employees more effectively with: </p>
                                     <ul class=''>
                                         <li>Understanding the Keys of : Understand the Four Generations, Use the 10 Tips to Help Bridge the Socio-Techno Gap, and Consider Specific Actions to Better Engage the Generational Workforce</li>
@@ -245,7 +245,7 @@
                                 </div>
                                 <h4><a href="#">Innovation and Creativity</a></h4>
                                 <div class="fix_height">
-                                    <p>ManagementFITT&trade;  “Innovation and Creativity” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources and their creativeness. It will help you understand the innovation and creativity process and how to use it every day to influence your employees to improve their performance. It will help you use innovation and creativity techniques in situations you never thought possible.</p>
+                                    <p><i>Management</i><span class="theme-text-secondary">FITT</span>&trade;  “Innovation and Creativity” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources and their creativeness. It will help you understand the innovation and creativity process and how to use it every day to influence your employees to improve their performance. It will help you use innovation and creativity techniques in situations you never thought possible.</p>
                                     <p>You can encourage innovation and creativity for today’s employees more effectively with: </p>
                                     <ul class=''>
                                         <li>Understanding the Keys of:  Believe that Everyone is Creative, Get Past the Obvious, Question your Assumptions and Paradigms,  Continually Ask Questions, and Use a Formal Idea Generation System</li>
@@ -282,7 +282,7 @@
                                 </div>
                                 <h4><a href="#">Meetings</a></h4>
                                 <div class="fix_height">
-                                    <p>ManagementFITT&trade;  “Meetings” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the meeting process and how to use it every day to influence your employees to improve their performance. It will help you use effective meeting techniques in situations you never thought possible.</p>
+                                    <p><i>Management</i><span class="theme-text-secondary">FITT</span>&trade;  “Meetings” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the meeting process and how to use it every day to influence your employees to improve their performance. It will help you use effective meeting techniques in situations you never thought possible.</p>
                                     <p>You can conduct meetings with today’s employees more effectively with: </p>
                                     <ul class=''>
                                         <li>Understanding the Keys of:  Plan and Prepare,  Set Ground Rules or Team Norms,  Involve Everyone, Encourage a Confrontation of Ideas, Not Personalities, Stay on Course and Ensure Accountability, and Summarize the Meeting</li>
@@ -305,7 +305,7 @@
                                 </div>
                                 <h4><a href="#">Motivation</a></h4>
                                 <div class="fix_height">
-                                    <p>ManagementFITT&trade;  “Motivation ” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the motivational factors and specific activities you can use every day to better motivate your employees to improve their performance. It will help you use motivational techniques in situations you never thought possible.</p>
+                                    <p><i>Management</i><span class="theme-text-secondary">FITT</span>&trade;  “Motivation ” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the motivational factors and specific activities you can use every day to better motivate your employees to improve their performance. It will help you use motivational techniques in situations you never thought possible.</p>
                                     <p>You can motivate today’s employees more effectively with: </p>
                                     <ul class=''>
                                         <li>Understanding the Keys of:  Understand Maslow and McClelland’s Work, Create Beliefs  (followed by action…….), Utilize Contracts, Establish Clear Goals,  Consider Monetary Incentives (but only to a point), Embrace Empowerment, and Value the Relationship</li>
@@ -342,7 +342,7 @@
                                 </div>
                                 <h4><a href="#">Problem Solving</a></h4>
                                 <div class="fix_height">
-                                    <p>ManagementFITT&trade; “Problem Solving” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the problem solving process and how to use it every day to influence your employees to improve their performance. It will help you use effective problem solving techniques in situations you never thought possible.</p>
+                                    <p><i>Management</i><span class="theme-text-secondary">FITT</span>&trade; “Problem Solving” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the problem solving process and how to use it every day to influence your employees to improve their performance. It will help you use effective problem solving techniques in situations you never thought possible.</p>
                                     <p>You can problem solve with today’s employees more effectively with: </p>
                                     <ul class=''>
                                         <li>Understanding the Keys of:  Understand the Basic 8 Step Problem-Solving Model, Understand the Power of PDCA, Consider a Prioritization Matrix for Best Solutions, and Use the Basic Tools of Problem-Solving</li>
@@ -365,7 +365,7 @@
                                 </div>
                                 <h4><a href="#">Remote Supervising</a></h4>
                                 <div class="fix_height">
-                                    <p>ManagementFITT&trade; “Remote Supervising” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand how to remote supervise more effectively and use it every day to influence your employees to improve their performance. It will help you use remote supervising techniques in situations you never thought possible. </p>
+                                    <p><i>Management</i><span class="theme-text-secondary">FITT</span>&trade; “Remote Supervising” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand how to remote supervise more effectively and use it every day to influence your employees to improve their performance. It will help you use remote supervising techniques in situations you never thought possible. </p>
                                     <p> You can remote supervise employees more effectively with: </p>
                                     <ul class=''>
                                         <li>Understanding the Keys of:  Consider Employee Aptitudes, Establish Goals and Objectives, Assess the Employee, Establish Communication Standards, and Support the Virtual Relationship </li>
@@ -388,7 +388,7 @@
                                 </div>
                                 <h4><a href="#">Time Management</a></h4>
                                 <div class="fix_height">
-                                    <p>ManagementFITT&trade; “Time Management” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your time and resources. It will help you understand the time management process and how to use it every day to influence you and your employees to improve their performance. It will help you use time management techniques in situations you never thought possible. </p>
+                                    <p><i>Management</i><span class="theme-text-secondary">FITT</span>&trade; “Time Management” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your time and resources. It will help you understand the time management process and how to use it every day to influence you and your employees to improve their performance. It will help you use time management techniques in situations you never thought possible. </p>
                                     <p>You can use time management techniques with yourself and today’s employees more effectively with: </p>
                                     <ul class=''>
                                         <li>Understanding the Keys of: Take Control of Your Time (Control and Choice, Yours to Keep or Give Away), Determine the Urgency,  Organize Your Time,  Set Personal and Professional Goals,  Determine Your Key Areas,  Organize Tasks by Key Area , and Eliminate the Dirty Dozen Time Stealers</li>
@@ -411,7 +411,7 @@
                                 </div>
                                 <h4><a href="#">Trust Building</a></h4>
                                 <div class="fix_height">
-                                    <p>ManagementFITT&trade; “Trust Building” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the trust building process and how to use it every day to influence your employees to improve their performance. It will help you use trust building techniques in situations you never thought possible.</p>
+                                    <p><i>Management</i><span class="theme-text-secondary">FITT</span>&trade; “Trust Building” is a breakthrough behavioral change approach that will inspire new long-term habits to better manage your human resources. It will help you understand the trust building process and how to use it every day to influence your employees to improve their performance. It will help you use trust building techniques in situations you never thought possible.</p>
                                     <p>You can build trust effectively with: </p>
                                     <ul class=''>
                                         <li>Understanding the Keys of: Understand Trust and Leadership, Use These 5 Tips to Build Trust, Conduct a Trust Self- Assessment, and  Consider These Specific Actions to Build Better Trust</li>
@@ -472,7 +472,7 @@
                 <div class="footer-copy">
                     <div class="row">
                         <div class="col-12">
-                            <p>Copyright © 2018 ManagementFITT&trade;. All rights reserved.</p>
+                            <p>Copyright © 2018 <i>Management</i><span class="theme-text-secondary">FITT</span>&trade;. All rights reserved.</p>
                         </div><!-- col -->
                     </div> <!-- row -->
                 </div> <!-- footer-copy -->
