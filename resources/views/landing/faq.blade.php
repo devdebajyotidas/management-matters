@@ -46,6 +46,11 @@
                 text-align: center !important;
             }
         }
+        @media only screen and (max-width: 992px) {
+            section#faq-intro {
+                margin-top: 50px;
+            }
+        }
     </style>
 </head>
 

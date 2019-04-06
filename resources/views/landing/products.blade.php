@@ -61,6 +61,11 @@
             font-weight: 400;
             line-height: 38px;
         }
+        @media only screen and (max-width: 992px) {
+            section:first-child .container .row:first-child {
+                margin-top: 50px;
+            }
+        }
     </style>
 </head>
 

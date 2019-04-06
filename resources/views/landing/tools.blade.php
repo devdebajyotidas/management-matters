@@ -67,6 +67,11 @@
                 transform: scale(1.05);
             }
         }
+        @media only screen and (max-width: 992px) {
+            section:first-child .container .row:first-child {
+                margin-top: 50px;
+            }
+        }
     </style>
 </head>
 

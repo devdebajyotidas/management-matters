@@ -77,6 +77,11 @@
                 text-align: center !important;
             }
         }
+        @media only screen and (max-width: 992px) {
+            section:first-child .container .row:first-child {
+                margin-top: 10px;
+            }
+        }
     </style>
 </head>
 
