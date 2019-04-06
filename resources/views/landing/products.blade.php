@@ -119,7 +119,7 @@
             <div class="container">
                 <div class="row justify-content-center m-50px-b md-m-35px-b mt-100px">
                     <div class="col-md-12 col-lg-10 col-xl-10 col-sm-12 text-center">
-                        <h2 class="theme-title-disabled" style="color: var(--primary-color)">The <span class="theme-text-secondary">FITT</span> Products</h2>
+                        <h2 class="theme-title-disabled" style="color: var(--primary-color)">The <span class="theme-text-secondary">FITT&trade;</span> Products</h2>
                         <p class="text-center mt-4">On-site and remote training on all the functions of LeanFITT™ is available. Please call 734-475-4301 or email info@leanfitt.com. We offer a 4-hour training session (maximum per group is 12), taking users through a LeanFITT™ business case study and assist in setting up first projects. Cost 2500 per day, plus expenses (minimum 1 day).</p>
                     </div>
                 </div>
