@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Jobs\StoreAssessmentSet;
 use App\Models\Award;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -122,17 +123,34 @@ class AssessmentController extends Controller
             return redirect()->back()->withInput($request->all())->withErrors(['Something went wrong!']);
         }
 
-
-
     }
 
-    public function update(Request $request, $id)
-    {
+    public function getAssessments(){
+        $learnings = Learning::all(['title', 'assessments']);
+        $assessments = [];
 
-    }
+        $i = 0;
+        foreach($learnings as $num => $learning)
+        {
+            $assessments[$num]['name'] = $learning->title;
+            $assessments[$num]['assessments'] = [];
+            if(is_array($learning->assessments))
+            {
+                foreach($learning->assessments as $key => $assessment)
+                {
+                    $assessments[$num]['assessments'][$i] = $assessment;
+                    $i++;
+                }
+            }
+            shuffle($assessments[$num]['assessments']);
+            $assessments[$num]['assessments'] = array_slice($assessments[$num]['assessments'], 0, 3, true);
+        }
 
-    public function delete($id)
-    {
+        StoreAssessmentSet::dispatch($assessments);
 
+        $data['learnings'] = $assessments;
+        $data['page'] = 'assessments';
+        $data['role'] = session('role');
+        $data['prefix'] = session('role');
     }
 }

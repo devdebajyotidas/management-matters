@@ -112,6 +112,7 @@ Route::group(['namespace' => 'Web'], function () {
 
     Route::get('assessments', 'AssessmentController@index');
     Route::get('assessments/new', 'AssessmentController@create');
+    Route::get('assessments/take', 'AssessmentController@getAssessments');
     Route::post('assessments/new', 'AssessmentController@store');
 
     Route::get('tickets', 'TicketController@index');
