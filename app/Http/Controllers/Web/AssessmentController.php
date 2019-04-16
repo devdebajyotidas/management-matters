@@ -146,9 +146,14 @@ class AssessmentController extends Controller
             $assessments[$num]['assessments'] = array_slice($assessments[$num]['assessments'], 0, 3, true);
         }
 
-        StoreAssessmentSet::dispatch($assessments);
-
         $data['learnings'] = $assessments;
+        $data['assessor_id'] = auth()->user()->id;
+        $data['organization_id'] = Auth::user()->account_id;
+
+
+        StoreAssessmentSet::dispatch($data);
+
+
         $data['page'] = 'assessments';
         $data['role'] = session('role');
         $data['prefix'] = session('role');
