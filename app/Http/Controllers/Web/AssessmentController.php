@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Jobs\StoreAssessmentSet;
+use App\Models\AssessmentSet;
+use App\Models\AssessmentStatement;
 use App\Models\Award;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,14 +15,13 @@ use App\Models\Learner;
 use App\Models\Learning;
 use App\Models\Organization;
 use App\Models\Department;
+use Illuminate\Support\Facades\Log;
 
 class AssessmentController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('checksub');
     }
 
     public function index()
@@ -81,6 +82,7 @@ class AssessmentController extends Controller
 
     public function store(Request $request)
     {
+
         DB::beginTransaction();
 
         $assessments = [];
@@ -126,36 +128,109 @@ class AssessmentController extends Controller
     }
 
     public function getAssessments(){
+
         $learnings = Learning::all(['title', 'assessments']);
         $assessments = [];
 
         $i = 0;
         foreach($learnings as $num => $learning)
         {
-            $assessments[$num]['name'] = $learning->title;
-            $assessments[$num]['assessments'] = [];
+            $title = $learning->title;
             if(is_array($learning->assessments))
             {
-                foreach($learning->assessments as $key => $assessment)
+                $statements = collect($learning->assessments)->shuffle();
+                foreach($statements as $key => $assessment)
                 {
-                    $assessments[$num]['assessments'][$i] = $assessment;
-                    $i++;
+                    if($key < 3){
+                        $assessmentStatements['name'] = $title;
+                        $assessmentStatements['statement'] = $assessment;
+                        array_push($assessments, $assessmentStatements);
+                        $i++;
+                    }
+
                 }
             }
-            shuffle($assessments[$num]['assessments']);
-            $assessments[$num]['assessments'] = array_slice($assessments[$num]['assessments'], 0, 3, true);
         }
 
-        $data['learnings'] = $assessments;
-        $data['assessor_id'] = auth()->user()->id;
-        $data['organization_id'] = Auth::user()->account_id;
+        shuffle($assessments);
+        shuffle($assessments);
+
+        $set['assessments'] = $assessments;
+        $set['assessor_id'] = auth()->user()->id;
+        $set['organization_id'] = Auth::user()->account_id;
 
 
-        StoreAssessmentSet::dispatch($data);
+        $reference = $this->storeAssessment($set);
 
+        $data['assessmentSet'] = AssessmentSet::where('reference', $reference)->where('assessor_id', $set['assessor_id'])->with(['statements' => function($q){
+            $q->where('type', 1);
+        }, 'assessor.account'])->first();
 
         $data['page'] = 'assessments';
         $data['role'] = session('role');
         $data['prefix'] = session('role');
+
+        return view('assessments.new', $data);
+    }
+
+    public function storeAssessment($data){
+        $assessments = $data['assessments'];
+        $assessor_id = $data['assessor_id'];
+        $organization_id = $data['organization_id'];
+
+        $successCount = 0;
+
+        if(count($assessments) > 0){
+
+            $set['assessor_id'] = $assessor_id;
+            $set['organization_id'] = $organization_id;
+            $set['reference'] = md5(time());
+            $assessmentSet = AssessmentSet::create($set);
+            $setId =$assessmentSet->id;
+
+            foreach ($assessments as  $assessment){
+                $module = $assessment['name'];
+
+                if($assessment['statement']){
+                    $statement = $assessment['statement'];
+                    $data['assessor_statement'] = $statement;
+                    $data['assessment_id'] = $setId;
+                    $data['type'] = 1;
+                    $data['module'] = $module;
+                    $data['assessee_statement'] = str_replace('am', '', str_replace('I', 'My Manager', $statement));
+
+                    if(AssessmentStatement::create($data)){
+                        $successCount++;
+                    }
+                }
+            }
+
+            if($successCount > 0){
+                return $set['reference'];
+            }
+        }
+
+        return null;
+    }
+
+    public function getSharedAssessment(Request $request, $assessor_id){
+        $data['page'] = 'assessments';
+        $reference = $request->get('ref');
+        $data['error'] = '';
+
+        if(!$reference && !$assessor_id){
+            $data['error'] = 'Sorry, you are not authorized to take this assessment';
+        }
+
+        $assessmentSet = AssessmentSet::where('reference', $reference)->where('assessor_id', $assessor_id)->with(['statements', 'assessor.account'])->first();
+        if(!$assessmentSet){
+            $data['error'] = 'No assessment to be taken';
+        }
+        else{
+            $data['learning'] = $assessmentSet;
+        }
+
+        return view('assessments.shares.index', $data);
+
     }
 }

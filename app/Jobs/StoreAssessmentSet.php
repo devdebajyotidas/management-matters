@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\AssessmentSet;
+use App\Models\AssessmentStatement;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -40,15 +41,20 @@ class StoreAssessmentSet implements ShouldQueue
 
             $set['assessor_id'] = $assessor_id;
             $set['organization_id'] = $organization_id;
+            $set['reference'] = md5(time());
             $assessmentSet = AssessmentSet::create($set);
             $setId =$assessmentSet->id;
 
-            foreach ($learnings as $module => $statements){
-                $data['module'] = $module;
-                if(count($statements) > 0){
-                    foreach ($statements as $statement){
-                        $data['statement'] = $statement;
+            Log::info($learnings);
+            foreach ($learnings as  $learning){
+                $data['module'] = $learning['name'];
+                Log::info($data['module']);
+                if(count($learning['assessments']) > 0){
+                    foreach ($learning['assessments'] as $statement){
+                        $data['statement'] = str_replace('am', '', str_replace('I', 'My Manager', $statement));
                         $data['assessment_id'] = $setId;
+                        $data['type']=1;
+                        AssessmentStatement::create($data);
                     }
                 }
             }

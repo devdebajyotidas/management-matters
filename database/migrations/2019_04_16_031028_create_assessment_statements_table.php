@@ -17,7 +17,8 @@ class CreateAssessmentStatementsTable extends Migration
             $table->increments('id');
             $table->integer('assessment_id');
             $table->text('module');
-            $table->text('statement');
+            $table->text('assessee_statement');
+            $table->text('assessor_statement');
             $table->integer('type');
             $table->timestamps();
         });

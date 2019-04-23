@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class AssessmentResult extends Model
 {
     protected $fillable = [
-        'statement_id',
+        'assessment_id',
         'name',
         'email',
         'result',
-        'is_self'
+        'is_self',
+        'total_average'
     ];
 
     public function statement(){

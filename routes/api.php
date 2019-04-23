@@ -21,6 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['namespace' => 'API'], function () {
 
+    Route::post('assessments/shares/check','AssessmentController@checkInvitation');
+    Route::post('assessments/shares/submit','AssessmentController@submitAssessment');
+    Route::post('assessments/shares/email','AssessmentController@emailAssessment');
+
     Route::post('learners', 'LearnerController@create');
     Route::put('learners/{id}', 'LearnerController@update');
     Route::get('learners', 'LearnerController@index');

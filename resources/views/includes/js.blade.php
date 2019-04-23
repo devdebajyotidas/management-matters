@@ -1,5 +1,4 @@
 <!-- jQuery -->
-<script src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="{{ asset('assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
