@@ -304,7 +304,22 @@
                                 <tr>
                                     <td>
                                         <h3>Assessment Invitation</h3>
-                                        <p>Hi, {{$name}}.You have been invited to assess your manager {{$manager_name}}. Please press the button below to get started.</p>
+                                        <p>Hi, {{$name}}, You have been invited to assess your manager {{$manager_name}}. Please press the button below to get started.</p>
+                                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                                            <tbody>
+                                            <tr>
+                                                <td align="center">
+                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td> <a href="{{isset($link) ? $link : '' }}" target="_blank">Take Assessment</a> </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                         <p>Team Management Matters.</p>
                                     </td>
                                 </tr>

@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-lg-2 col-sm-4 col-xs-12 pull-right text-center">
                         <input type="hidden" name="name" value="{{$assessmentSet->assessor->account->name}}">
-                        <input type="hidden" name="name" value="{{$assessmentSet->assessor->email}}">
+                        <input type="hidden" name="email" value="{{$assessmentSet->assessor->email}}">
                         <button id="assessmentSubmit" type="submit" class="btn btn-block btn-outline btn-primary">Submit</button>
                     </div>
                 </form>
@@ -138,6 +138,7 @@
         let assessmentId = "{{$assessmentSet->id}}"
         $(function(){
             $('#assessmentSubmit').on('click', function(){
+                NProgress.start();
                 let name = $('input[name="name"]').val();
                 let email = $('input[name="email"]').val();
                 let url = '{{url('api/v1/assessments/shares/submit?name=')}}'+name+"&email="+email+"&assessment="+assessmentId+'&self=1';
@@ -145,21 +146,24 @@
                 let isAllCheckd = checkAllRadioCheckd();
                 if(isAllCheckd){
                     $.post(url, formdata, function(response){
-                        console.log(response);
-                        if(response['succees']){
-
+                        if(response['success']){
+                            $('#assessmentForm')[0].reset();
+                            $('#share-assessment').modal({
+                                backdrop: 'static',
+                                keyboard: false
+                            });
                         }
+                        NProgress.done();
                     }).error(function(xhr){
-                        console.log(xhr);
+                        toastr.error('Something went wrong, Please try again later');
+                        NProgress.done();
                     })
                 }
                 else{
-                    console.log('nothng checked');
+                    toastr.info('All statements must be checked');
+                    NProgress.done();
                 }
-
             })
-
-            $('#share-assessment').modal('show');
 
             $('#emailsInput').tagify({'templates': 'tag'})
                 .on('add', function(e, tagName){
@@ -167,13 +171,27 @@
                 });
 
             $('#share-links').on('click', function(){
+                NProgress.start();
                 let emails = $('#emailsInput').val();
                 let url = "{{url('api/v1/assessments/shares/email')}}";
 
-                $.post(url, {emails: emails}, function(response){
-                    console.log(response);
+                $.post(url, {emails: emails, assessmentId : assessmentId}, function(response){
+                    if(response['success']){
+                        $('#share-assessment').modal('hide');
+                        toastr.success(response['message']);
+                        NProgress.done();
+                        setTimeout(function(){
+                            window.location.href= "{{url('assessments')}}";
+                        }, 500)
+                    }
+                    else{
+                        NProgress.done();
+                        toastr.error(response['message']);
+                    }
+
                 }).error(function(xhr){
-                    console.log(xhr);
+                    toastr.error('Unable to send the emails. Please check if email addresses are correct.');
+                    NProgress.done();
                 })
             })
 

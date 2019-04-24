@@ -67,6 +67,9 @@
 
 <script src="{{ asset('assets/js/cbpFWTabs.js') }}"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
 {{--<script src="{{ asset('assets/js/calendar.js') }}"></script>--}}
 
 <script type="text/javascript">

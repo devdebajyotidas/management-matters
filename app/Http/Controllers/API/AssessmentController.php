@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API;
 
 
+use App\Mail\ShareAssessment;
 use App\Models\AssessmentInvitation;
 use App\Models\AssessmentResult;
 use App\Models\AssessmentSet;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Assessment;
 use App\Models\Learner;
 use App\Models\Learning;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class AssessmentController extends Controller
@@ -140,8 +143,8 @@ class AssessmentController extends Controller
 
         $exists = AssessmentResult::where('email', $email)->exists();
         if($exists){
-            $response['success'] = true;
-            $response['message'] = "You've alrady taken this assessment";
+            $response['success'] = false;
+            $response['message'] = "You've already taken this assessment";
         }
 
         $assessmentSet = AssessmentSet::where('reference', $request->get('ref'))->where('assessor_id', $request->get('assessor'))->with(['statements', 'assessor.account'])->first();
@@ -218,6 +221,41 @@ class AssessmentController extends Controller
     }
 
     public function emailAssessment(Request $request){
-//        Mail::send()
+        $emailsCount = 0;
+        $emails = explode(',', $request->get('emails'));
+        $assessmentId = $request->get('assessmentId');
+
+        $assessmentSet = AssessmentSet::where('id', $assessmentId)->with('assessor.account')->first();
+
+        $manager = isset($assessmentSet->assessor->account) ? $assessmentSet->assessor->account->name : 'No Name';
+
+        if(count($emails) > 0){
+            foreach ($emails as $email){
+                $data['logo']=asset('assets/img/email-logo.png');
+                $user = User::where('email', $email)->with('account')->first();
+                $data['name'] = 'No Name';
+                if($user){
+                    $data['name'] = $user->account->name;
+                }
+
+                $data['manager_name'] = $manager;
+                $data['link'] = url('assessments/assess').'/'.$assessmentSet->assessor_id.'?ref='.$assessmentSet->reference;
+
+                Mail::to($email)->send(new ShareAssessment($data));
+
+                $emailsCount++;
+            }
+        }
+
+        if($emailsCount > 0){
+            $response['success'] = true;
+            $response['message'] = 'Emails has been sent';
+        }
+        else{
+            $response['success'] = false;
+            $response['message'] = 'Unable to sent the emails';
+        }
+
+        return response()->json($response);
     }
 }

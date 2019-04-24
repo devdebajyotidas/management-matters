@@ -22,7 +22,7 @@
                         <div class="scrollable white-box">
                             @if(session('role')== 'learner')
                                 <h3 class="box-title">
-                                    <a href="{{ url('assessments/new') }}" class="btn btn-info">
+                                    <a href="{{ url('assessments/take') }}" class="btn btn-info">
                                         Take New Assessment
                                     </a>
                                 </h3>

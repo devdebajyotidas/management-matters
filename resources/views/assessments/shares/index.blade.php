@@ -11,6 +11,7 @@
           href="{{asset('assets/img/favicon.png')}}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     @include('includes.css')
@@ -20,7 +21,6 @@
 
 @php
     $assessmentStatetments = isset($learning) ? $learning->statements : [];
-
 @endphp
 <div id="wrapper">
     <div class="container-fluid">
@@ -58,10 +58,10 @@
                 <div class="col-md-3"></div>
             </div>
 
-            <div class="assessment-details" style="display: none">
+            <div id="assessment-details" class="assessment-details" style="display: none">
                 <div class="row">
                     <div class="white-box col-md-12 m-t-15">
-                        <h3>Assess {{isset($learning->assessor->account->name) ? $learning->assessor->account->name : 'No Name'}}</h3>
+                        <h3>You're assessing <b>{{isset($learning->assessor->account->name) ? $learning->assessor->account->name : 'No Name'}}</b></h3>
                     </div>
                 </div>
 
@@ -76,16 +76,16 @@
                 </div>
             </div>
 
-            <div class="row" id="assessment-result">
+            <div class="row" id="assessment-result" style="display: none">
                 <div class="col-md-12 text-center" style="height: 100vh; justify-content: center; align-items: center; display: flex;">
                     <div>
                         <div class="assessment-success" style="display: none">
-                            <span class="text-success"><i class="fa fa-check-circle fa-5x"></i></span>
-                            <h3 >Thanks for your perticipation. Your assessment has been saved.</h3>
+                            <span class="text-success m-b-5"><i class="fa fa-check-circle fa-5x"></i></span>
+                            <h3 >Thanks for the participation. Your assessment has been saved.</h3>
                         </div>
-                        <div class="assessment-error" style="display: none">
-                            <span class="text-danger"><i class="fa fa-times-circle-o fa-5x"></i></span>
-                            <h3 >Sorry, unable to submit your assessment.</h3>
+                        <div class="assessment-error" style="display: none;">
+                            <span class="text-danger m-b-5"><i class="fa fa-times-circle fa-5x"></i></span>
+                            <h3 class="error-message" >Sorry, unable to submit your assessment.</h3>
                         </div>
                     </div>
                 </div>
@@ -100,9 +100,11 @@
 
     $(function () {
         $('.check-invitation').on('click', function(){
+            NProgress.start();
             let url = "{{url('api/v1/assessments/shares/check')}}?ref={{Request::get('ref')}}&assessor="+assessor;
             let data = $('#shareForm').serializeArray();
             $.post(url, data, function(response){
+                console.log(response);
                 let html='';
                 if(response['success']){
                     if(response['data']){
@@ -110,7 +112,7 @@
                         if(statements.length > 0){
                             $.each(statements, function(i, assessment){
                                  console.log(i, assessment);
-                                 html += getAssessments(i, assessment['statement'], assessment['module']);
+                                 html += getAssessments(i, assessment['assessee_statement'], assessment['module']);
                             })
                         }
                     }
@@ -120,13 +122,20 @@
                     $('#assessment-wrapper').empty().append(html);
                 }
                 else{
-
+                    $('#assessment-get-started').stop(0).fadeOut('fast', function(){
+                        $('#assessment-result').stop(0).fadeIn('fast')
+                        $('.assessment-error').stop(0).fadeIn('fast');
+                        $('.error-message').html(response['message'])
+                    })
                 }
+                NProgress.done();
             }).error(function(xhr){
+                NProgress.done();
             })
         })
 
         $('#assessmentSubmit').on('click', function(){
+            NProgress.start();
             let name = $('input[name="name"]').val();
             let email = $('input[name="email"]').val();
             let url = '{{url('api/v1/assessments/shares/submit?name=')}}'+name+"&email="+email+"&assessment="+assessment_id;
@@ -134,10 +143,22 @@
             let isAllCheckd = checkAllRadioCheckd();
             if(isAllCheckd){
                 $.post(url, formdata, function(response){
-                    if(response['sucees']){
-
+                    if(response['success']){
+                        $('#assessment-details').stop(0).fadeOut('fast', function(){
+                            $('#assessment-result').stop(0).fadeIn('fast')
+                            $('.assessment-success').stop(0).fadeIn('fast');
+                        })
                     }
+                    else{
+                        $('#assessment-get-started').stop(0).fadeOut('fast', function(){
+                            $('#assessment-result').stop(0).fadeIn('fast')
+                            $('.assessment-error').stop(0).fadeIn('fast');
+                            $('.error-message').html(response['message'])
+                        })
+                    }
+                    NProgress.done();
                 }).error(function(xhr){
+                    NProgress.done();
                     console.log(xhr);
                 })
             }
