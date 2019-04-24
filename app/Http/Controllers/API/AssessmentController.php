@@ -140,14 +140,13 @@ class AssessmentController extends Controller
             $response['success'] = false;
             $response['message'] = "Email is required";
         }
+        $assessmentSet = AssessmentSet::where('reference', $request->get('ref'))->where('assessor_id', $request->get('assessor'))->with(['statements', 'assessor.account'])->first();
 
-        $exists = AssessmentResult::where('email', $email)->exists();
+        $exists = AssessmentResult::where('assessment_id', $assessmentSet->id)->where('email', $email)->exists();
         if($exists){
             $response['success'] = false;
             $response['message'] = "You've already taken this assessment";
         }
-
-        $assessmentSet = AssessmentSet::where('reference', $request->get('ref'))->where('assessor_id', $request->get('assessor'))->with(['statements', 'assessor.account'])->first();
 
         $response['data'] = $assessmentSet;
 
@@ -191,9 +190,16 @@ class AssessmentController extends Controller
         $result = AssessmentResult::create($data);
 
         if($result){
-           $response['success'] = true;
-           $response['message'] = 'Assessment has been submitted';
-           $response['score'] = $data['total_average'];
+            $invitaion = AssessmentInvitation::where('assessment_id', $data['assessment_id'])->where('email', $data['email'])->first();
+
+            if($invitaion){
+                $invitaion->has_taken = 1;
+                $invitaion->save();
+            }
+
+            $response['success'] = true;
+            $response['message'] = 'Assessment has been submitted';
+            $response['score'] = $data['total_average'];
         }
         else{
             $response['success'] = false;
@@ -240,6 +246,12 @@ class AssessmentController extends Controller
 
                 $data['manager_name'] = $manager;
                 $data['link'] = url('assessments/assess').'/'.$assessmentSet->assessor_id.'?ref='.$assessmentSet->reference;
+
+                $invitation['assessment_id'] = $assessmentSet->id;
+                $invitation['email'] = $email;
+                $invitation['name'] = $data['name'];
+
+                AssessmentInvitation::create($invitation);
 
                 Mail::to($email)->send(new ShareAssessment($data));
 

@@ -36,4 +36,8 @@ class AssessmentSet extends Model
     public function shares(){
         return $this->hasMany(AssessmentInvitation::class, 'assessment_id', 'id');
     }
+
+    public function results(){
+        return $this->hasMany(AssessmentResult::class, 'assessment_id', 'id');
+    }
 }

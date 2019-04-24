@@ -16,7 +16,6 @@ class CreateAssessmentInvitationsTable extends Migration
         Schema::create('assessment_invitations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('assessment_id');
-            $table->integer('token');
             $table->string('email');
             $table->string('name');
             $table->tinyInteger('has_taken')->default(0);
