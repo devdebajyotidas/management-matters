@@ -22,9 +22,15 @@ use Illuminate\Support\Facades\Storage;
 Route::group(['namespace' => 'API'], function () {
     //Authenctication
 
-
+    Route::post('login', 'UserController@login');
 
     Route::group(['middleware' => ['auth:api','throttle:300,1']], function(){
+
+        //Learnings
+
+        Route::get('learnings', 'LearningController@index');
+        Route::get('learnings/{id}', 'LearningController@getLearning');
+
         Route::post('assessments/shares/check','AssessmentController@checkInvitation');
         Route::post('assessments/shares/submit','AssessmentController@submitAssessment');
         Route::post('assessments/shares/email','AssessmentController@emailAssessment');
@@ -44,13 +50,6 @@ Route::group(['namespace' => 'API'], function () {
         Route::get('organizations', 'OrganizationController@index');
         Route::get('organizations/{id}', 'OrganizationController@show');
         Route::delete('organizations/{id}', 'OrganizationController@delete');
-
-        // This may not required-- Route::post('learning', 'LearningController@create');
-        // This may not reqiured--  Route::put('learning/{id}', 'LearningController@update');
-        // Required
-        Route::get('learnings', 'LearningController@index');
-        Route::get('learnings/{id}', 'LearningController@getLearning');
-        // This may not required-- Route::delete('learning/{id}', 'LrganizationController@delete');
 
 
         // Need Assessments statements for a learner

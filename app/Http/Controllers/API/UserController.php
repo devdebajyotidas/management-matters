@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helper\ApiResponse;
+use App\Http\Controllers\BaseController;
 use App\Models\Learner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,45 +13,33 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
 
     public function login(Request $request)
     {
-        $response = [];
-
-        if($request->get('password') && Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')], true))
-        {
-            $user = Auth::user();
-
-            if ($user->account instanceof Learner)
+        try{
+            if($request->get('password') && Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')], true))
             {
-                $user->fcm_token = $request->get('fcm_token');
-                $user->save();
+                $user = Auth::user();
 
-                $response['success'] = true;
-                $response['account'] = $user->account->load('user', 'department.organization');
-                $response['error'] = '';
+                if ($user->account instanceof Learner)
+                {
+                    $user->fcm_token = $request->get('fcm_token');
+                    $user->save();
+
+                    $user = $user->account->load('user', 'department.organization');
+
+                    return $this->success($user, 'Successfully logged in');
+                }
+                else
+                {
+                    return $this->error('Invalid Email or Password!');
+                }
             }
-            else
-            {
-                $response['success'] = false;
-                $response['account'] = null;
-                $response['error'] = 'Invalid Email or Password!';
-            }
-
-
+        }catch(Exception $e){
+            return $this->error($e->getMessage());
         }
-        else
-        {
-            $response['success'] = false;
-            $response['account'] = null;
-            $response['error'] = 'Invalid Email or Password!';
-        }
-
-        return $response;
-
-
     }
 
 

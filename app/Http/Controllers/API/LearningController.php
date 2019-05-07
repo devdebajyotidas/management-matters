@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\API;
 
 use App\Helper\ApiResponse;
+use App\Http\Controllers\BaseController;
 use App\Models\Department;
 use App\Models\Learning;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class LearningController extends Controller
+class LearningController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +21,9 @@ class LearningController extends Controller
      */
     public function index()
     {
-        return Learning::orderBy('title','ASC')->get(['id', 'title', 'description', 'highlights']);
+        $learnings = Learning::orderBy('title','ASC')->get(['id', 'title', 'description', 'highlights']);
+
+        return $this->success($learnings,'Learnings available');
     }
 
     /**
@@ -40,7 +44,28 @@ class LearningController extends Controller
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
 
+        $data =  ($request->all());
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = time().rand(100,999).".".$file->getClientOriginalExtension();
+            if($file->move('uploads/',$name)){
+                $data['image']=$name;
+            }else{
+                $data['image'] = null;
+            }
+        }
+        $learning = Learning::create($data);
+
+        if($learning){
+            DB::commit();
+            return $this->success($learning, 'Module has been created successfully', 201);
+        }
+        else{
+            DB::rollBack();
+            return $this->error('Something went wrong!');
+        }
     }
 
     /**
@@ -78,9 +103,7 @@ class LearningController extends Controller
             $learning = Learning::find($id);
         }
 
-        Log::stack(['suspicious-activity', 'slack'])->info("We're being attacked!");
-
-        return ApiResponse::instance()->success($learning, 'Learning is available');
+        return $this->success($learning, 'Learning is available');
 
     }
 
