@@ -18,6 +18,7 @@ class CreateAssessmentSetsTable extends Migration
             $table->integer('organization_id');
             $table->integer('assessor_id');
             $table->integer('score')->default(0);
+            $table->string('reference');
             $table->timestamps();
         });
     }

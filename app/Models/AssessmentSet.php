@@ -9,11 +9,16 @@ class AssessmentSet extends Model
     protected $fillable = [
         'organization_id',
         'assessor_id',
-        'score'
+        'score',
+        'reference'
     ];
 
     public function organization(){
         return $this->belongsTo(Organization::class);
+    }
+
+    public function statements(){
+        return $this->hasMany(AssessmentStatement::class, 'assessment_id', 'id');
     }
 
     public function assessor(){
@@ -30,5 +35,9 @@ class AssessmentSet extends Model
 
     public function shares(){
         return $this->hasMany(AssessmentInvitation::class, 'assessment_id', 'id');
+    }
+
+    public function results(){
+        return $this->hasMany(AssessmentResult::class, 'assessment_id', 'id');
     }
 }

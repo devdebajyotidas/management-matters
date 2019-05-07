@@ -22,7 +22,7 @@
                         <div class="scrollable white-box">
                             @if(session('role')== 'learner')
                                 <h3 class="box-title">
-                                    <a href="{{ url('assessments/new') }}" class="btn btn-info">
+                                    <a href="{{ url('assessments/take') }}" class="btn btn-info">
                                         Take New Assessment
                                     </a>
                                 </h3>
@@ -86,14 +86,15 @@
                                                data-page-size="10" data-filter="#search-learner">
                                             <thead>
                                             <tr>
-                                                @if(session('role')=='admin')
-                                                    <th>Organization</th>
-                                                @elseif(session('role')=='organization')
-                                                    <th>Department</th>
-                                                @endif
-                                                @if(session('role')!= 'learner')
-                                                    <th>Learner</th>
-                                                @endif
+{{--                                                @if(session('role')=='admin')--}}
+{{--                                                    <th>Organization</th>--}}
+{{--                                                @elseif(session('role')=='organization')--}}
+{{--                                                    <th>Department</th>--}}
+{{--                                                @endif--}}
+{{--                                                @if(session('role')!= 'learner')--}}
+{{--                                                    <th>Learner</th>--}}
+{{--                                                @endif--}}
+                                                <th>Taken by</th>
                                                 <th>Score</th>
                                                 <th>Taken On</th>
                                             </tr>
@@ -102,26 +103,27 @@
                                             @if(isset($assessments))
                                                 @foreach($assessments as $assessment)
                                                     <tr>
-                                                        @if(session('role') == "admin")
-                                                            @if(isset($assessment->learner->department->organization->name))
-                                                                <td>{{ $assessment->learner->department->organization->name }}</td>
-                                                            @else
-                                                                <td>Not Applicable</td>
-                                                            @endif
+                                                        <td>{{$assessment->is_self ? 'Self' : $assessment->name}}</td>
+{{--                                                        @if(session('role') == "admin")--}}
+{{--                                                            @if(isset($assessment->learner->department->organization->name))--}}
+{{--                                                                <td>{{ $assessment->learner->department->organization->name }}</td>--}}
+{{--                                                            @else--}}
+{{--                                                                <td>Not Applicable</td>--}}
+{{--                                                            @endif--}}
 
-                                                        @elseif(session('role')=='organization')
-                                                            @if(isset($assessment->learner->department->name))
-                                                                <td>{{ $assessment->learner->department->name }}</td>
-                                                            @else
-                                                                <td>Not Applicable</td>
-                                                            @endif
-                                                        @endif
-                                                        @if(session('role') != 'learner')
-                                                            <td>{{ $assessment->learner->name }}</td>
-                                                        @endif
+{{--                                                        @elseif(session('role')=='organization')--}}
+{{--                                                            @if(isset($assessment->learner->department->name))--}}
+{{--                                                                <td>{{ $assessment->learner->department->name }}</td>--}}
+{{--                                                            @else--}}
+{{--                                                                <td>Not Applicable</td>--}}
+{{--                                                            @endif--}}
+{{--                                                        @endif--}}
+{{--                                                        @if(session('role') != 'learner')--}}
+{{--                                                            <td>{{ $assessment->learner->name }}</td>--}}
+{{--                                                        @endif--}}
 
                                                         <td>
-                                                            @foreach($assessment->scores as $module => $score)
+                                                            @foreach(json_decode($assessment->result) as $module => $score)
                                                                 @if($score < 2)
                                                                     <span class="text-danger">
                                                                         {{ $module }} : {{ number_format((float)$score, 2, '.', '') }}
@@ -163,6 +165,8 @@
         var chartData = [];
         var count = 0;
 
+        console.log(scores);
+
         function renderChart() {
 
             for(var i=0; i<dates.length; i++){
@@ -188,7 +192,7 @@
                     title: {
                         text: 'Score'
                     },
-                    categories: [1,2,3,4,5]
+                                       categories: [1,2,3,4,5,6,7,8,9,10]
                 },
                 plotOptions: {
                     line: {

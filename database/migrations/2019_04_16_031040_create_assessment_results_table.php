@@ -15,10 +15,11 @@ class CreateAssessmentResultsTable extends Migration
     {
         Schema::create('assessment_results', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('statement_id');
+            $table->integer('assessment_id');
             $table->string('email')->nullable();
             $table->string('name')->nullable();
-            $table->integer('result');
+            $table->text('result');
+            $table->float('total_average')->default(0);
             $table->tinyInteger('is_self');
             $table->timestamps();
         });

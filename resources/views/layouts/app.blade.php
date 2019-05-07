@@ -11,6 +11,7 @@
           href="{{asset('assets/img/favicon.png')}}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://wrappixel.com/demos/admin-templates/pixeladmin/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     @include('includes.css')

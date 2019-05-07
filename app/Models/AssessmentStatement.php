@@ -8,8 +8,10 @@ class AssessmentStatement extends Model
 {
     protected  $fillable = [
         'assessment_id',
-        'statement',
-        'type'
+        'assessee_statement',
+        'assessor_statement',
+        'type',
+        'module'
     ];
 
     public function assessmentSet()
