@@ -45,7 +45,7 @@ Route::group(['namespace' => 'API'], function () {
     // This may not reqiured--  Route::put('learning/{id}', 'LearningController@update');
     // Required
     Route::get('learnings', 'LearningController@index');
-    Route::get('learnings/{id}', 'LearningController@show');
+    Route::get('learnings/{id}', 'LearningController@getLearning');
     // This may not required-- Route::delete('learning/{id}', 'LrganizationController@delete');
 
 
