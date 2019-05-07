@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Contracts\UserResolver;
 use Laratrust\Traits\LaratrustUserTrait;
 use Illuminate\Support\Facades\Auth;
 
-class User extends Authenticatable implements AuditableContract, UserResolver
+class User extends Authenticatable implements Auditable
 {
     use Notifiable;
     use SoftDeletes;
-    use Auditable;
+    use \OwenIt\Auditing\Auditable;
     use LaratrustUserTrait;
 
     /**
@@ -29,7 +29,8 @@ class User extends Authenticatable implements AuditableContract, UserResolver
         'password',
         'account_id',
         'account_type',
-        'verification_token'
+        'verification_token',
+        'api_token'
     ];
 
     /**
