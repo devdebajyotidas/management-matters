@@ -15,22 +15,23 @@
                      </span>
             </a>
         </div>
+
         <ul class="nav navbar-top-links navbar-left hidden-xs">
             <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="ti-menu"></i></a></li>
         </ul>
         <ul class="nav navbar-top-links navbar-right pull-right">
 
-            @if(session('role')!='admin')
-                @if(session('role')=='organization')
-                    <?php
-                    $tickets=\App\Models\Ticket::with(['assignments'])->whereIn('learner_id',auth()->user()->account->learners()->pluck('learners.id')->toArray())->where("is_archived",0)->where('is_completed',0)->pluck('id')->toArray();
+            @if(session()->get('role') != 'admin')
+                @if(session()->get('role') == 'organization')
+                    @php
+                    $tickets=\App\Models\Ticket::with(['assignments'])->whereIn('learner_id', auth()->user()->account->learners()->pluck('learners.id')->toArray())->where("is_archived",0)->where('is_completed',0)->pluck('id')->toArray();
                     $assignments=\App\Models\TicketAssignment::whereIn('ticket_id',$tickets)->where('target_date',date("Y-m-d"))->count();
-                    ?>
+                    @endphp
                 @else
-                    <?php
-                    $tickets=\App\Models\Ticket::where('learner_id',auth()->user()->account_id)->where("is_archived",0)->where('is_completed',0)->pluck('id')->toArray();
+                    @php
+                    $tickets=\App\Models\Ticket::where('learner_id', auth()->user()->account_id)->where("is_archived",0)->where('is_completed',0)->pluck('id')->toArray();
                     $assignments=\App\Models\TicketAssignment::whereIn('ticket_id',$tickets)->where('target_date',date("Y-m-d"))->count();
-                    ?>
+                    @endphp
                 @endif
                    @if($assignments > 0)
                        <li><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false">
@@ -54,9 +55,9 @@
                    @endif
 
             @endif
-                <?php
+                @php
                 $quotes=\App\Models\Quotes::where('is_active',1)->first();
-                ?>
+                @endphp
                 @if(isset($quotes->name))
                 <li><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false" title="Quote of the day">
                         <i class="fas fa-quote-right"></i>

@@ -29,7 +29,18 @@ Route::group(['namespace' => 'API'], function () {
         //Learnings
 
         Route::get('learnings', 'LearningController@index');
+        Route::post('learnings', 'LearningController@store');
+
         Route::get('learnings/{id}', 'LearningController@getLearning');
+        Route::put('learnings/{id}', 'LearningController@update');
+        Route::delete('learnings/{id}', 'LearningController@destroy');
+
+        //Quiz
+        Route::get('learnings/{learningId}/quiz', 'QuizController@index');
+        Route::get('learnings/{learningId}/quiz/{id}', 'QuizController@show');
+        Route::post('learnings/{learningId}/quiz', 'QuizController@store');
+        Route::put('learnings/{learningId}/quiz', 'QuizController@update');
+        Route::get('quiz', 'QuizController@index');
 
         Route::post('assessments/shares/check','AssessmentController@checkInvitation');
         Route::post('assessments/shares/submit','AssessmentController@submitAssessment');
@@ -52,20 +63,20 @@ Route::group(['namespace' => 'API'], function () {
         Route::delete('organizations/{id}', 'OrganizationController@delete');
 
 
-        // Need Assessments statements for a learner
-        Route::get('learning', 'LearningController@index');
-        // Post Assessment Submission
-        Route::post('learning', 'LearningController@index');
-        // Need Assessment Restults for a learner
-        Route::get('learning', 'LearningController@index');
+//        // Need Assessments statements for a learner
+//        Route::get('learning', 'LearningController@index');
+//        // Post Assessment Submission
+//        Route::post('learning', 'LearningController@index');
+//        // Need Assessment Restults for a learner
+//        Route::get('learning', 'LearningController@index');
 
 
-        // Need Quiz Contents
-        Route::get('learning', 'LearningController@index');
-        // Post Quiz Submission
-        Route::post('learning', 'LearningController@index');
-        // Need Quiz Results or a learner
-        Route::get('learning', 'LearningController@index');
+//        // Need Quiz Contents
+//        Route::get('learning', 'LearningController@index');
+//        // Post Quiz Submission
+//        Route::post('learning', 'LearningController@index');
+//        // Need Quiz Results or a learner
+//        Route::get('learning', 'LearningController@index');
 
 
         // Need Learner Login
@@ -88,11 +99,6 @@ Route::group(['namespace' => 'API'], function () {
 
         Route::get('learners/{learnerId}/quiz', 'QuizController@index');
 
-        Route::get('learnings/{learningId}/quiz', 'QuizController@index');
-        Route::get('learnings/{learningId}/quiz/{id}', 'QuizController@show');
-        Route::post('learnings/{learningId}/quiz', 'QuizController@store');
-        Route::put('learnings/{learningId}/quiz', 'QuizController@update');
-        Route::get('quiz', 'QuizController@index');
 
         Route::get('tickets', 'TicketController@index');
         Route::get('tickets/events', 'TicketController@events');
