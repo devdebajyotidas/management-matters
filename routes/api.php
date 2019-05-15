@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Storage;
 //});
 
 
-Route::group(['namespace' => 'API'], function () {
+Route::group(['namespace' => 'API', 'middleware' => ['cors']], function () {
     //Authenctication
 
     Route::post('login', 'UserController@login');
