@@ -57,15 +57,13 @@ class LearningController extends BaseController
             $filename=strtolower(str_replace(' ', '-', $file->getClientOriginalName()));
             $path='attachments/'.$time.$filename;
 
-            if (!Storage::exists('attachments/'.$time)) {
-                Storage::makeDirectory('attachments/'.$time);
-            }
+            Storage::disk('s3')->put('attachments/'.$time.'/'.$filename, $file);
+            Storage::disk('s3')->setVisibility('attachments/'.$time.'/'.$filename, 'public');
+            $filePath = 'attachments/'.$time.'/'.$filename;
+            $fileUrl = Storage::disk('s3')->url('attachments/'.$time.'/'.$filename);
 
-            Storage::put('attachments/'.$time.'/'.$filename, file_get_contents($file));
-            Storage::setVisibility('attachments/'.$time.'/'.$filename, 'public');
-
-            $data['path']='attachments/'.$time.'/'.$filename;
-            $data['image'] = 'https://'.Storage::url('attachments/'.$time.'/'.$filename);
+            $data['image'] = $fileUrl;
+            $data['path'] = $filePath;
         }
         $learning = Learning::create($data);
 
@@ -148,13 +146,18 @@ class LearningController extends BaseController
         }
 
         if ($request->hasFile('image')) {
+            $time = time();
             $file = $request->file('image');
-            $name = time().rand(100,999).".".$file->getClientOriginalExtension();
-            if($file->move('uploads/',$name)){
-                $data['image']=$name;
-            }else{
-                $data['image'] = null;
-            }
+            $filename=strtolower(str_replace(' ', '-', $file->getClientOriginalName()));
+            $path='attachments/'.$time.$filename;
+
+            Storage::disk('s3')->put('attachments/'.$time.'/'.$filename, $file);
+            Storage::disk('s3')->setVisibility('attachments/'.$time.'/'.$filename, 'public');
+            $filePath = 'attachments/'.$time.'/'.$filename;
+            $fileUrl = Storage::disk('s3')->url('attachments/'.$time.'/'.$filename);
+
+            $data['image'] = $fileUrl;
+            $data['path'] = $filePath;
         }
         if(session('role')=='organization'){
             $exist=Introduction::where('learning_id',$id)->where('organization_id',Auth::user()->account_id)->count();

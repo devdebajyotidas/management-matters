@@ -81,7 +81,9 @@
 
             </li>
             <li>
-                <span class="dropdown-toggle u-dropdown" data-toggle="dropdown"  role="button"><img style="width: 30px;height: 30px;margin: 15px" src="{{!empty(auth()->user()->account->image) ? asset('uploads/'.auth()->user()->account->image) : asset('uploads/avatar.png') }}" alt="user-img" class="img-circle"></span>
+                @if(session('role') !='admin'))
+                    <span class="dropdown-toggle u-dropdown" data-toggle="dropdown"  role="button"><img style="width: 30px;height: 30px;margin: 15px" src="{{!empty(auth()->user()->account->image) ? asset('uploads/'.auth()->user()->account->image) : asset('uploads/avatar.png') }}" alt="user-img" class="img-circle"></span>
+                @endif
                 <ul class="dropdown-menu animated flipInY m-r-20" style="margin-top: -5px">
                     @if(session("role")!='admin')
                         <li><a href="javascript:void(0)">{{Auth::user()->account->name}}</a></li>

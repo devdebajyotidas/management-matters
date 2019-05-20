@@ -11,6 +11,8 @@
         "laravel/framework": "5.8.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.8",
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "league/flysystem-cached-adapter": "~1.0",
         "owen-it/laravel-auditing": "^9.2",
         "phpunit/phpunit": "^7.5",
         "santigarcor/laratrust": "^5.2"
