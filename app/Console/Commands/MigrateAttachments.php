@@ -42,11 +42,16 @@ class MigrateAttachments extends Command
 
         foreach ($tables as $table){
             $rows = DB::table($table)->whereNotNull('image')->get();
-            $this->comment('total '.$rows->count().' found in '. $table. 'table');
-//            if(count($rows) > 0){
-//                foreach ($rows as $row){
-//                }
-//            }
+            $this->comment('total '.$rows->count().' found in '. $table. ' table');
+            if(count($rows) > 0){
+                foreach ($rows as $row){
+                    $path = public_path('attachments').'/'.$row->image;
+                    $this->comment('path: '.$path);
+
+                    $exists = file_exists($path);
+                    $this->comment('file exists '.$exists );
+                }
+            }
         }
     }
 }
