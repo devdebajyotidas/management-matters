@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\MigrateAttachments;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Log;
@@ -14,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-         Commands\QuotesSchedule::class
+         Commands\QuotesSchedule::class,
+         MigrateAttachments::class,
     ];
 
     /**
